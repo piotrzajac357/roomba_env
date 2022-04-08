@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "math.h": "c",
+        "unistd.h": "c",
+        "battery_update.h": "c",
+        "position_update.h": "c",
+        "stat.h": "c",
+        "types.h": "c",
+        "pthread.h": "c",
+        "wait.h": "c",
+        "semaphore.h": "c",
+        "set_new_task.h": "c",
+        "signal.h": "c",
+        "run_python_script.h": "c",
+        "sim_from_control.h": "c",
+        "control.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

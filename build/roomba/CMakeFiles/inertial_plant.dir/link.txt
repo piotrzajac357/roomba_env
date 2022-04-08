@@ -1,0 +1,1 @@
+/usr/bin/clang-6.0 -g  -rdynamic CMakeFiles/inertial_plant.dir/inertial_plant.o  -o inertial_plant -lpthread -lrt 

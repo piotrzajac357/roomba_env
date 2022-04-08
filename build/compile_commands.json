@@ -1,0 +1,122 @@
+[
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/vis.dir/vis_files/src/vis.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/vis_files/src/vis.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/vis_files/src/vis.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/vis.dir/vis_files/src/run_python_script.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/vis_files/src/run_python_script.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/vis_files/src/run_python_script.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_battery_container.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_from_sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_functions.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_to_sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_update.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_update.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/sensors_inspect.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/sensors_inspect.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/set_new_task.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/set_new_task.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/set_new_task.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/task_to_movement.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/load_plan.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/roomba.dir/roomba.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/roomba.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/roomba.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/load_plan.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/load_plan.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/load_plan.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/position_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/position_update.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/position_update.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/battery_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/battery_update.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/battery_update.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/container_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/container_update.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/container_update.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/dist_sensors_update.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/dist_sensors_update.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/trash_generator.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/trash_generator.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_control.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_control.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_vis.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_vis.c"
+},
+{
+  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
+  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_from_control.c",
+  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_from_control.c"
+}
+]

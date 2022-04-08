@@ -1,0 +1,1 @@
+/usr/bin/clang-6.0 -g   CMakeFiles/position_update.dir/position_update.c.o  -o position_update -lpthread -lrt 

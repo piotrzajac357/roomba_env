@@ -1,0 +1,76 @@
+#ifndef SIM_FUNCTIONS_H_
+#define SIM_FUNCTIONS_H_
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846     // PI
+#endif
+
+#ifndef ST_TO_RAD
+#define ST_TO_RAD 0.01745329251         // Degrees to radian convertion multiplier
+#endif
+
+double position_x;                      // Current cartesian position x coord (0-20m)          
+double position_y;                      // Current cartesian position y coord (0-20m)
+double previous_orientation;            // Current orientation (0-360deg)
+sem_t position_orientationSemaphore;    // Semaphore
+
+double left_motor_power;                // Left motor power (0-1)
+double right_motor_power;               // Right motor power (0-1)
+double suction_power;                   // Suction/brushes power (0-1)
+sem_t controlSemaphore;                 // Semaphore
+
+double battery_level;                   // Battery state (0-100%)
+sem_t batterySemaphore;                 // Semaphore
+
+double container_level;                 // Container state (0-100%)
+sem_t containerSemaphore;               // Semaphore
+
+double front_sensor;                    // front distance sensor
+double back_sensor;                     // back distance sensor
+double left_sensor;                     // left distance sensor
+double right_sensor;                    // right distance sensor
+int trash_sensor;                       // trash (below) sensor
+sem_t dist_sensorsSemaphore;            // Semaphore
+
+char plan[200][200];                    // 200x200 char array representing house 
+sem_t planSemaphore;                    // Semaphores
+
+int trashes[30];                        // Array with 15 trashes centers coords
+int new_trashes[2];                     // Coords of trashes currently being sent
+sem_t trashSemaphore;                   // Semaphore
+
+
+// Read only variables (after being once set)
+double sim_step_position;               // Simulation step for calculating position (0-1sec)
+int sim_step_battery;                   // Simulation step for calculating battery state (sec)
+int sim_step_container;                 // Simulation step for calculating container state (sec)
+double sim_step_dist_sensors;           // Simulation step for calculating sensors (0-1sec)
+double max_speed;                       // Linear speed of robot. Increase this to fasten simulation.
+double max_rotating_speed;              // Rotating speed of robot. Increase this to fasten simulation.
+
+
+int initialize_semaphores(void);
+
+int initialize_position(void);
+
+int initialize_battery(void);
+
+int initialize_container(void);
+
+int initialize_dist_sensors(void);
+
+int initialize_trash(void);
+
+int initialize_control_values(void);
+
+int calculate_position(void);
+
+int calculate_battery(void);
+
+int calculate_container(void);
+
+int calculate_sensors(void);
+
+int generate_trashes(int *thread_counter_ptr);
+
+#endif  /* SIM_FUNCTIONS_H_ */
