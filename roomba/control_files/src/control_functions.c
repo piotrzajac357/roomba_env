@@ -11,6 +11,7 @@
 
 #include "../include/control_functions.h"
 #include "../include/load_plan.h"
+//#include "../include/stc_algorithm.h"
 
 /* function initializing semaphores */
 int initialize_semaphores(void) {

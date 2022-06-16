@@ -19,6 +19,7 @@
 #include "../include/sensors_inspect.h"
 #include "../include/task_to_movement.h"
 #include "../include/control_battery_container.h"
+#include "../include/stc_algorithm.h"
 
 int main(int argc, char *argv[]) {
 
@@ -104,6 +105,11 @@ int main(int argc, char *argv[]) {
 
     if ((status = init_battery_container_inspect())) {
         fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
+        return 0;
+    }
+
+    if ((status = init_stc_algorithm())) {
+        fprintf(stderr, "Error initializing STC algorithm thread : %d\n", status);
         return 0;
     }
 

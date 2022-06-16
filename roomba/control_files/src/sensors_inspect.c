@@ -11,6 +11,7 @@
 
 #include "sensors_inspect.h"
 #include "control_functions.h"
+#include "stc_algorithm.h"
 
 /* initialize sensors inspecting thread */
 int init_sensors_inspect() {

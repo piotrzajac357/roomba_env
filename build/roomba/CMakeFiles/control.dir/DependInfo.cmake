@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/sensors_inspect.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/set_new_task.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o"
+  "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"
   )
 set(CMAKE_C_COMPILER_ID "Clang")
