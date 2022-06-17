@@ -1,6 +1,10 @@
 #ifndef STC_ALGORITHM_H_
 #define STC_ALGORITHM_H_
 
+int algorithm_select;                   // algorithm selection
+                                        // 0 - random bouncing
+                                        // 1 - stc
+
 int disc_plan[500][500];                // discovered plan of house
                                         // 0 - not checked (default)
                                         // 1 - not visited
@@ -20,6 +24,10 @@ int current_orientation;                // robot orientation
                                         // 1-right
                                         // 2-up
                                         // 3-left
+
+double tmp_orientation_stc_step;        // tmp orientation for rotating by 90deg task
+double tmp_pos_x_stc_step;
+double tmp_pos_y_stc_step;
 
 int current_quarter;                    // current quarter of the tile
                                         // 0 - upper left

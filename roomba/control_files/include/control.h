@@ -1,6 +1,10 @@
 #ifndef CONTROL_H_
 #define CONTROL_H_
 
+int algorithm_select;                   // algorithm selection
+                                        // 0 - random bouncing
+                                        // 1 - stc
+
 /* Shared memory structure sim -> control */
 struct s2c_shm {
 

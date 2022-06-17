@@ -11,6 +11,7 @@
 #include <errno.h>
 
 #include "../include/stc_algorithm.h"
+#include "../include/control_functions.h"
 
 /* initialize stc algorithm thread */
 
@@ -18,28 +19,18 @@ int init_stc_algorithm(){
 
     int status;
 
+    pthread_t StcThread;
     pthread_attr_t aStcThreadAttr;
-    struct itimerspec timerSpecStruct;
-    timer_t timerVar;
-    struct sigevent timerEvent;
     pthread_attr_init(&aStcThreadAttr);
-
-    timerEvent.sigev_notify = SIGEV_THREAD;
-    timerEvent.sigev_notify_function = (void*)tStcThreadFunc;
-	timerEvent.sigev_notify_attributes = &aStcThreadAttr;
-
-    if ((status = timer_create(CLOCK_REALTIME, &timerEvent, &timerVar))) {
-        fprintf(stderr, "Error creating timer : %d\n", status);
-    return 0;
-    }
-
-    timerSpecStruct.it_value.tv_sec = 0;
-	timerSpecStruct.it_value.tv_nsec = 50000000;
-	timerSpecStruct.it_interval.tv_sec = 1;
-	timerSpecStruct.it_interval.tv_nsec = 0;
+    pthread_attr_setschedpolicy(&aStcThreadAttr, SCHED_FIFO);
 
     status = init_stc();
-    timer_settime(timerVar, 0, &timerSpecStruct, NULL);
+    status = calc_next_step();
+
+    if ((status = pthread_create(&StcThread, &aStcThreadAttr, tStcThreadFunc, NULL))) {
+        fprintf(stderr, "Cannot create thread.\n");
+    return 0;
+	}
 
     return EXIT_SUCCESS;
 
@@ -59,6 +50,15 @@ void *tStcThreadFunc(void *cookie) {
 
     status = update_position_orientation();
     status = check_nbh();
+    status = select_target_cell();
+    target_cell = 1;
+    for(;;) {
+    sem_wait(&spool_calc_next_step_stc);
+    sem_wait(&calc_next_step_stcSemaphore);
+    status = calc_next_step();
+    sem_post(&calc_next_step_stcSemaphore);
+    }
+
 
     return EXIT_SUCCESS;
 }
@@ -70,12 +70,14 @@ int init_stc(void) {
     current_position_x = 250;
     current_position_y = 250;
     current_orientation = 0;
+    current_quarter = 0;
+    target_cell = 1;
     return EXIT_SUCCESS;
 }
 
 int update_position_orientation(){
-    current_position_x++;
-    current_position_y++;
+    //current_position_x++;
+    //current_position_y++;
     return EXIT_SUCCESS;
 }
 
@@ -161,13 +163,13 @@ int check_nbh(void) {
     // printf("disc_plan[x-1][y]: %d\n",disc_plan[current_position_x-1][current_position_y]);
     // printf("disc_plan[x][y-1]: %d\n",disc_plan[current_position_x][current_position_y-1]);
  
-    for (int i=250;i<260;i++){
-        for (int j=250;j<260;j++){
-            printf("%d",disc_plan[j][i]);
-        }
-        printf("\n");
-    }
-    printf("\n\n");
+    // for (int i=250;i<260;i++){
+    //     for (int j=250;j<260;j++){
+    //         printf("%d",disc_plan[j][i]);
+    //     }
+    //     printf("\n");
+    // }
+    // printf("\n\n");
 
     return EXIT_SUCCESS;
 }
@@ -211,12 +213,17 @@ int select_target_cell(void){
         else {target_cell = 3;}
     }
 
+    printf("target_cell: %d  ", target_cell);
+
     return EXIT_SUCCESS;
 }
 
 
 int calc_next_step(){
-    if (current_quarter == 0){
+    tmp_orientation_stc_step = orientation;
+    tmp_pos_x_stc_step = position_x;
+    tmp_pos_y_stc_step = position_y;
+        if (current_quarter == 0){
         if (current_orientation == 0){
             if (target_cell == 1) { next_step = 2;}
             else { next_step = 3;}
@@ -256,6 +263,24 @@ int calc_next_step(){
             else { next_step = 1;}
         }
     }
-
+    if (next_step == 1){
+        if (tmp_orientation_stc_step >= 270.0){
+            tmp_orientation_stc_step -= 270.0;
+        }
+        else {tmp_orientation_stc_step += 90.0;}
+    }
+    else if (next_step == 2) {
+        if (tmp_orientation_stc_step <= 90.0){
+            tmp_orientation_stc_step += 270.0;
+        }
+        else {tmp_orientation_stc_step -= 90.0;}
+    }
+    
+    printf("current quarter: %d\n", current_quarter);
+    printf("target cell: %d\n", target_cell);
+    printf("current orientation: %d\n",current_orientation);
+    printf("next step: %d   \n", next_step);
+    printf("\nalgorithm:%d\n",algorithm_select);
+    printf("%f\n",tmp_orientation_stc_step);
     return EXIT_SUCCESS;
 }

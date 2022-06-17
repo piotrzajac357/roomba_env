@@ -25,6 +25,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/
 
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/load_plan.h
+roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/stc_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/src/control_functions.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o: ../roomba/control_files/include/control.h
@@ -50,6 +51,7 @@ roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o: ../roomba/cont
 roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o: ../roomba/control_files/include/set_new_task.h
 roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o: ../roomba/control_files/src/set_new_task.c
 
+roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/include/stc_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/src/stc_algorithm.c
 

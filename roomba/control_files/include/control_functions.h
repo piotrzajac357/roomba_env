@@ -5,6 +5,10 @@
 #define ST_TO_RAD 0.01745329251         // degrees to radians convert multiplier
 #endif
 
+int algorithm_select;                   // algorithm selection
+                                        // 0 - random bouncing
+                                        // 1 - stc
+
 double position_x;                      // Current cartesian position x coord (0-20m)
 double position_y;                      // Current cartesian position y coord (0-20m)
 double orientation;                     // Current orientation (0-360deg)
@@ -57,6 +61,11 @@ double target_direction;                // target direction to rotate to
 sem_t target_directionSemaphore;        // Semaphore
 
 sem_t spool_set_new_task;               // notification that new task has to be selected
+
+sem_t spool_calc_next_step_stc;         // notification for stc quarter algorithm
+sem_t calc_next_step_stcSemaphore;
+
+//double tmp_orientation;                 // tmp orientation for rotating by 90deg task
 
 int initialize_semaphores(void);
 

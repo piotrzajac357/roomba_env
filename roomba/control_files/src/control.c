@@ -24,6 +24,7 @@
 int main(int argc, char *argv[]) {
 
     int status;
+    algorithm_select = 1;
 
     // shared memory initialization, sim - writer, control - reader
     if ((mutex_sem_s2c = sem_open("/sem-mutex_s2c", O_CREAT, 0660, 0)) == SEM_FAILED) {
@@ -107,12 +108,12 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
         return 0;
     }
-
-    if ((status = init_stc_algorithm())) {
-        fprintf(stderr, "Error initializing STC algorithm thread : %d\n", status);
-        return 0;
+    if (algorithm_select == 1){
+        if ((status = init_stc_algorithm())) {
+            fprintf(stderr, "Error initializing STC algorithm thread : %d\n", status);
+            return 0;
+        }
     }
-
     while (1){        
         usleep(100000);
     }

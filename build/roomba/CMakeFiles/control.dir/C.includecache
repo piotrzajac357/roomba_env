@@ -173,6 +173,8 @@ fcntl.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 ../include/load_plan.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
+../include/stc_algorithm.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c
 stdlib.h
@@ -333,6 +335,8 @@ errno.h
 -
 ../include/stc_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
+../include/control_functions.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c
 stdlib.h

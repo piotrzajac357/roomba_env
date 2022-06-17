@@ -11,6 +11,7 @@
 
 #include "../include/control_functions.h"
 #include "../include/load_plan.h"
+#include "../include/stc_algorithm.h"
 //#include "../include/stc_algorithm.h"
 
 /* function initializing semaphores */
@@ -25,7 +26,9 @@ int initialize_semaphores(void) {
 		sem_init(&movement_typeSemaphore, 0, 1)			||
 		sem_init(&planSemaphore, 0, 1)					||
 		sem_init(&trashSemaphore, 0 ,1)					||
-		sem_init(&target_directionSemaphore, 0, 1))
+		sem_init(&target_directionSemaphore, 0, 1)		||
+		sem_init(&spool_calc_next_step_stc, 0, 1)		||
+		sem_init(&calc_next_step_stcSemaphore, 0, 1))
 		{
 			return EXIT_FAILURE;
 		}
@@ -279,6 +282,8 @@ int calculate_movement_type(void) {
 	// read input values
 	sem_wait(&position_orientationSemaphore);
 	double tmp_orientation = orientation;
+	double tmp_pos_x = position_x;
+	double tmp_pos_y = position_y;
 	sem_post(&position_orientationSemaphore);
 	sem_wait(&taskSemaphore);
 	double tmp_current_task = current_task;
@@ -286,37 +291,83 @@ int calculate_movement_type(void) {
 	sem_wait(&target_directionSemaphore);
 	double target_direction_tmp = target_direction;
 	sem_post(&target_directionSemaphore);
-	switch (current_task)
-		{
-		case 0:
-			// just standing
-			movement_type = 0;
-			break;
-		case 1:
-			// driving forward
-			movement_type = 1;
-			break;
-		case 2:
-			// rotating clockwise until reaching target_direction, then driving forward
-			if (fabs(tmp_orientation - target_direction_tmp) < 0.2) { 
-				current_task = 1;
-				movement_type = 1; 
-			} else {
-				movement_type = 2;
-			}
-			break;
-		case 3: 
-			// rotating counter clokcwise until reaching target direction, then driving forward
-			if (fabs(tmp_orientation - target_direction_tmp) < 0.2) {
-				current_task = 1;
+	if (algorithm_select == 0){
+		switch (current_task)
+			{
+			case 0:
+				// just standing
+				movement_type = 0;
+				break;
+			case 1:
+				// driving forward
 				movement_type = 1;
-			} else {
-				movement_type = 3;
-			}
-			break;
-		default: 
-			break;
+				break;
+			case 2:
+				// rotating clockwise until reaching target_direction, then driving forward
+				if (fabs(tmp_orientation - target_direction_tmp) < 0.2) { 
+					current_task = 1;
+					movement_type = 1; 
+				} else {
+					movement_type = 2;
+				}
+				break;
+			case 3: 
+				// rotating counter clokcwise until reaching target direction, then driving forward
+				if (fabs(tmp_orientation - target_direction_tmp) < 0.2) {
+					current_task = 1;
+					movement_type = 1;
+				} else {
+					movement_type = 3;
+				}
+				break;
+			default: 
+				break;
 		}
+	}
+	else if (algorithm_select == 1){
+		sem_wait(&calc_next_step_stcSemaphore);
+		switch(next_step)
+		{
+			case 0:
+				// just standing
+				movement_type = 0;
+				break;
+			case 1:
+				// rotate counter clockwise
+				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.2) {
+					movement_type = 3;
+				} else {
+					movement_type = 0;
+					//current_orientation = ((int)(tmp_orientation/90.0)+3)%4;
+					current_orientation = (current_orientation + 1) % 4;
+					sem_post(&spool_calc_next_step_stc);
+				}
+				break;
+			case 2:
+				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.2) {
+					movement_type = 2;
+				} else {
+					movement_type = 0;
+					//current_orientation = ((int)(tmp_orientation/90.0)+2)%4;
+					//current_orientation =  (current_orientation > 0) ? ((current_orientation - 1) %4) : 3;
+					sem_post(&spool_calc_next_step_stc);
+				}
+				break;
+			case 3:
+				if(fabs(tmp_pos_x_stc_step - tmp_pos_x) <= 0.05 &&
+				   fabs(tmp_pos_y_stc_step - tmp_pos_y) <= 0.05) {
+					movement_type = 1;
+					//printf("%f %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+				} else {
+					movement_type = 0;
+					printf("reached here\n");
+					sem_post(&spool_calc_next_step_stc);
+				}
+				break;
+		}
+		sem_post(&calc_next_step_stcSemaphore);
+	}
+
 	return EXIT_SUCCESS;
 }
 
