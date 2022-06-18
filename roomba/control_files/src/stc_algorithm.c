@@ -10,6 +10,7 @@
 #include <time.h>
 #include <errno.h>
 
+
 #include "../include/stc_algorithm.h"
 #include "../include/control_functions.h"
 
@@ -25,7 +26,7 @@ int init_stc_algorithm(){
     pthread_attr_setschedpolicy(&aStcThreadAttr, SCHED_FIFO);
 
     status = init_stc();
-    status = calc_next_step();
+    //status = calc_next_step();
 
     if ((status = pthread_create(&StcThread, &aStcThreadAttr, tStcThreadFunc, NULL))) {
         fprintf(stderr, "Cannot create thread.\n");
@@ -48,10 +49,12 @@ void *tStcThreadFunc(void *cookie) {
     param.sched_priority = sched_get_priority_max(policy)-2;
 	pthread_setschedparam(pthread_self(), policy, &param);
 
+    usleep(1000000);
     status = update_position_orientation();
     status = check_nbh();
     status = select_target_cell();
-    target_cell = 1;
+    //target_cell = 3;
+
     for(;;) {
     sem_wait(&spool_calc_next_step_stc);
     sem_wait(&calc_next_step_stcSemaphore);
@@ -72,6 +75,7 @@ int init_stc(void) {
     current_orientation = 0;
     current_quarter = 0;
     target_cell = 1;
+    next_step = 0;
     return EXIT_SUCCESS;
 }
 
@@ -90,6 +94,10 @@ int check_nbh(void) {
     double tmp_left_sensor = left_sensor;
     double tmp_right_sensor = right_sensor;
     sem_post(&dist_sensorsSemaphore);
+
+    //printf("\nsensors: %f %f %f %f\n", tmp_front_sensor, tmp_left_sensor,tmp_back_sensor,tmp_right_sensor);
+
+
 
     double f_s;
     double b_s;
@@ -123,7 +131,7 @@ int check_nbh(void) {
  
 
     if (disc_plan[current_position_x][current_position_y-1] == 0){
-        if (f_s <= 0.02){
+        if (f_s <= 0.05){
             disc_plan[current_position_x][current_position_y-1] = 3;
         }
         else{
@@ -131,7 +139,7 @@ int check_nbh(void) {
         }
     }
     if (disc_plan[current_position_x+1][current_position_y] == 0){
-        if (l_s <= 0.02){
+        if (l_s <= 0.05){
             disc_plan[current_position_x+1][current_position_y] = 3;
         }
         else{
@@ -139,7 +147,7 @@ int check_nbh(void) {
         }
     }
     if (disc_plan[current_position_x][current_position_y+1] == 0){
-        if (b_s <= 0.02){
+        if (b_s <= 0.05){
             disc_plan[current_position_x][current_position_y+1] = 3;
         }
         else{
@@ -147,7 +155,7 @@ int check_nbh(void) {
         }
     }
     if (disc_plan[current_position_x-1][current_position_y] == 0){
-        if (r_s <= 0.02){
+        if (r_s <= 0.05){
             disc_plan[current_position_x-1][current_position_y] = 3;
         }
         else{
@@ -163,8 +171,8 @@ int check_nbh(void) {
     // printf("disc_plan[x-1][y]: %d\n",disc_plan[current_position_x-1][current_position_y]);
     // printf("disc_plan[x][y-1]: %d\n",disc_plan[current_position_x][current_position_y-1]);
  
-    // for (int i=250;i<260;i++){
-    //     for (int j=250;j<260;j++){
+    // for (int i=247;i<253;i++){
+    //     for (int j=247;j<253;j++){
     //         printf("%d",disc_plan[j][i]);
     //     }
     //     printf("\n");
@@ -213,13 +221,19 @@ int select_target_cell(void){
         else {target_cell = 3;}
     }
 
-    printf("target_cell: %d  ", target_cell);
+    printf("\n");
+    //printf("target_cell: %d  ", target_cell);
 
     return EXIT_SUCCESS;
 }
 
 
 int calc_next_step(){
+
+    int status;
+
+    status = update_quarter_and_cell();
+
     tmp_orientation_stc_step = orientation;
     tmp_pos_x_stc_step = position_x;
     tmp_pos_y_stc_step = position_y;
@@ -264,23 +278,118 @@ int calc_next_step(){
         }
     }
     if (next_step == 1){
-        if (tmp_orientation_stc_step >= 270.0){
-            tmp_orientation_stc_step -= 270.0;
-        }
-        else {tmp_orientation_stc_step += 90.0;}
+        // if (tmp_orientation_stc_step >= 270.0){
+        //     tmp_orientation_stc_step -= 270.0;
+        // }
+        // else {tmp_orientation_stc_step += 90.0;}
+        // switch (current_orientation){
+        //     case 0:
+        //         tmp_orientation_stc_step = 0.0;
+        //         break;
+        //     case 1:
+        //         tmp_orientation_stc_step = 90.0;
+        //         break;
+        //     case 2:
+        //         tmp_orientation_stc_step = 180.0;
+        //         break;
+        //     case 3:
+        //         tmp_orientation_stc_step = 270.0;
+        //         break;
+        // }
+        int a = tmp_orientation_stc_step + 90;
+        tmp_orientation_stc_step = a % 360;
     }
     else if (next_step == 2) {
+        // switch (current_orientation){
+        //     case 0:
+        //         tmp_orientation_stc_step = 180.0;
+        //         break;
+        //     case 1:
+        //         tmp_orientation_stc_step = 270.0;
+        //         break;
+        //     case 2:
+        //         tmp_orientation_stc_step = 0.0;
+        //         break;
+        //     case 3:
+        //         tmp_orientation_stc_step = 90.0;
+        //         break;
+        // }
+
         if (tmp_orientation_stc_step <= 90.0){
             tmp_orientation_stc_step += 270.0;
         }
-        else {tmp_orientation_stc_step -= 90.0;}
+         else {tmp_orientation_stc_step -= 90.0;}
+        //printf("xd tmp_orient: %f  desired: %f\n", orientation,tmp_orientation_stc_step);
+        // int a = tmp_orientation_stc_step + 270;
+        // tmp_orientation_stc_step = a % 360;
+        //printf("xd tmp_orient: %f  desired: %f\n", orientation,tmp_orientation_stc_step);
+
     }
     
-    printf("current quarter: %d\n", current_quarter);
-    printf("target cell: %d\n", target_cell);
-    printf("current orientation: %d\n",current_orientation);
-    printf("next step: %d   \n", next_step);
-    printf("\nalgorithm:%d\n",algorithm_select);
-    printf("%f\n",tmp_orientation_stc_step);
+    // printf("current quarter: %d\n", current_quarter);
+    // printf("target cell: %d\n", target_cell);
+    // printf("current orientation: %d\n",current_orientation);
+    // printf("next step: %d   \n", next_step);
+    // printf("algorithm:%d\n",algorithm_select);
+    // printf("%f\n\n",tmp_orientation_stc_step);
+    return EXIT_SUCCESS;
+}
+
+int update_quarter_and_cell() {
+    
+    int status;
+
+    printf("%d -> ",current_quarter);
+    if (next_step == 3) {
+        switch (current_quarter)
+        {
+            case 0:
+                if (current_orientation == 0){
+                    current_quarter += 1;
+                }
+                else if (current_orientation == 3) {
+                    current_quarter = 3;
+                    current_position_x -= 1;
+                    status = check_nbh();
+                    status = select_target_cell(); 
+                }
+                break;
+            case 1:
+                if (current_orientation == 1){
+                    current_quarter += 1;
+                }
+                else if (current_orientation == 0) {
+                    current_quarter = 0;
+                    current_position_y -= 1;
+                    status = check_nbh();
+                    status = select_target_cell();
+                }
+                break;
+            case 2:
+                if (current_orientation == 2) {
+                    current_quarter += 1;
+                }
+                else if (current_orientation == 1) {
+                    current_quarter = 1;
+                    current_position_x += 1;
+                    status = check_nbh();
+                    status = select_target_cell();
+                }
+                break;
+            case 3:
+                if (current_orientation == 3) {
+                    current_quarter = 0;
+                } 
+                else if (current_orientation == 2) {
+                    current_quarter = 2;
+                    current_position_y += 1;
+                    status = check_nbh();
+                    status = select_target_cell();
+                }
+                break;
+        }
+
+    }
+
     return EXIT_SUCCESS;
 }

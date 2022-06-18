@@ -16,12 +16,12 @@
 #include "../include/sim.h"
 
 /* "Read only" variables definitions */
-double sim_step_position = 0.005;
+double sim_step_position = 0.001;
 int sim_step_battery = 1;
 int sim_step_container = 1;
-double sim_step_dist_sensors = 0.005;
-double max_speed = 3.0;
-double max_rotating_speed = 0.3;
+double sim_step_dist_sensors = 0.001;
+double max_speed = 2.0;
+double max_rotating_speed = 0.1;
 int trashes[30];
 
 double position_x;
@@ -56,8 +56,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 10.0;
-	position_y = 7.0;
+	position_x = 10;
+	position_y = 10;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
@@ -103,10 +103,10 @@ int initialize_trash(void) {
 int initialize_dist_sensors(void) {
 	// read house plan from file for calculating sensors
 	init_plan();
-	front_sensor = 0.0;
-	double back_sensor = 0.0;
-	double left_sensor = 0.0;
-	double right_sensor = 0.0;
+	double front_sensor = 1.0;
+	double back_sensor = 1.0;
+	double left_sensor = 1.0;
+	double right_sensor = 1.0;
 	int trash_sensor = 0; 
 	return 0;
 }

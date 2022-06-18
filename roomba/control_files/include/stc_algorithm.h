@@ -57,6 +57,8 @@ int select_target_cell();
 
 int init_stc_algorithm();
 
+int update_quarter_and_cell();
+
 void *tStcThreadFunc(void *cookie);
 
 #endif /* STC_ALGORITHM_H_*/
