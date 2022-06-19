@@ -16,11 +16,11 @@
 #include "../include/sim.h"
 
 /* "Read only" variables definitions */
-double sim_step_position = 0.001;
+double sim_step_position = 0.002;
 int sim_step_battery = 1;
 int sim_step_container = 1;
-double sim_step_dist_sensors = 0.001;
-double max_speed = 2.0;
+double sim_step_dist_sensors = 0.002;
+double max_speed = 1.0;
 double max_rotating_speed = 0.1;
 int trashes[30];
 
@@ -56,8 +56,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 10;
-	position_y = 10;
+	position_x = 2;
+	position_y = 2;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
@@ -167,6 +167,9 @@ int calculate_position(void) {
 		tmp_y = tmp_y + max_speed * left_motor_power_tmp * sim_step_position * (sin(tmp_orientation * ST_TO_RAD));
 	}
 
+	tmp_x = round(tmp_x * 1000)/1000;
+	tmp_y = round(tmp_y * 1000)/1000;
+	tmp_orientation = round(tmp_orientation * 100)/100;
 	// write output values
 	sem_wait(&position_orientationSemaphore);
 	position_x = tmp_x;

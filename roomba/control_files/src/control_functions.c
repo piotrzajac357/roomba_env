@@ -334,36 +334,41 @@ int calculate_movement_type(void) {
 				break;
 			case 1:
 				// rotate counter clockwise
-				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.03) {
+				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.075) {
 					movement_type = 3;
 				} else {
 					movement_type = 0;
 					//current_orientation = ((int)(tmp_orientation/90.0)+3)%4;
 					current_orientation = (current_orientation + 1) % 4;
-					printf("\nangle diff %f\n",fabs(tmp_orientation_stc_step - tmp_orientation));
+					//printf("\nangle diff %f\n",fabs(tmp_orientation_stc_step - tmp_orientation));
 					//printf("finished rotating 222\n");
 					sem_post(&spool_calc_next_step_stc);
 				}
 				break;
 			case 2:
-				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.03) {
+				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.075) {
 					movement_type = 2;
+					//printf("%f %f\n",tmp_orientation_stc_step,tmp_orientation);
 				} else {
 					movement_type = 0;
 					current_orientation = (current_orientation + 3) % 4;
-					printf("\nangle diff %f\n",fabs(tmp_orientation_stc_step - tmp_orientation));
+					//printf("\nangle diff %f\n",fabs(tmp_orientation_stc_step - tmp_orientation));
 					//current_orientation = ((int)(tmp_orientation/90.0)+2)%4;
 					//current_orientation =  (current_orientation > 0) ? ((current_orientation - 1) %4) : 3;
 					//printf("finished rotating 111\n");
+					printf("\n");
 					sem_post(&spool_calc_next_step_stc);
 				}
 				break;
 			case 3:
-				if(fabs(tmp_pos_x_stc_step - tmp_pos_x) <= 0.2 &&
-				   fabs(tmp_pos_y_stc_step - tmp_pos_y) <= 0.2) {
+				if(fabs(tmp_pos_x_stc_step - tmp_pos_x) < 0.25 &&
+				   fabs(tmp_pos_y_stc_step - tmp_pos_y) < 0.25) {
 					movement_type = 1;
-					//printf("%f %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+					//printf("here\n");
+					//printf("dist x: %f dist y: %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
 				} else {
+					printf("dist x: %f dist y: %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+					printf("+1");
 					movement_type = 0;
 					//printf("reached here\n");
 					sem_post(&spool_calc_next_step_stc);

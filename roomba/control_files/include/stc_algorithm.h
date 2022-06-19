@@ -10,6 +10,7 @@ int disc_plan[500][500];                // discovered plan of house
                                         // 1 - not visited
                                         // 2 - visited
                                         // 3 - obstacle
+int disc_plan2[40][40];
 
 double front_sensor;                    // front distance sensor
 double back_sensor;                     // back distance sensor
@@ -24,6 +25,8 @@ int current_orientation;                // robot orientation
                                         // 1-right
                                         // 2-up
                                         // 3-left
+double starting_x;
+double starting_y;
 
 double tmp_orientation_stc_step;        // tmp orientation for rotating by 90deg task
 double tmp_pos_x_stc_step;
