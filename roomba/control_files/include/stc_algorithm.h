@@ -12,6 +12,13 @@ int disc_plan[500][500];                // discovered plan of house
                                         // 3 - obstacle
 int disc_plan2[40][40];
 
+int parent_cells[40][40];               // parent cells of each cell
+                                        // 0 - not calculated
+                                        // 1 - from lower
+                                        // 2 - from right
+                                        // 3 - from upper
+                                        // 4 - from left
+
 double front_sensor;                    // front distance sensor
 double back_sensor;                     // back distance sensor
 double left_sensor;                     // left distance sensor
@@ -61,6 +68,8 @@ int select_target_cell();
 int init_stc_algorithm();
 
 int update_quarter_and_cell();
+
+int parent_to_target(int);
 
 void *tStcThreadFunc(void *cookie);
 

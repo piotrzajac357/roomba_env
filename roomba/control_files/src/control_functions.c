@@ -334,7 +334,7 @@ int calculate_movement_type(void) {
 				break;
 			case 1:
 				// rotate counter clockwise
-				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.075) {
+				if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.03) {
 					movement_type = 3;
 				} else {
 					movement_type = 0;
@@ -346,7 +346,7 @@ int calculate_movement_type(void) {
 				}
 				break;
 			case 2:
-				if (fabs(tmp_orientation_stc_step - tmp_orientation) > 0.075) {
+				if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.03) {
 					movement_type = 2;
 					//printf("%f %f\n",tmp_orientation_stc_step,tmp_orientation);
 				} else {
@@ -356,7 +356,7 @@ int calculate_movement_type(void) {
 					//current_orientation = ((int)(tmp_orientation/90.0)+2)%4;
 					//current_orientation =  (current_orientation > 0) ? ((current_orientation - 1) %4) : 3;
 					//printf("finished rotating 111\n");
-					printf("\n");
+					//printf("\n");
 					sem_post(&spool_calc_next_step_stc);
 				}
 				break;
@@ -367,8 +367,9 @@ int calculate_movement_type(void) {
 					//printf("here\n");
 					//printf("dist x: %f dist y: %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
 				} else {
-					printf("dist x: %f dist y: %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
-					printf("+1");
+					//printf("dist x: %f dist y: %f",fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+					//printf("\nposition_x: %f position_y: %f\n",position_x, position_y);
+					//printf("+1");
 					movement_type = 0;
 					//printf("reached here\n");
 					sem_post(&spool_calc_next_step_stc);

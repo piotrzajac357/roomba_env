@@ -1,0 +1,1810 @@
+pos_x: 15.000000 pos_y: 15.000000 orientation: 270.000000
+up: 1 left: 1 down: 1 right: 1, parent 1, target: 1
+pos_x: 14.750000 pos_y: 15.000000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 1, parent 1, target: 0
+pos_x: 14.750000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 15.000000 pos_y: 15.250000 orientation: 0.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 15.500000 pos_y: 15.250000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 15.500000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 15.500000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.250000 pos_y: 14.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 14.750000 pos_y: 14.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.250000 pos_y: 14.500000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 14.250000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 14.250000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 14.250000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 14.500000 pos_y: 15.750000 orientation: 0.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 15.000000 pos_y: 15.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.500000 pos_y: 15.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.000000 pos_y: 15.750000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 16.000000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.000000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.000000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.000000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.750000 pos_y: 14.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.250000 pos_y: 14.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.750000 pos_y: 14.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.250000 pos_y: 14.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.750000 pos_y: 14.000000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 13.750000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.750000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.750000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.750000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.750000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 14.000000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 14.500000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.000000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.500000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.000000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.500000 pos_y: 16.250000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 16.500000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.500000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.500000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.500000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.500000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.500000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 16.250000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.750000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.250000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.750000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.250000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.750000 pos_y: 13.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.250000 pos_y: 13.500000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 13.250000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.250000 pos_y: 16.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 13.500000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 14.000000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.500000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.000000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.500000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 16.750000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 16.750000 pos_y: 16.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 16.750000 pos_y: 13.000000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 16.500000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 13.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 13.000000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 13.000000 pos_y: 13.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 16.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 13.000000 pos_y: 17.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 13.250000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.750000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.250000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.750000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.250000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.250000 pos_y: 17.250000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 17.250000 pos_y: 17.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 16.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 13.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.250000 pos_y: 12.500000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 17.000000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.500000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 12.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.500000 pos_y: 12.500000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 12.500000 pos_y: 12.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 13.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 16.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 17.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 12.500000 pos_y: 17.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 12.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.250000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.250000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.250000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.250000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.750000 pos_y: 17.750000 orientation: 0.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 17.750000 pos_y: 17.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 17.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 16.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 13.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 12.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 17.750000 pos_y: 12.000000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 17.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 17.000000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.500000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.250000 pos_y: 12.000000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.750000 pos_y: 12.000000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 11.750000 pos_y: 12.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 12.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 13.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 16.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 17.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 17.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.750000 pos_y: 18.250000 orientation: 90.000000
+up: 3 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 12.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 12.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 18.000000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 18.500000 pos_y: 18.250000 orientation: 0.000000
+up: 3 left: 2 down: 1 right: 3, parent 4, target: 2
+pos_x: 18.500000 pos_y: 18.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 17.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 17.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 16.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 13.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 12.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 12.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.500000 pos_y: 11.500000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 3, parent 3, target: 1
+pos_x: 18.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 3, parent 3, target: 1
+pos_x: 17.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 17.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.250000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.750000 pos_y: 11.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.250000 pos_y: 11.500000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 11.250000 pos_y: 11.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 12.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 12.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 13.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 13.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 14.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 14.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 16.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 16.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 17.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 17.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 18.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.250000 pos_y: 18.500000 orientation: 90.000000
+up: 3 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 10.750000 pos_y: 18.750000 orientation: 180.000000
+up: 3 left: 3 down: 1 right: 3, parent 2, target: 2
+pos_x: 10.500000 pos_y: 18.250000 orientation: 270.000000
+up: 3 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 10.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 9.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 1.750000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 1.250000 pos_y: 18.250000 orientation: 180.000000
+up: 3 left: 3 down: 1 right: 2, parent 2, target: 2
+pos_x: 1.000000 pos_y: 17.750000 orientation: 270.000000
+up: 3 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 17.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 16.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 16.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 15.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 15.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 14.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 14.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 13.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 13.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 12.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 12.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 11.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 11.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 10.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 8.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 7.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 7.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 6.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 6.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 5.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 5.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 4.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 4.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 3.750000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 3.250000 orientation: 270.000000
+up: 2 left: 3 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.000000 pos_y: 2.750000 orientation: 270.000000
+up: 2 left: 3 down: 3 right: 1, parent 3, target: 3
+pos_x: 1.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 3 down: 3 right: 1, parent 4, target: 3
+pos_x: 2.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 2.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 3.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 3.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 4.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 4.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 5.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 5.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 6.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 6.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 7.000000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 7.500000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 7.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 8.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 8.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 9.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 9.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 10.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 10.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 11.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 11.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 12.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 12.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 13.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 13.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 14.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 14.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 15.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 17.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 17.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 18.250000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 1, parent 4, target: 3
+pos_x: 18.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 3, parent 4, target: 0
+pos_x: 19.000000 pos_y: 3.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 3.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 4.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 4.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 5.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 5.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 6.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 6.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 7.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 7.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 8.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 8.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 9.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 9.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 10.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 10.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 3, parent 1, target: 0
+pos_x: 19.000000 pos_y: 11.000000 orientation: 90.000000
+up: 3 left: 1 down: 2 right: 3, parent 1, target: 1
+pos_x: 18.500000 pos_y: 11.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 3, parent 3, target: 2
+pos_x: 18.250000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 2, parent 3, target: 1
+pos_x: 18.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 17.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 17.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.000000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.500000 pos_y: 10.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.000000 pos_y: 10.750000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 11.000000 pos_y: 11.000000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 11.000000 pos_y: 11.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 12.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 12.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 13.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 13.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 14.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 14.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 16.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 16.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 17.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 17.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 18.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 11.000000 pos_y: 18.500000 orientation: 90.000000
+up: 2 left: 2 down: 2 right: 2, parent 1, target: 2
+pos_x: 10.750000 pos_y: 18.250000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 2, parent 1, target: 2
+pos_x: 10.750000 pos_y: 17.750000 orientation: 270.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 10.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.000000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 1.500000 pos_y: 17.750000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 1.250000 pos_y: 17.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 16.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 16.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 14.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 13.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 13.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 12.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 12.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 11.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 11.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 10.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 8.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 7.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 7.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 6.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 6.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 5.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 5.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 4.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 4.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 3.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 3.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 1.250000 pos_y: 2.750000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 1.750000 pos_y: 2.500000 orientation: 360.000000
+up: 1 left: 2 down: 3 right: 2, parent 4, target: 0
+pos_x: 2.000000 pos_y: 3.000000 orientation: 90.000000
+up: 1 left: 2 down: 2 right: 1, parent 1, target: 3
+pos_x: 2.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 2.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 3.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 3.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.750000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.250000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 18.000000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 18.500000 pos_y: 3.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 2, parent 4, target: 0
+pos_x: 18.750000 pos_y: 3.500000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 3, parent 1, target: 1
+pos_x: 18.250000 pos_y: 3.750000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 18.250000 pos_y: 4.000000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 18.250000 pos_y: 4.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 4.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 5.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 5.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 6.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 6.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 7.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 7.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 8.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 8.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 9.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 9.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.250000 pos_y: 10.250000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 17.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 17.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.250000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.750000 pos_y: 10.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.250000 pos_y: 10.500000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 10.250000 pos_y: 10.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 11.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 11.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 12.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 12.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 13.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 15.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 15.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 16.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 16.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.250000 pos_y: 17.250000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 9.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.250000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 1.750000 pos_y: 17.500000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 1.500000 pos_y: 17.000000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 2.000000 pos_y: 16.750000 orientation: 360.000000
+up: 2 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 2.000000 pos_y: 16.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 16.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 15.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 15.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 14.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 14.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 13.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 13.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 12.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 12.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 11.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 11.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 10.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 10.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 9.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 9.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 8.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 8.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 7.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 7.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 6.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 6.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 5.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 5.000000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 4.500000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 4.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 3.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.000000 pos_y: 3.250000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 2.500000 pos_y: 3.000000 orientation: 360.000000
+up: 1 left: 2 down: 2 right: 2, parent 4, target: 0
+pos_x: 2.750000 pos_y: 3.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 3.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 1 down: 2 right: 1, parent 1, target: 3
+pos_x: 3.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.000000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.500000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.250000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.750000 pos_y: 3.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 18.250000 pos_y: 3.500000 orientation: 0.000000
+up: 2 left: 2 down: 2 right: 2, parent 4, target: 1
+pos_x: 18.000000 pos_y: 3.750000 orientation: 180.000000
+up: 1 left: 1 down: 2 right: 2, parent 2, target: 0
+pos_x: 18.000000 pos_y: 4.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 2, target: 0
+pos_x: 18.000000 pos_y: 4.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 5.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 5.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 6.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 6.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 7.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 7.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 8.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 8.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 9.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 9.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 18.000000 pos_y: 10.000000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 17.500000 pos_y: 10.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 17.250000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 2, parent 3, target: 1
+pos_x: 17.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.500000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.000000 pos_y: 9.750000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 10.000000 pos_y: 10.000000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 10.000000 pos_y: 10.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 11.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 11.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 12.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 12.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 13.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 13.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 14.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 14.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 16.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 16.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 10.000000 pos_y: 17.000000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 9.500000 pos_y: 17.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 9.250000 pos_y: 16.750000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 2, parent 3, target: 1
+pos_x: 9.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 2.500000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 2.250000 pos_y: 16.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 15.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 15.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 14.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 14.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 13.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 13.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 12.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 12.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 11.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 11.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 10.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 8.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 7.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 7.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 6.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 6.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 5.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 5.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 4.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 4.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 3.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.250000 pos_y: 3.250000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 2, parent 3, target: 0
+pos_x: 2.500000 pos_y: 3.500000 orientation: 90.000000
+up: 2 left: 2 down: 2 right: 2, parent 3, target: 0
+pos_x: 2.500000 pos_y: 4.000000 orientation: 90.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 2.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 3.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 3.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.750000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.250000 pos_y: 4.000000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 2, parent 4, target: 0
+pos_x: 17.500000 pos_y: 4.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 5.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 5.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 6.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 6.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 7.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 7.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 8.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 8.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 9.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 17.500000 pos_y: 9.500000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 17.000000 pos_y: 9.750000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 16.750000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 2, parent 3, target: 1
+pos_x: 16.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 16.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 15.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.500000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.000000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.500000 pos_y: 9.250000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 9.500000 pos_y: 9.500000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 9.500000 pos_y: 10.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 10.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 11.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 11.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 12.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 12.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 13.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 13.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 14.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 14.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 16.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 9.500000 pos_y: 16.500000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 9.000000 pos_y: 16.750000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 8.750000 pos_y: 16.250000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 2, parent 3, target: 1
+pos_x: 8.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 7.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.500000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.000000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 2.750000 pos_y: 15.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 15.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 14.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 14.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 13.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 13.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 12.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 12.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 11.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 11.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 10.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 8.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 7.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 7.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 6.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 6.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 5.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 5.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 4.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 2.750000 pos_y: 4.250000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 3.250000 pos_y: 4.000000 orientation: 360.000000
+up: 1 left: 2 down: 2 right: 2, parent 4, target: 0
+pos_x: 3.500000 pos_y: 4.500000 orientation: 90.000000
+up: 1 left: 2 down: 2 right: 1, parent 1, target: 3
+pos_x: 3.750000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.250000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 4.750000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.250000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 5.750000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.250000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 6.750000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 7.510000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 8.510000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.010000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.510000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 9.760000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.260000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.760000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.760000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 10.760000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.260000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 11.770000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.020000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 12.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.020000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 13.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.020000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 14.520000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.030000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 15.530000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.030000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 16.540000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 1, parent 4, target: 3
+pos_x: 17.040000 pos_y: 4.500000 orientation: 0.000000
+up: 1 left: 2 down: 2 right: 2, parent 4, target: 0
+pos_x: 17.300000 pos_y: 5.000000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 16.800000 pos_y: 5.250000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 16.800000 pos_y: 5.500000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 16.800000 pos_y: 6.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 6.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 7.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 7.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 8.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 8.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 16.800000 pos_y: 9.000000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 16.300000 pos_y: 9.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 16.050000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 15.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 14.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 13.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 12.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 11.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 10.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.800000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 9.300000 pos_y: 8.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 8.800000 pos_y: 8.750000 orientation: 180.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 8.800000 pos_y: 9.000000 orientation: 90.000000
+up: 1 left: 1 down: 1 right: 2, parent 2, target: 0
+pos_x: 8.800000 pos_y: 9.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 10.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 10.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 11.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 11.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 11.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 12.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 12.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 13.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 13.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 14.250000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 14.750000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 15.000000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 15.500000 orientation: 90.000000
+up: 1 left: 1 down: 2 right: 2, parent 1, target: 0
+pos_x: 8.800000 pos_y: 16.000000 orientation: 90.000000
+up: 2 left: 1 down: 2 right: 2, parent 1, target: 1
+pos_x: 8.300000 pos_y: 16.250000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 8.050000 pos_y: 15.750000 orientation: 270.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 7.800000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 1, parent 3, target: 1
+pos_x: 7.300000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.800000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 6.300000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.800000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 5.300000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.800000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 4.300000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.800000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 1 down: 1 right: 2, parent 2, target: 1
+pos_x: 3.300000 pos_y: 15.750000 orientation: 180.000000
+up: 2 left: 2 down: 1 right: 2, parent 2, target: 2
+pos_x: 3.050000 pos_y: 15.250000 orientation: 270.000000
+up: 2 left: 2 down: 2 right: 1, parent 3, target: 3
+pos_x: 3.550000 pos_y: 15.000000 orientation: 360.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 3.550000 pos_y: 14.750000 orientation: 270.000000
+up: 1 left: 2 down: 1 right: 1, parent 4, target: 2
+pos_x: 3.550000 pos_y: 14.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 13.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 13.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 12.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 12.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 11.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 11.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 10.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 10.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 9.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 9.250000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2
+pos_x: 3.550000 pos_y: 8.750000 orientation: 270.000000
+up: 2 left: 2 down: 1 right: 1, parent 3, target: 2

@@ -16,12 +16,12 @@
 #include "../include/sim.h"
 
 /* "Read only" variables definitions */
-double sim_step_position = 0.002;
+double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
-double max_speed = 1.0;
-double max_rotating_speed = 0.1;
+double max_speed = 1.2;
+double max_rotating_speed = 0.08;
 int trashes[30];
 
 double position_x;
@@ -56,8 +56,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 2;
-	position_y = 2;
+	position_x = 15;
+	position_y = 15;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
@@ -148,7 +148,7 @@ int calculate_position(void) {
 		tmp_orientation = tmp_orientation + (-left_motor_power_tmp + right_motor_power_tmp) * sim_step_position * 360 * max_rotating_speed/2;
 		
 		// normalize result to 0-360 degree
-		if (tmp_orientation > 360) { tmp_orientation -= 360; }
+		if (tmp_orientation >= 360) { tmp_orientation -= 360; }
 		else if (tmp_orientation < 0) { tmp_orientation += 360; } 
 	}
 
@@ -157,7 +157,7 @@ int calculate_position(void) {
 		tmp_orientation = tmp_orientation - (left_motor_power_tmp - right_motor_power_tmp) * sim_step_position * 360 * max_rotating_speed/2;
 		
 		// normalize result to 0-360 degree
-		if (tmp_orientation > 360) {tmp_orientation -= 360; }
+		if (tmp_orientation >= 360) {tmp_orientation -= 360; }
 		else if ((tmp_orientation < 0)) { tmp_orientation += 360; } 
 	}
 
@@ -167,16 +167,17 @@ int calculate_position(void) {
 		tmp_y = tmp_y + max_speed * left_motor_power_tmp * sim_step_position * (sin(tmp_orientation * ST_TO_RAD));
 	}
 
-	tmp_x = round(tmp_x * 1000)/1000;
-	tmp_y = round(tmp_y * 1000)/1000;
-	tmp_orientation = round(tmp_orientation * 100)/100;
+	tmp_x = round(tmp_x * 100)/100;
+	tmp_y = round(tmp_y * 100)/100;
+	//if ((fmod(tmp_orientation,1.0) < 0.01) || (fmod(tmp_orientation,1.0) > 0.99)){tmp_orientation = round(tmp_orientation);}
+	tmp_orientation = round(tmp_orientation * 10)/10;
 	// write output values
 	sem_wait(&position_orientationSemaphore);
 	position_x = tmp_x;
 	position_y = tmp_y;
 	previous_orientation = tmp_orientation;
 	sem_post(&position_orientationSemaphore);
-
+	//printf("%f", tmp_orientation);
 	return 0;
 }
 

@@ -26,6 +26,10 @@ int init_stc_algorithm(){
     pthread_attr_setschedpolicy(&aStcThreadAttr, SCHED_FIFO);
 
     status = init_stc();
+    FILE *fptr2;
+    fptr2 = fopen("../../roomba/log/decisions.txt","w");
+    fclose(fptr2);
+
     //status = calc_next_step();
 
     if ((status = pthread_create(&StcThread, &aStcThreadAttr, tStcThreadFunc, NULL))) {
@@ -52,6 +56,8 @@ void *tStcThreadFunc(void *cookie) {
     usleep(1000000);
     starting_x = position_x;
     starting_y = position_y;
+    parent_cells[(int)(round(position_x*2))][(int)(round(position_y*2))] = 1;
+    //status = init_stc();
     printf("%f %f",starting_x,starting_y);
     status = update_position_orientation();
     status = check_nbh();
@@ -79,6 +85,7 @@ int init_stc(void) {
     current_quarter = 0;
     target_cell = 1;
     next_step = 0;
+    //parent_cells[(int)(round(position_x*2))][(int)(round(position_y*2))] = 1;
     return EXIT_SUCCESS;
 }
 
@@ -98,12 +105,32 @@ int check_nbh(void) {
     double tmp_right_sensor = right_sensor;
     sem_post(&dist_sensorsSemaphore);
 
+    current_position_x = (int)(round(position_x*2));
+    current_position_y = (int)(round(position_y*2));
+
     //printf("\nsensors: %f %f %f %f\n", tmp_front_sensor, tmp_left_sensor,tmp_back_sensor,tmp_right_sensor);
 
     double f_s;
     double b_s;
     double r_s;
     double l_s;
+
+    if (parent_cells[current_position_x][current_position_y] == 0){
+        parent_cells[current_position_x][current_position_y] = target_cell + 1;
+    }
+
+    FILE *fptr;
+    char c;
+    fptr = fopen("../../roomba/log/map_parent.txt","w");
+    for(int i = 0; i < 40; i++) {
+        for(int j = 0; j < 40; j++){
+            c = parent_cells[j][40-i] +'0';
+            fputc(c,fptr);
+        }
+        fprintf(fptr,"\r\n");
+    }
+    fclose(fptr);
+
 
     if (current_orientation == 0){
         f_s = tmp_front_sensor;
@@ -150,35 +177,36 @@ int check_nbh(void) {
     disc_plan[current_position_x][current_position_y] = 2;
 
     if (disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] == 0){
-        if (f_s <= 0.1){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] = 3;}
+        if (f_s <= 0.075){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] = 3;}
         else {disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] = 1;}
     }
     if (disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] == 0){
-        if (l_s <= 0.1){disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] = 3;}
+        if (l_s <= 0.075){disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] = 3;}
         else {disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] = 1;}
     }
         if (disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] == 0){
-        if (b_s <= 0.1){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] = 3;}
+        if (b_s <= 0.05){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] = 3;}
         else {disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] = 1;}
     }
         if (disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] == 0){
-        if (r_s <= 0.1){disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] = 3;}
+        if (r_s <= 0.05){disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] = 3;}
         else {disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] = 1;}
     }
     disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2))] = 2;
+    //parent_cells[(int)(round(position_x*2))][(int)(round(position_y*2))] = 1;
     
 
-    FILE *fptr;
-    char c;
-    fptr = fopen("../../roomba/log/map.txt","w");
+    FILE *fptr1;
+    char cc;
+    fptr1 = fopen("../../roomba/log/map.txt","w");
     for(int i = 0; i < 40; i++) {
         for(int j = 0; j < 40; j++){
-            c = disc_plan2[j][40-i] +'0';
-            fputc(c,fptr);
+            cc = disc_plan2[j][40-i] +'0';
+            fputc(cc,fptr1);
         }
-        fprintf(fptr,"\r\n");
+        fprintf(fptr1,"\r\n");
     }
-    fclose(fptr);
+    fclose(fptr1);
 
 
 
@@ -252,56 +280,63 @@ int select_target_cell(void){
     //     else {target_cell = 3;}
     // }
 
-    current_position_x = (int)(round(position_x*2));
-    current_position_y = (int)(round(position_y*2));
+    // current_position_x = (int)(round(position_x*2));
+    // current_position_y = (int)(round(position_y*2));
     if (current_orientation == 0){
         if (disc_plan2[current_position_x-1][current_position_y] == 1) {target_cell = 1;}
         else if (disc_plan2[current_position_x][current_position_y-1] == 1) {target_cell = 2;}
         else if (disc_plan2[current_position_x+1][current_position_y] == 1) {target_cell = 3;}
-        else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
-        else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
-        else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
-        else {target_cell = 0;}
+        else {target_cell = parent_to_target(parent_cells[current_position_x][current_position_y]);}
+        // else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
+        // else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
+        // else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
+        //else {target_cell = 0;}
     }
     else if (current_orientation == 1){
         if (disc_plan2[current_position_x][current_position_y-1] == 1) {target_cell = 2;}
         else if (disc_plan2[current_position_x+1][current_position_y] == 1) {target_cell = 3;}
         else if (disc_plan2[current_position_x][current_position_y+1] == 1) {target_cell = 0;}
-        else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
-        else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
-        else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
-        else {target_cell = 1;}
+        else {target_cell = parent_to_target(parent_cells[current_position_x][current_position_y]);}
+        // else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
+        // else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
+        // else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
+        // else {target_cell = 1;}
     }
     else if (current_orientation == 2){
         if (disc_plan2[current_position_x+1][current_position_y] == 1) {target_cell = 3;}
         else if (disc_plan2[current_position_x][current_position_y+1] == 1) {target_cell = 0;}
         else if (disc_plan2[current_position_x-1][current_position_y] == 1) {target_cell = 1;}
-        else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
-        else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
-        else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
-        else {target_cell = 2;}
+        else {target_cell = parent_to_target(parent_cells[current_position_x][current_position_y]);}
+        // else if (disc_plan2[current_position_x+1][current_position_y] == 2) {target_cell = 3;}
+        // else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
+        // else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
+        // else {target_cell = 2;}
     }
     else if (current_orientation == 3){
         if (disc_plan2[current_position_x][current_position_y+1] == 1) {target_cell = 0;}
         else if (disc_plan2[current_position_x-1][current_position_y] == 1) {target_cell = 1;}
         else if (disc_plan2[current_position_x][current_position_y-1] == 1) {target_cell = 2;}
-        else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
-        else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
-        else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
-        else {target_cell = 3;}
+        else {target_cell = parent_to_target(parent_cells[current_position_x][current_position_y]);}
+        // else if (disc_plan2[current_position_x][current_position_y+1] == 2) {target_cell = 0;}
+        // else if (disc_plan2[current_position_x-1][current_position_y] == 2) {target_cell = 1;}
+        // else if (disc_plan2[current_position_x][current_position_y-1] == 2) {target_cell = 2;}
+        // else {target_cell = 3;}
     }
 
-  
 
-
-
-
-
-
-
-    printf("\n");
-    printf("target_cell: %d  ", target_cell);
-
+    //printf("\n");
+    //printf("target_cell: %d  ", target_cell);
+    FILE *fptr2;
+    char ccc;
+    fptr2 = fopen("../../roomba/log/decisions.txt","a");
+    fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+    fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
+                disc_plan2[current_position_x][current_position_y+1],
+                disc_plan2[current_position_x-1][current_position_y],
+                disc_plan2[current_position_x][current_position_y-1],
+                disc_plan2[current_position_x+1][current_position_y],
+                parent_cells[current_position_x][current_position_y], target_cell);
+    fclose(fptr2);
     return EXIT_SUCCESS;
 }
 
@@ -315,7 +350,7 @@ int calc_next_step(){
     tmp_orientation_stc_step = orientation;
     tmp_pos_x_stc_step = position_x;
     tmp_pos_y_stc_step = position_y;
-        if (current_quarter == 0){
+    if (current_quarter == 0){
         if (current_orientation == 0){
             if (target_cell == 1) { next_step = 2;}
             else { next_step = 3;}
@@ -471,4 +506,12 @@ int update_quarter_and_cell() {
     }
 
     return EXIT_SUCCESS;
+}
+
+int parent_to_target(int parent_cell) {
+    if (parent_cell == 1) { return 2;}
+    else if (parent_cell == 2) {return 3;}
+    else if (parent_cell == 3) {return 0;}
+    else if (parent_cell == 4) {return 1;}
+    else { return 0;}
 }
