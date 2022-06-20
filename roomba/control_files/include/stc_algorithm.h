@@ -12,7 +12,7 @@ int disc_plan[500][500];                // discovered plan of house
                                         // 3 - obstacle
 int disc_plan2[40][40];
 
-int parent_cells[40][40];               // parent cells of each cell
+int parent_cells[80][80];               // parent cells of each cell
                                         // 0 - not calculated
                                         // 1 - from lower
                                         // 2 - from right

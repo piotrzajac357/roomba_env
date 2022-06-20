@@ -29,6 +29,9 @@ int init_stc_algorithm(){
     FILE *fptr2;
     fptr2 = fopen("../../roomba/log/decisions.txt","w");
     fclose(fptr2);
+    FILE *fptr3;
+    fptr3 = fopen("../../roomba/log/quarters.txt","w");
+    fclose(fptr3);
 
     //status = calc_next_step();
 
@@ -64,12 +67,15 @@ void *tStcThreadFunc(void *cookie) {
     status = select_target_cell();
     //target_cell = 3;
 
-    for(;;) {
-    sem_wait(&spool_calc_next_step_stc);
-    sem_wait(&calc_next_step_stcSemaphore);
     status = calc_next_step();
-    sem_post(&calc_next_step_stcSemaphore);
-    }
+    // for(;;) {
+    // sem_wait(&spool_calc_next_step_stc);
+    // printf("decreased semaphore\n");
+    // fflush(stdout);
+    // sem_wait(&calc_next_step_stcSemaphore);
+    // status = calc_next_step();
+    // sem_post(&calc_next_step_stcSemaphore);
+    // }
 
 
     return EXIT_SUCCESS;
@@ -98,6 +104,15 @@ int update_position_orientation(){
 
 int check_nbh(void) {
 
+    double i = 0;
+    double j = 0;
+    switch (current_quarter){
+        case 0: { i = 0; j = 0;}
+        case 1: { i = 0; j = 0.25;}
+        case 2: { i = -0.25; j = 0.25;}
+        case 3: { i = -0.25; j = 0;}
+    }
+
     sem_wait(&dist_sensorsSemaphore);
     double tmp_front_sensor = front_sensor;
     double tmp_back_sensor = back_sensor;
@@ -105,8 +120,8 @@ int check_nbh(void) {
     double tmp_right_sensor = right_sensor;
     sem_post(&dist_sensorsSemaphore);
 
-    current_position_x = (int)(round(position_x*2));
-    current_position_y = (int)(round(position_y*2));
+    current_position_x = (int)(round((position_x+i)*2));
+    current_position_y = (int)(round((position_y+j)*2));
 
     //printf("\nsensors: %f %f %f %f\n", tmp_front_sensor, tmp_left_sensor,tmp_back_sensor,tmp_right_sensor);
 
@@ -176,23 +191,25 @@ int check_nbh(void) {
     }
     disc_plan[current_position_x][current_position_y] = 2;
 
-    if (disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] == 0){
-        if (f_s <= 0.075){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] = 3;}
-        else {disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) - 1] = 1;}
+
+
+    if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] == 0){
+        if (f_s <= 0.09){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] = 3;}
+        else {disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] = 1;}
     }
-    if (disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] == 0){
-        if (l_s <= 0.075){disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] = 3;}
-        else {disc_plan2[(int)(round(position_x*2)+1)][(int)(round(position_y*2))] = 1;}
+    if (disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] == 0){
+        if (l_s <= 0.09){disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] = 3;}
+        else {disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] = 1;}
     }
-        if (disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] == 0){
-        if (b_s <= 0.05){disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] = 3;}
-        else {disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2)) + 1] = 1;}
+        if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] == 0){
+        if (b_s <= 0.065){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] = 3;}
+        else {disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] = 1;}
     }
-        if (disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] == 0){
-        if (r_s <= 0.05){disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] = 3;}
-        else {disc_plan2[(int)(round(position_x*2)-1)][(int)(round(position_y*2))] = 1;}
+        if (disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] == 0){
+        if (r_s <= 0.065){disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] = 3;}
+        else {disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] = 1;}
     }
-    disc_plan2[(int)(round(position_x*2))][(int)(round(position_y*2))] = 2;
+    disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2))] = 2;
     //parent_cells[(int)(round(position_x*2))][(int)(round(position_y*2))] = 1;
     
 
@@ -344,7 +361,8 @@ int select_target_cell(void){
 int calc_next_step(){
 
     int status;
-
+    // printf("decreased semaphore\n");
+    // fflush(stdout);
     status = update_quarter_and_cell();
 
     tmp_orientation_stc_step = orientation;
@@ -504,6 +522,13 @@ int update_quarter_and_cell() {
         }
 
     }
+    FILE *fptr3;
+    char q;
+    fptr3 = fopen("../../roomba/log/quarters.txt","a");
+    fprintf(fptr3,"pos_x: %.2f pos_y: %.2f orientation: %.2f next step: %d quarter: %d\r\n", position_x, position_y, orientation, next_step, current_quarter);
+    fclose(fptr3);
+
+
 
     return EXIT_SUCCESS;
 }
