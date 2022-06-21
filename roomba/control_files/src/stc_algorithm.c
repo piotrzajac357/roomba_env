@@ -85,8 +85,8 @@ void *tStcThreadFunc(void *cookie) {
 
 int init_stc(void) {
     
-    current_position_x = 250;
-    current_position_y = 250;
+    // current_position_x = 250;
+    // current_position_y = 250;
     current_orientation = 0;
     current_quarter = 0;
     target_cell = 1;
@@ -106,11 +106,12 @@ int check_nbh(void) {
 
     double i = 0;
     double j = 0;
+    double f, b, r, l = 0;
     switch (current_quarter){
-        case 0: { i = 0; j = 0;}
-        case 1: { i = 0; j = 0.25;}
-        case 2: { i = -0.25; j = 0.25;}
-        case 3: { i = -0.25; j = 0;}
+        case 0: { i = 0;     j = 0;     f = 0.025; l = 0.025;}
+        case 1: { i = 0;     j = 0.25;  b = 0.025; l = 0.025;}
+        case 2: { i = -0.25; j = 0.25;  b = 0.025; r = 0.025;}
+        case 3: { i = -0.25; j = 0;     f = 0.025; r = 0.025;}
     }
 
     sem_wait(&dist_sensorsSemaphore);
@@ -173,40 +174,40 @@ int check_nbh(void) {
         }
  
 
-    if (disc_plan[current_position_x][current_position_y-1] == 0){
-        if (f_s <= 0.1){disc_plan[current_position_x][current_position_y-1] = 3;}
-        else{disc_plan[current_position_x][current_position_y-1] = 1;}
-    }
-    if (disc_plan[current_position_x+1][current_position_y] == 0){
-        if (l_s <= 0.1){disc_plan[current_position_x+1][current_position_y] = 3;}
-        else{disc_plan[current_position_x+1][current_position_y] = 1;}
-    }
-    if (disc_plan[current_position_x][current_position_y+1] == 0){
-        if (b_s <= 0.1){disc_plan[current_position_x][current_position_y+1] = 3;}
-        else{disc_plan[current_position_x][current_position_y+1] = 1;}
-    }
-    if (disc_plan[current_position_x-1][current_position_y] == 0){
-        if (r_s <= 0.1){disc_plan[current_position_x-1][current_position_y] = 3;}
-        else{disc_plan[current_position_x-1][current_position_y] = 1;}
-    }
-    disc_plan[current_position_x][current_position_y] = 2;
+    // if (disc_plan[current_position_x][current_position_y-1] == 0){
+    //     if (f_s <= 0.1){disc_plan[current_position_x][current_position_y-1] = 3;}
+    //     else{disc_plan[current_position_x][current_position_y-1] = 1;}
+    // }
+    // if (disc_plan[current_position_x+1][current_position_y] == 0){
+    //     if (l_s <= 0.1){disc_plan[current_position_x+1][current_position_y] = 3;}
+    //     else{disc_plan[current_position_x+1][current_position_y] = 1;}
+    // }
+    // if (disc_plan[current_position_x][current_position_y+1] == 0){
+    //     if (b_s <= 0.1){disc_plan[current_position_x][current_position_y+1] = 3;}
+    //     else{disc_plan[current_position_x][current_position_y+1] = 1;}
+    // }
+    // if (disc_plan[current_position_x-1][current_position_y] == 0){
+    //     if (r_s <= 0.1){disc_plan[current_position_x-1][current_position_y] = 3;}
+    //     else{disc_plan[current_position_x-1][current_position_y] = 1;}
+    // }
+    // disc_plan[current_position_x][current_position_y] = 2;
 
 
 
-    if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] == 0){
-        if (f_s <= 0.09){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] = 3;}
+    if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] <= 1){
+        if (f_s <= (0.05+f)){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] = 3;}
         else {disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) - 1] = 1;}
     }
-    if (disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] == 0){
-        if (l_s <= 0.09){disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] = 3;}
+    if (disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] <= 1){
+        if (l_s <= (0.05+l)){disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] = 3;}
         else {disc_plan2[(int)(round((position_x+i)*2)+1)][(int)(round((position_y+j)*2))] = 1;}
     }
-        if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] == 0){
-        if (b_s <= 0.065){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] = 3;}
+    if (disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] <= 1){
+        if (b_s <= (0.05+b)){disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] = 3;}
         else {disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2)) + 1] = 1;}
     }
-        if (disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] == 0){
-        if (r_s <= 0.065){disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] = 3;}
+    if (disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] <= 1){
+        if (r_s <= (0.05+r)){disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] = 3;}
         else {disc_plan2[(int)(round((position_x+i)*2)-1)][(int)(round((position_y+j)*2))] = 1;}
     }
     disc_plan2[(int)(round((position_x+i)*2))][(int)(round((position_y+j)*2))] = 2;
@@ -353,6 +354,8 @@ int select_target_cell(void){
                 disc_plan2[current_position_x][current_position_y-1],
                 disc_plan2[current_position_x+1][current_position_y],
                 parent_cells[current_position_x][current_position_y], target_cell);
+    fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
+    fprintf(fptr2,"\r\n");
     fclose(fptr2);
     return EXIT_SUCCESS;
 }

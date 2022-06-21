@@ -56,8 +56,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 15;
-	position_y = 15;
+	position_x = 13;
+	position_y = 10;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
@@ -167,8 +167,9 @@ int calculate_position(void) {
 		tmp_y = tmp_y + max_speed * left_motor_power_tmp * sim_step_position * (sin(tmp_orientation * ST_TO_RAD));
 	}
 
-	tmp_x = round(tmp_x * 100)/100;
-	tmp_y = round(tmp_y * 100)/100;
+	// change here to adjust resolution
+	tmp_x = round(tmp_x * 80)/80;
+	tmp_y = round(tmp_y * 80)/80;
 	//if ((fmod(tmp_orientation,1.0) < 0.01) || (fmod(tmp_orientation,1.0) > 0.99)){tmp_orientation = round(tmp_orientation);}
 	tmp_orientation = round(tmp_orientation * 10)/10;
 	// write output values
