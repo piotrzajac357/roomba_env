@@ -9,6 +9,7 @@ int algorithm_select;                   // algorithm selection
                                         // 0 - random bouncing
                                         // 1 - stc
 
+/* sensors and odometry and output variables */
 double position_x;                      // Current cartesian position x coord (0-20m)
 double position_y;                      // Current cartesian position y coord (0-20m)
 double orientation;                     // Current orientation (0-360deg)
@@ -38,6 +39,9 @@ sem_t planSemaphore;                    // Semaphore
 int trash_sensor;                       // trash (below) sensor
 sem_t trashSemaphore;                   // Semaphore
 
+
+/* RANDOM algorithm variables */
+
 /*  current task to be done 
     0 - no driving, motors off
     1 - driving forward
@@ -62,10 +66,62 @@ sem_t target_directionSemaphore;        // Semaphore
 
 sem_t spool_set_new_task;               // notification that new task has to be selected
 
-sem_t spool_calc_next_step_stc;         // notification for stc quarter algorithm
-sem_t calc_next_step_stcSemaphore;
 
-//double tmp_orientation;                 // tmp orientation for rotating by 90deg task
+/* STC ALGORITHM VARIABLES */
+sem_t spool_calc_next_step_stc;         // notification for STC algorithm - calculate next step
+
+int spool_next_step_calculated;         // flag that next step has been calculated
+
+
+/* discovered plan of house
+    0 - not checked (default)
+    1 - not visited
+    2 - visited
+    3 - obstacle */
+int disc_plan2[40][40];                 
+
+/* parent cells of each cell
+0 - not calculated
+1 - from lower
+2 - from right
+3 - from upper
+4 - from left */
+int parent_cells[80][80];
+
+int current_position_x;                 // robot position x for stc algorithm (rounded)
+int current_position_y;                 // robot position y for stc algorithm (rounded)
+
+/* robot orientation for stc algorithm
+0 - down
+1 - right
+2 - up
+3 - left */
+int current_orientation;
+
+double tmp_orientation_stc_step;        // target orientation of stc (orientation +- 90)
+double tmp_pos_x_stc_step;              // tmp position x for moving by quarter
+double tmp_pos_y_stc_step;              // tmp position y for moving by quarter
+
+/* current quarter of the cell
+0 - upper left
+1 - lower left
+2 - lower right
+3 - upper right */
+int current_quarter;
+
+/* next step to be done by stc
+0 - nothing
+1 - rotate counter clockwise by 90deg
+2 - rotate clockwise by 90deg
+3 - drive forward by quarter */
+int next_step;
+
+/* target cell to move to 
+0 - upper 
+1 - left
+2 - lower 
+3 - right */
+int target_cell;
 
 int initialize_semaphores(void);
 
@@ -88,5 +144,19 @@ int calculate_movement_type(void);
 int inspect_battery_and_container(void);
 
 int update_plan(int previous_x_pixel, int previous_y_pixel, int current_x_pix, int current_y_pix);
+
+int check_nbh(void);
+
+int init_stc(void);
+
+int update_position_orientation(void);
+
+int calc_next_step(void);
+
+int select_target_cell(void);
+
+int update_quarter_and_cell(void);
+
+int parent_to_target(int);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

@@ -69,7 +69,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/plan/plan7.png')
+background = mpimg.imread('../../roomba/plan/plan5.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
