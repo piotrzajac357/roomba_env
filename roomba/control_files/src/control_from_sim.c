@@ -92,7 +92,7 @@ void *tCFSThreadFunc(void *cookie) {
         sem_post(&trashSemaphore);
           
         // function updates plan (visited points)
-        int status = update_plan(previous_x_pix, previous_y_pix, round(10*position_x_tmp), round(10*position_y_tmp));
+        //int status = update_plan(previous_x_pix, previous_y_pix, round(10*position_x_tmp), round(10*position_y_tmp));
         
         // if new trashes coords are different since last, insert trashes into plan 
         /* sem_wait(&planSemaphore);

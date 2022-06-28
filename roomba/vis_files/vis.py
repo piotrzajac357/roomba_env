@@ -23,8 +23,8 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
 
     # Increase clean area and change robot position on plot if robot position has changed
     if (robot_pos_x != previous_robot_x[0]) or (robot_pos_y != previous_robot_y[0]):
-        for k in [-3,-2,-1,0,1,2,3]:
-            for j in [-3,-2,0,-1,1,2,3]:
+        for k in [-2,-1,0,1,2,]:
+            for j in [-2,0,-1,1,2]:
                 if ((background[robot_pos_x + k,robot_pos_y + j,2] == 1)):
                     # Cleaned area - light green
                     background[robot_pos_x + k,robot_pos_y + j,:] = [210/255,1,210/255]
@@ -69,7 +69,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/plan/plan5.png')
+background = mpimg.imread('../../roomba/plan/plan7.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")

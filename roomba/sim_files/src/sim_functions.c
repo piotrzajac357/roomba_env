@@ -56,8 +56,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 14;
-	position_y = 9;
+	position_x = 13;
+	position_y = 17;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;

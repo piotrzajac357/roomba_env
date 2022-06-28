@@ -44,7 +44,7 @@ int init_sim_to_vis() {
       	timerSpecStruct.it_value.tv_sec = 0;
 	    timerSpecStruct.it_value.tv_nsec = 25000000;
 	    timerSpecStruct.it_interval.tv_sec = 0;
-    	timerSpecStruct.it_interval.tv_nsec = 25000000;
+    	timerSpecStruct.it_interval.tv_nsec = 50000000;
 
         // create and configure socket
         my_socket = socket(PF_INET, SOCK_DGRAM, 0);

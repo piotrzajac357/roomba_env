@@ -594,30 +594,30 @@ int check_nbh(void) {
     // }
 
 	/* write map for debugging */
-    FILE *fptr1;
-    char cc;
-    fptr1 = fopen("../../roomba/log/map.txt","w");
-    for(int i = 0; i < 40; i++) {
-        for(int j = 0; j < 40; j++){
-            cc = disc_plan2[j][40-i] +'0';
-            fputc(cc,fptr1);
-        }
-        fprintf(fptr1,"\r\n");
-    }
-    fclose(fptr1);
+    // FILE *fptr1;
+    // char cc;
+    // fptr1 = fopen("../../roomba/log/map.txt","w");
+    // for(int i = 0; i < 40; i++) {
+    //     for(int j = 0; j < 40; j++){
+    //         cc = disc_plan2[j][40-i] +'0';
+    //         fputc(cc,fptr1);
+    //     }
+    //     fprintf(fptr1,"\r\n");
+    // }
+    // fclose(fptr1);
 
-	/* write parent map for debugging */
-    FILE *fptr;
-    char c;
-    fptr = fopen("../../roomba/log/map_parent.txt","w");
-    for(int i = 0; i < 40; i++) {
-        for(int j = 0; j < 40; j++){
-            c = parent_cells[j][40-i] +'0';
-            fputc(c,fptr);
-        }
-        fprintf(fptr,"\r\n");
-    }
-    fclose(fptr);
+	// /* write parent map for debugging */
+    // FILE *fptr;
+    // char c;
+    // fptr = fopen("../../roomba/log/map_parent.txt","w");
+    // for(int i = 0; i < 40; i++) {
+    //     for(int j = 0; j < 40; j++){
+    //         c = parent_cells[j][40-i] +'0';
+    //         fputc(c,fptr);
+    //     }
+    //     fprintf(fptr,"\r\n");
+    // }
+    // fclose(fptr);
 
     return EXIT_SUCCESS;
 }
@@ -658,19 +658,19 @@ int select_target_cell(void){
     }
 
 	/* write decisions and circumstances to file for debugging */
-    FILE *fptr2;
-    char ccc;
-    fptr2 = fopen("../../roomba/log/decisions.txt","a");
-    fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
-    fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
-                disc_plan2[current_position_x][current_position_y+1],
-                disc_plan2[current_position_x-1][current_position_y],
-                disc_plan2[current_position_x][current_position_y-1],
-                disc_plan2[current_position_x+1][current_position_y],
-                parent_cells[current_position_x][current_position_y], target_cell);
-    fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
-    fprintf(fptr2,"\r\n");
-    fclose(fptr2);
+    // FILE *fptr2;
+    // char ccc;
+    // fptr2 = fopen("../../roomba/log/decisions.txt","a");
+    // fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+    // fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
+    //             disc_plan2[current_position_x][current_position_y+1],
+    //             disc_plan2[current_position_x-1][current_position_y],
+    //             disc_plan2[current_position_x][current_position_y-1],
+    //             disc_plan2[current_position_x+1][current_position_y],
+    //             parent_cells[current_position_x][current_position_y], target_cell);
+    // fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
+    // fprintf(fptr2,"\r\n");
+    // fclose(fptr2);
 
     return EXIT_SUCCESS;
 }
