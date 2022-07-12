@@ -16,6 +16,8 @@
 
 ../roomba/sim_files/include/position_update.h
 
+../roomba/sim_files/include/quality_indexes.h
+
 ../roomba/sim_files/include/sim_functions.h
 
 ../roomba/sim_files/include/sim_to_vis.h
@@ -31,6 +33,8 @@
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/load_plan.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/position_update.h
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/quality_indexes.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim.h
 
@@ -162,6 +166,32 @@ position_update.h
 sim_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.h
 
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c
+stdio.h
+-
+stdlib.h
+-
+pthread.h
+-
+unistd.h
+-
+signal.h
+-
+errno.h
+-
+time.h
+-
+semaphore.h
+-
+fcntl.h
+-
+sys/types.h
+-
+quality_indexes.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.h
+sim_functions.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.h
+
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim.c
 stdlib.h
 -
@@ -207,6 +237,8 @@ arpa/inet.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_to_vis.h
 ../include/sim_from_control.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_from_control.h
+../include/quality_indexes.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/quality_indexes.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_from_control.c
 stdlib.h

@@ -122,6 +122,16 @@ int initialize_control_values(void) {
 	return EXIT_SUCCESS;
 	}
 
+/* initialize quality indexes with starting values */
+int initialize_quality_indexes(void) {
+	//TODO
+	// jakas semafora
+	time_QI = 0;
+	//koniec jakiejs semafory
+	return EXIT_SUCCESS;
+};
+
+
 /* function calculating cartesian position of robot */
 int calculate_position(void) {
 /* 	Function calculates new position and orientation based on previous position orientation and motors powers */

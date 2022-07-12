@@ -629,6 +629,33 @@ sim_files/src/position_update.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/position_update.c.s
 .PHONY : sim_files/src/position_update.c.s
 
+sim_files/src/quality_indexes.o: sim_files/src/quality_indexes.c.o
+
+.PHONY : sim_files/src/quality_indexes.o
+
+# target to build an object file
+sim_files/src/quality_indexes.c.o:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o
+.PHONY : sim_files/src/quality_indexes.c.o
+
+sim_files/src/quality_indexes.i: sim_files/src/quality_indexes.c.i
+
+.PHONY : sim_files/src/quality_indexes.i
+
+# target to preprocess a source file
+sim_files/src/quality_indexes.c.i:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.i
+.PHONY : sim_files/src/quality_indexes.c.i
+
+sim_files/src/quality_indexes.s: sim_files/src/quality_indexes.c.s
+
+.PHONY : sim_files/src/quality_indexes.s
+
+# target to generate assembly for a file
+sim_files/src/quality_indexes.c.s:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.s
+.PHONY : sim_files/src/quality_indexes.c.s
+
 sim_files/src/sim.o: sim_files/src/sim.c.o
 
 .PHONY : sim_files/src/sim.o
@@ -908,6 +935,9 @@ help:
 	@echo "... sim_files/src/position_update.o"
 	@echo "... sim_files/src/position_update.i"
 	@echo "... sim_files/src/position_update.s"
+	@echo "... sim_files/src/quality_indexes.o"
+	@echo "... sim_files/src/quality_indexes.i"
+	@echo "... sim_files/src/quality_indexes.s"
 	@echo "... sim_files/src/sim.o"
 	@echo "... sim_files/src/sim.i"
 	@echo "... sim_files/src/sim.s"

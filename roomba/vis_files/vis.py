@@ -39,7 +39,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
 
     i[0] = i[0] + 1
     # Display changes every 8th received packet
-    if i[0] == 8:
+    if i[0] == 4:
 
         img[:,:,:] = background[:,:,:]
         i[0] = 0
@@ -59,9 +59,10 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
         # Display direction arrow, robot position and title with useful information
         a = plt.arrow(robot_pos_y,robot_pos_x,dx,dy,width=0.9)
         axim1.set_data(img)
-        plt.title('Poziom baterii: '+ str(round(float(battery_lvl),2)) +'%, Zapełnienie zbiornika: ' + str(round(float(box_lvl),2)) + '%\nMoc ssania: ' + str(round(suction_power,2)) + '%')
+        plt.title('Poziom baterii: '+ str(round(float(battery_lvl),2)) +'%, timeQI: ' + str(round(float(box_lvl),2)) + 'sec\nMoc ssania: ' + str(round(suction_power,2)) + '%')
         # flush 
         fig1.canvas.flush_events()
+        #fig1.canvas.draw()
         a.remove()
     return
 
@@ -76,7 +77,7 @@ plt.axis("off")
 
 
 # Mutual objects help with handling first iteration and "did it change?" checking
-i = [7]
+i = [3]
 previous_robot_x = [0]
 previous_robot_y = [0]
 # previous_trashes_x = [0]

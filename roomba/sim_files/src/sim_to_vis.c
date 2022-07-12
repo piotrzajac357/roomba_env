@@ -110,7 +110,7 @@ void * tS2VThreadFunc(void *cookie) {
     
     // buffer with trash coords 
     // snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %d %d %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_container, trashes[0], trashes[1], tmp_suction_power);
-    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_container, tmp_suction_power);
+    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, time_QI, tmp_suction_power);
 
     // send buffer 
     sendto(my_socket, buffer, 64, MSG_CONFIRM, (const struct sockaddr *) &socket_addr, sizeof(socket_addr));

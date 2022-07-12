@@ -225,9 +225,33 @@ roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o.provides: roomba/CMa
 roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o.provides.build: roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o
 
 
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o: roomba/CMakeFiles/sim.dir/flags.make
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o: ../roomba/sim_files/src/quality_indexes.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o"
+	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c
+
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.i"
+	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c > CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.i
+
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.s"
+	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c -o CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.s
+
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.requires:
+
+.PHONY : roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.requires
+
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.provides: roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.requires
+	$(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.provides.build
+.PHONY : roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.provides
+
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.provides.build: roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o
+
+
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o: roomba/CMakeFiles/sim.dir/flags.make
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o: ../roomba/sim_files/src/sim_functions.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.c
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.i: cmake_force
@@ -251,7 +275,7 @@ roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o.provides.build: roomba
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o: roomba/CMakeFiles/sim.dir/flags.make
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o: ../roomba/sim_files/src/sim_to_control.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_control.c
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.i: cmake_force
@@ -275,7 +299,7 @@ roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o.provides.build: roomb
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o: roomba/CMakeFiles/sim.dir/flags.make
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o: ../roomba/sim_files/src/sim_to_vis.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_vis.c
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.i: cmake_force
@@ -299,7 +323,7 @@ roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o.provides.build: roomba/CM
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o: roomba/CMakeFiles/sim.dir/flags.make
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o: ../roomba/sim_files/src/sim_from_control.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_from_control.c
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.i: cmake_force
@@ -330,6 +354,7 @@ sim_OBJECTS = \
 "CMakeFiles/sim.dir/sim_files/src/container_update.c.o" \
 "CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o" \
 "CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o" \
+"CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o" \
 "CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o" \
 "CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o" \
 "CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o" \
@@ -345,13 +370,14 @@ roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/battery_update.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/container_update.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o
+roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o
 roomba/sim: roomba/CMakeFiles/sim.dir/build.make
 roomba/sim: roomba/CMakeFiles/sim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking C executable sim"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -366,6 +392,7 @@ roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/batt
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/container_update.c.o.requires
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o.requires
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o.requires
+roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o.requires
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o.requires
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o.requires
 roomba/CMakeFiles/sim.dir/requires: roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o.requires

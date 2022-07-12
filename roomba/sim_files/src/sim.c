@@ -21,6 +21,7 @@
 #include "../include/sim_to_control.h"
 #include "../include/sim_to_vis.h"
 #include "../include/sim_from_control.h"
+#include "../include/quality_indexes.h"
 
 /* simulation process */
 int main(int argc, char *argv[]) {
@@ -94,6 +95,11 @@ int main(int argc, char *argv[]) {
 
     if ((status = init_dist_sensors_update())) {
         fprintf(stderr, "Error initializing distance sensors update thread : %d\n", status);
+        return 0;
+    }
+
+    if ((status = init_quality_indexes_update())) {
+        fprintf(stderr, "Error initializing quality indexes update thread: %d\n", status);
         return 0;
     }
 

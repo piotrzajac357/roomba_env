@@ -13,7 +13,8 @@
         "signal.h": "c",
         "run_python_script.h": "c",
         "sim_from_control.h": "c",
-        "control.h": "c"
+        "control.h": "c",
+        "dist_sensors_update.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

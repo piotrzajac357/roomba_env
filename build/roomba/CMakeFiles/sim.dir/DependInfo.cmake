@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/dist_sensors_update.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/load_plan.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/load_plan.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/position_update.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/position_update.c.o"
+  "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_from_control.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o"

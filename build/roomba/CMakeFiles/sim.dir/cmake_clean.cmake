@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/sim.dir/sim_files/src/container_update.c.o"
   "CMakeFiles/sim.dir/sim_files/src/dist_sensors_update.c.o"
   "CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o"
+  "CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o"
   "CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o"
   "CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o"
   "CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o"

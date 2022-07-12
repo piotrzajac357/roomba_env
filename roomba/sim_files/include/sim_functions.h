@@ -48,6 +48,8 @@ double sim_step_dist_sensors;           // Simulation step for calculating senso
 double max_speed;                       // Linear speed of robot. Increase this to fasten simulation.
 double max_rotating_speed;              // Rotating speed of robot. Increase this to fasten simulation.
 
+// quality indexes
+double time_QI;
 
 int initialize_semaphores(void);
 
@@ -62,6 +64,8 @@ int initialize_dist_sensors(void);
 int initialize_trash(void);
 
 int initialize_control_values(void);
+
+int initialize_quality_indexes(void);
 
 int calculate_position(void);
 

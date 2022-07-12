@@ -20,11 +20,16 @@ roomba/CMakeFiles/sim.dir/sim_files/src/position_update.c.o
  ../roomba/sim_files/include/position_update.h
  ../roomba/sim_files/include/sim_functions.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/position_update.c
+roomba/CMakeFiles/sim.dir/sim_files/src/quality_indexes.c.o
+ ../roomba/sim_files/include/quality_indexes.h
+ ../roomba/sim_files/include/sim_functions.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/quality_indexes.c
 roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/battery_update.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/container_update.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/dist_sensors_update.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/position_update.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/quality_indexes.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_from_control.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_functions.h

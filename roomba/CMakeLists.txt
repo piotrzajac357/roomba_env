@@ -11,6 +11,7 @@ add_executable(sim  sim_files/src/sim.c
                     sim_files/src/container_update.c
                     sim_files/src/dist_sensors_update.c
                     sim_files/src/trash_generator.c
+                    sim_files/src/quality_indexes.c
                     sim_files/src/sim_functions.c
                     sim_files/src/sim_to_control.c
                     sim_files/src/sim_to_vis.c
