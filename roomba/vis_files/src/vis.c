@@ -9,6 +9,8 @@
 /* main function of visualisation process */
 int main(int argc, char** argv) {
 
+    //nice(20);
+
     int status;
     // init visualisation thread
     if ((status = init_visualisation())) {

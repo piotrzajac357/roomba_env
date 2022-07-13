@@ -59,7 +59,11 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
         # Display direction arrow, robot position and title with useful information
         a = plt.arrow(robot_pos_y,robot_pos_x,dx,dy,width=0.9)
         axim1.set_data(img)
-        plt.title('Poziom baterii: '+ str(round(float(battery_lvl),2)) +'%, timeQI: ' + str(round(float(box_lvl),2)) + 'sec\nMoc ssania: ' + str(round(suction_power,2)) + '%')
+        plt.title('Poziom baterii: '+ str(round(float(battery_lvl),2)) 
+                + '%, timeQI: ' + str(round(float(box_lvl),2))
+                + 'sec\npathQI: ' + str(round(suction_power,2))
+                + 'm rotationQI: ' + str(round(rotation_qi,2)) 
+                + 'deg\ncoverageQI: ' + str(round(coverage_qi,2)) + '%')
         # flush 
         fig1.canvas.flush_events()
         #fig1.canvas.draw()
@@ -95,7 +99,8 @@ while(True):
     clientIP  = "Client IP Address:{}".format(address)
     
     # Decode message
-    clientMsg = clientMsg.decode("utf-8")
+    clientMsg = clientMsg.decode("ISO-8859-1")
+    # clientMsg = clientMsg.decode("utf-8")
 
     # Received variables:
     pos_x = ''
@@ -106,6 +111,8 @@ while(True):
     new_trashes_x = ''
     new_trashes_y = ''
     suction_power = ''
+    rotation_qi = ''
+    coverage_qi = ''
 
     # Each variable is separated by ' ' sign
     licznik_spacji = 0
@@ -125,6 +132,10 @@ while(True):
                 box_lvl = box_lvl + char
             elif licznik_spacji == 5:
                 suction_power = suction_power + char
+            elif licznik_spacji == 6:
+                rotation_qi = rotation_qi + char
+            elif licznik_spacji == 7:
+                coverage_qi = coverage_qi + char
             else:
                 break
 
@@ -142,7 +153,9 @@ while(True):
     orientation = float(orientation)
     # trashes_x = 400 - round(2*float(new_trashes_x))
     # trashes_y = round(2*float(new_trashes_y))
-    suction_power = 100*float(suction_power)
-
+    suction_power = float(suction_power)
+    rotation_qi = float(rotation_qi)
+    coverage_qi = 100*float(coverage_qi)
+    #coverage_qi = 100*float(coverage_qi)
     # Call function to update display
     update_vis(robot_pos_x,robot_pos_y,orientation,battery,box_lvl,suction_power)

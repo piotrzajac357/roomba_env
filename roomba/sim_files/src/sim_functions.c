@@ -47,7 +47,8 @@ int initialize_semaphores(void) {
 		sem_init(&dist_sensorsSemaphore, 0, 1) 			||
 		sem_init(&controlSemaphore, 0, 1)				||
 		sem_init(&trashSemaphore, 0, 1)					||
-		sem_init(&planSemaphore, 0, 1)) {
+		sem_init(&planSemaphore, 0, 1)					||
+		sem_init(&qiSemaphore, 0, 1)) {
 			return 1;
 		}
 	return 0;
@@ -124,10 +125,47 @@ int initialize_control_values(void) {
 
 /* initialize quality indexes with starting values */
 int initialize_quality_indexes(void) {
-	//TODO
-	// jakas semafora
+
+	coverage_qi_total = 1;
+	coverage_acc = 0;
+	sem_wait(&planSemaphore);
+	for(int i = 0; i < 200; i++){
+		for (int j = 0; j < 200; j++){
+			for (int k = 0; k < 4; k++){
+				for (int l = 0; l < 4; l++){
+					int a = plan[i][j] - '0';
+					coverage_plan[4*i+k][4*j+l] = a;
+					coverage_qi_total += a;
+				}
+			}	 
+		}
+	}
+	sem_post(&planSemaphore);
+
+	// FILE* fptr9;
+	// char c;
+	// fptr9 = fopen("../../roomba/log/map_cov.txt","w");
+	// for (int i = 0; i < 800; i++) {
+	// 	for (int j = 0; j < 800; j++) {
+	// 		c = coverage_plan[i][j] + '0';
+	// 		fputc(c, fptr9);
+	// 	}
+	// 	fprintf(fptr9, "\r\n");
+	// }
+	// fclose(fptr9);
+
+	sem_wait(&qiSemaphore);
 	time_QI = 0;
-	//koniec jakiejs semafory
+	path_QI = 0;
+	rotation_QI = 0;
+	coverage_QI = 0.0;
+	sem_post(&qiSemaphore);
+	sem_wait(&position_orientationSemaphore);
+	path_qi_prev_x = position_x;
+	path_qi_prev_y = position_y;
+	rotation_qi_prev = previous_orientation;
+	sem_post(&position_orientationSemaphore);
+
 	return EXIT_SUCCESS;
 };
 
@@ -382,5 +420,59 @@ int generate_trashes(int *thread_counter_ptr) {
     new_trashes[1] = trashes[thread_counter*2+1]; 
     sem_post(&trashSemaphore);
 
+	return EXIT_SUCCESS;
+}
+
+/* function calculating time_QI */
+int calculate_qis(double time_step) {
+
+
+	double time_QI_tmp = time_QI;
+	double path_QI_tmp = path_QI;
+	double rotation_QI_tmp = rotation_QI;
+	double coverage_QI_tmp;
+
+	sem_wait(&position_orientationSemaphore);
+	double curr_x_tmp = position_x;
+	double curr_y_tmp = position_y;
+	double curr_orient = previous_orientation;
+	sem_post(&position_orientationSemaphore);
+
+	// time quality index
+	time_QI_tmp += time_step;
+
+	// travelled distance quality index
+	path_QI_tmp += sqrt(pow(path_qi_prev_x - curr_x_tmp, 2)
+					  + pow(path_qi_prev_y - curr_y_tmp, 2));
+
+	// rotation done quality index
+	double a = fabs(rotation_qi_prev - curr_orient);
+	if (a > 180) { a = fabs(a - 360.0);	}
+	rotation_QI_tmp += a;
+
+	for (double i = -0.125; i <= 0.125; i = i + 0.0125){
+		for (double j = -0.125; j <= 0.125; j = j + 0.0125){
+			if (coverage_plan[(int)(round(40*(curr_x_tmp+i)))][(int)(round(40*(curr_y_tmp+j)))] == 1){
+				coverage_plan[(int)(round(40*(curr_x_tmp+i)))][(int)(round(40*(curr_y_tmp+j)))] = 2;
+				coverage_acc++;
+				
+			}
+		}
+	}
+	coverage_QI_tmp = (double)coverage_acc / (double)coverage_qi_total;
+
+	path_qi_prev_x = curr_x_tmp;
+	path_qi_prev_y = curr_y_tmp;
+	rotation_qi_prev = curr_orient;
+
+	sem_wait(&qiSemaphore);
+	time_QI = time_QI_tmp;
+	path_QI = path_QI_tmp;
+	rotation_QI = rotation_QI_tmp;
+	coverage_QI = coverage_QI_tmp;
+	sem_post(&qiSemaphore);
+	
+	// printf("%d	",coverage_acc);
+	// printf("%f\n",coverage_QI);
 	return EXIT_SUCCESS;
 }

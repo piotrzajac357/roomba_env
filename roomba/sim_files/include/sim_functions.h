@@ -49,7 +49,20 @@ double max_speed;                       // Linear speed of robot. Increase this 
 double max_rotating_speed;              // Rotating speed of robot. Increase this to fasten simulation.
 
 // quality indexes
-double time_QI;
+double time_QI;                         // time quality index
+double path_QI;
+double path_qi_prev_x;
+double path_qi_prev_y;
+double rotation_QI;
+double rotation_qi_prev;
+double coverage_QI;
+int coverage_plan[800][800];
+int coverage_qi_total;
+int coverage_acc;
+
+
+sem_t qiSemaphore;                      // Semaphore
+
 
 int initialize_semaphores(void);
 
@@ -74,6 +87,8 @@ int calculate_battery(void);
 int calculate_container(void);
 
 int calculate_sensors(void);
+
+int calculate_qis(double);
 
 int generate_trashes(int *thread_counter_ptr);
 

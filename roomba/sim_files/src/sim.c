@@ -28,6 +28,8 @@ int main(int argc, char *argv[]) {
 
     int status;
 
+    //nice(-15);
+
     // shared memory initialization, sim -> reader
     if ((mutex_sem_s2c = sem_open("/sem-mutex_s2c", O_CREAT, 0660, 0)) == SEM_FAILED) {
         fprintf(stderr, "Cannot create semaphore.\n");

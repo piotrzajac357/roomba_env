@@ -56,6 +56,7 @@ void * tQualityThreadFunc(void *cookie) {
     pthread_setschedparam(pthread_self(), policy, &param);
 
     // in microseconds
-    time_QI = time_QI + sim_step_position;
+    status = calculate_qis(sim_step_position);
+    
     return EXIT_SUCCESS;
 }

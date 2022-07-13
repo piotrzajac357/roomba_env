@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 		pid = fork();
 		if (pid == 0) {
 			/* execute file with simulation process */
-			execvp(child_arg_sim[0], child_arg_sim);	
+			execvp(child_arg_sim[0], child_arg_sim);
 		}
 		else {
 			pid = fork();
