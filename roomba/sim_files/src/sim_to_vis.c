@@ -111,13 +111,14 @@ void * tS2VThreadFunc(void *cookie) {
     double tmp_path_qi = path_QI;
     double tmp_rotation_qi = rotation_QI;
     double tmp_coverage_qi = coverage_QI;
+    double tmp_idle_time_qi = idle_time_QI;
     sem_post(&qiSemaphore);
 
     // write data to buffer
     
     // buffer with trash coords 
     // snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %d %d %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_container, trashes[0], trashes[1], tmp_suction_power);
-    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi);
+    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f  ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi);
 
     // send buffer 
     sendto(my_socket, buffer, 100, MSG_CONFIRM, (const struct sockaddr *) &socket_addr, sizeof(socket_addr));

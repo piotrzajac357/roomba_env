@@ -124,14 +124,14 @@ int calculate_control(void){
 		// driving backward 
 		if (trash_sensor == 1) {
 			// if there are trashes below - slow down and increase suction
-			left_motor_power = 0.1;
-			right_motor_power = 0.1;
+			left_motor_power = -0.1;
+			right_motor_power = -0.1;
 			if (!container_full_tmp) { suction_power = 1.0; }
 			else { suction_power = 0.0; }
 		} else {
-			// if there are no trashes below - drive forward with 0.5 suction
-			left_motor_power = 1;
-			right_motor_power = 1;
+			// if there are no trashes below - drive backward with 0.5 suction
+			left_motor_power = -1.0;
+			right_motor_power = -1.0;
 			if (!container_full_tmp) { suction_power = 0.5; }
 			else { suction_power = 0.0; }
 		}
@@ -366,8 +366,10 @@ int calculate_movement_type(void) {
 					break;
 				case 3:
 					// move forward until moving by a quarter distance
-					if (fabs(tmp_pos_x_stc_step - tmp_pos_x) >= 0.25 ||
-					fabs(tmp_pos_y_stc_step - tmp_pos_y) >= 0.25) {
+					printf("\n%f %f", tmp_pos_x, tmp_pos_y);
+					printf("\n%f %f", fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+					if (fabs(tmp_pos_x_stc_step - tmp_pos_x) >= 0.24999999 ||
+						fabs(tmp_pos_y_stc_step - tmp_pos_y) >= 0.24999999) {
 						// distance reached, set movement to 0
 						movement_type = 0;
 						// reset "next step calculated" flag
@@ -375,7 +377,8 @@ int calculate_movement_type(void) {
 						// notify STC thread
 						sem_post(&spool_calc_next_step_stc);
 						//status = calc_next_step();
-					} else {
+						}
+					else {
 						// keep moving while distance not reached
 						movement_type = 1;
 					}
@@ -594,17 +597,17 @@ int check_nbh(void) {
     // }
 
 	/* write map for debugging */
-    // FILE *fptr1;
-    // char cc;
-    // fptr1 = fopen("../../roomba/log/map.txt","w");
-    // for(int i = 0; i < 40; i++) {
-    //     for(int j = 0; j < 40; j++){
-    //         cc = disc_plan2[j][40-i] +'0';
-    //         fputc(cc,fptr1);
-    //     }
-    //     fprintf(fptr1,"\r\n");
-    // }
-    // fclose(fptr1);
+    FILE *fptr1;
+    char cc;
+    fptr1 = fopen("../../roomba/log/map.txt","w");
+    for(int i = 0; i < 40; i++) {
+        for(int j = 0; j < 40; j++){
+            cc = disc_plan2[j][40-i] +'0';
+            fputc(cc,fptr1);
+        }
+        fprintf(fptr1,"\r\n");
+    }
+    fclose(fptr1);
 
 	// /* write parent map for debugging */
     // FILE *fptr;
@@ -658,19 +661,19 @@ int select_target_cell(void){
     }
 
 	/* write decisions and circumstances to file for debugging */
-    // FILE *fptr2;
-    // char ccc;
-    // fptr2 = fopen("../../roomba/log/decisions.txt","a");
-    // fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
-    // fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
-    //             disc_plan2[current_position_x][current_position_y+1],
-    //             disc_plan2[current_position_x-1][current_position_y],
-    //             disc_plan2[current_position_x][current_position_y-1],
-    //             disc_plan2[current_position_x+1][current_position_y],
-    //             parent_cells[current_position_x][current_position_y], target_cell);
-    // fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
-    // fprintf(fptr2,"\r\n");
-    // fclose(fptr2);
+    FILE *fptr2;
+    char ccc;
+    fptr2 = fopen("../../roomba/log/decisions.txt","a");
+    fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+    fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
+                disc_plan2[current_position_x][current_position_y+1],
+                disc_plan2[current_position_x-1][current_position_y],
+                disc_plan2[current_position_x][current_position_y-1],
+                disc_plan2[current_position_x+1][current_position_y],
+                parent_cells[current_position_x][current_position_y], target_cell);
+    fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
+    fprintf(fptr2,"\r\n");
+    fclose(fptr2);
 
     return EXIT_SUCCESS;
 }
@@ -684,8 +687,8 @@ int calc_next_step(void){
     status = update_quarter_and_cell();
 	sem_wait(&position_orientationSemaphore);
     tmp_orientation_stc_step = orientation;
-    tmp_pos_x_stc_step = position_x;
-    tmp_pos_y_stc_step = position_y;
+    tmp_pos_x_stc_step = (round(position_x*4))/4;
+    tmp_pos_y_stc_step = (round(position_y*4))/4;
 	sem_post(&position_orientationSemaphore);
 
 	// depending on quarter, orientation and target cell, set next step

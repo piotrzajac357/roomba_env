@@ -59,7 +59,7 @@ double coverage_QI;
 int coverage_plan[800][800];
 int coverage_qi_total;
 int coverage_acc;
-
+double idle_time_QI;
 
 sem_t qiSemaphore;                      // Semaphore
 

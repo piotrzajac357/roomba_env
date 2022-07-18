@@ -14,7 +14,8 @@
         "run_python_script.h": "c",
         "sim_from_control.h": "c",
         "control.h": "c",
-        "dist_sensors_update.h": "c"
+        "dist_sensors_update.h": "c",
+        "cmath": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

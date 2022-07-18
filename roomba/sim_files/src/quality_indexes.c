@@ -12,6 +12,8 @@
 #include "quality_indexes.h"
 #include "sim_functions.h"
 
+int thread_counter1 = 0;
+
 /* initialize quality indexes calculating thread */
 int init_quality_indexes_update(){
     
@@ -58,5 +60,22 @@ void * tQualityThreadFunc(void *cookie) {
     // in microseconds
     status = calculate_qis(sim_step_position);
     
+    if (thread_counter1 == 1000){
+        thread_counter1 = 0;
+        FILE *fptr_cov_map;
+        char c;
+        fptr_cov_map = fopen("../../roomba/log/map_cov.txt","w");
+        for (int i = 0; i < 800; i++) {
+            for (int j = 0; j < 800; j++) {
+                c = coverage_plan[i][j] + '0';
+                fputc(c, fptr_cov_map);
+            }
+            fprintf(fptr_cov_map, "\r\n");
+        }
+        fclose(fptr_cov_map);
+
+    }
+    //printf("\nidle_time_qi: %f", idle_time_QI);
+    thread_counter1++;
     return EXIT_SUCCESS;
 }

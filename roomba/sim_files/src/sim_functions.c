@@ -159,6 +159,7 @@ int initialize_quality_indexes(void) {
 	path_QI = 0;
 	rotation_QI = 0;
 	coverage_QI = 0.0;
+	idle_time_QI = 0.0;
 	sem_post(&qiSemaphore);
 	sem_wait(&position_orientationSemaphore);
 	path_qi_prev_x = position_x;
@@ -216,8 +217,9 @@ int calculate_position(void) {
 	}
 
 	// change here to adjust resolution
-	tmp_x = round(tmp_x * 80)/80;
-	tmp_y = round(tmp_y * 80)/80;
+	// tmp_x = round(tmp_x * 80)/80;
+	// tmp_y = round(tmp_y * 80)/80;
+
 	//if ((fmod(tmp_orientation,1.0) < 0.01) || (fmod(tmp_orientation,1.0) > 0.99)){tmp_orientation = round(tmp_orientation);}
 	tmp_orientation = round(tmp_orientation * 10)/10;
 	// write output values
@@ -431,12 +433,18 @@ int calculate_qis(double time_step) {
 	double path_QI_tmp = path_QI;
 	double rotation_QI_tmp = rotation_QI;
 	double coverage_QI_tmp;
+	double idle_time_QI_tmp = idle_time_QI;
 
 	sem_wait(&position_orientationSemaphore);
 	double curr_x_tmp = position_x;
 	double curr_y_tmp = position_y;
 	double curr_orient = previous_orientation;
 	sem_post(&position_orientationSemaphore);
+
+	sem_wait(&controlSemaphore);
+	double left_motor_tmp = left_motor_power;
+	double right_motor_tmp = right_motor_power;
+	sem_post(&controlSemaphore);
 
 	// time quality index
 	time_QI_tmp += time_step;
@@ -452,14 +460,19 @@ int calculate_qis(double time_step) {
 
 	for (double i = -0.125; i <= 0.125; i = i + 0.0125){
 		for (double j = -0.125; j <= 0.125; j = j + 0.0125){
-			if (coverage_plan[(int)(round(40*(curr_x_tmp+i)))][(int)(round(40*(curr_y_tmp+j)))] == 1){
-				coverage_plan[(int)(round(40*(curr_x_tmp+i)))][(int)(round(40*(curr_y_tmp+j)))] = 2;
+			if (coverage_plan[(int)(round(40*(curr_y_tmp+i)))][(int)(round(40*(curr_x_tmp+j)))] == 1){
+				coverage_plan[(int)(round(40*(curr_y_tmp+i)))][(int)(round(40*(curr_x_tmp+j)))] = 2;
 				coverage_acc++;
 				
 			}
 		}
 	}
 	coverage_QI_tmp = (double)coverage_acc / (double)coverage_qi_total;
+
+	if (right_motor_tmp == 0 && left_motor_power == 0) {
+		idle_time_QI_tmp += time_step;
+	}
+
 
 	path_qi_prev_x = curr_x_tmp;
 	path_qi_prev_y = curr_y_tmp;
@@ -470,6 +483,7 @@ int calculate_qis(double time_step) {
 	path_QI = path_QI_tmp;
 	rotation_QI = rotation_QI_tmp;
 	coverage_QI = coverage_QI_tmp;
+	idle_time_QI = idle_time_QI_tmp;
 	sem_post(&qiSemaphore);
 	
 	// printf("%d	",coverage_acc);

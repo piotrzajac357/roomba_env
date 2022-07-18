@@ -91,25 +91,29 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    if ((status = init_set_new_task())) {
-        fprintf(stderr, "Error initializing new task setting thread : %d\n", status);
-        return 0;
-    }
+    // for random bouncing
+    // if ((status = init_set_new_task())) {
+    //     fprintf(stderr, "Error initializing new task setting thread : %d\n", status);
+    //     return 0;
+    // }
 
-    if ((status = init_sensors_inspect())) {
-        fprintf(stderr, "Error initializing sensors inspecting thread : %d\n", status);
-        return 0;
-    }
+    // for random bouncing
+    // if ((status = init_sensors_inspect())) {
+    //     fprintf(stderr, "Error initializing sensors inspecting thread : %d\n", status);
+    //     return 0;
+    // }
 
     if ((status = init_task_to_movement())) {
         fprintf(stderr, "Error initializing task to movement converting thread : %d\n", status);
         return 0;
     }
 
-    if ((status = init_battery_container_inspect())) {
-        fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
-        return 0;
-    }
+    // for random bouncing
+    // if ((status = init_battery_container_inspect())) {
+    //     fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
+    //     return 0;
+    // }
+
     if (algorithm_select == 1){
         if ((status = init_stc_algorithm())) {
             fprintf(stderr, "Error initializing STC algorithm thread : %d\n", status);

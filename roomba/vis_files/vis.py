@@ -13,7 +13,7 @@ UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 UDPServerSocket.bind((localIP, localPort))
 
 # Function adds received data from socket to visualisation
-def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_power):
+def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
     """# Apply trashes to plot if there are new trashes
     if ((trashes_coords[1] > 0) and ((trashes_coords[0] != previous_trashes_x[0]) or (trashes_coords[1] != previous_trashes_y[0]))):
         for k in range (-8,8,1):
@@ -60,10 +60,10 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,box_lvl, suction_po
         a = plt.arrow(robot_pos_y,robot_pos_x,dx,dy,width=0.9)
         axim1.set_data(img)
         plt.title('Poziom baterii: '+ str(round(float(battery_lvl),2)) 
-                + '%, timeQI: ' + str(round(float(box_lvl),2))
-                + 'sec\npathQI: ' + str(round(suction_power,2))
-                + 'm rotationQI: ' + str(round(rotation_qi,2)) 
-                + 'deg\ncoverageQI: ' + str(round(coverage_qi,2)) + '%')
+                + '%, timeQI: ' + str(round(float(timeQI),2))
+                + 'sec, pathQI: ' + str(round(pathQI,2))
+                + 'm,\n rotationQI: ' + str(round(rotation_qi,2)) 
+                + 'deg, coverageQI: ' + str(round(coverage_qi,2)) + '%')
         # flush 
         fig1.canvas.flush_events()
         #fig1.canvas.draw()
@@ -78,6 +78,7 @@ background = mpimg.imread('../../roomba/plan/plan7.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
+fig1.set_size_inches(8,8)
 
 
 # Mutual objects help with handling first iteration and "did it change?" checking
@@ -107,10 +108,10 @@ while(True):
     pos_y = ''
     orientation = ''
     battery = ''
-    box_lvl = ''
+    timeQI = ''
     new_trashes_x = ''
     new_trashes_y = ''
-    suction_power = ''
+    pathQI = ''
     rotation_qi = ''
     coverage_qi = ''
 
@@ -129,9 +130,9 @@ while(True):
             elif licznik_spacji == 3:  
                 battery = battery + char
             elif licznik_spacji == 4:
-                box_lvl = box_lvl + char
+                timeQI = timeQI + char
             elif licznik_spacji == 5:
-                suction_power = suction_power + char
+                pathQI = pathQI + char
             elif licznik_spacji == 6:
                 rotation_qi = rotation_qi + char
             elif licznik_spacji == 7:
@@ -153,9 +154,9 @@ while(True):
     orientation = float(orientation)
     # trashes_x = 400 - round(2*float(new_trashes_x))
     # trashes_y = round(2*float(new_trashes_y))
-    suction_power = float(suction_power)
+    pathQI = float(pathQI)
     rotation_qi = float(rotation_qi)
     coverage_qi = 100*float(coverage_qi)
     #coverage_qi = 100*float(coverage_qi)
     # Call function to update display
-    update_vis(robot_pos_x,robot_pos_y,orientation,battery,box_lvl,suction_power)
+    update_vis(robot_pos_x,robot_pos_y,orientation,battery,timeQI,pathQI)
