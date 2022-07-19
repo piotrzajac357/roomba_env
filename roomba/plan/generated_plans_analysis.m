@@ -18,7 +18,11 @@ for i=1:1:39
     end
 end
 
-figure(); 
+figure();
+subplot(121);
+imshow(imread("plan5.png"));
+title('plan mieszkania')
+subplot(122);
 imshow(img,'InitialMagnification',1200);
 title('discovery map');
 
