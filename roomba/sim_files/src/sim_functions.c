@@ -20,8 +20,8 @@ double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
-double max_speed = 1;
-double max_rotating_speed = 0.08;
+double max_speed = 3;
+double max_rotating_speed = 0.5;
 int trashes[30];
 
 double position_x;
@@ -57,8 +57,8 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
-	position_x = 13;
-	position_y = 17;
+	position_x = 12.875;
+	position_y = 17.125;
 	previous_orientation = 270.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;

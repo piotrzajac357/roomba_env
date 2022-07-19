@@ -49,6 +49,7 @@ void *tSFCThreadFunc(void *cookie) {
     double tmp_left_motor_power = c2s_shm_ptr->left_motor_power;
     double tmp_right_motor_power = c2s_shm_ptr->right_motor_power;
     double tmp_suction_power = c2s_shm_ptr->suction_power;
+    double tmp_algorithm_finished = c2s_shm_ptr->algorithm_finished;
     sem_post(mutex_sem_c2s);
 
     // Write data to process global memory
@@ -56,6 +57,7 @@ void *tSFCThreadFunc(void *cookie) {
     left_motor_power = tmp_left_motor_power;
     right_motor_power = tmp_right_motor_power;
     suction_power = tmp_suction_power;
+    algorithm_finished = tmp_algorithm_finished;
     sem_post(&controlSemaphore);
     }
 

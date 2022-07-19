@@ -69,6 +69,7 @@ void * tC2SThreadFunc(void *cookie) {
     c2s_shm_ptr->left_motor_power = left_motor_power_tmp;
     c2s_shm_ptr->right_motor_power = right_motor_power_tmp;
     c2s_shm_ptr->suction_power = suction_power_tmp;
+    c2s_shm_ptr->algorithm_finished = algorithm_finished;
     sem_post(mutex_sem_c2s);
 
     // notify about new data

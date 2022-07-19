@@ -31,6 +31,7 @@ struct c2s_shm {
     double left_motor_power;    // left motor power (0-1)
     double right_motor_power;   // right motor power (0-1)
     double suction_power;       // suction/brushes power (0-1)
+    int algorithm_finished;
 };
 
 // control to sim semaphores and pointer

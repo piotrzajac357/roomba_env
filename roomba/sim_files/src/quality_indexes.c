@@ -58,7 +58,9 @@ void * tQualityThreadFunc(void *cookie) {
     pthread_setschedparam(pthread_self(), policy, &param);
 
     // in microseconds
-    status = calculate_qis(sim_step_position);
+    if (algorithm_finished == 0) {
+        status = calculate_qis(sim_step_position);
+    }
     
     if (thread_counter1 == 1000){
         thread_counter1 = 0;

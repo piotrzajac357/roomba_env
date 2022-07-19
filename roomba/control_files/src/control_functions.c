@@ -366,8 +366,8 @@ int calculate_movement_type(void) {
 					break;
 				case 3:
 					// move forward until moving by a quarter distance
-					printf("\n%f %f", tmp_pos_x, tmp_pos_y);
-					printf("\n%f %f", fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
+					// printf("\n%f %f", tmp_pos_x, tmp_pos_y);
+					// printf("\n%f %f", fabs(tmp_pos_x_stc_step - tmp_pos_x),fabs(tmp_pos_y_stc_step - tmp_pos_y));
 					if (fabs(tmp_pos_x_stc_step - tmp_pos_x) >= 0.24999999 ||
 						fabs(tmp_pos_y_stc_step - tmp_pos_y) >= 0.24999999) {
 						// distance reached, set movement to 0
@@ -460,6 +460,7 @@ int init_stc(void) {
     current_quarter = 0;
     target_cell = 1;
     next_step = 0;
+	algorithm_finished = 0;
 
 	/* clear log files for debugging */
 	FILE *fptr2;
@@ -471,6 +472,13 @@ int init_stc(void) {
 	
 	// sleep some time so simulator will set up
 	sleep(3);
+	
+	sem_wait(&position_orientationSemaphore);
+	starting_cell_x = (int)(round((position_x+0.125)*2));
+	starting_cell_y = (int)(round((position_y-0.125)*2));
+	sem_post(&position_orientationSemaphore);
+
+	parent_cells[starting_cell_x][starting_cell_y] = 3;
 
 	// check neighbourhood
     status = check_nbh();
@@ -505,21 +513,30 @@ int check_nbh(void) {
 	sem_wait(&position_orientationSemaphore);
 	double tmp_position_x = position_x;
 	double tmp_position_y = position_y;
-	sem_post(&position_orientationSemaphore);
+	// double tmp_position_x = round(100*(position_x))/100;
+	// double tmp_position_y = round(100*(position_y))/100;
 
+
+	sem_post(&position_orientationSemaphore);
 
     switch (current_quarter){
 		// i, j, f, b, r, l are for correct obstacles detection
 		// needed space depends on current quarter and orientation
-        case 0: { i = 0;     j = 0;     f = 0.025; l = 0.025;}
-        case 1: { i = 0;     j = 0.25;  b = 0.025; l = 0.025;}
-        case 2: { i = -0.25; j = 0.25;  b = 0.025; r = 0.025;}
-        case 3: { i = -0.25; j = 0;     f = 0.025; r = 0.025;}
+        case 0:  i = 0.125; j = -0.125;f = 0.025; l = 0.025; break;
+        case 1:  i = 0.125; j = 0.125; b = 0.025; l = 0.025; break;
+        case 2:  i = -0.125;j = 0.125; b = 0.025; r = 0.025; break;
+        case 3:  i = -0.125;j = -0.125;f = 0.025; r = 0.025; break;
     }
 
 	// transform cartesian position to appropriate int value
     current_position_x = (int)(round((tmp_position_x+i)*2));
     current_position_y = (int)(round((tmp_position_y+j)*2));
+	// printf("\ncurrent quarter: %d\n",current_quarter);
+	// printf("i: %f j: %f\n",i,j);
+	// printf("raw_pos_x: %f raw_pos_y: %f\n", tmp_position_x,tmp_position_y);
+	// printf("curr_x: %f  curr_y: %f\n",tmp_position_x+i,tmp_position_y+j);
+	// printf("current_x: %d  current_y: %d\n", current_position_x, current_position_y);
+
 
 	// absolute sensors values in terms of disc_map
     double f_s, b_s, r_s, l_s;
@@ -597,17 +614,17 @@ int check_nbh(void) {
     // }
 
 	/* write map for debugging */
-    FILE *fptr1;
-    char cc;
-    fptr1 = fopen("../../roomba/log/map.txt","w");
-    for(int i = 0; i < 40; i++) {
-        for(int j = 0; j < 40; j++){
-            cc = disc_plan2[j][40-i] +'0';
-            fputc(cc,fptr1);
-        }
-        fprintf(fptr1,"\r\n");
-    }
-    fclose(fptr1);
+    // FILE *fptr1;
+    // char cc;
+    // fptr1 = fopen("../../roomba/log/map.txt","w");
+    // for(int i = 0; i < 40; i++) {
+    //     for(int j = 0; j < 40; j++){
+    //         cc = disc_plan2[j][40-i] +'0';
+    //         fputc(cc,fptr1);
+    //     }
+    //     fprintf(fptr1,"\r\n");
+    // }
+    // fclose(fptr1);
 
 	// /* write parent map for debugging */
     // FILE *fptr;
@@ -661,19 +678,19 @@ int select_target_cell(void){
     }
 
 	/* write decisions and circumstances to file for debugging */
-    FILE *fptr2;
-    char ccc;
-    fptr2 = fopen("../../roomba/log/decisions.txt","a");
-    fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
-    fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
-                disc_plan2[current_position_x][current_position_y+1],
-                disc_plan2[current_position_x-1][current_position_y],
-                disc_plan2[current_position_x][current_position_y-1],
-                disc_plan2[current_position_x+1][current_position_y],
-                parent_cells[current_position_x][current_position_y], target_cell);
-    fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
-    fprintf(fptr2,"\r\n");
-    fclose(fptr2);
+    // FILE *fptr2;
+    // char ccc;
+    // fptr2 = fopen("../../roomba/log/decisions.txt","a");
+    // fprintf(fptr2,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+    // fprintf(fptr2,"up: %d left: %d down: %d right: %d, parent %d, target: %d\r\n",
+    //             disc_plan2[current_position_x][current_position_y+1],
+    //             disc_plan2[current_position_x-1][current_position_y],
+    //             disc_plan2[current_position_x][current_position_y-1],
+    //             disc_plan2[current_position_x+1][current_position_y],
+    //             parent_cells[current_position_x][current_position_y], target_cell);
+    // fprintf(fptr2,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
+    // fprintf(fptr2,"\r\n");
+    // fclose(fptr2);
 
     return EXIT_SUCCESS;
 }
@@ -687,13 +704,22 @@ int calc_next_step(void){
     status = update_quarter_and_cell();
 	sem_wait(&position_orientationSemaphore);
     tmp_orientation_stc_step = orientation;
-    tmp_pos_x_stc_step = (round(position_x*4))/4;
-    tmp_pos_y_stc_step = (round(position_y*4))/4;
+    tmp_pos_x_stc_step = (round(position_x*8))/8;
+    tmp_pos_y_stc_step = (round(position_y*8))/8;
 	sem_post(&position_orientationSemaphore);
 
 	// depending on quarter, orientation and target cell, set next step
 	// to rotating or moving forward
 	// next step is compliant to stc algorithm principles
+
+	/* end algorithm condition */
+	if (current_position_x == starting_cell_x &&
+	    current_position_y == starting_cell_y &&
+		current_quarter    == 3){
+			algorithm_finished = 1;
+			return EXIT_SUCCESS;
+		}
+
     if (current_quarter == 0){
         if (current_orientation == 0){
             if (target_cell == 1) { next_step = 2;}

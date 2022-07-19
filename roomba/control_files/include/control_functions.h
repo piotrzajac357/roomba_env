@@ -72,6 +72,9 @@ sem_t spool_calc_next_step_stc;         // notification for STC algorithm - calc
 
 int spool_next_step_calculated;         // flag that next step has been calculated
 
+int starting_cell_x;                    // first cell 
+int starting_cell_y;                    // first cell
+int algorithm_finished;
 
 /* discovered plan of house
     0 - not checked (default)

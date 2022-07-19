@@ -61,6 +61,8 @@ int coverage_qi_total;
 int coverage_acc;
 double idle_time_QI;
 
+int algorithm_finished;
+
 sem_t qiSemaphore;                      // Semaphore
 
 

@@ -52,7 +52,13 @@ void *tStcThreadFunc(void *cookie) {
         sem_wait(&spool_calc_next_step_stc);
         // calculate next step, movement controller will
         // know what to do with result
-        status = calc_next_step();
+        if (algorithm_finished == 0) {
+            status = calc_next_step(); 
+        } else {
+            next_step = 0;
+            movement_type = 0;
+        }
+
     }
 
     return EXIT_SUCCESS;
