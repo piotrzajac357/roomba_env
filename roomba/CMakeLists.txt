@@ -32,6 +32,7 @@ add_executable(control  control_files/src/control
                         control_files/src/set_new_task.c
                         control_files/src/task_to_movement.c
                         control_files/src/stc_algorithm.c
+                        control_files/src/ba_algorithm.c
                         control_files/src/load_plan.c)
 
 

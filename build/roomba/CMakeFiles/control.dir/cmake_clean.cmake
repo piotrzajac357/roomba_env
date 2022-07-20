@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/control.dir/control_files/src/set_new_task.c.o"
   "CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"
   "CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
+  "CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o"
   "CMakeFiles/control.dir/control_files/src/load_plan.c.o"
   "control.pdb"
   "control"

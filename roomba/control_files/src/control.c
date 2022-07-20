@@ -20,11 +20,12 @@
 #include "../include/task_to_movement.h"
 #include "../include/control_battery_container.h"
 #include "../include/stc_algorithm.h"
+#include "../include/ba_algorithm.h"
 
 int main(int argc, char *argv[]) {
 
     int status;
-    algorithm_select = 1;
+    algorithm_select = 2;
 
     //nice(-20);
 
@@ -120,6 +121,14 @@ int main(int argc, char *argv[]) {
             return 0;
         }
     }
+
+    if (algorithm_select == 2){
+        if ((status = init_ba_algorithm())) {
+            fprintf(stderr, "Error initializing BA algorithm thread : %d\n", status);
+            return 0;
+        }
+    }
+
     while (1){        
         usleep(100000);
     }

@@ -490,6 +490,11 @@ int init_stc(void) {
     return EXIT_SUCCESS;
 }
 
+/* function initializing BA algorithm variables */
+int init_ba(void) {
+	return EXIT_SUCCESS;
+}
+
 /* does nothing atm */
 int update_position_orientation(void){
     return EXIT_SUCCESS;

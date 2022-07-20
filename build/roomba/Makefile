@@ -170,6 +170,33 @@ sim/fast:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/build
 .PHONY : sim/fast
 
+control_files/src/ba_algorithm.o: control_files/src/ba_algorithm.c.o
+
+.PHONY : control_files/src/ba_algorithm.o
+
+# target to build an object file
+control_files/src/ba_algorithm.c.o:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o
+.PHONY : control_files/src/ba_algorithm.c.o
+
+control_files/src/ba_algorithm.i: control_files/src/ba_algorithm.c.i
+
+.PHONY : control_files/src/ba_algorithm.i
+
+# target to preprocess a source file
+control_files/src/ba_algorithm.c.i:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.i
+.PHONY : control_files/src/ba_algorithm.c.i
+
+control_files/src/ba_algorithm.s: control_files/src/ba_algorithm.c.s
+
+.PHONY : control_files/src/ba_algorithm.s
+
+# target to generate assembly for a file
+control_files/src/ba_algorithm.c.s:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.s
+.PHONY : control_files/src/ba_algorithm.c.s
+
 control_files/src/control.o: control_files/src/control.c.o
 
 .PHONY : control_files/src/control.o
@@ -884,6 +911,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... roomba"
 	@echo "... sim"
+	@echo "... control_files/src/ba_algorithm.o"
+	@echo "... control_files/src/ba_algorithm.i"
+	@echo "... control_files/src/ba_algorithm.s"
 	@echo "... control_files/src/control.o"
 	@echo "... control_files/src/control.i"
 	@echo "... control_files/src/control.s"

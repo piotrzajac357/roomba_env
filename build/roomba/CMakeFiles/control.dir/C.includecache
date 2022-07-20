@@ -14,11 +14,11 @@
 
 ../roomba/control_files/include/sensors_inspect.h
 
-../roomba/control_files/include/stc_algorithm.h
-
 ../roomba/control_files/include/task_to_movement.h
 
 ../roomba/sim_files/include/load_plan.h
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
 
@@ -41,6 +41,32 @@
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/task_to_movement.h
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/ba_algorithm.c
+stdio.h
+-
+stdlib.h
+-
+pthread.h
+-
+semaphore.h
+-
+unistd.h
+-
+sys/types.h
+-
+signal.h
+-
+fcntl.h
+-
+time.h
+-
+errno.h
+-
+../include/ba_algorithm.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
+../include/control_functions.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control.c
 stdlib.h
@@ -85,6 +111,8 @@ sys/mman.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery_container.h
 ../include/stc_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
+../include/ba_algorithm.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c
 stdio.h
@@ -333,6 +361,8 @@ errno.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 ../include/control_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c
 stdlib.h

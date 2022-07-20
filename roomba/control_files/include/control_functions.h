@@ -126,6 +126,18 @@ int next_step;
 3 - right */
 int target_cell;
 
+/* BA* algorithm variables */
+sem_t spool_calc_next_step_ba;
+
+int spool_next_step_ba_calculated;
+
+int ba_disc_map[80][80];
+
+int backtracking_map[80][80];
+
+/* backtracking map:
+   0 - no backtracking point
+   1 - backtracking point */
 int initialize_semaphores(void);
 
 int init_battery_container(void);
@@ -151,6 +163,8 @@ int update_plan(int previous_x_pixel, int previous_y_pixel, int current_x_pix, i
 int check_nbh(void);
 
 int init_stc(void);
+
+int init_ba(void);
 
 int update_position_orientation(void);
 
