@@ -25,7 +25,8 @@ int initialize_semaphores(void) {
 		sem_init(&planSemaphore, 0, 1)					||
 		sem_init(&trashSemaphore, 0 ,1)					||
 		sem_init(&target_directionSemaphore, 0, 1)		||
-		sem_init(&spool_calc_next_step_stc, 0, 0))
+		sem_init(&spool_calc_next_step_stc, 0, 0)		||
+		sem_init(&spool_calc_next_step_ba, 0, 0))
 		{
 			return EXIT_FAILURE;
 		}
@@ -82,7 +83,8 @@ int calculate_control(void){
 
 	// set control based on movement type 
 	sem_wait(&controlSemaphore);
-	switch (movement_type)
+	int tmp_movement_type = movement_type;
+	switch (tmp_movement_type)
 	{
 	case 0:
 		// just standing
@@ -386,8 +388,64 @@ int calculate_movement_type(void) {
 			 	default:
 					// default movement is 0 (no movement) for safety 
 					movement_type = 0;
+					break;
 			}
 		}
+	}
+
+	else if (algorithm_select == 2) {
+		if (spool_next_step_ba_calculated == 1){
+			switch(current_task_ba){
+				case 0:
+					// just standing
+					movement_type = 0;
+					break;
+				case 1:
+					// rotate clockwise to orientation
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.03) 
+					movement_type = 2;
+					else {
+						movement_type = 0;
+						// set flag so there is no movement until BA thread calculates
+						spool_next_step_ba_calculated = 0;
+						// notify BA thread
+						sem_post(&spool_calc_next_step_ba);
+					}
+					break;
+				case 2: 
+					// rotate clockwise to orientation
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.03) 
+					movement_type = 3;
+					else {
+						movement_type = 0;
+						// set flag so there is no movement until BA thread calculates
+						spool_next_step_ba_calculated = 0;
+						// notify BA thread
+						sem_post(&spool_calc_next_step_ba);
+					}
+					break;
+				case 3:
+					// TODO
+
+					movement_type = 1;
+					break;
+				case 4:
+					if (sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
+							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.05) {
+								movement_type = 1;
+							 }
+					else {
+						movement_type = 0;
+						spool_next_step_ba_calculated = 0;
+						sem_post(&spool_calc_next_step_ba);
+					}
+					break;
+
+				default:
+				movement_type = 0;
+				break;
+			}
+		} 
 	}
 	return EXIT_SUCCESS;
 }
@@ -492,6 +550,9 @@ int init_stc(void) {
 
 /* function initializing BA algorithm variables */
 int init_ba(void) {
+	current_task_ba = 3;
+	movement_mode = 0;
+	spool_next_step_ba_calculated = 1;
 	return EXIT_SUCCESS;
 }
 
@@ -899,3 +960,133 @@ int parent_to_target(int parent_cell) {
     else { return 0;}
 }
 
+int calc_next_task(void){
+	
+	sem_wait(&position_orientationSemaphore);
+	double tmp_position_x = position_x;
+	double tmp_position_y = position_y;
+	double tmp_orientation = orientation;
+	sem_post(&position_orientationSemaphore);
+	
+	int tmp_current_task_ba = current_task_ba;
+	//printf("%d", tmp_current_task_ba);
+	switch (tmp_current_task_ba){
+		case 0:
+			break;
+		case 1 ... 2:
+			if (movement_mode == 1){ 
+				// DO STH
+				break;
+			}
+			else {
+				if (vertical_horizontal == 0){
+					// calculate target position based sensors and data
+					// target posistion, set driving forward, update flags, exit
+					target_position_x_ba = tmp_position_x + 0.25*cos((round(tmp_orientation) * ST_TO_RAD));
+					target_position_y_ba = tmp_position_y + 0.25*sin((round(tmp_orientation) * ST_TO_RAD));
+					current_task_ba = 4;
+					vertical_horizontal = 1;
+					spool_next_step_ba_calculated = 1;
+				}
+				else {
+					current_task_ba = 3;
+					vertical_horizontal = 0;
+					spool_next_step_ba_calculated = 1;
+				}
+				break;
+			}
+		case 3:
+			// ło panie dużo sprawdzania otoczenia,
+			// wyznaczania łobrotu
+			// do prawidłowego działania trza jeszcze cykliczne uzupełnianie macierzy statusu
+			
+			break;
+
+	}
+	
+	
+	return EXIT_SUCCESS;
+}
+
+
+int update_ba_map(void) {
+
+	int status;
+
+	sem_wait(&position_orientationSemaphore);
+	double tmp_orientation = orientation;
+	double tmp_position_x = position_x;
+	double tmp_position_y = position_y;
+	sem_post(&position_orientationSemaphore);
+
+	sem_wait(&dist_sensorsSemaphore);
+	double tmp_front_sensor = front_sensor;
+	double tmp_back_sensor  = back_sensor;
+	double tmp_left_sensor  = left_sensor;
+	double tmp_right_sensor = right_sensor;
+	sem_post(&dist_sensorsSemaphore);
+
+	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
+	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
+
+	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation))));  
+	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_y = (int)round(4*(tmp_position_y - 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_y = (int)round(4*(tmp_position_y + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	
+	
+	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
+	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
+	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
+
+
+	if (ba_disc_map[this_pixel_x][this_pixel_y] < 2) {
+		ba_disc_map[this_pixel_x][this_pixel_y] = 2; }
+	
+	if (ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
+		if (tmp_left_sensor <= 0.025) {
+			ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
+		}
+		else {
+			ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 1;
+		}
+	}
+	if (ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
+		if (tmp_right_sensor <= 0.025) {
+			ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
+		}
+		else {
+
+			ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 1;
+		}
+	}
+	if (ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
+		if (tmp_front_sensor <= 0.025) {
+			ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+		}
+		else {
+			ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
+		}
+	}
+
+
+	/* write a map for debugging */
+    FILE *fptr;
+    char c;
+    fptr = fopen("../../roomba/log/map_ba.txt","w");
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++){
+            c = ba_disc_map[j][80-i] +'0';
+            fputc(c,fptr);
+        }
+        fprintf(fptr,"\r\n");
+    }
+    fclose(fptr);
+
+
+
+
+	return EXIT_SUCCESS;
+}

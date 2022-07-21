@@ -58,7 +58,7 @@ sem_t taskSemaphore;                    // Semaphore
     2 - rotating clockwise
     3 - rotating counter clockwise
     4 - driving backward   */
-int movement_type;
+_Atomic int movement_type;
 sem_t movement_typeSemaphore;           // Semaphore
 
 double target_direction;                // target direction to rotate to
@@ -131,13 +131,41 @@ sem_t spool_calc_next_step_ba;
 
 int spool_next_step_ba_calculated;
 
+/* 0 - no data
+   1 - not visited
+   2 - visited
+   3 - obstacle */
 int ba_disc_map[80][80];
-
-int backtracking_map[80][80];
 
 /* backtracking map:
    0 - no backtracking point
    1 - backtracking point */
+int backtracking_map[80][80];
+
+/* current task that is being executed
+0 - just standing
+1 - rotating clockwise to certain orientation
+2 - rotating counter clockwise to certain orientation
+3 - moving forward, primary boustrophedon
+    movement (until reaching obstacle)
+4 - moving forward, secondary boustrophedon
+    movement (to a certain point)
+*/
+int current_task_ba;
+double target_orientation_ba;
+double target_position_x_ba;
+double target_position_y_ba;
+
+/* movement mode:
+0 - simple B. movement
+1 - navigating to next area */
+int movement_mode;
+
+/* type of previous movement during B. movement
+0 - vertical (up or down)
+1 - horizontal (left or right) */
+int vertical_horizontal;
+
 int initialize_semaphores(void);
 
 int init_battery_container(void);
@@ -173,6 +201,10 @@ int calc_next_step(void);
 int select_target_cell(void);
 
 int update_quarter_and_cell(void);
+
+int calc_next_task(void);
+
+int update_ba_map(void);
 
 int parent_to_target(int);
 

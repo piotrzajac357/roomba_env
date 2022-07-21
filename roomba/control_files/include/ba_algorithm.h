@@ -5,4 +5,6 @@ int init_ba_algorithm();
 
 void *tBaThreadFunc(void *cookie);
 
+void* tBaMapThreadFunction(void *cookie); 
+
 #endif /* BA_ALGORITHM_H_*/
