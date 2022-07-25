@@ -14,6 +14,8 @@
 
 ../roomba/control_files/include/sensors_inspect.h
 
+../roomba/control_files/include/stc_algorithm.h
+
 ../roomba/control_files/include/task_to_movement.h
 
 ../roomba/sim_files/include/load_plan.h
@@ -361,8 +363,6 @@ errno.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 ../include/control_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c
 stdlib.h

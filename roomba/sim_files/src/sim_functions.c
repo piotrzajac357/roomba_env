@@ -20,7 +20,7 @@ double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
-double max_speed = 3;
+double max_speed = 2.5;
 double max_rotating_speed = 0.5;
 int trashes[30];
 
@@ -60,7 +60,7 @@ int initialize_position(void) {
 	/* STC position */
 	// position_x = 12.875;
 	// position_y = 17.125;
-	position_x = 12.0;
+	position_x = 15.2;
 	position_y = 17.0;
 
 	previous_orientation = 270.0;

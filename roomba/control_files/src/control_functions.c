@@ -425,13 +425,22 @@ int calculate_movement_type(void) {
 					}
 					break;
 				case 3:
-					// TODO
-
-					movement_type = 1;
+					if (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
+							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] > 1 ||
+							   	   front_sensor < 0.001){
+						movement_type = 0;
+						spool_next_step_ba_calculated = 0;
+						sem_post(&spool_calc_next_step_ba);	
+					}
+					else {
+						movement_type = 1;
+					}
 					break;
 				case 4:
+					// printf("%f\n",sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
+					// 			       pow(target_position_y_ba - tmp_pos_y,2)));
 					if (sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
-							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.05) {
+							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.01) {
 								movement_type = 1;
 							 }
 					else {
@@ -553,6 +562,11 @@ int init_ba(void) {
 	current_task_ba = 3;
 	movement_mode = 0;
 	spool_next_step_ba_calculated = 1;
+	vertical_horizontal = 0;
+
+	FILE *fptr12;
+    fptr12 = fopen("../../roomba/log/decisions_ba.txt","w");
+    fclose(fptr12);
 	return EXIT_SUCCESS;
 }
 
@@ -969,41 +983,91 @@ int calc_next_task(void){
 	sem_post(&position_orientationSemaphore);
 	
 	int tmp_current_task_ba = current_task_ba;
+	vertical_horizontal = ((int)round(tmp_orientation/90)+1) % 2;
 	//printf("%d", tmp_current_task_ba);
 	switch (tmp_current_task_ba){
 		case 0:
 			break;
 		case 1 ... 2:
 			if (movement_mode == 1){ 
-				// DO STH
+				//target_position_x_ba = (double)bt_list[bt_point][1])/4;
 				break;
 			}
 			else {
-				if (vertical_horizontal == 0){
-					// calculate target position based sensors and data
+				if (vertical_horizontal == 1){
+					// calculate target position based on sensors and data
 					// target posistion, set driving forward, update flags, exit
 					target_position_x_ba = tmp_position_x + 0.25*cos((round(tmp_orientation) * ST_TO_RAD));
 					target_position_y_ba = tmp_position_y + 0.25*sin((round(tmp_orientation) * ST_TO_RAD));
 					current_task_ba = 4;
-					vertical_horizontal = 1;
 					spool_next_step_ba_calculated = 1;
 				}
 				else {
 					current_task_ba = 3;
-					vertical_horizontal = 0;
 					spool_next_step_ba_calculated = 1;
 				}
 				break;
 			}
-		case 3:
-			// ło panie dużo sprawdzania otoczenia,
-			// wyznaczania łobrotu
-			// do prawidłowego działania trza jeszcze cykliczne uzupełnianie macierzy statusu
-			
-			break;
+		case 3 ... 4:
+		if (movement_mode == 0) {
+			// check nbh 
+			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
+				target_orientation_ba = 90.0;
+				printf("90\n");
+				fflush(stdout);
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
+				target_orientation_ba = 270.0;
+				printf("270\n");
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
+				target_orientation_ba = 0.0;
+				printf("0\n");
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
+				target_orientation_ba = 180.0;
+				printf("180\n");
+			}
+			else {
+				movement_mode = 1;
+			 	int status = create_bt_list();
+				int bt_point;
+				bt_point = select_bt_point();
+				if (bt_point < 0) {
+					algorithm_finished = 1;
+					return EXIT_SUCCESS;
+				}
+				double b = ((double)bt_list[bt_point][1])/4 - tmp_position_y;
+				double c = sqrt(pow(((double)bt_list[bt_point][0])/4 - tmp_position_x,2) +
+				 	   			pow(((double)bt_list[bt_point][1])/4 - tmp_position_y,2));
+				target_orientation_ba = acos(b/c);
+				printf("target_orienteation: %f\n",target_orientation_ba);
+				current_task = 2;
+				spool_next_step_ba_calculated = 1;
 
+			// TODO zamienic rad na stopnie
+			}
+			current_task_ba = 2;
+			spool_next_step_ba_calculated = 1;
+
+			// FILE *fptr13;
+			// char cccc;
+			// fptr13 = fopen("../../roomba/log/decisions_ba.txt","a");
+			// fprintf(fptr13,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+			// fprintf(fptr13,"up: %d down: %d left: %d right: %d, target: %f\r\n",
+			// 			ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1],
+			// 			ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1],
+			// 			ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))],
+			// 			ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))],
+			// 			target_orientation_ba);
+			// fprintf(fptr13,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
+			// fprintf(fptr13,"\r\n");
+			// fclose(fptr13);
+			break;
+			}
+
+			else { break; }
 	}
-	
 	
 	return EXIT_SUCCESS;
 }
@@ -1016,6 +1080,7 @@ int update_ba_map(void) {
 	sem_wait(&position_orientationSemaphore);
 	double tmp_orientation = orientation;
 	double tmp_position_x = position_x;
+
 	double tmp_position_y = position_y;
 	sem_post(&position_orientationSemaphore);
 
@@ -1042,32 +1107,35 @@ int update_ba_map(void) {
 	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
 
 
-	if (ba_disc_map[this_pixel_x][this_pixel_y] < 2) {
-		ba_disc_map[this_pixel_x][this_pixel_y] = 2; }
-	
-	if (ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
-		if (tmp_left_sensor <= 0.025) {
-			ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
-		}
-		else {
-			ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 1;
-		}
-	}
-	if (ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
-		if (tmp_right_sensor <= 0.025) {
-			ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
-		}
-		else {
+	if (((int) round(tmp_orientation) % 90) == 0) {
 
-			ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 1;
+		if (ba_disc_map[this_pixel_x][this_pixel_y] < 2) {
+			ba_disc_map[this_pixel_x][this_pixel_y] = 2; }
+		
+		if (ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
+			if (tmp_left_sensor < 0.025) {
+				ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
+			}
+			else {
+				ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 1;
+			}
 		}
-	}
-	if (ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
-		if (tmp_front_sensor <= 0.025) {
-			ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+		if (ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
+			if (tmp_right_sensor < 0.025) {
+				ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
+			}
+			else {
+
+				ba_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 1;
+			}
 		}
-		else {
-			ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
+		if (ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
+			if (tmp_front_sensor < 0.025) {
+				ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+			}
+			else {
+				ba_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
+			}
 		}
 	}
 
@@ -1085,8 +1153,72 @@ int update_ba_map(void) {
     }
     fclose(fptr);
 
-
-
-
 	return EXIT_SUCCESS;
+}
+
+int create_bt_list(void) {
+
+	int k = 0;
+	for (int i = 0; i < 80; i++) {
+		for (int j = 0; j < 80; j++){
+			if (ba_disc_map[i][j] == 2) {
+				int s1 = ba_disc_map[i+1][j];
+				int s2 = ba_disc_map[i+1][j+1];
+				int s3 = ba_disc_map[i][j+1];
+				int s4 = ba_disc_map[i-1][j+1];
+				int s5 = ba_disc_map[i-1][j];
+				int s6 = ba_disc_map[i-1][j-1];
+				int s7 = ba_disc_map[i][j-1];
+				int s8 = ba_disc_map[i+i][j-1];
+
+				int goal = 0;
+				goal += (s1 == 1 && (s2 % 3 == 0)) ? 1 : 0;
+				goal += (s1 == 1 && (s8 % 3 == 0)) ? 1 : 0;
+				goal += (s5 == 1 && (s6 % 3 == 0)) ? 1 : 0;
+				goal += (s5 == 1 && (s4 % 3 == 0)) ? 1 : 0;
+				goal += (s7 == 1 && (s6 % 3 == 0)) ? 1 : 0;
+				goal += (s7 == 1 && (s8 % 3 == 0)) ? 1 : 0;
+
+				if (goal >= 1) {
+					bt_list[k][0] = i;
+					bt_list[k][1] = j;
+					k++;
+					printf("added point to backtracking list: x = %d y = %d\n",i,j);
+				}
+			}
+		}
+	}
+	return EXIT_SUCCESS;
+}
+
+
+int select_bt_point(void) {
+	// just distance for now
+	sem_wait(&position_orientationSemaphore);
+	double tmp_position_x = position_x;
+	double tmp_position_y = position_y;
+	double tmp_orientation = orientation;
+	sem_post(&position_orientationSemaphore);
+
+	int best_point = 0;
+	double best_value = 1000;
+	int bt_point_x;
+	int bt_point_y;
+	double i_value;
+
+	for (int i = 0; i < 100; i++) {
+		bt_point_x = bt_list[i][0];
+		bt_point_y = bt_list[i][0];
+		if (bt_point_x == bt_point_y == 0) {
+			return -1;
+		}
+		i_value = sqrt(pow(((double)bt_point_x)/4 - tmp_position_x,2) +
+				 	   pow(((double)bt_point_y)/4 - tmp_position_y,2));
+		if (i_value < best_value) {
+			best_value = i_value;
+			best_point = i;
+		}
+	}
+	printf("selected point: x = %d, y = %d\n",bt_list[best_point][0],bt_list[best_point][1]);
+	return best_point;
 }

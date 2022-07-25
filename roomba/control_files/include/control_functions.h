@@ -155,6 +155,7 @@ int current_task_ba;
 double target_orientation_ba;
 double target_position_x_ba;
 double target_position_y_ba;
+int bt_list[100][2];
 
 /* movement mode:
 0 - simple B. movement
@@ -205,6 +206,10 @@ int update_quarter_and_cell(void);
 int calc_next_task(void);
 
 int update_ba_map(void);
+
+int create_bt_list(void);
+
+int select_bt_point(void);
 
 int parent_to_target(int);
 

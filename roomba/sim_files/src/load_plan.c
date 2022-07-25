@@ -8,7 +8,7 @@ void init_plan(){
 
     FILE *fptr;
     char c;
-    fptr = fopen("../../roomba/plan/plan_binary1.txt","r");
+    fptr = fopen("../../roomba/plan/plan_binary2.txt","r");
     if(fptr == NULL) {
         perror("Error in opening file");
         return;

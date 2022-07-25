@@ -41,9 +41,10 @@ int init_ba_algorithm() {
     timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 1000000;
+	timerSpecStruct.it_interval.tv_nsec = 10000000;
 
     // initilize algorithm variables
+    sleep(1);
     status = init_ba();
 
     // create new stc thread

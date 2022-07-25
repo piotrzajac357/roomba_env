@@ -46,8 +46,8 @@ roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o: ../roomba/control
 
 roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o: ../roomba/control_files/include/sensors_inspect.h
+roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o: ../roomba/control_files/include/stc_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o: ../roomba/control_files/src/sensors_inspect.c
-roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o: ../roomba/control_files/src/stc_algorithm.h
 
 roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o: ../roomba/control_files/include/control.h
 roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o: ../roomba/control_files/include/control_functions.h
