@@ -402,7 +402,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.03) 
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) 
 					movement_type = 2;
 					else {
 						movement_type = 0;
@@ -410,13 +410,15 @@ int calculate_movement_type(void) {
 						spool_next_step_ba_calculated = 0;
 						// notify BA thread
 						sem_post(&spool_calc_next_step_ba);
+						
 					}
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.03) 
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) 
 					movement_type = 3;
 					else {
+						printf("reached orientation\n");
 						movement_type = 0;
 						// set flag so there is no movement until BA thread calculates
 						spool_next_step_ba_calculated = 0;
@@ -990,7 +992,10 @@ int calc_next_task(void){
 			break;
 		case 1 ... 2:
 			if (movement_mode == 1){ 
-				//target_position_x_ba = (double)bt_list[bt_point][1])/4;
+				target_position_x_ba = bt_target_x;
+				target_position_y_ba = bt_target_y;
+				current_task_ba = 4;
+				spool_next_step_ba_calculated = 1;
 				break;
 			}
 			else {
@@ -1014,41 +1019,56 @@ int calc_next_task(void){
 			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
 				target_orientation_ba = 90.0;
 				printf("90\n");
-				fflush(stdout);
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;		
+				break;		
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
 				target_orientation_ba = 270.0;
 				printf("270\n");
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 0.0;
 				printf("0\n");
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 180.0;
 				printf("180\n");
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				break;
 			}
 			else {
 				movement_mode = 1;
 			 	int status = create_bt_list();
 				int bt_point;
 				bt_point = select_bt_point();
+				bt_target_x = (double)bt_list[bt_point][0]/4;
+				bt_target_y = (double)bt_list[bt_point][1]/4;
+
 				if (bt_point < 0) {
 					algorithm_finished = 1;
 					return EXIT_SUCCESS;
 				}
-				double b = ((double)bt_list[bt_point][1])/4 - tmp_position_y;
+				double b = fabs(((double)bt_list[bt_point][1])/4 - tmp_position_y);
 				double c = sqrt(pow(((double)bt_list[bt_point][0])/4 - tmp_position_x,2) +
 				 	   			pow(((double)bt_list[bt_point][1])/4 - tmp_position_y,2));
-				target_orientation_ba = acos(b/c);
-				printf("target_orienteation: %f\n",target_orientation_ba);
-				current_task = 2;
-				spool_next_step_ba_calculated = 1;
 
-			// TODO zamienic rad na stopnie
+				//if ()
+				target_orientation_ba = round((acos(b/c)*180.0/M_PI)*20)/20;
+				printf("acos(b/c)*180/pi = %f\n", acos(b/c)*180.0/M_PI);
+				printf("target_orienteation: %f\n",target_orientation_ba);
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				break;
 			}
-			current_task_ba = 2;
-			spool_next_step_ba_calculated = 1;
+
 
 			// FILE *fptr13;
 			// char cccc;
@@ -1063,12 +1083,32 @@ int calc_next_task(void){
 			// fprintf(fptr13,"front: %.5f left: %.5f back: %.5f right: %.5f\r\n",front_sensor,left_sensor,back_sensor,right_sensor); 
 			// fprintf(fptr13,"\r\n");
 			// fclose(fptr13);
-			break;
+		
+		}
+		else {
+			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
+				target_orientation_ba = 90.0;
+				printf("90\n");
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
+				target_orientation_ba = 270.0;
+				printf("270\n");
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
+				target_orientation_ba = 0.0;
+				printf("0\n");
+			}
+			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
+				target_orientation_ba = 180.0;
+				printf("180\n");
 			}
 
-			else { break; }
-	}
-	
+			movement_mode = 0;
+			current_task_ba = 2;
+			spool_next_step_ba_calculated = 1;
+			break; 
+			}
+		}
 	return EXIT_SUCCESS;
 }
 

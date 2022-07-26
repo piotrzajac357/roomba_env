@@ -1,6 +1,10 @@
 #ifndef CONTROL_FUNCTIONS_H_
 #define CONTROL_FUNCTIONS_H_
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846     // PI
+#endif
+
 #ifndef ST_TO_RAD
 #define ST_TO_RAD 0.01745329251         // degrees to radians convert multiplier
 #endif
@@ -156,6 +160,8 @@ double target_orientation_ba;
 double target_position_x_ba;
 double target_position_y_ba;
 int bt_list[100][2];
+double bt_target_x;
+double bt_target_y;
 
 /* movement mode:
 0 - simple B. movement
