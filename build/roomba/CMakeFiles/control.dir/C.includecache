@@ -12,6 +12,8 @@
 
 ../roomba/control_files/include/control_update.h
 
+../roomba/control_files/include/path_main.h
+
 ../roomba/control_files/include/sensors_inspect.h
 
 ../roomba/control_files/include/stc_algorithm.h
@@ -19,6 +21,22 @@
 ../roomba/control_files/include/task_to_movement.h
 
 ../roomba/sim_files/include/load_plan.h
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
+unistd.h
+-
+stdio.h
+-
+math.h
+-
+
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
+inttypes.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/inttypes.h
+unistd.h
+-
+coordinate.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 
@@ -199,6 +217,12 @@ sys/types.h
 -
 fcntl.h
 -
+inttypes.h
+-
+../include/astar/grid.uint8_t.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
+path_main.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/path_main.h
 ../include/control_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 ../include/load_plan.h

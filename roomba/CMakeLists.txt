@@ -37,8 +37,10 @@ add_executable(control  control_files/src/control
 
 
 
-target_link_libraries(control pthread rt m)
 
+find_library(PATHE_LIB libpath.so)
+#target_link_libraries(control PRIVATE )
+target_link_libraries(control pthread rt m "${PATHE_LIB}")
 
 ##find_package (PythonLibs 3.6 REQUIRED)
 add_executable(vis  vis_files/src/vis.c

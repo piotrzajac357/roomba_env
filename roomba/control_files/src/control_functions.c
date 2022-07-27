@@ -8,9 +8,17 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <inttypes.h>
+
+
+#include "../include/astar/grid.uint8_t.h"
+#include "path_main.h"
+
 
 #include "../include/control_functions.h"
 #include "../include/load_plan.h"
+
+
 
 /* function initializing semaphores */
 int initialize_semaphores(void) {
@@ -1241,7 +1249,7 @@ int select_bt_point(void) {
 	sem_post(&position_orientationSemaphore);
 
 	int best_point = 0;
-	double best_value = 1000;
+	double best_value = 10000;
 	int bt_point_x;
 	int bt_point_y;
 	double i_value;
@@ -1260,5 +1268,8 @@ int select_bt_point(void) {
 		}
 	}
 	printf("selected point: x = %d, y = %d\n",bt_list[best_point][0],bt_list[best_point][1]);
+	const uint8_t a = 2;
+	int status = we_co_napisz();
+	status = is_traversable(&a);
 	return best_point;
 }

@@ -1,0 +1,1 @@
+/usr/bin/clang -g  -rdynamic CMakeFiles/roomba.dir/roomba.o  -o roomba -lpthread -lrt -lm 

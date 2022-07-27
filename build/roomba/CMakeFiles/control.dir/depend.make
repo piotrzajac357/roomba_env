@@ -28,6 +28,9 @@ roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/control_files/src/control_from_sim.c
 
+roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/path_main.h
+roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/astar/coordinate.h
+roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/astar/grid.uint8_t.h
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/include/load_plan.h
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/src/control_functions.c

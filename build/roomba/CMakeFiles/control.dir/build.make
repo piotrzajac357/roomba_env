@@ -376,6 +376,7 @@ roomba/control: roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o
 roomba/control: roomba/CMakeFiles/control.dir/build.make
+roomba/control: /lib/x86_64-linux-gnu/libpath.so
 roomba/control: roomba/CMakeFiles/control.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking C executable control"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/control.dir/link.txt --verbose=$(VERBOSE)

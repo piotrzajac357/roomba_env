@@ -12,6 +12,7 @@
 #include "../include/ba_algorithm.h"
 #include "../include/control_functions.h"
 
+
 /* initialize ba algorithm thread */
 int init_ba_algorithm() {
 

@@ -1,0 +1,1 @@
+/usr/bin/clang -g  -rdynamic CMakeFiles/vis.dir/vis_files/src/vis.o CMakeFiles/vis.dir/vis_files/src/run_python_script.o  -o vis -lpthread -lrt -lm -lpython3.6m 

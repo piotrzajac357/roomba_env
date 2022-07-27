@@ -15,7 +15,11 @@
         "sim_from_control.h": "c",
         "control.h": "c",
         "dist_sensors_update.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "load_plan.h": "c",
+        "inttypes.h": "c",
+        "path_main.h": "c",
+        "control_functions.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
