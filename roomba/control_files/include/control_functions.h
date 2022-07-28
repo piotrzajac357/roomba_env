@@ -1,5 +1,10 @@
 #ifndef CONTROL_FUNCTIONS_H_
 #define CONTROL_FUNCTIONS_H_
+#include "inttypes.h"
+#include <unistd.h>
+#include "astar/coordinate.h"
+#include "astar/grid.uint8_t.h"
+#include "astar/path.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846     // PI
@@ -162,6 +167,8 @@ double target_position_y_ba;
 int bt_list[100][2];
 double bt_target_x;
 double bt_target_y;
+path_t path;
+int path_index;
 
 /* movement mode:
 0 - simple B. movement
@@ -218,5 +225,11 @@ int create_bt_list(void);
 int select_bt_point(void);
 
 int parent_to_target(int);
+
+void init_a_grid(grid_uint8_t* grid);
+
+int is_point_traversable(const uint8_t* val);
+
+double calculate_target_angle(double start_x, double start_y, double end_x, double end_y);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

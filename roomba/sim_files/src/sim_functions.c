@@ -60,10 +60,10 @@ int initialize_position(void) {
 	/* STC position */
 	// position_x = 12.875;
 	// position_y = 17.125;
-	position_x = 15.2;
-	position_y = 17.0;
+	position_x = 5.0;
+	position_y = 16.0;
 
-	previous_orientation = 270.0;
+	previous_orientation = 90.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }
@@ -225,7 +225,7 @@ int calculate_position(void) {
 	// tmp_y = round(tmp_y * 80)/80;
 
 	//if ((fmod(tmp_orientation,1.0) < 0.01) || (fmod(tmp_orientation,1.0) > 0.99)){tmp_orientation = round(tmp_orientation);}
-	tmp_orientation = round(tmp_orientation * 10)/10;
+	tmp_orientation = round(tmp_orientation * 100)/100;
 	// write output values
 	sem_wait(&position_orientationSemaphore);
 	position_x = tmp_x;

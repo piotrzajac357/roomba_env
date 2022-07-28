@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <math.h>
+#include <stdint.h>
+#include <inttypes.h>
 #include <semaphore.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include <inttypes.h>
 
-
+#include "../include/astar/astar.uint8_t.h"
 #include "../include/astar/grid.uint8_t.h"
-#include "path_main.h"
-
+#include "../include/path_main.h"
 
 #include "../include/control_functions.h"
 #include "../include/load_plan.h"
@@ -410,21 +410,24 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) 
-					movement_type = 2;
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.1) {
+						movement_type = 2;
+						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
+						}
 					else {
 						movement_type = 0;
 						// set flag so there is no movement until BA thread calculates
 						spool_next_step_ba_calculated = 0;
 						// notify BA thread
 						sem_post(&spool_calc_next_step_ba);
-						
 					}
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) 
-					movement_type = 3;
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.5) {
+						movement_type = 3;
+						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
+					}
 					else {
 						printf("reached orientation\n");
 						movement_type = 0;
@@ -450,7 +453,7 @@ int calculate_movement_type(void) {
 					// printf("%f\n",sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
 					// 			       pow(target_position_y_ba - tmp_pos_y,2)));
 					if (sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
-							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.01) {
+							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.02) {
 								movement_type = 1;
 							 }
 					else {
@@ -569,14 +572,19 @@ int init_stc(void) {
 
 /* function initializing BA algorithm variables */
 int init_ba(void) {
-	current_task_ba = 3;
+	current_task_ba = 0;
 	movement_mode = 0;
-	spool_next_step_ba_calculated = 1;
 	vertical_horizontal = 0;
+	path_index = 0;
 
 	FILE *fptr12;
     fptr12 = fopen("../../roomba/log/decisions_ba.txt","w");
     fclose(fptr12);
+
+	//int status = run_test_1();
+
+	current_task_ba = 3;
+	spool_next_step_ba_calculated = 1;
 	return EXIT_SUCCESS;
 }
 
@@ -1054,24 +1062,46 @@ int calc_next_task(void){
 			}
 			else {
 				movement_mode = 1;
+				update_ba_map();
 			 	int status = create_bt_list();
 				int bt_point;
 				bt_point = select_bt_point();
-				bt_target_x = (double)bt_list[bt_point][0]/4;
-				bt_target_y = (double)bt_list[bt_point][1]/4;
 
 				if (bt_point < 0) {
 					algorithm_finished = 1;
 					return EXIT_SUCCESS;
 				}
-				double b = fabs(((double)bt_list[bt_point][1])/4 - tmp_position_y);
-				double c = sqrt(pow(((double)bt_list[bt_point][0])/4 - tmp_position_x,2) +
-				 	   			pow(((double)bt_list[bt_point][1])/4 - tmp_position_y,2));
 
-				//if ()
-				target_orientation_ba = round((acos(b/c)*180.0/M_PI)*20)/20;
-				printf("acos(b/c)*180/pi = %f\n", acos(b/c)*180.0/M_PI);
-				printf("target_orienteation: %f\n",target_orientation_ba);
+				int begin_x = (int)round(4*(tmp_position_x));
+				int begin_y = (int)round(4*(tmp_position_y));
+
+				grid_uint8_t grid;
+				init_a_grid(&grid);
+				coordinate_t begin = {begin_x,begin_y};
+				coordinate_t end = {bt_list[bt_point][0],bt_list[bt_point][1]};
+				print_begin_end(&begin, &end);
+				path = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
+				path_index = 0;
+				if(path_empty(&path)) {
+					printf("No path found!\n");
+				}
+				else {
+					path_for_each_r(&path, coordinate_print);
+					printf("\n");
+				}
+				grid_uint8_destroy(&grid);
+				// uint8_t abc = path_get(&path,path_index).row;
+				// uint8_t abcd = path_get(&path,path_index).col;
+				// uint8_t dcba = path_get(&path,path_index+1).row;
+
+				// printf("%d %d %d\n",abc,abcd,dcba);
+				double dest_x = ((double)(path_get(&path,path_index)).row)/4;
+				double dest_y = ((double)(path_get(&path,path_index)).col)/4;
+				target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,dest_x,dest_y);
+
+				bt_target_x = dest_x;
+				bt_target_y = dest_y;
+
 				current_task_ba = 2;
 				spool_next_step_ba_calculated = 1;
 				break;
@@ -1094,28 +1124,39 @@ int calc_next_task(void){
 		
 		}
 		else {
-			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
-				target_orientation_ba = 90.0;
-				printf("90\n");
+			path_index++;
+			if (path_index == path_size(&path)){
+				if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
+					target_orientation_ba = 90.0;
+					printf("90\n");
+				}
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
+					target_orientation_ba = 270.0;
+					printf("270\n");
+				}
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
+					target_orientation_ba = 0.0;
+					printf("0\n");
+				}
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
+					target_orientation_ba = 180.0;
+					printf("180\n");
+				}
+				movement_mode = 0;
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				path_destroy(&path);
+				break; 
 			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
-				target_orientation_ba = 270.0;
-				printf("270\n");
+			else {
+				bt_target_x = ((double)(path_get(&path,path_index).row))/4;
+				bt_target_y = ((double)(path_get(&path,path_index).col))/4;
+				target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,bt_target_x,bt_target_y);
+				current_task_ba = 2;
+				spool_next_step_ba_calculated = 1;
+				break;
 			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
-				target_orientation_ba = 0.0;
-				printf("0\n");
-			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
-				target_orientation_ba = 180.0;
-				printf("180\n");
-			}
-
-			movement_mode = 0;
-			current_task_ba = 2;
-			spool_next_step_ba_calculated = 1;
-			break; 
-			}
+		}
 		}
 	return EXIT_SUCCESS;
 }
@@ -1239,7 +1280,6 @@ int create_bt_list(void) {
 	return EXIT_SUCCESS;
 }
 
-
 int select_bt_point(void) {
 	// just distance for now
 	sem_wait(&position_orientationSemaphore);
@@ -1268,8 +1308,39 @@ int select_bt_point(void) {
 		}
 	}
 	printf("selected point: x = %d, y = %d\n",bt_list[best_point][0],bt_list[best_point][1]);
-	const uint8_t a = 2;
-	int status = we_co_napisz();
-	status = is_traversable(&a);
+
 	return best_point;
+}
+
+void init_a_grid(grid_uint8_t* grid){
+	uint8_t value = 0;
+	uint8_t values[80*80];
+	for (int i = 0; i < 80; i++){
+		for (int j = 0; j < 80; j++){
+			values[80*i+j] = ba_disc_map[i][j];
+		}
+	}
+	grid_uint8_init(grid,80,80,&values[0]);
+	grid_uint8_for_each(grid,grid_uint8_print);
+}
+
+int is_point_traversable(const uint8_t* val) {
+    return *val == 2 ? 1 : 0;
+}
+
+double calculate_target_angle(double start_x, double start_y, double end_x, double end_y) {
+	
+	double diff_x = end_x - start_x;
+	double diff_y = end_y - start_y;
+	printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
+	double angle = fmod((atan2(diff_y, diff_x) * 180.0 / M_PI) + 360.0,360.0);
+
+	printf("pos_x: %f pos_y: %f dest_x: %f dest_y: %f\n",start_x,start_y,end_x,end_y);
+	printf("target_orienteation: %f\n",angle);
+	// if 		(diff_x <= 0 && diff_y >= 0) {angle = 180.0 - angle;}
+	// else if (diff_x <= 0 && diff_y <= 0) {angle = 180.0 + angle;}
+	// else if (diff_x >= 0 && diff_y <= 0) {angle = 360.0 - angle;}
+	
+
+	return round(100*angle)/100;
 }

@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 27 17:48:27 2022
+# Make data base, printed on Thu Jul 28 00:33:39 2022
 
 # Variables
 
@@ -83,11 +83,11 @@ GSETTINGS_SCHEMA_DIR = /snap/code/102/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/piotr/.local/bin:/home/piotr/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/piotr/Desktop/pm_project/roomba_env/build/roomba:
+PATH = /home/piotr/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Piotr:@/tmp/.ICE-unix/1068,unix/Piotr:/tmp/.ICE-unix/1068
+SESSION_MANAGER = local/Piotr:@/tmp/.ICE-unix/1124,unix/Piotr:/tmp/.ICE-unix/1124
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -115,7 +115,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1672
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2161
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,7 +129,7 @@ PWD = /home/piotr/Desktop/pm_project/roomba_env
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1181
+SSH_AGENT_PID = 1244
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -181,7 +181,7 @@ QT_IM_MODULE = xim
 # environment
 SNAP_USER_DATA = /home/piotr/snap/code/102
 # environment
-SHLVL = 1
+SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
@@ -224,6 +224,8 @@ MFLAGS = -pqrR
 GDK_BACKEND = x11
 # environment
 LC_PAPER = pl_PL.UTF-8
+# environment
+NO_AT_BRIDGE = 1
 # environment
 LC_IDENTIFICATION = pl_PL.UTF-8
 # environment
@@ -269,9 +271,9 @@ LC_ADDRESS = pl_PL.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1720
+VSCODE_PID = 1739
 # variable set hash-table stats:
-# Load=129/1024=13%, Rehash=0, Collisions=23/151=15%
+# Load=130/1024=13%, Rehash=0, Collisions=23/152=15%
 
 # Pattern-specific Variable Values
 
@@ -338,6 +340,6 @@ GNUmakefile:
 # strcache performance: lookups = 19 / hit rate = 15%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Wed Jul 27 17:48:27 2022
+# Finished Make data base on Thu Jul 28 00:33:39 2022
 
  
