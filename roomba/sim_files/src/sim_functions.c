@@ -21,7 +21,7 @@ int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
 double max_speed = 2.5;
-double max_rotating_speed = 0.25;
+double max_rotating_speed = 0.2;
 int trashes[30];
 
 double position_x;
@@ -61,7 +61,7 @@ int initialize_position(void) {
 	// position_x = 12.875;
 	// position_y = 17.125;
 	position_x = 5.0;
-	position_y = 16.0;
+	position_y = 14.0;
 
 	previous_orientation = 90.0;
 	sem_post(&position_orientationSemaphore);

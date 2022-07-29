@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <string.h>
 
 #include "../include/astar/astar.uint8_t.h"
 #include "../include/astar/grid.uint8_t.h"
@@ -410,7 +411,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.1) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.6) {
 						movement_type = 2;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 						}
@@ -424,7 +425,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.5) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.6) {
 						movement_type = 3;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 					}
@@ -439,8 +440,10 @@ int calculate_movement_type(void) {
 					break;
 				case 3:
 					if (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
-							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] > 1 ||
-							   	   front_sensor < 0.001){
+							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 2 ||
+					   (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
+								   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 3 &&
+							   	   front_sensor < 0.02)){
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
 						sem_post(&spool_calc_next_step_ba);	
@@ -452,13 +455,17 @@ int calculate_movement_type(void) {
 				case 4:
 					// printf("%f\n",sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
 					// 			       pow(target_position_y_ba - tmp_pos_y,2)));
-					if (sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
-							 pow(target_position_y_ba - tmp_pos_y,2)) >= 0.02) {
-								movement_type = 1;
-							 }
+					dist = sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
+							    pow(target_position_y_ba - tmp_pos_y,2));
+					if (dist >= 0.02  && prev_dist >= dist) {
+						prev_dist = dist;
+						movement_type = 1;
+					}
 					else {
+						prev_dist = 10000;
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
+						printf("xd");
 						sem_post(&spool_calc_next_step_ba);
 					}
 					break;
@@ -576,6 +583,8 @@ int init_ba(void) {
 	movement_mode = 0;
 	vertical_horizontal = 0;
 	path_index = 0;
+	dist = 10000;
+	prev_dist = 10000;
 
 	FILE *fptr12;
     fptr12 = fopen("../../roomba/log/decisions_ba.txt","w");
@@ -1035,28 +1044,28 @@ int calc_next_task(void){
 			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
 				target_orientation_ba = 90.0;
 				printf("90\n");
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;		
 				break;		
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
 				target_orientation_ba = 270.0;
 				printf("270\n");
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 0.0;
 				printf("0\n");
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 180.0;
 				printf("180\n");
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
@@ -1102,7 +1111,7 @@ int calc_next_task(void){
 				bt_target_x = dest_x;
 				bt_target_y = dest_y;
 
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
@@ -1142,8 +1151,9 @@ int calc_next_task(void){
 					target_orientation_ba = 180.0;
 					printf("180\n");
 				}
+				printf("end B. movement\n");
 				movement_mode = 0;
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				path_destroy(&path);
 				break; 
@@ -1151,8 +1161,9 @@ int calc_next_task(void){
 			else {
 				bt_target_x = ((double)(path_get(&path,path_index).row))/4;
 				bt_target_y = ((double)(path_get(&path,path_index).col))/4;
+				printf("target_x_px: %d target_y_px: %d\n", (int)path_get(&path,path_index).row,(int)path_get(&path,path_index).col);
 				target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,bt_target_x,bt_target_y);
-				current_task_ba = 2;
+				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
@@ -1198,7 +1209,7 @@ int update_ba_map(void) {
 
 	if (((int) round(tmp_orientation) % 90) == 0) {
 
-		if (ba_disc_map[this_pixel_x][this_pixel_y] < 2) {
+		if (ba_disc_map[this_pixel_x][this_pixel_y] != 2) {
 			ba_disc_map[this_pixel_x][this_pixel_y] = 2; }
 		
 		if (ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
@@ -1247,10 +1258,15 @@ int update_ba_map(void) {
 
 int create_bt_list(void) {
 
+	memset(bt_list,0,sizeof(bt_list));
+	bt_list[0][0] = 0;
+	bt_list[0][1] = 0;
 	int k = 0;
-	for (int i = 0; i < 80; i++) {
-		for (int j = 0; j < 80; j++){
+
+	for (int i = 1; i < 79; i++){
+		for (int j = 1; j < 79; j++){
 			if (ba_disc_map[i][j] == 2) {
+
 				int s1 = ba_disc_map[i+1][j];
 				int s2 = ba_disc_map[i+1][j+1];
 				int s3 = ba_disc_map[i][j+1];
@@ -1258,7 +1274,7 @@ int create_bt_list(void) {
 				int s5 = ba_disc_map[i-1][j];
 				int s6 = ba_disc_map[i-1][j-1];
 				int s7 = ba_disc_map[i][j-1];
-				int s8 = ba_disc_map[i+i][j-1];
+				int s8 = ba_disc_map[i+1][j-1];
 
 				int goal = 0;
 				goal += (s1 == 1 && (s2 % 3 == 0)) ? 1 : 0;
@@ -1272,16 +1288,22 @@ int create_bt_list(void) {
 					bt_list[k][0] = i;
 					bt_list[k][1] = j;
 					k++;
-					printf("added point to backtracking list: x = %d y = %d\n",i,j);
 				}
 			}
+
 		}
 	}
+	for (int z = 0;z<20;z++){
+		printf("\n{%d,%d}",bt_list[z][0],bt_list[z][1]);
+	}
+
 	return EXIT_SUCCESS;
 }
 
 int select_bt_point(void) {
 	// just distance for now
+	printf("tutaj");
+	fflush(stdout);
 	sem_wait(&position_orientationSemaphore);
 	double tmp_position_x = position_x;
 	double tmp_position_y = position_y;
@@ -1294,14 +1316,16 @@ int select_bt_point(void) {
 	int bt_point_y;
 	double i_value;
 
+	if (bt_list[0][0] == 0 && bt_list[0][1] == 0) { return -1; }
+
 	for (int i = 0; i < 100; i++) {
+		if (bt_list[i][0] == 0 && bt_list[i][1] == 0) {break;}
 		bt_point_x = bt_list[i][0];
-		bt_point_y = bt_list[i][0];
-		if (bt_point_x == bt_point_y == 0) {
-			return -1;
-		}
+		bt_point_y = bt_list[i][1];	
 		i_value = sqrt(pow(((double)bt_point_x)/4 - tmp_position_x,2) +
 				 	   pow(((double)bt_point_y)/4 - tmp_position_y,2));
+		printf("%f\n",i_value);
+		fflush(stdout);
 		if (i_value < best_value) {
 			best_value = i_value;
 			best_point = i;
@@ -1335,12 +1359,22 @@ double calculate_target_angle(double start_x, double start_y, double end_x, doub
 	printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
 	double angle = fmod((atan2(diff_y, diff_x) * 180.0 / M_PI) + 360.0,360.0);
 
-	printf("pos_x: %f pos_y: %f dest_x: %f dest_y: %f\n",start_x,start_y,end_x,end_y);
-	printf("target_orienteation: %f\n",angle);
+	printf("pos_x: %.2f pos_y: %.2f dest_x: %.2f dest_y: %.2f\n",start_x,start_y,end_x,end_y);
+	printf("target_orienteation: %.2f\n",angle);
 	// if 		(diff_x <= 0 && diff_y >= 0) {angle = 180.0 - angle;}
 	// else if (diff_x <= 0 && diff_y <= 0) {angle = 180.0 + angle;}
 	// else if (diff_x >= 0 && diff_y <= 0) {angle = 360.0 - angle;}
 	
 
 	return round(100*angle)/100;
+}
+
+int rotation_direction(double target_angle, double current_angle){
+
+        if ((   (target_angle > current_angle) && (fabs(target_angle - current_angle) > 180.0)) ||
+            (   (target_angle < current_angle) && (fabs(target_angle - current_angle) < 180.0))) {
+        	return 1;
+        } else {
+			return 2;
+        }
 }

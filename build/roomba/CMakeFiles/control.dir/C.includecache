@@ -279,6 +279,8 @@ sys/types.h
 -
 fcntl.h
 -
+string.h
+-
 ../include/astar/astar.uint8_t.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/astar.uint8_t.h
 ../include/astar/grid.uint8_t.h

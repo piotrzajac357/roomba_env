@@ -19,7 +19,8 @@
         "load_plan.h": "c",
         "inttypes.h": "c",
         "path_main.h": "c",
-        "control_functions.h": "c"
+        "control_functions.h": "c",
+        "*.tcc": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

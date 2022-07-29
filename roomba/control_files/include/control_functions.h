@@ -161,6 +161,8 @@ int backtracking_map[80][80];
     movement (to a certain point)
 */
 int current_task_ba;
+double dist;
+double prev_dist;
 double target_orientation_ba;
 double target_position_x_ba;
 double target_position_y_ba;
@@ -231,5 +233,7 @@ void init_a_grid(grid_uint8_t* grid);
 int is_point_traversable(const uint8_t* val);
 
 double calculate_target_angle(double start_x, double start_y, double end_x, double end_y);
+
+int rotation_direction(double target_angle, double current_angle);
 
 #endif /* CONTROL_FUNCTIONS_H_*/
