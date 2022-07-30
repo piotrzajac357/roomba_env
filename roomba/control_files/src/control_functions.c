@@ -430,7 +430,7 @@ int calculate_movement_type(void) {
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 					}
 					else {
-						printf("reached orientation\n");
+						//printf("reached orientation\n");
 						movement_type = 0;
 						// set flag so there is no movement until BA thread calculates
 						spool_next_step_ba_calculated = 0;
@@ -465,7 +465,6 @@ int calculate_movement_type(void) {
 						prev_dist = 10000;
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
-						printf("xd");
 						sem_post(&spool_calc_next_step_ba);
 					}
 					break;
@@ -1043,28 +1042,28 @@ int calc_next_task(void){
 			// check nbh 
 			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
 				target_orientation_ba = 90.0;
-				printf("90\n");
+				//printf("90\n");
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;		
 				break;		
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
 				target_orientation_ba = 270.0;
-				printf("270\n");
+				//printf("270\n");
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 0.0;
-				printf("0\n");
+				//printf("0\n");
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
 			}
 			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
 				target_orientation_ba = 180.0;
-				printf("180\n");
+				//printf("180\n");
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
 				break;
@@ -1092,12 +1091,21 @@ int calc_next_task(void){
 				path = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
 				path_index = 0;
 				if(path_empty(&path)) {
-					printf("No path found!\n");
+					algorithm_finished = 1;
+					printf("No path found!\nFinishing work...\n");
 				}
 				else {
+					printf("Path before smoothing:\n");
 					path_for_each_r(&path, coordinate_print);
 					printf("\n");
 				}
+				printf("Path after smoothing:\n");
+				path_t path2 = path;
+				//status = smooth_path(&path2);
+				path_for_each_r(&path2, coordinate_print);
+				printf("\n");
+
+
 				grid_uint8_destroy(&grid);
 				// uint8_t abc = path_get(&path,path_index).row;
 				// uint8_t abcd = path_get(&path,path_index).col;
@@ -1137,21 +1145,21 @@ int calc_next_task(void){
 			if (path_index == path_size(&path)){
 				if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
 					target_orientation_ba = 90.0;
-					printf("90\n");
+					//printf("90\n");
 				}
 				else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
 					target_orientation_ba = 270.0;
-					printf("270\n");
+					//printf("270\n");
 				}
 				else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
 					target_orientation_ba = 0.0;
-					printf("0\n");
+					//printf("0\n");
 				}
 				else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
 					target_orientation_ba = 180.0;
-					printf("180\n");
+					//printf("180\n");
 				}
-				printf("end B. movement\n");
+				printf("begin B. movement\n");
 				movement_mode = 0;
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
@@ -1171,7 +1179,6 @@ int calc_next_task(void){
 		}
 	return EXIT_SUCCESS;
 }
-
 
 int update_ba_map(void) {
 
@@ -1293,8 +1300,8 @@ int create_bt_list(void) {
 
 		}
 	}
-	for (int z = 0;z<20;z++){
-		printf("\n{%d,%d}",bt_list[z][0],bt_list[z][1]);
+	for (int z = 0; bt_list[z][0] != 0; z++){
+		printf("\n{%d,%d}\n",bt_list[z][0],bt_list[z][1]);
 	}
 
 	return EXIT_SUCCESS;
@@ -1302,8 +1309,7 @@ int create_bt_list(void) {
 
 int select_bt_point(void) {
 	// just distance for now
-	printf("tutaj");
-	fflush(stdout);
+
 	sem_wait(&position_orientationSemaphore);
 	double tmp_position_x = position_x;
 	double tmp_position_y = position_y;
@@ -1324,8 +1330,6 @@ int select_bt_point(void) {
 		bt_point_y = bt_list[i][1];	
 		i_value = sqrt(pow(((double)bt_point_x)/4 - tmp_position_x,2) +
 				 	   pow(((double)bt_point_y)/4 - tmp_position_y,2));
-		printf("%f\n",i_value);
-		fflush(stdout);
 		if (i_value < best_value) {
 			best_value = i_value;
 			best_point = i;
@@ -1337,7 +1341,7 @@ int select_bt_point(void) {
 }
 
 void init_a_grid(grid_uint8_t* grid){
-	uint8_t value = 0;
+
 	uint8_t values[80*80];
 	for (int i = 0; i < 80; i++){
 		for (int j = 0; j < 80; j++){
@@ -1345,7 +1349,7 @@ void init_a_grid(grid_uint8_t* grid){
 		}
 	}
 	grid_uint8_init(grid,80,80,&values[0]);
-	grid_uint8_for_each(grid,grid_uint8_print);
+	//grid_uint8_for_each(grid,grid_uint8_print);
 }
 
 int is_point_traversable(const uint8_t* val) {
@@ -1356,7 +1360,7 @@ double calculate_target_angle(double start_x, double start_y, double end_x, doub
 	
 	double diff_x = end_x - start_x;
 	double diff_y = end_y - start_y;
-	printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
+	//printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
 	double angle = fmod((atan2(diff_y, diff_x) * 180.0 / M_PI) + 360.0,360.0);
 
 	printf("pos_x: %.2f pos_y: %.2f dest_x: %.2f dest_y: %.2f\n",start_x,start_y,end_x,end_y);
@@ -1378,3 +1382,60 @@ int rotation_direction(double target_angle, double current_angle){
 			return 2;
         }
 }
+
+
+int smooth_path(path_t* path) {
+
+	// copy long path 
+	path_t path_old = *path;
+	// clear long path 
+	path_clear(path);
+	path->size = 10;
+
+	int is_path_traversable = 1;
+	int last_checked_point = 0;
+	int sequence_first_point = 0;
+	int checked_point = 0;
+
+	while(last_checked_point != path_size(&path_old)){
+		for(int i = sequence_first_point + 1; i <= path_size(&path_old); i++) {
+
+			double first_x 		= ((double)(path_get(&path_old,sequence_first_point)).row)/4;
+			double first_y 		= ((double)(path_get(&path_old,sequence_first_point)).col)/4;
+			double checked_x 	= ((double)(path_get(&path_old,i)).row)/4;
+			double checked_y 	= ((double)(path_get(&path_old,i)).col)/4;
+
+			// get angle between these 2 points
+			double angle 	= calculate_target_angle(first_x,first_y,checked_x,checked_y);
+			double distance = sqrt((pow(first_x-checked_x,2)+pow(first_y-checked_y,2)));
+			is_path_traversable = 1;
+
+			for (double j = 0.0; j <= distance; j = j + 0.1){
+				// determining the closest pixel
+				int x_pix = (int)round(4 * (first_x + j * cos(angle)));
+				int y_pix = (int)round(4 * (first_y + j * sin(angle)));
+				int pix_value = ba_disc_map[x_pix][y_pix];
+				
+				if (pix_value == 2){
+					continue; }
+				else {
+					is_path_traversable = 0;
+					break;
+				}
+			}
+
+			if (is_path_traversable == 1) {
+				continue;
+			}
+			else {
+				path_push_back(path,path_get(&path_old, i-1));
+				sequence_first_point = i-1;
+			}
+		last_checked_point = i;
+		}
+
+	}
+	path_push_back(path,*path_end(&path_old));
+	return EXIT_SUCCESS;
+}
+
