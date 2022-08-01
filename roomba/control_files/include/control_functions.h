@@ -236,6 +236,6 @@ double calculate_target_angle(double start_x, double start_y, double end_x, doub
 
 int rotation_direction(double target_angle, double current_angle);
 
-int smooth_path(path_t* path);
+path_t smooth_path(path_t* path);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

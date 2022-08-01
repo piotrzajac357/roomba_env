@@ -411,7 +411,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.6) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.3) {
 						movement_type = 2;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 						}
@@ -425,7 +425,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.6) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.3) {
 						movement_type = 3;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 					}
@@ -443,7 +443,7 @@ int calculate_movement_type(void) {
 							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 2 ||
 					   (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
 								   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 3 &&
-							   	   front_sensor < 0.02)){
+							   	   front_sensor < 0.01)){
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
 						sem_post(&spool_calc_next_step_ba);	
@@ -457,7 +457,7 @@ int calculate_movement_type(void) {
 					// 			       pow(target_position_y_ba - tmp_pos_y,2)));
 					dist = sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
 							    pow(target_position_y_ba - tmp_pos_y,2));
-					if (dist >= 0.02  && prev_dist >= dist) {
+					if (dist >= 0.01  && prev_dist >= dist) {
 						prev_dist = dist;
 						movement_type = 1;
 					}
@@ -1002,6 +1002,8 @@ int parent_to_target(int parent_cell) {
 
 int calc_next_task(void){
 	
+	update_ba_map();
+
 	sem_wait(&position_orientationSemaphore);
 	double tmp_position_x = position_x;
 	double tmp_position_y = position_y;
@@ -1069,6 +1071,21 @@ int calc_next_task(void){
 				break;
 			}
 			else {
+
+				FILE *fptr14;
+				char c;
+				fptr14 = fopen("../../roomba/log/decisions_ba.txt","a");
+				fprintf(fptr14,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+				fprintf(fptr14,"up: %d down: %d left: %d right: %d, target: %f\r\n moving to next area\r\n\r\n",
+							ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1],
+							ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1],
+							ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))],
+							ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))],
+							target_orientation_ba);
+				fprintf(fptr14,"\r\n");
+				fclose(fptr14);
+
+
 				movement_mode = 1;
 				update_ba_map();
 			 	int status = create_bt_list();
@@ -1088,24 +1105,28 @@ int calc_next_task(void){
 				coordinate_t begin = {begin_x,begin_y};
 				coordinate_t end = {bt_list[bt_point][0],bt_list[bt_point][1]};
 				print_begin_end(&begin, &end);
-				path = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
+				path_t path_raw = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
+
 				path_index = 0;
-				if(path_empty(&path)) {
+				if(path_empty(&path_raw)) {
 					algorithm_finished = 1;
 					printf("No path found!\nFinishing work...\n");
 				}
 				else {
 					printf("Path before smoothing:\n");
-					path_for_each_r(&path, coordinate_print);
+					path_for_each_r(&path_raw, coordinate_print);
 					printf("\n");
 				}
 				printf("Path after smoothing:\n");
-				path_t path2 = path;
-				//status = smooth_path(&path2);
-				path_for_each_r(&path2, coordinate_print);
+				//path_t path2 = path;
+
+				path = smooth_path(&path_raw);
+
+				path_destroy(&path_raw);
+				path_for_each_r(&path, coordinate_print);
 				printf("\n");
-
-
+				printf("size: %zu capacity: %zu\n",path.size,path.capacity);
+				fflush(stdout);
 				grid_uint8_destroy(&grid);
 				// uint8_t abc = path_get(&path,path_index).row;
 				// uint8_t abcd = path_get(&path,path_index).col;
@@ -1169,7 +1190,7 @@ int calc_next_task(void){
 			else {
 				bt_target_x = ((double)(path_get(&path,path_index).row))/4;
 				bt_target_y = ((double)(path_get(&path,path_index).col))/4;
-				printf("target_x_px: %d target_y_px: %d\n", (int)path_get(&path,path_index).row,(int)path_get(&path,path_index).col);
+				//printf("target_x_px: %d target_y_px: %d\n", (int)path_get(&path,path_index).row,(int)path_get(&path,path_index).col);
 				target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,bt_target_x,bt_target_y);
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
@@ -1363,8 +1384,8 @@ double calculate_target_angle(double start_x, double start_y, double end_x, doub
 	//printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
 	double angle = fmod((atan2(diff_y, diff_x) * 180.0 / M_PI) + 360.0,360.0);
 
-	printf("pos_x: %.2f pos_y: %.2f dest_x: %.2f dest_y: %.2f\n",start_x,start_y,end_x,end_y);
-	printf("target_orienteation: %.2f\n",angle);
+	//printf("pos_x: %.2f pos_y: %.2f dest_x: %.2f dest_y: %.2f\n",start_x,start_y,end_x,end_y);
+	//printf("target_orienteation: %.2f\n",angle);
 	// if 		(diff_x <= 0 && diff_y >= 0) {angle = 180.0 - angle;}
 	// else if (diff_x <= 0 && diff_y <= 0) {angle = 180.0 + angle;}
 	// else if (diff_x >= 0 && diff_y <= 0) {angle = 360.0 - angle;}
@@ -1384,26 +1405,32 @@ int rotation_direction(double target_angle, double current_angle){
 }
 
 
-int smooth_path(path_t* path) {
+path_t smooth_path(path_t* path) {
 
-	// copy long path 
-	path_t path_old = *path;
-	// clear long path 
-	path_clear(path);
-	path->size = 10;
+	path_t smoothed_path;
+	path_init(&smoothed_path, 10);
 
 	int is_path_traversable = 1;
 	int last_checked_point = 0;
 	int sequence_first_point = 0;
 	int checked_point = 0;
 
-	while(last_checked_point != path_size(&path_old)){
-		for(int i = sequence_first_point + 1; i <= path_size(&path_old); i++) {
+	if (path_size(path) == 1) { 
+		path_push_back(&smoothed_path,path_get(path,0));
+		return smoothed_path;
+	}
 
-			double first_x 		= ((double)(path_get(&path_old,sequence_first_point)).row)/4;
-			double first_y 		= ((double)(path_get(&path_old,sequence_first_point)).col)/4;
-			double checked_x 	= ((double)(path_get(&path_old,i)).row)/4;
-			double checked_y 	= ((double)(path_get(&path_old,i)).col)/4;
+
+	printf("size of path: %zu", path_size(path));
+	while(last_checked_point != path_size(path)-1){
+		printf("last checked: %d   path size: %zu\n",last_checked_point,path_size(path));
+		printf("sequence_first_point: %d", sequence_first_point);
+		// for(int i = sequence_first_point + 1; i < path_size(path); i++) {
+		for(int i = path_size(path) - 1; i > sequence_first_point; i--) {
+			double first_x 		= ((double)(path_get(path,sequence_first_point)).row)/4;
+			double first_y 		= ((double)(path_get(path,sequence_first_point)).col)/4;
+			double checked_x 	= ((double)(path_get(path,i)).row)/4;
+			double checked_y 	= ((double)(path_get(path,i)).col)/4;
 
 			// get angle between these 2 points
 			double angle 	= calculate_target_angle(first_x,first_y,checked_x,checked_y);
@@ -1412,30 +1439,66 @@ int smooth_path(path_t* path) {
 
 			for (double j = 0.0; j <= distance; j = j + 0.1){
 				// determining the closest pixel
-				int x_pix = (int)round(4 * (first_x + j * cos(angle)));
-				int y_pix = (int)round(4 * (first_y + j * sin(angle)));
-				int pix_value = ba_disc_map[x_pix][y_pix];
-				
-				if (pix_value == 2){
+				int x_pix = (int)round(4 * (first_x + j * cos(angle * ST_TO_RAD)));
+				int y_pix = (int)round(4 * (first_y + j * sin(angle * ST_TO_RAD)));
+
+				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.175)));
+				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.175)));
+				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.175)));
+				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.175)));
+
+				int pix_value 		= ba_disc_map[x_pix][y_pix];
+				int pix_value_left  = ba_disc_map[x_pix_left][y_pix];
+				int pix_value_right = ba_disc_map[x_pix_right][y_pix];
+				int pix_value_up    = ba_disc_map[x_pix][y_pix_up];
+				int pix_value_down  = ba_disc_map[x_pix][y_pix_down];
+
+
+				if (pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
+									  pix_value_up == 2	  && pix_value_down == 2){
 					continue; }
 				else {
 					is_path_traversable = 0;
+					printf("due to px %d, %d\n", x_pix,y_pix);
 					break;
 				}
 			}
+			printf("\n");
+			printf("from point %d to point %d  ", sequence_first_point, i);
+			printf("is traversable path: %d\n", is_path_traversable);
+			
+			last_checked_point = i;
 
-			if (is_path_traversable == 1) {
-				continue;
+
+			// end to start
+			if (is_path_traversable == 0) {
+				if (i == sequence_first_point+1){
+					path_push_back(&smoothed_path,path_get(path,i));
+					sequence_first_point = i;
+				}
+				else {
+					continue;
+				}
 			}
 			else {
-				path_push_back(path,path_get(&path_old, i-1));
-				sequence_first_point = i-1;
+				path_push_back(&smoothed_path,path_get(path, i));
+				sequence_first_point = i;
 			}
-		last_checked_point = i;
-		}
 
+			// start to end
+			// if (is_path_traversable == 1) {
+			// 	continue;
+			// }
+			// else {
+			// 	path_push_back(&smoothed_path,path_get(path, i));
+			// 	sequence_first_point = i-1;
+			// }
+		}
 	}
-	path_push_back(path,*path_end(&path_old));
-	return EXIT_SUCCESS;
+	//path_push_back(&smoothed_path,path_get(path,last_checked_point));
+	//path_push_back(&smoothed_path,*path_end(path));
+	//path_push_back(&smoothed_path,*path_end(path));
+	return smoothed_path;
 }
+
 

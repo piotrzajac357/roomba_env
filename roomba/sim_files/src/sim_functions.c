@@ -20,8 +20,8 @@ double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
-double max_speed = 2.5;
-double max_rotating_speed = 0.2;
+double max_speed = 5;
+double max_rotating_speed = 0.1;
 int trashes[30];
 
 double position_x;
@@ -60,8 +60,8 @@ int initialize_position(void) {
 	/* STC position */
 	// position_x = 12.875;
 	// position_y = 17.125;
-	position_x = 5.0;
-	position_y = 14.0;
+	position_x = 1.5;
+	position_y = 11.75;
 
 	previous_orientation = 90.0;
 	sem_post(&position_orientationSemaphore);
@@ -338,11 +338,15 @@ int calculate_sensors(void) {
 	double temp_right_sensor = 1.0;
 
 	// check for obstacles every 5cm
-	for (double i = 0.0; i < 10.0; i = i + 0.02) {
+	for (double i = 0.0; i < 10.0; i = i + 0.005) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
-			int f_x_pix = round(10 * (front_x + i * cos(front_orientation)));
+			int f_x_pix =  round(10 * (front_x + i * cos(front_orientation)));
+
+			//int for_testing = (int)round(10 * (front_x + i * cos(front_orientation)));
+			//if (f_x_pix != for_testing ){printf("bingo karwasz jego twarz\n");};
+
 			int f_y_pix = round(10 * (front_y + i * sin(front_orientation)));
 			// if that pixel is obstacle - set sensor indication
 			if (plan[f_y_pix][f_x_pix] == '0') {

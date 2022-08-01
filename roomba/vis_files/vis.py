@@ -74,7 +74,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/plan/plan8.png')
+background = mpimg.imread('../../roomba/plan/plan7.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
@@ -149,7 +149,7 @@ while(True):
             """
 
     # Convert variable strings to actual values
-    robot_pos_x = 400 - round(20*float(pos_y))
+    robot_pos_x = 400 - round(20*float(pos_y))+1
     robot_pos_y = round(20*float(pos_x))
     orientation = float(orientation)
     # trashes_x = 400 - round(2*float(new_trashes_x))
