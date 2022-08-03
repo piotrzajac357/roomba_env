@@ -443,7 +443,9 @@ int calculate_movement_type(void) {
 							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 2 ||
 					   (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
 								   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 3 &&
-							   	   front_sensor < 0.01)){
+							   	   front_sensor <= 0.0025) ||
+								   left_sensor <= 0.0005    ||
+								   right_sensor <= 0.0005){
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
 						sem_post(&spool_calc_next_step_ba);	
@@ -456,22 +458,36 @@ int calculate_movement_type(void) {
 					// printf("%f\n",sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
 					// 			       pow(target_position_y_ba - tmp_pos_y,2)));
 					dist = sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
-							    pow(target_position_y_ba - tmp_pos_y,2));
-					if (dist >= 0.01  && prev_dist >= dist) {
-						prev_dist = dist;
-						movement_type = 1;
-					}
-					else {
-						prev_dist = 10000;
-						movement_type = 0;
-						spool_next_step_ba_calculated = 0;
-						sem_post(&spool_calc_next_step_ba);
+								pow(target_position_y_ba - tmp_pos_y,2));
+					if (movement_mode == 0){
+						if (dist >= 0.005 && prev_dist >= dist) {
+							prev_dist = dist;
+							movement_type = 1;
+						}
+						else {
+							prev_dist = 10000;
+							movement_type = 0;
+							spool_next_step_ba_calculated = 0;
+							sem_post(&spool_calc_next_step_ba);
+						}
+					} else {
+						if (dist >= 0.005 && prev_dist >= dist && front_sensor > 0.0025) {
+							prev_dist = dist;
+							movement_type = 1;
+						} else {
+							prev_dist = 10000;
+							movement_type = 0;
+							spool_next_step_ba_calculated = 0;
+							sem_post(&spool_calc_next_step_ba);
+						}
 					}
 					break;
+
 
 				default:
 				movement_type = 0;
 				break;
+					
 			}
 		} 
 	}
@@ -1442,10 +1458,10 @@ path_t smooth_path(path_t* path) {
 				int x_pix = (int)round(4 * (first_x + j * cos(angle * ST_TO_RAD)));
 				int y_pix = (int)round(4 * (first_y + j * sin(angle * ST_TO_RAD)));
 
-				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.175)));
-				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.175)));
-				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.175)));
-				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.175)));
+				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.1)));
+				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.1)));
+				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.1)));
+				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.1)));
 
 				int pix_value 		= ba_disc_map[x_pix][y_pix];
 				int pix_value_left  = ba_disc_map[x_pix_left][y_pix];
