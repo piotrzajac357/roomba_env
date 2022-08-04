@@ -1,0 +1,90 @@
+pos_x: 11.100000 pos_y: 11.848000 orientation: 270.000000
+up: 2 down: 0 left: 3 right: 0, target: 270.000000
+ moving to next area
+
+
+pos_x: 17.028000 pos_y: 1.529000 orientation: 270.000000
+up: 2 down: 3 left: 2 right: 3, target: 270.000000
+ moving to next area
+
+
+pos_x: 14.179000 pos_y: 3.896000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 13.760000 pos_y: 3.400000 orientation: 89.640000
+up: 3 down: 2 left: 3 right: 3, target: 90.000000
+ moving to next area
+
+
+pos_x: 11.749000 pos_y: 4.950000 orientation: 270.000000
+up: 2 down: 3 left: 2 right: 3, target: 270.000000
+ moving to next area
+
+
+pos_x: 12.249000 pos_y: 5.750000 orientation: 270.000000
+up: 2 down: 3 left: 2 right: 3, target: 270.000000
+ moving to next area
+
+
+pos_x: 14.251000 pos_y: 4.350000 orientation: 270.000000
+up: 2 down: 2 left: 3 right: 2, target: 270.000000
+ moving to next area
+
+
+pos_x: 11.253000 pos_y: 9.099000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 10.749000 pos_y: 8.499000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 10.249000 pos_y: 7.999000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 9.749000 pos_y: 7.499000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 9.249000 pos_y: 7.049000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 8.749000 pos_y: 6.599000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 3.544000 pos_y: 13.397000 orientation: 90.000000
+up: 2 down: 2 left: 2 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 1.486000 pos_y: 18.579000 orientation: 90.000000
+up: 3 down: 2 left: 3 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 9.535000 pos_y: 18.552000 orientation: 90.000000
+up: 3 down: 2 left: 2 right: 2, target: 90.000000
+ moving to next area
+
+
+pos_x: 17.286000 pos_y: 1.595000 orientation: 270.000000
+up: 2 down: 3 left: 2 right: 3, target: 270.000000
+ moving to next area
+
+
+pos_x: 18.471000 pos_y: 15.595000 orientation: 90.000000
+up: 3 down: 2 left: 2 right: 3, target: 90.000000
+ moving to next area
+
+

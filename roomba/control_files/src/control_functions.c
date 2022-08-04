@@ -411,7 +411,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.3) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.2) {
 						movement_type = 2;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 						}
@@ -425,7 +425,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.3) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.2) {
 						movement_type = 3;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 					}
@@ -443,9 +443,9 @@ int calculate_movement_type(void) {
 							   	   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 2 ||
 					   (ba_disc_map[(int)round(4*(tmp_pos_x+0.25*(cos(ST_TO_RAD*tmp_orientation))))]
 								   [(int)round(4*(tmp_pos_y+0.25*(sin(ST_TO_RAD*tmp_orientation))))] == 3 &&
-							   	   front_sensor <= 0.0025) ||
-								   left_sensor <= 0.0005    ||
-								   right_sensor <= 0.0005){
+							   	   front_sensor <= 0.005)){//} ||
+								   //left_sensor <= 0.0005    ||
+								   //right_sensor <= 0.0005){
 						movement_type = 0;
 						spool_next_step_ba_calculated = 0;
 						sem_post(&spool_calc_next_step_ba);	
@@ -1470,8 +1470,12 @@ path_t smooth_path(path_t* path) {
 				int pix_value_down  = ba_disc_map[x_pix][y_pix_down];
 
 
-				if (pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
-									  pix_value_up == 2	  && pix_value_down == 2){
+				if ((pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
+									  pix_value_up == 2	  && pix_value_down == 2) ||
+									  x_pix_left == path_begin(path)->col ||
+									  x_pix_right == path_begin(path)->col ||
+									  y_pix_up == path_begin(path)->row ||
+									  y_pix_down == path_begin(path)->row){
 					continue; }
 				else {
 					is_path_traversable = 0;

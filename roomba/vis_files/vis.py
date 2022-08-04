@@ -39,7 +39,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
 
     i[0] = i[0] + 1
     # Display changes every 8th received packet
-    if i[0] == 8:
+    if i[0] == 16:
 
         img[:,:,:] = background[:,:,:]
         i[0] = 0
