@@ -1,5 +1,6 @@
 #ifndef SIM_FUNCTIONS_H_
 #define SIM_FUNCTIONS_H_
+#include "semaphore.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846     // PI
@@ -22,14 +23,10 @@ sem_t controlSemaphore;                 // Semaphore
 double battery_level;                   // Battery state (0-100%)
 sem_t batterySemaphore;                 // Semaphore
 
-double container_level;                 // Container state (0-100%)
-sem_t containerSemaphore;               // Semaphore
-
 double front_sensor;                    // front distance sensor
 double back_sensor;                     // back distance sensor
 double left_sensor;                     // left distance sensor
 double right_sensor;                    // right distance sensor
-int trash_sensor;                       // trash (below) sensor
 sem_t dist_sensorsSemaphore;            // Semaphore
 
 char plan[200][200];                    // 200x200 char array representing house 
@@ -60,14 +57,11 @@ int algorithm_finished;
 
 sem_t qiSemaphore;                      // Semaphore
 
-
 int initialize_semaphores(void);
 
 int initialize_position(void);
 
 int initialize_battery(void);
-
-int initialize_container(void);
 
 int initialize_dist_sensors(void);
 
@@ -78,8 +72,6 @@ int initialize_quality_indexes(void);
 int calculate_position(void);
 
 int calculate_battery(void);
-
-int calculate_container(void);
 
 int calculate_sensors(void);
 

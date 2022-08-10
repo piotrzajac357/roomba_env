@@ -6,12 +6,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/ba_algorithm.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control.c.o"
-  "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_battery_container.c.o"
+  "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_update.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o"
-  "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/rg_algorithm.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"

@@ -9,10 +9,7 @@ struct s2c_shm {
     double back_sensor;         // back distance sensor
     double left_sensor;         // left distance sensor
     double right_sensor;        // right distance sensor
-    int trash_sensor;           // trash (below) sensor
     double battery_level;       // battery state [%]
-    double container_level;     // container state [%]
-    int new_trashes_coords[2];  // new trashes coords center (to reconstruct in control)
     double position_x;          // robot position cartesian (0-20m)
     double position_y;          // robot position cartesian (0-20m)
     double orientation;         // robot orientation (0-360deg)

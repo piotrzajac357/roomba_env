@@ -9,8 +9,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "quality_indexes.h"
-#include "sim_functions.h"
+#include "../include/quality_indexes.h"
+#include "../include/sim_functions.h"
 
 int thread_counter1 = 0;
 

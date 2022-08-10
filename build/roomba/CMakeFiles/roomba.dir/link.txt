@@ -1,1 +1,1 @@
-/usr/bin/clang -g   CMakeFiles/roomba.dir/roomba.c.o  -o roomba -lpthread -lrt -lm 
+/usr/bin/clang -g   CMakeFiles/roomba.dir/roomba.c.o  -o roomba -pthread -lrt -lm 

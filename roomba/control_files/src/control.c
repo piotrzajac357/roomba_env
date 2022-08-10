@@ -15,9 +15,8 @@
 #include "../include/control_from_sim.h"
 #include "../include/control_update.h"
 #include "../include/rg_algorithm.h"
-#include "../include/load_plan.h"
 #include "../include/task_to_movement.h"
-#include "../include/control_battery_container.h"
+#include "../include/control_battery.h"
 #include "../include/stc_algorithm.h"
 #include "../include/ba_algorithm.h"
 
@@ -96,7 +95,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    if ((status = init_battery_container_inspect())) {
+    if ((status = init_battery_inspect())) {
         fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
         return 0;
     }

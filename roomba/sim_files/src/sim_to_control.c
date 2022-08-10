@@ -70,9 +70,6 @@ void * tS2CThreadFunc(void *cookie) {
     double tmp_battery_level = battery_level;
 	sem_post(&batterySemaphore);
 
-	sem_wait(&containerSemaphore);
-    double tmp_container_level = container_level;
-	sem_post(&containerSemaphore);
 
 	sem_wait(&position_orientationSemaphore);
     double tmp_position_x = position_x;
@@ -83,7 +80,6 @@ void * tS2CThreadFunc(void *cookie) {
     /* write to IPC shared memory from tmp variables */
     sem_wait(mutex_sem_s2c);
     s2c_shm_ptr->battery_level = tmp_battery_level;
-	s2c_shm_ptr->container_level = tmp_container_level;
 	s2c_shm_ptr->front_sensor = tmp_front_sensor;
 	s2c_shm_ptr->back_sensor = tmp_back_sensor;
 	s2c_shm_ptr->left_sensor = tmp_left_sensor;

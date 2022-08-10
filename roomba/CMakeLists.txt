@@ -1,6 +1,6 @@
 add_executable(roomba roomba.c)
 
-target_link_libraries(roomba pthread rt m)
+target_link_libraries(roomba -pthread rt m)
 
 include_directories(sim sim_files/include)
 
@@ -8,7 +8,6 @@ add_executable(sim  sim_files/src/sim.c
                     sim_files/src/load_plan.c
                     sim_files/src/position_update.c 
                     sim_files/src/battery_update.c
-                    sim_files/src/container_update.c
                     sim_files/src/dist_sensors_update.c
                     sim_files/src/quality_indexes.c
                     sim_files/src/sim_functions.c
@@ -22,7 +21,7 @@ target_link_libraries(sim pthread rt m)
 include_directories(control control_files/include)
 
 add_executable(control  control_files/src/control
-                        control_files/src/control_battery_container.c
+                        control_files/src/control_battery.c
                         control_files/src/control_from_sim.c
                         control_files/src/control_functions.c
                         control_files/src/control_to_sim.c
@@ -30,8 +29,7 @@ add_executable(control  control_files/src/control
                         control_files/src/rg_algorithm.c
                         control_files/src/task_to_movement.c
                         control_files/src/stc_algorithm.c
-                        control_files/src/ba_algorithm.c
-                        control_files/src/load_plan.c)
+                        control_files/src/ba_algorithm.c)
 
 
 

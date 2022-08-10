@@ -13,8 +13,8 @@
 #include <time.h>
 #include <pthread.h>
 
-#include "sim_to_vis.h"
-#include "sim_functions.h"
+#include "../include/sim_to_vis.h"
+#include "../include/sim_functions.h"
 
 /* UDP communication with visualisation process */
 
@@ -92,10 +92,6 @@ void * tS2VThreadFunc(void *cookie) {
     double tmp_battery = battery_level;
     sem_post(&batterySemaphore);
 
-    sem_wait(&containerSemaphore);
-    double tmp_container = container_level;
-    sem_post(&containerSemaphore);
-  
     sem_wait(&controlSemaphore);
     double tmp_suction_power = suction_power;
     sem_post(&controlSemaphore);

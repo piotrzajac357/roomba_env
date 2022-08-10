@@ -28,8 +28,6 @@ coordinate.h
 unistd.h
 -
 
-../roomba/control_files/include/control_battery_container.h
-
 ../roomba/control_files/include/control_functions.h
 inttypes.h
 ../roomba/control_files/include/inttypes.h
@@ -41,12 +39,12 @@ astar/grid.uint8_t.h
 ../roomba/control_files/include/astar/grid.uint8_t.h
 astar/path.h
 ../roomba/control_files/include/astar/path.h
+semaphore.h
+../roomba/control_files/include/semaphore.h
 
 ../roomba/control_files/include/control_update.h
 
 ../roomba/control_files/include/task_to_movement.h
-
-../roomba/sim_files/include/load_plan.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/array.coordinate_t.h=path.h
 path.h
@@ -80,11 +78,13 @@ coordinate.h
 unistd.h
 -
 
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path_main.h
+
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
 
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery_container.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_from_sim.h
 
@@ -99,14 +99,12 @@ astar/grid.uint8_t.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
 astar/path.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
+semaphore.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/semaphore.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_to_sim.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_update.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/path_main.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/rg_algorithm.h
 
@@ -173,18 +171,16 @@ sys/mman.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_update.h
 ../include/rg_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/rg_algorithm.h
-../include/load_plan.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
 ../include/task_to_movement.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/task_to_movement.h
-../include/control_battery_container.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery_container.h
+../include/control_battery.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
 ../include/stc_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 ../include/ba_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c
 stdio.h
 -
 stdlib.h
@@ -205,10 +201,10 @@ fcntl.h
 -
 sys/types.h
 -
-control_battery_container.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.h
-control_functions.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.h
+../include/control_battery.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
+../include/control_functions.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c
 stdlib.h
@@ -273,16 +269,16 @@ fcntl.h
 -
 string.h
 -
+bits/pthreadtypes.h
+-
 ../include/astar/astar.uint8_t.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/astar.uint8_t.h
 ../include/astar/grid.uint8_t.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
-../include/path_main.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/path_main.h
+../include/astar/path_main.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path_main.h
 ../include/control_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
-../include/load_plan.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c
 stdlib.h
@@ -344,14 +340,6 @@ control_update.h
 control_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.h
 
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c
-stdio.h
--
-stdlib.h
--
-load_plan.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.h
-
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/rg_algorithm.c
 stdlib.h
 -
@@ -387,8 +375,6 @@ math.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 ../include/control.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
-../include/load_plan.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.c
 stdio.h

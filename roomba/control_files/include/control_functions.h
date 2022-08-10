@@ -5,6 +5,7 @@
 #include "astar/coordinate.h"
 #include "astar/grid.uint8_t.h"
 #include "astar/path.h"
+#include "semaphore.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846     // PI
@@ -32,10 +33,6 @@ sem_t controlSemaphore;                 // Semaphore
 double battery_level;                   // Battery state (0-100%)
 sem_t batterySemaphore;                 // Semaphore
 
-double container_level;                 // Container state (0-100%)
-int container_full;                     // Flag, 1 - container full, 0 container not full
-sem_t containerSemaphore;               // Semaphore
-
 double front_sensor;                    // front distance sensor
 double back_sensor;                     // back distance sensor
 double left_sensor;                     // left distance sensor
@@ -44,10 +41,6 @@ sem_t dist_sensorsSemaphore;            // Semaphore
 
 char plan[200][200];                    // 200x200 char array representing house 
 sem_t planSemaphore;                    // Semaphore
-
-int trash_sensor;                       // trash (below) sensor
-sem_t trashSemaphore;                   // Semaphore
-
 
 /* RANDOM algorithm variables */
 
@@ -75,7 +68,7 @@ sem_t movement_typeSemaphore;           // Semaphore
 double target_direction;                // target direction to rotate to
 sem_t target_directionSemaphore;        // Semaphore
 
-sem_t spool_set_new_task;               // notification that new task has to be selected
+sem_t spool_calc_next_step_rg;          // notification that new task has to be selected
 int spool_next_step_rg_calculated;      // flag that next step has been calclated
 
 
@@ -183,7 +176,7 @@ int vertical_horizontal;
 
 int initialize_semaphores(void);
 
-int init_battery_container(void);
+int init_battery(void);
 
 int init_control(void);
 
@@ -199,7 +192,7 @@ int select_new_direction(void);
 
 int calculate_movement_type(void);
 
-int inspect_battery_and_container(void);
+int inspect_battery(void);
 
 int update_plan(int previous_x_pixel, int previous_y_pixel, int current_x_pix, int current_y_pix);
 

@@ -16,7 +16,6 @@
 #include "../include/rg_algorithm.h"
 #include "../include/control_functions.h"
 #include "../include/control.h"
-#include "../include/load_plan.h"
 
 /* initialize selecting new direction thread */
 int init_rg_algorithm() {
@@ -50,7 +49,6 @@ int init_rg_algorithm() {
     // read plan from file, direction grades are based on plan
     
     sleep(3);
-    init_plan();
 
     status = init_rg();
 
@@ -83,7 +81,7 @@ void *tRgThreadFunc(void *cookie) {
 
     for(;;) {
         /* wait for spool ("new task must be set" signal) */
-        sem_wait(&spool_set_new_task);
+        sem_wait(&spool_calc_next_step_rg);
         
         // stop the robot while new task is calculated
         current_task = 0;

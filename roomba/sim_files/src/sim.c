@@ -14,7 +14,6 @@
 #include "../include/sim.h"
 #include "../include/position_update.h"
 #include "../include/battery_update.h"
-#include "../include/container_update.h"
 #include "../include/dist_sensors_update.h"
 #include "../include/sim_functions.h"
 #include "../include/sim_to_control.h"
@@ -88,11 +87,6 @@ int main(int argc, char *argv[]) {
   	    fprintf(stderr, "Error initializing position update thread : %d\n", status);
         return 0;
     }
-
-    if ((status = init_container_update())) {
-  	    fprintf(stderr, "Error initializing container update thread : %d\n", status);
-        return 0;
-    }  
 
     if ((status = init_dist_sensors_update())) {
         fprintf(stderr, "Error initializing distance sensors update thread : %d\n", status);

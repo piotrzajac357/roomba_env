@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/control.dir/control_files/src/control.c.o"
-  "CMakeFiles/control.dir/control_files/src/control_battery_container.c.o"
+  "CMakeFiles/control.dir/control_files/src/control_battery.c.o"
   "CMakeFiles/control.dir/control_files/src/control_from_sim.c.o"
   "CMakeFiles/control.dir/control_files/src/control_functions.c.o"
   "CMakeFiles/control.dir/control_files/src/control_to_sim.c.o"
@@ -9,7 +9,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"
   "CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
   "CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o"
-  "CMakeFiles/control.dir/control_files/src/load_plan.c.o"
   "control.pdb"
   "control"
 )

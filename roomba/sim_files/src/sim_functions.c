@@ -30,7 +30,6 @@ double left_motor_power;
 double right_motor_power;
 double suction_power;
 double battery_level;
-double container_level;
 double front_sensor;
 double back_sensor;
 double left_sensor;
@@ -39,7 +38,6 @@ double right_sensor;
 int initialize_semaphores(void) {
 	// initialization of semaphores
 	if(	sem_init(&batterySemaphore, 0, 1) 				||
-		sem_init(&containerSemaphore, 0, 1) 			||
 		sem_init(&position_orientationSemaphore, 0, 1)	||	
 		sem_init(&dist_sensorsSemaphore, 0, 1) 			||
 		sem_init(&controlSemaphore, 0, 1)				||
@@ -70,14 +68,6 @@ int initialize_battery(void) {
 	battery_level = 100.0;
 	sem_post(&batterySemaphore);
     return EXIT_SUCCESS;
-}
-
-/* set container state */
-int initialize_container(void) {
-	sem_wait(&containerSemaphore);
-	container_level = 0.0;
-	sem_post(&containerSemaphore);
-	return EXIT_SUCCESS;
 }
 
 /* set first distance sensors values */
@@ -245,24 +235,6 @@ int calculate_battery(void) {
     return 0;
 }
 
-/* function calculating container state */
-int calculate_container(void) {
-
-	/* container filling speed depends on suction power */
-
-	// read input values
-	sem_wait(&controlSemaphore);
-	double suction_power_tmp = suction_power;
-	sem_post(&controlSemaphore);
-
-	// calculate and write to output
-	sem_wait(&containerSemaphore);
-	container_level = container_level + suction_power_tmp * (0.6);
-	if (container_level > 100.0) { container_level = 100.0; }
-	sem_post(&containerSemaphore);
-
-	return 0;
-}
 
 /* function calculating distance sensors indications */
 int calculate_sensors(void) {

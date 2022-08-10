@@ -14,23 +14,22 @@ roomba/CMakeFiles/control.dir/control_files/src/control.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery_container.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_from_sim.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_to_sim.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_update.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/rg_algorithm.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/task_to_movement.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control.c
-roomba/CMakeFiles/control.dir/control_files/src/control_battery_container.c.o
- ../roomba/control_files/include/astar/coordinate.h
- ../roomba/control_files/include/astar/grid.uint8_t.h
- ../roomba/control_files/include/astar/path.h
- ../roomba/control_files/include/control_battery_container.h
- ../roomba/control_files/include/control_functions.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery_container.c
+roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
@@ -45,9 +44,8 @@ roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path_main.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/path_main.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.c
 roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
@@ -64,16 +62,12 @@ roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o
  ../roomba/control_files/include/control_functions.h
  ../roomba/control_files/include/control_update.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_update.c
-roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o
- ../roomba/sim_files/include/load_plan.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/load_plan.c
 roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
- /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/load_plan.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/rg_algorithm.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/rg_algorithm.c
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o

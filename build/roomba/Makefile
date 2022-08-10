@@ -224,32 +224,32 @@ control_files/src/control.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control.c.s
 .PHONY : control_files/src/control.c.s
 
-control_files/src/control_battery_container.o: control_files/src/control_battery_container.c.o
+control_files/src/control_battery.o: control_files/src/control_battery.c.o
 
-.PHONY : control_files/src/control_battery_container.o
+.PHONY : control_files/src/control_battery.o
 
 # target to build an object file
-control_files/src/control_battery_container.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery_container.c.o
-.PHONY : control_files/src/control_battery_container.c.o
+control_files/src/control_battery.c.o:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o
+.PHONY : control_files/src/control_battery.c.o
 
-control_files/src/control_battery_container.i: control_files/src/control_battery_container.c.i
+control_files/src/control_battery.i: control_files/src/control_battery.c.i
 
-.PHONY : control_files/src/control_battery_container.i
+.PHONY : control_files/src/control_battery.i
 
 # target to preprocess a source file
-control_files/src/control_battery_container.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery_container.c.i
-.PHONY : control_files/src/control_battery_container.c.i
+control_files/src/control_battery.c.i:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.i
+.PHONY : control_files/src/control_battery.c.i
 
-control_files/src/control_battery_container.s: control_files/src/control_battery_container.c.s
+control_files/src/control_battery.s: control_files/src/control_battery.c.s
 
-.PHONY : control_files/src/control_battery_container.s
+.PHONY : control_files/src/control_battery.s
 
 # target to generate assembly for a file
-control_files/src/control_battery_container.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery_container.c.s
-.PHONY : control_files/src/control_battery_container.c.s
+control_files/src/control_battery.c.s:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.s
+.PHONY : control_files/src/control_battery.c.s
 
 control_files/src/control_from_sim.o: control_files/src/control_from_sim.c.o
 
@@ -358,33 +358,6 @@ control_files/src/control_update.s: control_files/src/control_update.c.s
 control_files/src/control_update.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_update.c.s
 .PHONY : control_files/src/control_update.c.s
-
-control_files/src/load_plan.o: control_files/src/load_plan.c.o
-
-.PHONY : control_files/src/load_plan.o
-
-# target to build an object file
-control_files/src/load_plan.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.o
-.PHONY : control_files/src/load_plan.c.o
-
-control_files/src/load_plan.i: control_files/src/load_plan.c.i
-
-.PHONY : control_files/src/load_plan.i
-
-# target to preprocess a source file
-control_files/src/load_plan.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.i
-.PHONY : control_files/src/load_plan.c.i
-
-control_files/src/load_plan.s: control_files/src/load_plan.c.s
-
-.PHONY : control_files/src/load_plan.s
-
-# target to generate assembly for a file
-control_files/src/load_plan.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.s
-.PHONY : control_files/src/load_plan.c.s
 
 control_files/src/rg_algorithm.o: control_files/src/rg_algorithm.c.o
 
@@ -520,33 +493,6 @@ sim_files/src/battery_update.s: sim_files/src/battery_update.c.s
 sim_files/src/battery_update.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/battery_update.c.s
 .PHONY : sim_files/src/battery_update.c.s
-
-sim_files/src/container_update.o: sim_files/src/container_update.c.o
-
-.PHONY : sim_files/src/container_update.o
-
-# target to build an object file
-sim_files/src/container_update.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/container_update.c.o
-.PHONY : sim_files/src/container_update.c.o
-
-sim_files/src/container_update.i: sim_files/src/container_update.c.i
-
-.PHONY : sim_files/src/container_update.i
-
-# target to preprocess a source file
-sim_files/src/container_update.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/container_update.c.i
-.PHONY : sim_files/src/container_update.c.i
-
-sim_files/src/container_update.s: sim_files/src/container_update.c.s
-
-.PHONY : sim_files/src/container_update.s
-
-# target to generate assembly for a file
-sim_files/src/container_update.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/container_update.c.s
-.PHONY : sim_files/src/container_update.c.s
 
 sim_files/src/dist_sensors_update.o: sim_files/src/dist_sensors_update.c.o
 
@@ -863,9 +809,9 @@ help:
 	@echo "... control_files/src/control.o"
 	@echo "... control_files/src/control.i"
 	@echo "... control_files/src/control.s"
-	@echo "... control_files/src/control_battery_container.o"
-	@echo "... control_files/src/control_battery_container.i"
-	@echo "... control_files/src/control_battery_container.s"
+	@echo "... control_files/src/control_battery.o"
+	@echo "... control_files/src/control_battery.i"
+	@echo "... control_files/src/control_battery.s"
 	@echo "... control_files/src/control_from_sim.o"
 	@echo "... control_files/src/control_from_sim.i"
 	@echo "... control_files/src/control_from_sim.s"
@@ -878,9 +824,6 @@ help:
 	@echo "... control_files/src/control_update.o"
 	@echo "... control_files/src/control_update.i"
 	@echo "... control_files/src/control_update.s"
-	@echo "... control_files/src/load_plan.o"
-	@echo "... control_files/src/load_plan.i"
-	@echo "... control_files/src/load_plan.s"
 	@echo "... control_files/src/rg_algorithm.o"
 	@echo "... control_files/src/rg_algorithm.i"
 	@echo "... control_files/src/rg_algorithm.s"
@@ -896,9 +839,6 @@ help:
 	@echo "... sim_files/src/battery_update.o"
 	@echo "... sim_files/src/battery_update.i"
 	@echo "... sim_files/src/battery_update.s"
-	@echo "... sim_files/src/container_update.o"
-	@echo "... sim_files/src/container_update.i"
-	@echo "... sim_files/src/container_update.s"
 	@echo "... sim_files/src/dist_sensors_update.o"
 	@echo "... sim_files/src/dist_sensors_update.i"
 	@echo "... sim_files/src/dist_sensors_update.s"
