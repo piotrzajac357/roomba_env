@@ -35,11 +35,6 @@ sem_t dist_sensorsSemaphore;            // Semaphore
 char plan[200][200];                    // 200x200 char array representing house 
 sem_t planSemaphore;                    // Semaphores
 
-int trashes[30];                        // Array with 15 trashes centers coords
-int new_trashes[2];                     // Coords of trashes currently being sent
-sem_t trashSemaphore;                   // Semaphore
-
-
 // Read only variables (after being once set)
 double sim_step_position;               // Simulation step for calculating position (0-1sec)
 int sim_step_battery;                   // Simulation step for calculating battery state (sec)
@@ -76,8 +71,6 @@ int initialize_container(void);
 
 int initialize_dist_sensors(void);
 
-int initialize_trash(void);
-
 int initialize_control_values(void);
 
 int initialize_quality_indexes(void);
@@ -91,7 +84,5 @@ int calculate_container(void);
 int calculate_sensors(void);
 
 int calculate_qis(double);
-
-int generate_trashes(int *thread_counter_ptr);
 
 #endif  /* SIM_FUNCTIONS_H_ */

@@ -96,12 +96,6 @@ void * tS2VThreadFunc(void *cookie) {
     double tmp_container = container_level;
     sem_post(&containerSemaphore);
   
-    int trashes[2];
-    sem_wait(&trashSemaphore);
-    trashes[0] = new_trashes[0];
-    trashes[1] = new_trashes[1];
-    sem_post(&trashSemaphore);
-
     sem_wait(&controlSemaphore);
     double tmp_suction_power = suction_power;
     sem_post(&controlSemaphore);

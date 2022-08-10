@@ -14,9 +14,8 @@
 #include "../include/control_to_sim.h"
 #include "../include/control_from_sim.h"
 #include "../include/control_update.h"
-#include "../include/set_new_task.h"
+#include "../include/rg_algorithm.h"
 #include "../include/load_plan.h"
-#include "../include/sensors_inspect.h"
 #include "../include/task_to_movement.h"
 #include "../include/control_battery_container.h"
 #include "../include/stc_algorithm.h"
@@ -25,7 +24,7 @@
 int main(int argc, char *argv[]) {
 
     int status;
-    algorithm_select = 2;
+    algorithm_select = 0;
 
     //nice(-20);
 
@@ -92,28 +91,22 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    // for random bouncing
-    // if ((status = init_set_new_task())) {
-    //     fprintf(stderr, "Error initializing new task setting thread : %d\n", status);
-    //     return 0;
-    // }
-
-    // for random bouncing
-    // if ((status = init_sensors_inspect())) {
-    //     fprintf(stderr, "Error initializing sensors inspecting thread : %d\n", status);
-    //     return 0;
-    // }
-
     if ((status = init_task_to_movement())) {
         fprintf(stderr, "Error initializing task to movement converting thread : %d\n", status);
         return 0;
     }
 
-    // for random bouncing
-    // if ((status = init_battery_container_inspect())) {
-    //     fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
-    //     return 0;
-    // }
+    if ((status = init_battery_container_inspect())) {
+        fprintf(stderr, "Error initializing container and battery watching thread : %d\n", status);
+        return 0;
+    }
+
+    if (algorithm_select == 0){
+        if ((status = init_rg_algorithm())) {
+            fprintf(stderr, "Error initializing new task setting thread : %d\n", status);
+            return 0;
+        }
+    }
 
     if (algorithm_select == 1){
         if ((status = init_stc_algorithm())) {

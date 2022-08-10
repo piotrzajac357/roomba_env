@@ -16,7 +16,6 @@
 #include "../include/battery_update.h"
 #include "../include/container_update.h"
 #include "../include/dist_sensors_update.h"
-#include "../include/trash_generator.h"
 #include "../include/sim_functions.h"
 #include "../include/sim_to_control.h"
 #include "../include/sim_to_vis.h"
@@ -105,11 +104,6 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    /* do not generate trashes for now
-    if ((status = init_trash_generator())) {
-        fprintf(stderr, "Error initializing trash generator thread : %d\n", status);
-    }
-    */
    
     if ((status = init_sim_to_control())) {
         fprintf(stderr, "Error initializing sim_to_control data thread : %d\n", status);

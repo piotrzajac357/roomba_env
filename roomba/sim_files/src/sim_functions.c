@@ -22,7 +22,6 @@ int sim_step_container = 1;
 double sim_step_dist_sensors = 0.002;
 double max_speed = 5;
 double max_rotating_speed = 0.1;
-int trashes[30];
 
 double position_x;
 double position_y;
@@ -36,8 +35,6 @@ double front_sensor;
 double back_sensor;
 double left_sensor;
 double right_sensor;
-int trash_sensor;   
-int new_trashes[2];
 
 int initialize_semaphores(void) {
 	// initialization of semaphores
@@ -46,7 +43,6 @@ int initialize_semaphores(void) {
 		sem_init(&position_orientationSemaphore, 0, 1)	||	
 		sem_init(&dist_sensorsSemaphore, 0, 1) 			||
 		sem_init(&controlSemaphore, 0, 1)				||
-		sem_init(&trashSemaphore, 0, 1)					||
 		sem_init(&planSemaphore, 0, 1)					||
 		sem_init(&qiSemaphore, 0, 1)) {
 			return 1;
@@ -84,26 +80,6 @@ int initialize_container(void) {
 	return EXIT_SUCCESS;
 }
 
-/* read from file trash coords to trash generator */
-int initialize_trash(void) {
-	FILE *fptr;
-	fptr = fopen("../../roomba/plan/trashes.txt","r");
-    if(fptr == NULL) {
-        perror("Error in opening file");
-        return EXIT_FAILURE;;
-    }
-
-	sem_wait(&trashSemaphore);
-	for (int i = 0; i < 15; i++) {
-        fscanf(fptr, "%d ", &trashes[2*i]);
-		trashes[2*i] = 200 - trashes[2*i];
-		fscanf(fptr, "%d\n", &trashes[2*i+1]);
-    }
-	sem_post(&trashSemaphore);
-
-	return EXIT_SUCCESS;;
-}
-
 /* set first distance sensors values */
 int initialize_dist_sensors(void) {
 	// read house plan from file for calculating sensors
@@ -112,7 +88,6 @@ int initialize_dist_sensors(void) {
 	double back_sensor = 1.0;
 	double left_sensor = 1.0;
 	double right_sensor = 1.0;
-	int trash_sensor = 0; 
 	return 0;
 }
 
@@ -145,6 +120,11 @@ int initialize_quality_indexes(void) {
 		}
 	}
 	sem_post(&planSemaphore);
+
+	FILE *fptr2;
+    fptr2 = fopen("../../roomba/log/log_cov.txt","w");
+    fclose(fptr2);
+
 
 	// FILE* fptr9;
 	// char c;
@@ -268,19 +248,16 @@ int calculate_battery(void) {
 /* function calculating container state */
 int calculate_container(void) {
 
-	/* container filling speed depends on suction power and trash presence */
+	/* container filling speed depends on suction power */
 
 	// read input values
 	sem_wait(&controlSemaphore);
 	double suction_power_tmp = suction_power;
 	sem_post(&controlSemaphore);
-	sem_wait(&trashSemaphore);
-	int trash_sensor_tmp = trash_sensor;
-	sem_post(&trashSemaphore);
 
 	// calculate and write to output
 	sem_wait(&containerSemaphore);
-	container_level = container_level + suction_power_tmp * (0.6 + 0.6 * trash_sensor_tmp);
+	container_level = container_level + suction_power_tmp * (0.6);
 	if (container_level > 100.0) { container_level = 100.0; }
 	sem_post(&containerSemaphore);
 
@@ -296,8 +273,6 @@ int calculate_sensors(void) {
 	 	distance is normalized to 0-1 range, 0 for pixel, 1.0 for more than 100pixels (10m)
 	 	distance from sensor is calculated as sqrt(dx + dy)
 		starting cartesian position of sensors is modified to include robot diameter  	*/
-
-	/* function also determines whether there are trashes below robot by simply checking the closest pixel */
 
 	// read input values
 	sem_wait(&position_orientationSemaphore);
@@ -327,9 +302,6 @@ int calculate_sensors(void) {
 	int b_flag = 0;
 	int l_flag = 0;
 	int r_flag = 0;
-
-	// tmp trash sensor value
-	int tmp_trash_sensor = 0;
 
 	// initialize sensors indications to 1.0 (closest obstacle farther than 10m)
 	double temp_front_sensor = 1.0;
@@ -384,12 +356,6 @@ int calculate_sensors(void) {
 		}
 	}
 
-	// check the closest pixel's value in background matrix 
-	// '3' means trashes
-	sem_wait(&planSemaphore);
-	if (plan[(int)round(10*(y_coord))][(int)round(10*(x_coord))] == '3') { tmp_trash_sensor = 1; }
-	else { tmp_trash_sensor = 0; }
-	sem_post(&planSemaphore);
 
 	// write values to output
 	sem_wait(&dist_sensorsSemaphore);
@@ -398,39 +364,8 @@ int calculate_sensors(void) {
 	left_sensor = temp_left_sensor;
 	right_sensor = temp_right_sensor;
 	sem_post(&dist_sensorsSemaphore);
-	sem_wait(&trashSemaphore);
-	trash_sensor = tmp_trash_sensor;
-	sem_post(&trashSemaphore);
 
 	return 0;
-}
-
-/* trashes generator function */
-int generate_trashes(int *thread_counter_ptr) {
-
-	/*	function fills 9x9 pixel area (0.9m x 0.9m) in background matrix with trashes ('3' values)
-		center points are predefined and read from file */
-
-	// there are 15 different places for trashes
-	if (*thread_counter_ptr == 15) { *thread_counter_ptr = 0;}
-	int thread_counter = *thread_counter_ptr;
-	 	
-	// change 9x9 area in background to '3'
-    sem_wait(&planSemaphore);
-    for (int i = -4; i <= 4; i++) {
-        for (int j = -4; j <= 4; j++){
-            plan[(trashes[thread_counter*2])+i][(trashes[thread_counter*2+1])+j] = '3';
-        }
-    }
-    sem_post(&planSemaphore);
-
-	// change latest generated trashes coords so control and vis process can reconstruct them
-    sem_wait(&trashSemaphore);
-    new_trashes[0] = trashes[thread_counter*2];
-    new_trashes[1] = trashes[thread_counter*2+1]; 
-    sem_post(&trashSemaphore);
-
-	return EXIT_SUCCESS;
 }
 
 /* function calculating time_QI */

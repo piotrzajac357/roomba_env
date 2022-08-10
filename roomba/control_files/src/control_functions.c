@@ -59,8 +59,9 @@ int init_control(void) {
 }
 
 /* function setting starting task to 1 (drive forward) */
-int init_new_task(void) {
+int init_rg(void) {
 	current_task = 1;
+	spool_next_step_rg_calculated = 1;
 	return EXIT_SUCCESS;
 }
 
@@ -75,13 +76,13 @@ int init_movement_type(void) {
 /* function calculating control based on movement type, trash sensor, container full flag and battery level */
 int calculate_control(void){
 
-/*	function calculates motor power and suction power based on current movement type
+	/*	function calculates motor power and suction power based on current movement type
 	0 - stop, no driving, we calculating or sth
 	1 - drive forward
 	2 - rotating clockwise
 	3 - rotating counterclockwise
 	4 - drive backward
-*/
+	*/
 	// read input values
 	sem_wait(&trashSemaphore);
 	int trash_sensor_tmp = trash_sensor;
@@ -160,6 +161,105 @@ int calculate_control(void){
 }
 
 /* function choosing the best new direction from random candidates  */
+//
+// int select_new_direction_(void) {
+// 		// select new direction to drive
+// 		// candidates are random, prefer directions with less visited points
+// 		// read input values
+// 		sem_wait(&position_orientationSemaphore);
+// 		double tmp_orientation = orientation;
+// 		double tmp_x = position_x;
+// 		double tmp_y = position_y;
+// 		sem_post(&position_orientationSemaphore);
+//
+// 		/* a few candidates without randomizing */
+// 		/* double candidate_directions[6] = {(tmp_orientation+90.0)*ST_TO_RAD, (tmp_orientation-90.0)*ST_TO_RAD,
+// 											(tmp_orientation+135.0)*ST_TO_RAD, (tmp_orientation-135.0)*ST_TO_RAD,
+// 											(tmp_orientation+45.0)*ST_TO_RAD, (tmp_orientation-45.0)*ST_TO_RAD}; */
+//		
+// 		/* random candidates */
+// 		double candidate_directions[18] = 	{(rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD,
+// 											 (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD,
+// 											 (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD,
+// 											 (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD,
+// 											 (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD,
+// 											 (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD, (rand()%359)*ST_TO_RAD};
+//		
+// 		// candidate grades to determine better ones
+// 		double candidate_grades[18] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+// 		// double candidate_grades[9] = {0,0,0,0,0,0,0,0,0};
+// 		int best_candidate_index = 0;
+// 		sem_wait(&planSemaphore);
+//
+// 		// calculate grade for each candidate
+// 		for (int i = 0; i < 18; i++) {
+// 			// flag to skip loop
+// 			int flag = 0;
+// 			// check the closest pixel for every candidate every 10cm in given direction
+// 			// 10cm is most natural since 1 pixel represents 10x10cm square
+//
+// 			for (double j = 0.0; j < 20.0; j = j + 0.1){
+// 				if(!flag){
+// 					// determining the closest pixel
+// 					int x_pix = round(10 * (tmp_x + j * cos(candidate_directions[i])));
+// 					int y_pix = round(10 * (tmp_y + j * sin(candidate_directions[i])));
+//
+// 					// get that pixels value
+// 					char c = plan[y_pix-1][x_pix-1];
+// 					if (c == '0') { flag = 1; }														// 0 - obstacle
+// 					else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }			// 1 - floor (not visited)
+// 					else if (c == '2') { candidate_grades[i] = candidate_grades[i] -0.5; }			// 2 - floor (visited)
+// 					else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }			// 3 - trashes
+// 					else { continue; }
+//
+// 					// check also 4 neighbour pixels, because robot will visit them following that path
+// 					c = plan[y_pix-2][x_pix-1];
+// 					if (c == '0') { flag = 1; }
+// 					else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
+// 					else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
+// 					else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+// 					else { continue; }
+//
+// 					c = plan[y_pix-1][x_pix-2];
+// 					if (c == '0') { flag = 1; }
+// 					else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
+// 					else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
+// 					else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+// 					else { continue; }
+//
+// 					c = plan[y_pix][x_pix-1];
+// 					if (c == '0') { flag = 1; }
+// 					else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
+// 					else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
+// 					else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+// 					else { continue; }
+//
+// 					c = plan[y_pix-1][x_pix];
+// 					if (c == '0') { flag = 1; }
+// 					else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
+// 					else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
+// 					else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+// 					else { continue; }
+// 				}
+// 			}
+// 			// change the best candidate if current is better
+// 			if (candidate_grades[i] > candidate_grades[best_candidate_index]){
+// 				best_candidate_index = i;
+// 			}
+// 		}			
+// 		sem_post(&planSemaphore);
+//
+// 		// calculate target direction in degrees and write to output
+// 		sem_wait(&target_directionSemaphore);
+// 		target_direction = (candidate_directions[best_candidate_index]) * 57.295779513;
+// 		if (target_direction > 360) { target_direction -= 360; }
+// 		else if (target_direction < 0) { target_direction += 360; }
+// 		sem_post(&target_directionSemaphore);
+//
+// 		return EXIT_SUCCESS;
+// 	}
+
+/* function choosing the best new direction from random candidates  */
 int select_new_direction(void) {
 	// select new direction to drive
 	// candidates are random, prefer directions with less visited points
@@ -188,7 +288,6 @@ int select_new_direction(void) {
 	double candidate_grades[18] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	// double candidate_grades[9] = {0,0,0,0,0,0,0,0,0};
 	int best_candidate_index = 0;
-	sem_wait(&planSemaphore);
 
 	// calculate grade for each candidate
 	for (int i = 0; i < 18; i++) {
@@ -197,56 +296,64 @@ int select_new_direction(void) {
 		// check the closest pixel for every candidate every 10cm in given direction
 		// 10cm is most natural since 1 pixel represents 10x10cm square
 
-		for (double j = 0.0; j < 20.0; j = j + 0.1){
+		for (double j = 0.25; j < 10.0; j = j + 0.125){
 			if(!flag){
 				// determining the closest pixel
-				int x_pix = round(10 * (tmp_x + j * cos(candidate_directions[i])));
-				int y_pix = round(10 * (tmp_y + j * sin(candidate_directions[i])));
+				int x_pix = round(4 * (tmp_x + j * cos(candidate_directions[i])));
+				int y_pix = round(4 * (tmp_y + j * sin(candidate_directions[i])));
+				if ((x_pix * y_pix <= 0) || x_pix > 78 || y_pix > 78) {
+					break;
+				}
+
+				int x_pix_left =	(int)round(4 * ((tmp_x + j * cos(candidate_directions[i]) - 0.125)));
+				int x_pix_right = 	(int)round(4 * ((tmp_x + j * cos(candidate_directions[i]) + 0.125)));
+				int y_pix_up = 		(int)round(4 * ((tmp_y + j * sin(candidate_directions[i]) + 0.125)));
+				int y_pix_down = 	(int)round(4 * ((tmp_y + j * sin(candidate_directions[i]) - 0.125)));
 
 				// get that pixels value
-				char c = plan[y_pix-1][x_pix-1];
-				if (c == '0') { flag = 1; }														// 0 - obstacle
-				else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }			// 1 - floor (not visited)
-				else if (c == '2') { candidate_grades[i] = candidate_grades[i] -0.5; }			// 2 - floor (visited)
-				else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }			// 3 - trashes
+				int pix_val = rg_disc_map[x_pix][y_pix];
+				if 		(pix_val == 3) { flag = 1; }							// 3 - obstacle
+				else if (pix_val == 1) { candidate_grades[i] += 1; }			// 1 - floor (not visited)
+				else if (pix_val == 2) { candidate_grades[i] += 0.1; }			// 2 - floor (visited)
+				else if (pix_val == 0) { candidate_grades[i] += 0.5; }			// 0 - not recognized
 				else { continue; }
 
 				// check also 4 neighbour pixels, because robot will visit them following that path
-				c = plan[y_pix-2][x_pix-1];
-				if (c == '0') { flag = 1; }
-				else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
-				else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
-				else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+				int pix_val_left  = rg_disc_map[x_pix_left][y_pix];
+				if 		(pix_val_left == 3) { flag = 1; }							// 3 - obstacle
+				else if (pix_val_left == 1) { candidate_grades[i] += 1; }			// 1 - floor (not visited)
+				else if (pix_val_left == 2) { candidate_grades[i] += 0.1; }			// 2 - floor (visited)
+				else if (pix_val_left == 0) { candidate_grades[i] += 0.5; }			// 0 - not recognized
 				else { continue; }
 
-				c = plan[y_pix-1][x_pix-2];
-				if (c == '0') { flag = 1; }
-				else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
-				else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
-				else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+				int pix_val_right = rg_disc_map[x_pix_right][y_pix];
+				if 		(pix_val_right == 3) { flag = 1; }							// 3 - obstacle
+				else if (pix_val_right == 1) { candidate_grades[i] += 1; }			// 1 - floor (not visited)
+				else if (pix_val_right == 2) { candidate_grades[i] += 0.1; }		// 2 - floor (visited)
+				else if (pix_val_right == 0) { candidate_grades[i] += 0.5; }		// 0 - not recognized
 				else { continue; }
 
-				c = plan[y_pix][x_pix-1];
-				if (c == '0') { flag = 1; }
-				else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
-				else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
-				else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+				int pix_val_up    = rg_disc_map[x_pix][y_pix_up];
+				if 		(pix_val_up == 3) { flag = 1; }								// 3 - obstacle
+				else if (pix_val_up == 1) { candidate_grades[i] += 1; }				// 1 - floor (not visited)
+				else if (pix_val_up == 2) { candidate_grades[i] += 0.1; }			// 2 - floor (visited)
+				else if (pix_val_up == 0) { candidate_grades[i] += 0.5; }			// 0 - not recognized
 				else { continue; }
 
-				c = plan[y_pix-1][x_pix];
-				if (c == '0') { flag = 1; }
-				else if (c == '1') { candidate_grades[i] = candidate_grades[i] + 1; }
-				else if (c == '2') { candidate_grades[i] = candidate_grades[i] - 0.5; }
-				else if (c == '3') { candidate_grades[i] = candidate_grades[i] + 2; }
+				int pix_val_down  = rg_disc_map[x_pix][y_pix_down];
+				if 		(pix_val_down == 3) { flag = 1; }							// 3 - obstacle
+				else if (pix_val_down == 1) { candidate_grades[i] += 1; }			// 1 - floor (not visited)
+				else if (pix_val_down == 2) { candidate_grades[i] += 0.1; }			// 2 - floor (visited)
+				else if (pix_val_down == 0) { candidate_grades[i] += 0.5; }			// 0 - not recognized
 				else { continue; }
 			}
 		}
+
 		// change the best candidate if current is better
 		if (candidate_grades[i] > candidate_grades[best_candidate_index]){
 			best_candidate_index = i;
 		}
 	}			
-	sem_post(&planSemaphore);
 
 	// calculate target direction in degrees and write to output
 	sem_wait(&target_directionSemaphore);
@@ -255,32 +362,86 @@ int select_new_direction(void) {
 	else if (target_direction < 0) { target_direction += 360; }
 	sem_post(&target_directionSemaphore);
 
+	printf("target_direction_selected: %.2f		grade: %f\n", target_direction, candidate_grades[best_candidate_index]);
 	return EXIT_SUCCESS;
 }
 
-/* function inspecting distance sensors */
-int inspect_sensors(void) {
-	// robot needs to stop if there is obstacle close
+/* function updating rg map */
+int update_rg_map(void) {
 
-	// read input values 
+	int status;
+
+	sem_wait(&position_orientationSemaphore);
+	double tmp_orientation = orientation;
+	double tmp_position_x = position_x;
+	double tmp_position_y = position_y;
+	sem_post(&position_orientationSemaphore);
+
 	sem_wait(&dist_sensorsSemaphore);
 	double tmp_front_sensor = front_sensor;
-	double tmp_back_sensor = back_sensor;
-	double tmp_left_sensor = left_sensor;
+	double tmp_back_sensor  = back_sensor;
+	double tmp_left_sensor  = left_sensor;
 	double tmp_right_sensor = right_sensor;
 	sem_post(&dist_sensorsSemaphore);
-	sem_wait(&taskSemaphore);
-	int current_task_tmp = current_task;
-	sem_post(&taskSemaphore);
 
-	// if robot is driving, then check
-	// cant hit obstacle while rotating, because robot is round
-	if (current_task_tmp == 1){
-		if (tmp_front_sensor < 0.025 || tmp_left_sensor < 0.01 || tmp_right_sensor < 0.01){
-			// if close to wall, notify about need to select new direction
-			sem_post(&spool_set_new_task);
+	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
+	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
+
+	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation))));  
+	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_y = (int)round(4*(tmp_position_y - 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_y = (int)round(4*(tmp_position_y + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	
+	
+	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
+	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
+	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
+
+		if (rg_disc_map[this_pixel_x][this_pixel_y] != 2) {
+			rg_disc_map[this_pixel_x][this_pixel_y] = 2; }
+		
+		if (rg_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
+			if (tmp_left_sensor < 0.025) {
+				rg_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
+			}
+			else {
+				ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 1;
+			}
 		}
-	}
+		if (rg_disc_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
+			if (tmp_right_sensor < 0.025) {
+				rg_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
+			}
+			else {
+
+				rg_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 1;
+			}
+		}
+		if (rg_disc_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
+			if (tmp_front_sensor < 0.025) {
+				rg_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+			}
+			else {
+				rg_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
+			}
+		}
+
+
+	/* write a map for debugging */
+    FILE *fptr;
+    char c;
+    fptr = fopen("../../roomba/log/map_rg.txt","w");
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++){
+            c = rg_disc_map[j][80-i] +'0';
+            fputc(c,fptr);
+        }
+        fprintf(fptr,"\r\n");
+    }
+    fclose(fptr);
+
 	return EXIT_SUCCESS;
 }
 
@@ -293,6 +454,12 @@ int calculate_movement_type(void) {
 	double tmp_pos_x = position_x;
 	double tmp_pos_y = position_y;
 	sem_post(&position_orientationSemaphore);
+	sem_wait(&dist_sensorsSemaphore);
+	double tmp_front_sensor = front_sensor;
+	double tmp_back_sensor = back_sensor;
+	double tmp_left_sensor = left_sensor;
+	double tmp_right_sensor = right_sensor;
+	sem_post(&dist_sensorsSemaphore);
 	sem_wait(&taskSemaphore);
 	double tmp_current_task = current_task;
 	sem_post(&taskSemaphore);
@@ -301,37 +468,46 @@ int calculate_movement_type(void) {
 	sem_post(&target_directionSemaphore);
 
 	if (algorithm_select == 0){
-		// algorith_select = 0 is random bouncing
-		switch (current_task)
-			{
-			case 0:
-				// just standing
-				movement_type = 0;
-				break;
-			case 1:
-				// driving forward
-				movement_type = 1;
-				break;
-			case 2:
-				// rotating clockwise until reaching target_direction, then driving forward
-				if (fabs(tmp_orientation - target_direction_tmp) < 0.2) { 
-					current_task = 1;
-					movement_type = 1; 
-				} else {
-					movement_type = 2;
-				}
-				break;
-			case 3: 
-				// rotating counter clokcwise until reaching target direction, then driving forward
-				if (fabs(tmp_orientation - target_direction_tmp) < 0.2) {
-					current_task = 1;
-					movement_type = 1;
-				} else {
-					movement_type = 3;
-				}
-				break;
-			default: 
-				break;
+		if (spool_next_step_rg_calculated == 1){
+			// algorith_select = 0 is random bouncing
+			switch (current_task)
+				{
+				case 0:
+					// just standing
+					movement_type = 0;
+					break;
+				case 1:
+					// driving forward
+					if (tmp_front_sensor < 0.0025 || tmp_left_sensor < 0.005 || tmp_right_sensor < 0.005){
+						// if close to wall, notify about need to select new direction
+						spool_next_step_rg_calculated = 0;
+						sem_post(&spool_set_new_task);
+					}
+					else {
+						movement_type = 1;
+					}
+					break;
+				case 2:
+					// rotating clockwise until reaching target_direction, then driving forward
+					if (fabs(tmp_orientation - target_direction_tmp) < 0.2) { 
+						current_task = 1;
+						movement_type = 1; 
+					} else {
+						movement_type = 2;
+					}
+					break;
+				case 3: 
+					// rotating counter clokcwise until reaching target direction, then driving forward
+					if (fabs(tmp_orientation - target_direction_tmp) < 0.2) {
+						current_task = 1;
+						movement_type = 1;
+					} else {
+						movement_type = 3;
+					}
+					break;
+				default: 
+					break;
+			}
 		}
 	}
 	else if (algorithm_select == 1){
@@ -1419,7 +1595,6 @@ int rotation_direction(double target_angle, double current_angle){
 			return 2;
         }
 }
-
 
 path_t smooth_path(path_t* path) {
 

@@ -34,7 +34,6 @@ roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/include/sim
 roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/include/sim_functions.h
 roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/include/sim_to_control.h
 roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/include/sim_to_vis.h
-roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/include/trash_generator.h
 roomba/CMakeFiles/sim.dir/sim_files/src/sim.c.o: ../roomba/sim_files/src/sim.c
 
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_from_control.c.o: ../roomba/sim_files/include/sim.h
@@ -55,8 +54,4 @@ roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o: ../roomba/sim_files/
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o: ../roomba/sim_files/include/sim_functions.h
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o: ../roomba/sim_files/include/sim_to_vis.h
 roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o: ../roomba/sim_files/src/sim_to_vis.c
-
-roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o: ../roomba/sim_files/include/sim_functions.h
-roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o: ../roomba/sim_files/include/trash_generator.h
-roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o: ../roomba/sim_files/src/trash_generator.c
 

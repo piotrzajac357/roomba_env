@@ -80,11 +80,6 @@ void * tS2CThreadFunc(void *cookie) {
     double tmp_orientation = previous_orientation;
 	sem_post(&position_orientationSemaphore);
 
-	sem_wait(&trashSemaphore);
-	int tmp_trash_sensor = trash_sensor;
-	int tmp_new_trashes[2] = {new_trashes[0],new_trashes[1]};
-	sem_post(&trashSemaphore);
-
     /* write to IPC shared memory from tmp variables */
     sem_wait(mutex_sem_s2c);
     s2c_shm_ptr->battery_level = tmp_battery_level;
@@ -96,9 +91,6 @@ void * tS2CThreadFunc(void *cookie) {
 	s2c_shm_ptr->position_x = tmp_position_x;
 	s2c_shm_ptr->position_y = tmp_position_y;
 	s2c_shm_ptr->orientation = tmp_orientation;
-	s2c_shm_ptr->trash_sensor = tmp_trash_sensor;
-    // s2c_shm_ptr->new_trashes_coords[0] = tmp_new_trashes[0];
-    // s2c_shm_ptr->new_trashes_coords[1] = tmp_new_trashes[1];
     sem_post(mutex_sem_s2c);
 
     // notify about new data

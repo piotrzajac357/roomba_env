@@ -13,24 +13,46 @@
 #include <time.h>
 #include <math.h>
 
-#include "../include/set_new_task.h"
+#include "../include/rg_algorithm.h"
 #include "../include/control_functions.h"
 #include "../include/control.h"
 #include "../include/load_plan.h"
 
 /* initialize selecting new direction thread */
-int init_set_new_task() {
+int init_rg_algorithm() {
 
     int status;
-    pthread_t TaskThread;
-    pthread_attr_t aTaskThreadAttr;
-    pthread_attr_init(&aTaskThreadAttr);
-    pthread_attr_setschedpolicy(&aTaskThreadAttr, SCHED_FIFO);
+    pthread_t RgThread;
+    pthread_attr_t aRgThreadAttr;
+    pthread_attr_init(&aRgThreadAttr);
+    pthread_attr_setschedpolicy(&aRgThreadAttr, SCHED_FIFO);
+
+    pthread_attr_t aRgMapThreadAttr;
+    struct itimerspec timerSpecStruct;
+    timer_t timerVar;
+    struct sigevent timerEvent;
+    pthread_attr_init(&aRgMapThreadAttr);
+
+    timerEvent.sigev_notify = SIGEV_THREAD;
+    timerEvent.sigev_notify_function = (void*)tRgMapThreadFunction;
+    timerEvent.sigev_notify_attributes = &aRgMapThreadAttr;
+
+    if ((status = timer_create(CLOCK_REALTIME, &timerEvent, &timerVar))) {
+        fprintf(stderr, "Error creating timer : %d\n", status);
+    return 0;
+    }
+
+    timerSpecStruct.it_value.tv_sec = 0;
+	timerSpecStruct.it_value.tv_nsec = 5000000;
+	timerSpecStruct.it_interval.tv_sec = 0;
+	timerSpecStruct.it_interval.tv_nsec = 50000000;
 
     // read plan from file, direction grades are based on plan
+    
+    sleep(3);
     init_plan();
 
-    init_new_task();
+    status = init_rg();
 
     // time_t tt;
     // int seed = time(&tt);    // random
@@ -39,16 +61,18 @@ int init_set_new_task() {
     int seed = 1;
     srand(seed);                // pseudorandom
 
-    if ((status = pthread_create(&TaskThread, &aTaskThreadAttr, tTaskThreadFunc, NULL))) {
+    if ((status = pthread_create(&RgThread, &aRgThreadAttr, tRgThreadFunc, NULL))) {
         fprintf(stderr, "Cannot create thread.\n");
     return 0;
 	}
+
+    timer_settime(timerVar, 0, &timerSpecStruct, NULL);
 
     return EXIT_SUCCESS;
 }
 
 /* new direction setting thread function */
-void *tTaskThreadFunc(void *cookie) {
+void *tRgThreadFunc(void *cookie) {
 
     int status;
     int policy = SCHED_FIFO;
@@ -82,6 +106,25 @@ void *tTaskThreadFunc(void *cookie) {
         } else {
             current_task = 3;
         }
+        spool_next_step_rg_calculated = 1;
     }
     return 0;
+}
+
+void* tRgMapThreadFunction(void* cookie) {
+
+    int status; 
+    int policy = SCHED_FIFO;
+    struct sched_param param;
+
+    pthread_getschedparam(pthread_self(), &policy, &param);
+    param.sched_priority = sched_get_priority_min(policy) + 6;
+	pthread_setschedparam(pthread_self(), policy, &param);
+ 
+    if ((status = update_rg_map())) {
+        fprintf(stderr, "Error updating ba map");
+        return 0;
+    }
+
+    return EXIT_SUCCESS;
 }

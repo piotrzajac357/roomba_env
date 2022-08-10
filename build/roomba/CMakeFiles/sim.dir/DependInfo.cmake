@@ -15,7 +15,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim_functions.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_control.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_control.c.o"
   "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_vis.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.o"
-  "/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/trash_generator.c" "/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o"
   )
 set(CMAKE_C_COMPILER_ID "Clang")
 

@@ -386,59 +386,32 @@ control_files/src/load_plan.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/load_plan.c.s
 .PHONY : control_files/src/load_plan.c.s
 
-control_files/src/sensors_inspect.o: control_files/src/sensors_inspect.c.o
+control_files/src/rg_algorithm.o: control_files/src/rg_algorithm.c.o
 
-.PHONY : control_files/src/sensors_inspect.o
-
-# target to build an object file
-control_files/src/sensors_inspect.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.o
-.PHONY : control_files/src/sensors_inspect.c.o
-
-control_files/src/sensors_inspect.i: control_files/src/sensors_inspect.c.i
-
-.PHONY : control_files/src/sensors_inspect.i
-
-# target to preprocess a source file
-control_files/src/sensors_inspect.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.i
-.PHONY : control_files/src/sensors_inspect.c.i
-
-control_files/src/sensors_inspect.s: control_files/src/sensors_inspect.c.s
-
-.PHONY : control_files/src/sensors_inspect.s
-
-# target to generate assembly for a file
-control_files/src/sensors_inspect.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/sensors_inspect.c.s
-.PHONY : control_files/src/sensors_inspect.c.s
-
-control_files/src/set_new_task.o: control_files/src/set_new_task.c.o
-
-.PHONY : control_files/src/set_new_task.o
+.PHONY : control_files/src/rg_algorithm.o
 
 # target to build an object file
-control_files/src/set_new_task.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.o
-.PHONY : control_files/src/set_new_task.c.o
+control_files/src/rg_algorithm.c.o:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o
+.PHONY : control_files/src/rg_algorithm.c.o
 
-control_files/src/set_new_task.i: control_files/src/set_new_task.c.i
+control_files/src/rg_algorithm.i: control_files/src/rg_algorithm.c.i
 
-.PHONY : control_files/src/set_new_task.i
+.PHONY : control_files/src/rg_algorithm.i
 
 # target to preprocess a source file
-control_files/src/set_new_task.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.i
-.PHONY : control_files/src/set_new_task.c.i
+control_files/src/rg_algorithm.c.i:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.i
+.PHONY : control_files/src/rg_algorithm.c.i
 
-control_files/src/set_new_task.s: control_files/src/set_new_task.c.s
+control_files/src/rg_algorithm.s: control_files/src/rg_algorithm.c.s
 
-.PHONY : control_files/src/set_new_task.s
+.PHONY : control_files/src/rg_algorithm.s
 
 # target to generate assembly for a file
-control_files/src/set_new_task.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/set_new_task.c.s
-.PHONY : control_files/src/set_new_task.c.s
+control_files/src/rg_algorithm.c.s:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.s
+.PHONY : control_files/src/rg_algorithm.c.s
 
 control_files/src/stc_algorithm.o: control_files/src/stc_algorithm.c.o
 
@@ -818,33 +791,6 @@ sim_files/src/sim_to_vis.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/sim_to_vis.c.s
 .PHONY : sim_files/src/sim_to_vis.c.s
 
-sim_files/src/trash_generator.o: sim_files/src/trash_generator.c.o
-
-.PHONY : sim_files/src/trash_generator.o
-
-# target to build an object file
-sim_files/src/trash_generator.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.o
-.PHONY : sim_files/src/trash_generator.c.o
-
-sim_files/src/trash_generator.i: sim_files/src/trash_generator.c.i
-
-.PHONY : sim_files/src/trash_generator.i
-
-# target to preprocess a source file
-sim_files/src/trash_generator.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.i
-.PHONY : sim_files/src/trash_generator.c.i
-
-sim_files/src/trash_generator.s: sim_files/src/trash_generator.c.s
-
-.PHONY : sim_files/src/trash_generator.s
-
-# target to generate assembly for a file
-sim_files/src/trash_generator.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/sim.dir/build.make roomba/CMakeFiles/sim.dir/sim_files/src/trash_generator.c.s
-.PHONY : sim_files/src/trash_generator.c.s
-
 vis_files/src/run_python_script.o: vis_files/src/run_python_script.c.o
 
 .PHONY : vis_files/src/run_python_script.o
@@ -935,12 +881,9 @@ help:
 	@echo "... control_files/src/load_plan.o"
 	@echo "... control_files/src/load_plan.i"
 	@echo "... control_files/src/load_plan.s"
-	@echo "... control_files/src/sensors_inspect.o"
-	@echo "... control_files/src/sensors_inspect.i"
-	@echo "... control_files/src/sensors_inspect.s"
-	@echo "... control_files/src/set_new_task.o"
-	@echo "... control_files/src/set_new_task.i"
-	@echo "... control_files/src/set_new_task.s"
+	@echo "... control_files/src/rg_algorithm.o"
+	@echo "... control_files/src/rg_algorithm.i"
+	@echo "... control_files/src/rg_algorithm.s"
 	@echo "... control_files/src/stc_algorithm.o"
 	@echo "... control_files/src/stc_algorithm.i"
 	@echo "... control_files/src/stc_algorithm.s"
@@ -983,9 +926,6 @@ help:
 	@echo "... sim_files/src/sim_to_vis.o"
 	@echo "... sim_files/src/sim_to_vis.i"
 	@echo "... sim_files/src/sim_to_vis.s"
-	@echo "... sim_files/src/trash_generator.o"
-	@echo "... sim_files/src/trash_generator.i"
-	@echo "... sim_files/src/trash_generator.s"
 	@echo "... vis_files/src/run_python_script.o"
 	@echo "... vis_files/src/run_python_script.i"
 	@echo "... vis_files/src/run_python_script.s"

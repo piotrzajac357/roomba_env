@@ -22,8 +22,6 @@
 
 ../roomba/sim_files/include/sim_to_vis.h
 
-../roomba/sim_files/include/trash_generator.h
-
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/battery_update.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/container_update.h
@@ -45,8 +43,6 @@
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_to_control.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_to_vis.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/trash_generator.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/battery_update.c
 stdio.h
@@ -227,8 +223,6 @@ arpa/inet.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/container_update.h
 ../include/dist_sensors_update.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/dist_sensors_update.h
-../include/trash_generator.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/trash_generator.h
 ../include/sim_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/sim_functions.h
 ../include/sim_to_control.h
@@ -361,34 +355,6 @@ pthread.h
 -
 sim_to_vis.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_to_vis.h
-sim_functions.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/trash_generator.c
-stdlib.h
--
-stdio.h
--
-sys/types.h
--
-sys/stat.h
--
-sys/wait.h
--
-unistd.h
--
-semaphore.h
--
-fcntl.h
--
-pthread.h
--
-errno.h
--
-time.h
--
-trash_generator.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/trash_generator.h
 sim_functions.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/sim_functions.h
 

@@ -10,7 +10,6 @@ add_executable(sim  sim_files/src/sim.c
                     sim_files/src/battery_update.c
                     sim_files/src/container_update.c
                     sim_files/src/dist_sensors_update.c
-                    sim_files/src/trash_generator.c
                     sim_files/src/quality_indexes.c
                     sim_files/src/sim_functions.c
                     sim_files/src/sim_to_control.c
@@ -28,8 +27,7 @@ add_executable(control  control_files/src/control
                         control_files/src/control_functions.c
                         control_files/src/control_to_sim.c
                         control_files/src/control_update.c
-                        control_files/src/sensors_inspect.c
-                        control_files/src/set_new_task.c
+                        control_files/src/rg_algorithm.c
                         control_files/src/task_to_movement.c
                         control_files/src/stc_algorithm.c
                         control_files/src/ba_algorithm.c

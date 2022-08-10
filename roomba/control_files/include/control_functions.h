@@ -61,6 +61,8 @@ sem_t trashSemaphore;                   // Semaphore
 int current_task;
 sem_t taskSemaphore;                    // Semaphore
 
+int rg_disc_map[80][80];
+
 /*  movement type
     0 - standing
     1 - driving forward
@@ -74,6 +76,7 @@ double target_direction;                // target direction to rotate to
 sem_t target_directionSemaphore;        // Semaphore
 
 sem_t spool_set_new_task;               // notification that new task has to be selected
+int spool_next_step_rg_calculated;      // flag that next step has been calclated
 
 
 /* STC ALGORITHM VARIABLES */
@@ -146,10 +149,6 @@ int spool_next_step_ba_calculated;
    3 - obstacle */
 int ba_disc_map[80][80];
 
-/* backtracking map:
-   0 - no backtracking point
-   1 - backtracking point */
-int backtracking_map[80][80];
 
 /* current task that is being executed
 0 - just standing
@@ -188,15 +187,15 @@ int init_battery_container(void);
 
 int init_control(void);
 
-int init_new_task(void);
+int init_rg(void);
+
+int update_rg_map(void);
 
 int init_movement_type(void);
 
 int calculate_control(void);
 
 int select_new_direction(void);
-
-int inspect_sensors(void);
 
 int calculate_movement_type(void);
 
