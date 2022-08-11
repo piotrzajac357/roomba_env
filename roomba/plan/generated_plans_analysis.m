@@ -105,4 +105,43 @@ for i=1:1:38
 
     end
 end
+%%
+filename = 'C:\Users\zajac\Desktop\pm\roomba_env\roomba\log\map_cov.txt';
+startRow = 2;
+formatSpec = '%s%[^\n\r]';
+fileID = fopen(filename,'r');
+dataArray = textscan(fileID, formatSpec, 'Delimiter', '', 'WhiteSpace', '', 'TextType', 'string', 'HeaderLines' ,startRow-1, 'ReturnOnError', false, 'EndOfLine', '\r\n');
+dataArray{1} = strtrim(dataArray{1});
+fclose(fileID);
+map = [dataArray{1:end-1}];
+clearvars filename startRow formatSpec fileID dataArray ans;
 
+img = zeros(799,799);
+for i=1:1:799
+    str = char(map(i,1))-48;
+    for j=1:1:800
+        img(i,j) = str(j)/2;
+    end
+end
+imshow(img);
+
+%%
+filename = 'C:\Users\zajac\Desktop\pm\roomba_env\roomba\log\log_cov.txt';
+opts = delimitedTextImportOptions("NumVariables", 1);
+opts.DataLines = [1, Inf];
+opts.Delimiter = ",";
+opts.VariableNames = "cov_vector";
+opts.VariableTypes = "double";
+opts.ExtraColumnsRule = "ignore";
+opts.EmptyLineRule = "read";
+cov_vector = readtable("C:\Users\zajac\Desktop\pm\roomba_env\roomba\log\log_cov.txt", opts);
+cov_vector = table2array(cov_vector);
+clear opts
+
+time_stamp = 1/60:1/60:size(cov_vector,1)/60;
+
+plot(time_stamp,cov_vector.*100);
+grid on
+xlabel('min'), ylabel('%')
+title('percentage coverage over time')
+legend('rg algorithm')
