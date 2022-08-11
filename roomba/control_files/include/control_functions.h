@@ -39,9 +39,6 @@ double left_sensor;                     // left distance sensor
 double right_sensor;                    // right distance sensor
 sem_t dist_sensorsSemaphore;            // Semaphore
 
-char plan[200][200];                    // 200x200 char array representing house 
-sem_t planSemaphore;                    // Semaphore
-
 /* RANDOM algorithm variables */
 
 /*  current task to be done 
@@ -142,7 +139,6 @@ int spool_next_step_ba_calculated;
    3 - obstacle */
 int ba_disc_map[80][80];
 
-
 /* current task that is being executed
 0 - just standing
 1 - rotating clockwise to certain orientation
@@ -174,6 +170,26 @@ int movement_mode;
 1 - horizontal (left or right) */
 int vertical_horizontal;
 
+/* sfw algorithm variables */
+sem_t spool_calc_next_step_swf;
+
+int spool_next_step_swf_calculated;
+
+/* type of swf step that is being executed or is to be executed
+0 - do nothing
+1 - drive forward until reeaching wall
+2 - move forward by wall until end of wall/new wall
+3 - drive forward by 25cm
+4 - rotate ccw by 90deg
+5 - rotate cw by 90deg
+6 - rotate cw until right_sensor' > 0
+7 - rotate cw until right_sensor' < 0
+*/
+int current_swf_step;
+
+int is_adjusted;
+double dist_from_wall;
+
 int initialize_semaphores(void);
 
 int init_battery(void);
@@ -193,8 +209,6 @@ int select_new_direction(void);
 int calculate_movement_type(void);
 
 int inspect_battery(void);
-
-int update_plan(int previous_x_pixel, int previous_y_pixel, int current_x_pix, int current_y_pix);
 
 int check_nbh(void);
 
@@ -229,5 +243,13 @@ double calculate_target_angle(double start_x, double start_y, double end_x, doub
 int rotation_direction(double target_angle, double current_angle);
 
 path_t smooth_path(path_t* path);
+
+int init_swf(void);
+
+int next_step_swf(void);
+
+int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
+                   double tmp_front_sensor, double tmp_back_sensor,
+                   double tmp_left_sensor, double tmp_right_sensor);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

@@ -27,11 +27,11 @@ int initialize_semaphores(void) {
 		sem_init(&controlSemaphore, 0, 1) 				||
 		sem_init(&taskSemaphore, 0, 1)					||
 		sem_init(&movement_typeSemaphore, 0, 1)			||
-		sem_init(&planSemaphore, 0, 1)					||
 		sem_init(&target_directionSemaphore, 0, 1)		||
 		sem_init(&spool_calc_next_step_stc, 0, 0)		||
 		sem_init(&spool_calc_next_step_ba, 0, 0)		||
-		sem_init(&spool_calc_next_step_rg, 0, 0))
+		sem_init(&spool_calc_next_step_rg, 0, 0)		||
+		sem_init(&spool_calc_next_step_swf, 0, 0))
 		{
 			return EXIT_FAILURE;
 		}
@@ -355,7 +355,7 @@ int calculate_movement_type(void) {
 					// rotating clockwise until reaching target_direction, then driving forward
 					if (fabs(tmp_orientation - target_direction_tmp) < 0.5) { 
 						current_task = 1;
-						movement_type = 1; \
+						movement_type = 1; 
 					} else {
 						movement_type = 2;
 					}
@@ -374,6 +374,7 @@ int calculate_movement_type(void) {
 			}
 		}
 	}
+	
 	else if (algorithm_select == 1){
 		// algorithm_select = 1 is STC algorithm
 
@@ -442,7 +443,7 @@ int calculate_movement_type(void) {
 		}
 	}
 
-	else if (algorithm_select == 2) {
+	else if (algorithm_select == 2){
 		if (spool_next_step_ba_calculated == 1){
 			switch(current_task_ba){
 				case 0:
@@ -531,6 +532,15 @@ int calculate_movement_type(void) {
 			}
 		} 
 	}
+	
+	else if (algorithm_select == 3){
+		if (spool_next_step_swf_calculated == 1){
+			movement_type = swf_mov_superv(tmp_pos_x,tmp_pos_y,tmp_orientation, tmp_front_sensor,
+									   	   tmp_back_sensor,tmp_left_sensor,tmp_right_sensor);
+	
+		}
+	}
+	
 	return EXIT_SUCCESS;
 }
 
@@ -613,6 +623,15 @@ int init_ba(void) {
 
 	current_task_ba = 3;
 	spool_next_step_ba_calculated = 1;
+	return EXIT_SUCCESS;
+}
+
+/* function initializing sfw algorithm variables */
+int init_swf(void) {
+	current_swf_step = 1;
+	is_adjusted = 0;
+	spool_next_step_swf_calculated = 1;
+
 	return EXIT_SUCCESS;
 }
 
@@ -1524,4 +1543,41 @@ path_t smooth_path(path_t* path) {
 	return smoothed_path;
 }
 
+int next_step_swf(void){
 
+	return EXIT_SUCCESS;
+}
+
+int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
+                   double tmp_front_sensor, double tmp_back_sensor,
+                   double tmp_left_sensor, double tmp_right_sensor) {
+
+	int tmp_movement_type = 0;
+	int is_adjusted = 0;
+
+	switch(current_swf_step) {
+		case 0:
+			tmp_movement_type = 0;
+			break;
+		case 1:
+			dist_from_wall = is_adjusted ? 0.001 : 0.01;
+			if (tmp_front_sensor <= dist_from_wall){
+				tmp_movement_type = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+				printf("kek");
+				fflush(stdout);
+			}
+			else {
+				tmp_movement_type = 1;
+			}
+			break;
+		default: 
+		tmp_movement_type = 0;
+		break;
+	}
+
+
+
+	return tmp_movement_type;
+}

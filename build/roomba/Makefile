@@ -413,6 +413,33 @@ control_files/src/stc_algorithm.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.s
 .PHONY : control_files/src/stc_algorithm.c.s
 
+control_files/src/swf_algorithm.o: control_files/src/swf_algorithm.c.o
+
+.PHONY : control_files/src/swf_algorithm.o
+
+# target to build an object file
+control_files/src/swf_algorithm.c.o:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o
+.PHONY : control_files/src/swf_algorithm.c.o
+
+control_files/src/swf_algorithm.i: control_files/src/swf_algorithm.c.i
+
+.PHONY : control_files/src/swf_algorithm.i
+
+# target to preprocess a source file
+control_files/src/swf_algorithm.c.i:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.i
+.PHONY : control_files/src/swf_algorithm.c.i
+
+control_files/src/swf_algorithm.s: control_files/src/swf_algorithm.c.s
+
+.PHONY : control_files/src/swf_algorithm.s
+
+# target to generate assembly for a file
+control_files/src/swf_algorithm.c.s:
+	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.s
+.PHONY : control_files/src/swf_algorithm.c.s
+
 control_files/src/task_to_movement.o: control_files/src/task_to_movement.c.o
 
 .PHONY : control_files/src/task_to_movement.o
@@ -830,6 +857,9 @@ help:
 	@echo "... control_files/src/stc_algorithm.o"
 	@echo "... control_files/src/stc_algorithm.i"
 	@echo "... control_files/src/stc_algorithm.s"
+	@echo "... control_files/src/swf_algorithm.o"
+	@echo "... control_files/src/swf_algorithm.i"
+	@echo "... control_files/src/swf_algorithm.s"
 	@echo "... control_files/src/task_to_movement.o"
 	@echo "... control_files/src/task_to_movement.i"
 	@echo "... control_files/src/task_to_movement.s"

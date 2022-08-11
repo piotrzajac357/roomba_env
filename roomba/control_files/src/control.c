@@ -19,11 +19,13 @@
 #include "../include/control_battery.h"
 #include "../include/stc_algorithm.h"
 #include "../include/ba_algorithm.h"
+#include "../include/swf_algorithm.h"
+
 
 int main(int argc, char *argv[]) {
 
     int status;
-    algorithm_select = 0;
+    algorithm_select = 3;
 
     //nice(-20);
 
@@ -120,6 +122,14 @@ int main(int argc, char *argv[]) {
             return 0;
         }
     }
+
+    if (algorithm_select == 3){
+        if ((status = init_swf_algorithm())) {
+            fprintf(stderr, "Error initializing SWF algorithm thread : %d\n", status);
+            return 0;
+        }
+    }
+
 
     while (1){        
         usleep(100000);

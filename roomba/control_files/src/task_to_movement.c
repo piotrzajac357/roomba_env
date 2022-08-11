@@ -36,7 +36,7 @@ int init_task_to_movement() {
     }
 
     timerSpecStruct.it_value.tv_sec = 0;
-	timerSpecStruct.it_value.tv_nsec = 5000000;
+	timerSpecStruct.it_value.tv_nsec = 50000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
 	// gigaimportant - interval must be lower than 
 	// sim->control data transfer

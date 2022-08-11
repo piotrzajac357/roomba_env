@@ -20,6 +20,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_f
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control_update.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/rg_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/stc_algorithm.h
+roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/swf_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/task_to_movement.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/src/control.c
 
@@ -76,6 +77,13 @@ roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/con
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/include/stc_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/src/stc_algorithm.c
+
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/include/astar/coordinate.h
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/include/astar/grid.uint8_t.h
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/include/astar/path.h
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/include/control_functions.h
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/include/swf_algorithm.h
+roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/src/swf_algorithm.c
 
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o: ../roomba/control_files/include/astar/coordinate.h
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o: ../roomba/control_files/include/astar/grid.uint8_t.h
