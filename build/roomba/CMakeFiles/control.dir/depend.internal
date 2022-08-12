@@ -86,9 +86,9 @@ roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/swf_algorithm.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/swf_algorithm.c
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o
- ../roomba/control_files/include/astar/coordinate.h
- ../roomba/control_files/include/astar/grid.uint8_t.h
- ../roomba/control_files/include/astar/path.h
- ../roomba/control_files/include/control_functions.h
- ../roomba/control_files/include/task_to_movement.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/coordinate.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/grid.uint8_t.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/astar/path.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
+ /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/task_to_movement.h
  /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c

@@ -57,7 +57,7 @@ int initialize_position(void) {
 	position_x = 3.8;
 	position_y = 13.9;
 
-	previous_orientation = 90.0;
+	previous_orientation = 100.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }
@@ -282,7 +282,7 @@ int calculate_sensors(void) {
 	double temp_right_sensor = 1.0;
 
 	// check for obstacles every 5cm
-	for (double i = 0.0; i < 10.0; i = i + 0.00125) {
+	for (double i = 0.0; i < 10.0; i = i + 0.0005) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
@@ -324,6 +324,9 @@ int calculate_sensors(void) {
 			if (plan[r_y_pix][r_x_pix] == '0') {
 				temp_right_sensor = i/10;
 				r_flag = 1;
+
+				//temp_right_sensor = sqrt(pow(i * cos(right_orientation),2) + pow(i*sin(right_orientation),2))/10;
+
 			}
 		}
 	}

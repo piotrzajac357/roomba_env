@@ -12,8 +12,8 @@
 #include <errno.h>
 #include <time.h>
 
-#include "task_to_movement.h"
-#include "control_functions.h"
+#include "../include/task_to_movement.h"
+#include "../include/control_functions.h"
 
 /* initialize converting task to movement type and supervising movement thread */
 int init_task_to_movement() {
@@ -40,7 +40,7 @@ int init_task_to_movement() {
 	timerSpecStruct.it_interval.tv_sec = 0;
 	// gigaimportant - interval must be lower than 
 	// sim->control data transfer
-	timerSpecStruct.it_interval.tv_nsec = 250000;
+	timerSpecStruct.it_interval.tv_nsec = 1000000;
 
     init_movement_type();
 

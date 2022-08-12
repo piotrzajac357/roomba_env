@@ -631,7 +631,12 @@ int init_swf(void) {
 	current_swf_step = 1;
 	is_adjusted = 0;
 	spool_next_step_swf_calculated = 1;
-
+	new_wall_parameter = 0;
+	dist_swf = 10000;
+	prev_dist_swf = 10000;
+	sensors_set = 0;
+	prev_right_sensor = 0.0;
+	prev_front_sensor = 0.0;
 	return EXIT_SUCCESS;
 }
 
@@ -1545,6 +1550,66 @@ path_t smooth_path(path_t* path) {
 
 int next_step_swf(void){
 
+	sem_wait(&position_orientationSemaphore);
+	double tmp_pos_x = position_x;
+	double tmp_pos_y = position_y;
+	double tmp_orientation = orientation;
+	sem_post(&position_orientationSemaphore);
+
+	int tmp_current_swf_step = current_swf_step;
+
+	printf("orientation: %f\n", orientation);
+
+	switch(tmp_current_swf_step){
+		case 0: 
+			current_swf_step = 0;
+			break;
+		case 1:
+			if (is_adjusted == 0) {
+				current_swf_step = 10;
+			}
+			else {
+				target_orientation_swf = fmod(tmp_orientation + 90.0,360.0);
+				current_swf_step = 4;
+			}
+			break;
+		case 2:
+			if (new_wall_parameter == 0) {
+				current_swf_step = 6;
+			}
+			else {
+				current_swf_step = 9;
+			}
+			break;
+		case 3:
+			current_swf_step = 2;
+			break;
+
+		case 4:
+			// here procedure new round starting
+			current_swf_step = 2;
+			break;
+		case 6: 
+			current_swf_step = 2;
+			break;
+		case 7:
+			current_swf_step = 2;
+			break;
+		case 8:
+			current_swf_step = 2;
+			break;
+		case 9:
+			current_swf_step = 8;
+			break;
+		case 10:
+			is_adjusted = 1;
+			current_swf_step = 1;
+			break;
+
+	}
+	sleep(2);
+	printf("step: %d\n",current_swf_step);
+	spool_next_step_swf_calculated = 1;
 	return EXIT_SUCCESS;
 }
 
@@ -1553,31 +1618,159 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_left_sensor, double tmp_right_sensor) {
 
 	int tmp_movement_type = 0;
-	int is_adjusted = 0;
 
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
 			break;
 		case 1:
-			dist_from_wall = is_adjusted ? 0.001 : 0.01;
+			dist_from_wall = (is_adjusted == 1) ? 0.005 : 0.01;
 			if (tmp_front_sensor <= dist_from_wall){
 				tmp_movement_type = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
-				printf("kek");
-				fflush(stdout);
 			}
 			else {
 				tmp_movement_type = 1;
+			}
+			break;
+		case 2:
+			// if (tmp_right_sensor > 0.0012) {
+			// 	printf("end of wall %f\n", right_sensor);
+			// 	tmp_movement_type = 0;
+			// 	new_wall_parameter = 0;
+			// 	spool_next_step_swf_calculated = 0;
+			// 	sem_post(&spool_calc_next_step_swf);
+			// }
+			//else
+			 if (tmp_front_sensor < 0.01) {
+				tmp_movement_type = 0;
+				new_wall_parameter = 1;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 1;
+			}
+			break;
+		case 3:
+			dist_swf = sqrt(pow(target_position_x_swf - tmp_pos_x,2) + 
+							pow(target_position_y_swf - tmp_pos_y,2));
+			if (dist_swf >= 0.002 && prev_dist_swf >= dist_swf) {
+				prev_dist_swf = dist_swf;
+				tmp_movement_type = 1;
+			}
+			else {
+				prev_dist = 10000;
+				movement_type = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+		case 4:
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
+				tmp_movement_type = 3;
+			}
+			else {
+				movement_type = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			break;
+		case 5:
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
+				tmp_movement_type = 2;
+			}
+			else {
+				tmp_movement_type = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			break;
+		case 6:
+			printf("orientation: %f\n",tmp_orientation);
+			printf("prev: %f, curr: %f\n", prev_right_sensor,tmp_right_sensor);
+			if (sensors_set == 0) {
+				prev_right_sensor = tmp_right_sensor;
+				sensors_set = 1;
+			}
+			if ((tmp_right_sensor > prev_right_sensor)) {
+				tmp_movement_type = 0;
+				sensors_set = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 2;
+				prev_right_sensor = tmp_right_sensor;
+			}
+			break;
+		case 7:
+			if (sensors_set == 0) {
+				prev_right_sensor = tmp_right_sensor;
+				sensors_set = 1;
+			}
+			if (tmp_right_sensor < prev_right_sensor) {
+				tmp_movement_type = 0;
+				sensors_set = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 2;
+				prev_right_sensor = tmp_right_sensor;				
+			}
+			break;
+		case 8:
+			if (sensors_set == 0) {
+				prev_right_sensor = tmp_right_sensor;
+				sensors_set = 1;
+			}
+			if (tmp_right_sensor > prev_right_sensor) {
+				tmp_movement_type = 0;
+				sensors_set = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 3;
+				prev_right_sensor = tmp_right_sensor;				
+			}
+			break;
+		case 9:
+			if (sensors_set == 0) {
+				prev_right_sensor = tmp_right_sensor;
+				sensors_set = 1;
+			}
+			if (tmp_right_sensor < prev_right_sensor) {
+				tmp_movement_type = 0;
+				sensors_set = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 3;
+				prev_right_sensor = tmp_right_sensor;				
+			}
+			break;
+		case 10:
+			if (sensors_set == 0) {
+				prev_front_sensor = tmp_front_sensor;
+				sensors_set = 1;
+			}
+			if (tmp_front_sensor > prev_front_sensor) {
+				tmp_movement_type = 0;
+				sensors_set = 0;
+				spool_next_step_swf_calculated = 0;
+				sem_post(&spool_calc_next_step_swf);
+			}
+			else {
+				tmp_movement_type = 2;
+				prev_front_sensor = tmp_front_sensor;				
 			}
 			break;
 		default: 
 		tmp_movement_type = 0;
 		break;
 	}
-
-
-
 	return tmp_movement_type;
 }

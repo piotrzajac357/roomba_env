@@ -184,11 +184,27 @@ int spool_next_step_swf_calculated;
 5 - rotate cw by 90deg
 6 - rotate cw until right_sensor' > 0
 7 - rotate cw until right_sensor' < 0
+8 - rotate ccw until right_sensor' > 0
+9 - rotate ccw until right_sensor' < 0
+10 - rotate cw until front_sensor' > 0
 */
 int current_swf_step;
 
 int is_adjusted;
 double dist_from_wall;
+
+/* 0 - end of wall, 1 - new wall */
+int new_wall_parameter;
+
+double dist_swf;
+double prev_dist_swf;
+double target_position_x_swf;
+double target_position_y_swf;
+double target_orientation_swf;
+int sensors_set;
+double prev_right_sensor;
+double prev_front_sensor;
+
 
 int initialize_semaphores(void);
 
