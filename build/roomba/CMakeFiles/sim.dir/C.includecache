@@ -10,8 +10,6 @@
 
 ../roomba/sim_files/include/dist_sensors_update.h
 
-../roomba/sim_files/include/load_plan.h
-
 ../roomba/sim_files/include/position_update.h
 
 ../roomba/sim_files/include/sim_functions.h
@@ -99,8 +97,8 @@ stdio.h
 -
 stdlib.h
 -
-load_plan.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/load_plan.h
+../include/load_plan.h
+/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include/load_plan.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/src/position_update.c
 stdio.h

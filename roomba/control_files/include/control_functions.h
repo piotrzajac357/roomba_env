@@ -195,6 +195,7 @@ double dist_from_wall;
 
 /* 0 - end of wall, 1 - new wall */
 int new_wall_parameter;
+int is_at_corner;
 
 double dist_swf;
 double prev_dist_swf;
@@ -204,7 +205,16 @@ double target_orientation_swf;
 int sensors_set;
 double prev_right_sensor;
 double prev_front_sensor;
+double loop_point_x;
+double loop_point_y;
+int swf_disc_map[200][200];
 
+double virt_sensor_front;
+double virt_sensor_back;
+double virt_sensor_right;
+double virt_sensor_left;
+
+int new_loop;
 
 int initialize_semaphores(void);
 
@@ -267,5 +277,9 @@ int next_step_swf(void);
 int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_front_sensor, double tmp_back_sensor,
                    double tmp_left_sensor, double tmp_right_sensor);
+
+int update_swf_map(void);
+
+int virtual_sensors(void);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

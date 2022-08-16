@@ -19,8 +19,8 @@
 double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
-double sim_step_dist_sensors = 0.002;
-double max_speed = 5;
+double sim_step_dist_sensors = 0.01;
+double max_speed = 4;
 double max_rotating_speed = 0.1;
 
 double position_x;
@@ -57,7 +57,7 @@ int initialize_position(void) {
 	position_x = 3.8;
 	position_y = 13.9;
 
-	previous_orientation = 100.0;
+	previous_orientation = 90.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }
@@ -202,7 +202,7 @@ int calculate_position(void) {
 	position_y = tmp_y;
 	previous_orientation = tmp_orientation;
 	sem_post(&position_orientationSemaphore);
-	//printf("%f", tmp_orientation);
+	//printf("%f\n", tmp_orientation);
 	return 0;
 }
 
@@ -282,16 +282,16 @@ int calculate_sensors(void) {
 	double temp_right_sensor = 1.0;
 
 	// check for obstacles every 5cm
-	for (double i = 0.0; i < 10.0; i = i + 0.0005) {
+	for (double i = 0.0; i < 1.0; i = i + 0.001) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
-			int f_x_pix =  round(10 * (front_x + i * cos(front_orientation)));
+			int f_x_pix = round(10 * (front_x + i * cos(front_orientation)));
 
 			//int for_testing = (int)round(10 * (front_x + i * cos(front_orientation)));
 			//if (f_x_pix != for_testing ){printf("bingo karwasz jego twarz\n");};
 
-			int f_y_pix = round(-0.25 + 10 * (front_y + i * sin(front_orientation)));
+			int f_y_pix = round(10 * (front_y + i * sin(front_orientation)));
 			// if that pixel is obstacle - set sensor indication
 			if (plan[f_y_pix][f_x_pix] == '0') {
 				temp_front_sensor = i/10;
@@ -301,7 +301,7 @@ int calculate_sensors(void) {
 		}
 		// back sensor
 		if (!b_flag) {
-			int b_x_pix = round(10 * (back_x + i * cos(back_orientation)));
+			int b_x_pix = round(10 * (back_x + i * cos(back_orientation)))-1;
 			int b_y_pix = round(10 * (back_y + i * sin(back_orientation)));
 			if (plan[b_y_pix][b_x_pix] == '0') {
 				temp_back_sensor = i/10;
@@ -310,7 +310,7 @@ int calculate_sensors(void) {
 		}
 		// left sensor
 		if (!l_flag) {
-			int l_x_pix = round(10 * (left_x + i * cos(left_orientation)));
+			int l_x_pix = round(10 * (left_x + i * cos(left_orientation)))-1;
 			int l_y_pix = round(10 * (left_y + i * sin(left_orientation)));
 			if (plan[l_y_pix][l_x_pix] == '0') {
 				temp_left_sensor = i/10;
@@ -319,7 +319,7 @@ int calculate_sensors(void) {
 		}
 		// right sensor
 		if(!r_flag) {
-			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)));
+			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)))-1;
 			int r_y_pix = round(10 * (right_y + i * sin(right_orientation)));
 			if (plan[r_y_pix][r_x_pix] == '0') {
 				temp_right_sensor = i/10;

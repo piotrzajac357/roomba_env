@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "load_plan.h"
+#include "../include/load_plan.h"
 
 /* Open file with house plan and load it into an array in process global memory */
 void init_plan(){
