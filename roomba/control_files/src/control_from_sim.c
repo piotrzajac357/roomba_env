@@ -73,8 +73,11 @@ void *tCFSThreadFunc(void *cookie) {
         right_sensor = right_sensor_tmp;
         sem_post(&dist_sensorsSemaphore);
         sem_wait(&position_orientationSemaphore);
-        position_x = round(1000*position_x_tmp)/1000;
-        position_y = round(1000*position_y_tmp)/1000;
+        // position_x = round(1000*position_x_tmp)/1000;
+        // position_y = round(1000*position_y_tmp)/1000;
+        position_x = position_x_tmp;
+        position_y = position_y_tmp;
+
         orientation = orientation_tmp;
         sem_post(&position_orientationSemaphore);
     }

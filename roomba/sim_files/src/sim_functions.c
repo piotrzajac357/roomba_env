@@ -251,7 +251,7 @@ int calculate_sensors(void) {
 	double front_orientation = previous_orientation;
 	double x_coord = position_x;
 	double y_coord = position_y;
-	sem_post(&position_orientationSemaphore);
+	sem_post(&position_orientationSemaphore);	
 
 	// change orientations of each sensor and covert to radian
 	double back_orientation = (front_orientation + 180.0) * ST_TO_RAD;
@@ -282,7 +282,7 @@ int calculate_sensors(void) {
 	double temp_right_sensor = 1.0;
 
 	// check for obstacles every 5cm
-	for (double i = 0.0; i < 1.0; i = i + 0.001) {
+	for (double i = 0.0; i < 2.0; i = i + 0.001) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
@@ -301,7 +301,7 @@ int calculate_sensors(void) {
 		}
 		// back sensor
 		if (!b_flag) {
-			int b_x_pix = round(10 * (back_x + i * cos(back_orientation)))-1;
+			int b_x_pix = round(10 * (back_x + i * cos(back_orientation)));
 			int b_y_pix = round(10 * (back_y + i * sin(back_orientation)));
 			if (plan[b_y_pix][b_x_pix] == '0') {
 				temp_back_sensor = i/10;
@@ -310,7 +310,7 @@ int calculate_sensors(void) {
 		}
 		// left sensor
 		if (!l_flag) {
-			int l_x_pix = round(10 * (left_x + i * cos(left_orientation)))-1;
+			int l_x_pix = round(10 * (left_x + i * cos(left_orientation)));
 			int l_y_pix = round(10 * (left_y + i * sin(left_orientation)));
 			if (plan[l_y_pix][l_x_pix] == '0') {
 				temp_left_sensor = i/10;
@@ -319,7 +319,7 @@ int calculate_sensors(void) {
 		}
 		// right sensor
 		if(!r_flag) {
-			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)))-1;
+			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)));
 			int r_y_pix = round(10 * (right_y + i * sin(right_orientation)));
 			if (plan[r_y_pix][r_x_pix] == '0') {
 				temp_right_sensor = i/10;
@@ -339,7 +339,8 @@ int calculate_sensors(void) {
 	left_sensor = temp_left_sensor;
 	right_sensor = temp_right_sensor;
 	sem_post(&dist_sensorsSemaphore);
-
+	// printf("s_x: %f,    s_y: %f    %f\n",position_x,position_y,previous_orientation);
+	// printf("s_front: %.4f s_right: %.4f \n",front_sensor,right_sensor);
 	return 0;
 }
 

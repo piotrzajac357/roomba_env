@@ -641,6 +641,8 @@ int init_swf(void) {
 	virt_sensor_front = 1.0;
 	virt_sensor_right = 1.0;
 	new_loop = 0;
+	is_updatable = 0;
+	init_plan();
 	return EXIT_SUCCESS;
 }
 
@@ -1569,6 +1571,7 @@ int next_step_swf(void){
 		case 1:
 			loop_point_x = tmp_pos_x;
 			loop_point_y = tmp_pos_y;
+			is_updatable = 1;
 			target_orientation_swf = fmod(tmp_orientation + 90.0,360.0);
 			current_swf_step = 4;
 			break;
@@ -1650,8 +1653,8 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_left_sensor, double tmp_right_sensor) {
 
 	int tmp_movement_type = 0;
-	printf("front: %.4f right: %.4f\n", virt_sensor_front,virt_sensor_right);
-
+	//printf("  front: %.4f   right: %.4f\n", tmp_front_sensor,tmp_right_sensor);
+	//printf("v_front: %.4f v_right: %.4f\n", virt_sensor_front,virt_sensor_right);
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
@@ -1668,14 +1671,14 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 2:
-			if (tmp_right_sensor > 0.01) {
+			if (tmp_right_sensor > 0.015) {
 				printf("end of wall %f\n", right_sensor);
 				tmp_movement_type = 0;
 				new_wall_parameter = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (tmp_front_sensor < 0.01) {
+			else if (tmp_front_sensor < 0.005) {
 				tmp_movement_type = 0;
 				new_wall_parameter = 1;
 				spool_next_step_swf_calculated = 0;
@@ -1685,6 +1688,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 						  pow(loop_point_y - tmp_pos_y,2)) < 0.05){
 					tmp_movement_type = 0;
 					new_loop = 1;
+					int status = new_loop_plan();
 					spool_next_step_swf_calculated = 0;
 					sem_post(&spool_calc_next_step_swf);
 				}
@@ -1913,30 +1917,32 @@ int virtual_sensors(void) {
 	double front_y = y_coord + 0.175 * sin(front_orientation);
 	double right_x = x_coord + 0.175 * cos(right_orientation);
 	double right_y = y_coord + 0.175 * sin(right_orientation);
-
+	
 	int f_flag = 0;
 	int r_flag = 0;
 
 	double temp_front_sensor = 1.0;
 	double temp_right_sensor = 1.0;
 
-	for (double i = 0.0; i < 1.0; i = i + 0.001) {
+	for (double i = 0.0; i < 2.0; i = i + 0.001) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
 			int f_x_pix = round(10 * (front_x + i * cos(front_orientation)));
 			int f_y_pix = round(10 * (front_y + i * sin(front_orientation)));
-			if (swf_disc_map[f_x_pix][f_y_pix] > 1) {
+			if (swf_plan[f_x_pix][f_y_pix] == 0) {
 				temp_front_sensor = i/10;
+				//printf("%f\n",i);
 				f_flag = 1;
 			}
 		}
 		if (!r_flag) {
 			// determine closest pixel on background matrix
-			int r_x_pix = round(10 * (right_x + i * cos(front_orientation)));
-			int r_y_pix = round(10 * (right_y + i * sin(front_orientation)));
-			if (swf_disc_map[r_x_pix][r_y_pix] > 1) {
+			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)));
+			int r_y_pix = round(10 * (right_y + i * sin(right_orientation)));
+			if (swf_plan[r_x_pix][r_y_pix] == 0) {
 				temp_right_sensor = i/10;
+				//printf("%f\n",i);
 				r_flag = 1;
 			}
 		}
@@ -1944,6 +1950,55 @@ int virtual_sensors(void) {
 
 	virt_sensor_front = temp_front_sensor;
 	virt_sensor_right = temp_right_sensor;
+
+	// printf("c_x: %f,      c_y: %f    %f\n",position_x,position_y,orientation);
+	// printf("v_front: %.4f v_right: %.4f\n\n", virt_sensor_front,virt_sensor_right);
+
+	return EXIT_SUCCESS;
+}
+
+
+void init_plan(){
+
+    FILE *fptr;
+    char c;
+    int a;
+    fptr = fopen("../../roomba/plan/plan_binary2.txt","r");
+    if(fptr == NULL) {
+        perror("Error in opening file");
+        return;
+    }
+    for(int i = 0; i < 200; i++) {
+        for(int j = 0; j < 201; j++) {
+            c = fgetc(fptr);
+            a = c -'0';
+            if (!(j == 200)) {
+                // inverted y coord, higher index - smaller coord
+                swf_plan[j][199-i] = a;
+            }
+        }
+    }
+    fclose(fptr);
+
+    return;
+}
+
+int new_loop_plan(void) {
+
+	for (int i = 0; i < 200; i++){
+		for (int j = 0; j<  200; j++){
+			if (swf_disc_map[i][j] > 1){
+				swf_plan[i][j] = 0;
+			}
+		}
+	}
+
+	for (int i=0; i<140;i++){
+		for(int j = 0; j<140;j++){
+			printf("%d",swf_plan[j][200-i]);
+		}
+		printf("\n");
+	}
 
 	return EXIT_SUCCESS;
 }

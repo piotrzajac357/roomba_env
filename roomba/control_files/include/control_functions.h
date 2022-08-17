@@ -209,11 +209,13 @@ double loop_point_x;
 double loop_point_y;
 int swf_disc_map[200][200];
 
+int swf_plan[200][200];
+
 double virt_sensor_front;
 double virt_sensor_back;
 double virt_sensor_right;
 double virt_sensor_left;
-
+int is_updatable;
 int new_loop;
 
 int initialize_semaphores(void);
@@ -281,5 +283,9 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 int update_swf_map(void);
 
 int virtual_sensors(void);
+
+void init_plan();
+
+int new_loop_plan(void);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

@@ -93,11 +93,12 @@ void* tSwfMapThreadFunction(void *cookie) {
 	pthread_setschedparam(pthread_self(), policy, &param);
  
     status = virtual_sensors();
-    if ((status = update_swf_map())) {
-        fprintf(stderr, "Error updating swf map");
-        return 0;
+    if (is_updatable){
+        if ((status = update_swf_map())) {
+            fprintf(stderr, "Error updating swf map");
+            return 0;
+        }
     }
-
     
     return EXIT_SUCCESS;
 }
