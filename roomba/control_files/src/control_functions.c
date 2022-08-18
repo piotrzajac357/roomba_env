@@ -1555,7 +1555,6 @@ path_t smooth_path(path_t* path) {
 }
 
 int next_step_swf(void){
-
 	sem_wait(&position_orientationSemaphore);
 	double tmp_pos_x = position_x;
 	double tmp_pos_y = position_y;
@@ -1564,6 +1563,7 @@ int next_step_swf(void){
 
 	int tmp_current_swf_step = current_swf_step;
 
+	
 	switch(tmp_current_swf_step){
 		case 0: 
 			current_swf_step = 0;
@@ -1577,7 +1577,9 @@ int next_step_swf(void){
 			break;
 		case 2:
 			if (new_loop == 1){
+				int status = new_loop_plan();
 				target_orientation_swf = fmod(tmp_orientation + 90, 360.0);
+				printf("#1 target ori new loop: %.4f\n", target_orientation_swf);
 				current_swf_step = 4;
 			}
 			else if (new_wall_parameter == 0) {
@@ -1598,6 +1600,7 @@ int next_step_swf(void){
 			if (new_loop == 1){
 				target_orientation_swf = 90.0 * round(fmod(tmp_orientation + 360.0 - 90.0,360.0)/90);
 				current_swf_step = 5;
+				printf("#3, target ori: %.4f\n", target_orientation_swf);
 			}
 			else if (is_at_corner == 1){
 				current_swf_step = 5;
@@ -1613,6 +1616,9 @@ int next_step_swf(void){
 				target_position_x_swf = tmp_pos_x + 0.25 * cos(tmp_orientation * ST_TO_RAD);
 				target_position_y_swf = tmp_pos_y + 0.25 * sin(tmp_orientation * ST_TO_RAD);
 				current_swf_step = 3;
+				is_at_corner = 0;
+				printf("#2 orientation: %.4f\n current x: %.4f curr_y: %.4f\n target_x: %.4f target_y: %.4f",
+				orientation,tmp_pos_x,tmp_pos_y,target_position_x_swf,target_position_y_swf);
 			}
 			else {
 				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
@@ -1628,6 +1634,7 @@ int next_step_swf(void){
 				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
 				target_position_y_swf = tmp_pos_y + 0.1 * sin(tmp_orientation * ST_TO_RAD);
 				current_swf_step = 3;
+				printf("#4 target x: %.4f target y: %.4f\n", target_position_x_swf,target_position_y_swf);
 			}
 			else if (is_at_corner == 1){
 				target_position_x_swf = tmp_pos_x + 0.3 * cos(tmp_orientation * ST_TO_RAD);
@@ -1643,7 +1650,7 @@ int next_step_swf(void){
 
 	}
 	//usleep(100000);
-	printf("step: %d\n",current_swf_step);
+	//printf("step: %d\n",current_swf_step);
 	spool_next_step_swf_calculated = 1;
 	return EXIT_SUCCESS;
 }
@@ -1651,10 +1658,14 @@ int next_step_swf(void){
 int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_front_sensor, double tmp_back_sensor,
                    double tmp_left_sensor, double tmp_right_sensor) {
-
 	int tmp_movement_type = 0;
 	//printf("  front: %.4f   right: %.4f\n", tmp_front_sensor,tmp_right_sensor);
 	//printf("v_front: %.4f v_right: %.4f\n", virt_sensor_front,virt_sensor_right);
+
+	tmp_front_sensor = fmin(tmp_front_sensor,virt_sensor_front);
+	tmp_right_sensor = fmin(tmp_right_sensor,virt_sensor_right);
+
+
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
@@ -1684,14 +1695,14 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (sqrt(pow(loop_point_x- tmp_pos_x,2) + 
-						  pow(loop_point_y - tmp_pos_y,2)) < 0.05){
+			else if (sqrt(pow(loop_point_x - tmp_pos_x,2) + 
+						  pow(loop_point_y - tmp_pos_y,2)) < 0.15){
 					tmp_movement_type = 0;
 					new_loop = 1;
-					int status = new_loop_plan();
+					// int status = new_loop_plan();
 					spool_next_step_swf_calculated = 0;
 					sem_post(&spool_calc_next_step_swf);
-				}
+			}
 			else {
 				tmp_movement_type = 1;
 			}
@@ -1731,97 +1742,6 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 				sem_post(&spool_calc_next_step_swf);
 			}
 			break;
-		/* case 6:
-
-			if (sensors_set == 0) {
-				prev_right_sensor = tmp_right_sensor;
-				sensors_set = 1;
-			}
-			if ((tmp_right_sensor > prev_right_sensor)) {
-				tmp_movement_type = 0;
-				sensors_set = 0;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
-			}
-			else {
-				tmp_movement_type = 2;
-				prev_right_sensor = tmp_right_sensor;
-			}
-			break;
-		case 7:
-			if (sensors_set == 0) {
-				prev_right_sensor = tmp_right_sensor;
-				sensors_set = 1;
-			}
-			if (tmp_right_sensor < prev_right_sensor) {
-				printf("orientation: %f\n",tmp_orientation);
-				printf("prev: %f, curr: %f\n", prev_right_sensor,tmp_right_sensor);
-				tmp_movement_type = 0;
-				sensors_set = 0;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
-			}
-			else {
-				tmp_movement_type = 2;
-				prev_right_sensor = tmp_right_sensor;				
-			}
-			break;
-		case 8:
-
-			if (sensors_set == 0) {
-				prev_right_sensor = tmp_right_sensor;
-				sensors_set = 1;
-			}
-			if (tmp_right_sensor > prev_right_sensor) {
-				printf("orientation: %f\n",tmp_orientation);
-				printf("prev: %f, curr: %f\n", prev_right_sensor,tmp_right_sensor);				
-				tmp_movement_type = 0;
-				sensors_set = 0;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
-			}
-			else {
-				tmp_movement_type = 3;
-				prev_right_sensor = tmp_right_sensor;				
-			}
-			break;
-		case 9:
-			if (sensors_set == 0) {
-				prev_right_sensor = tmp_right_sensor;
-				sensors_set = 1;
-			}
-			if (tmp_right_sensor < prev_right_sensor) {
-				printf("orientation: %f\n",tmp_orientation);
-				printf("prev: %f, curr: %f\n", prev_right_sensor,tmp_right_sensor);
-				tmp_movement_type = 0;
-				sensors_set = 0;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
-			}
-			else {
-				tmp_movement_type = 3;
-				prev_right_sensor = tmp_right_sensor;				
-			}
-			break;
-		case 10:
-			if (sensors_set == 0) {
-				prev_front_sensor = tmp_front_sensor;
-				sensors_set = 1;
-			}
-			if (tmp_front_sensor > prev_front_sensor) {
-				printf("orientation: %f\n",tmp_orientation);
-				printf("prev: %f, curr: %f\n", prev_right_sensor,tmp_right_sensor);				
-				tmp_movement_type = 0;
-				sensors_set = 0;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
-			}
-			else {
-				tmp_movement_type = 2;
-				prev_front_sensor = tmp_front_sensor;				
-			}
-			break;
-		*/
 		default: 
 		tmp_movement_type = 0;
 		break;
@@ -1974,7 +1894,7 @@ void init_plan(){
             a = c -'0';
             if (!(j == 200)) {
                 // inverted y coord, higher index - smaller coord
-                swf_plan[j][199-i] = a;
+                swf_plan[j][199-i] = 1;
             }
         }
     }
@@ -1993,12 +1913,27 @@ int new_loop_plan(void) {
 		}
 	}
 
-	for (int i=0; i<140;i++){
-		for(int j = 0; j<140;j++){
-			printf("%d",swf_plan[j][200-i]);
-		}
-		printf("\n");
-	}
+	// for (int i=0; i<140;i++){
+	// 	for(int j = 0; j<140;j++){
+	// 		printf("%d",swf_plan[j][200-i]);
+	// 	}
+	// 	printf("\n");
+	// }
+
+
+	/* write a map for debugging */
+    FILE *fptr;
+    char c;
+    fptr = fopen("../../roomba/log/map_swf_new_loop.txt","w");
+    for(int i = 0; i < 200; i++) {
+        for(int j = 0; j < 200; j++){
+            c = swf_plan[j][200-i] +'0';
+            fputc(c,fptr);
+        }
+        fprintf(fptr,"\r\n");
+    }
+    fclose(fptr);
+
 
 	return EXIT_SUCCESS;
 }

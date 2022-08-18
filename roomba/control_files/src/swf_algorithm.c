@@ -72,7 +72,6 @@ void *tSwfThreadFunc(void *cookie) {
     // infinite loop waiting for spool
     for(;;) {
         sem_wait(&spool_calc_next_step_swf);
-
         if (algorithm_finished == 0){
             status = next_step_swf();
         } else {
