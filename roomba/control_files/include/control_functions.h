@@ -217,6 +217,8 @@ double virt_sensor_right;
 double virt_sensor_left;
 int is_updatable;
 int new_loop;
+int bt_list_swf[100][2];
+int swf_bt_map[80][80];
 
 int initialize_semaphores(void);
 
@@ -287,5 +289,9 @@ int virtual_sensors(void);
 void init_plan();
 
 int new_loop_plan(void);
+
+int create_bt_list_swf(void);
+
+int update_bt_swf_map(void);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

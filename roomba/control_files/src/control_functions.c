@@ -1576,20 +1576,22 @@ int next_step_swf(void){
 			current_swf_step = 4;
 			break;
 		case 2:
+			// new_loop_plan();
 			if (new_loop == 1){
-				int status = new_loop_plan();
+				//int status = new_loop_plan();
 				target_orientation_swf = fmod(tmp_orientation + 90, 360.0);
 				printf("#1 target ori new loop: %.4f\n", target_orientation_swf);
 				current_swf_step = 4;
 			}
 			else if (new_wall_parameter == 0) {
-				target_position_x_swf = tmp_pos_x + 0.2 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.2 * sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + 0.125 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.125 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("x: %.4f y: %.4f target x: %.4f target y: %.4f", tmp_pos_x,tmp_pos_y,target_position_x_swf,target_position_y_swf);
 				current_swf_step = 3;
 				//current_swf_step = 5;
 				target_orientation_swf = 90.0 * round(fmod(tmp_orientation + 360.0 - 90.0,360.0)/90);
 				is_at_corner = 1;
+				new_loop_plan();
 			}
 			else {
 				current_swf_step = 4;
@@ -1624,6 +1626,7 @@ int next_step_swf(void){
 				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
 				target_position_y_swf = tmp_pos_y + 0.1 * sin(tmp_orientation * ST_TO_RAD);
 				current_swf_step = 3;
+				new_loop_plan();
 			}
 			break;
 		case 5:
@@ -1641,7 +1644,9 @@ int next_step_swf(void){
 				target_position_y_swf = tmp_pos_y + 0.3 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("%f %f \n", target_position_x_swf, target_position_y_swf);
 				current_swf_step = 3;
+				new_loop_plan();
 				is_at_corner = 0;
+				// new_loop_plan();
 			}
 			else{
 				current_swf_step = 0;
@@ -1665,14 +1670,15 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 	tmp_front_sensor = fmin(tmp_front_sensor,virt_sensor_front);
 	tmp_right_sensor = fmin(tmp_right_sensor,virt_sensor_right);
 
+	//printf("%f %f\n", tmp_right_sensor,tmp_front_sensor);
 
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
 			break;
 		case 1:
-			dist_from_wall = (is_adjusted == 1) ? 0.005 : 0.01;
-			if (tmp_front_sensor <= dist_from_wall){
+			dist_from_wall = (is_adjusted == 1) ? 0.005 : 0.005;
+			if (tmp_front_sensor < dist_from_wall){
 				tmp_movement_type = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
@@ -1689,20 +1695,20 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (tmp_front_sensor < 0.005) {
+			else if (tmp_front_sensor < 0.01) {
 				tmp_movement_type = 0;
 				new_wall_parameter = 1;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (sqrt(pow(loop_point_x - tmp_pos_x,2) + 
-						  pow(loop_point_y - tmp_pos_y,2)) < 0.15){
-					tmp_movement_type = 0;
-					new_loop = 1;
-					// int status = new_loop_plan();
-					spool_next_step_swf_calculated = 0;
-					sem_post(&spool_calc_next_step_swf);
-			}
+			// else if (sqrt(pow(loop_point_x - tmp_pos_x,2) + 
+			// 			  pow(loop_point_y - tmp_pos_y,2)) < 0.15){
+			// 		tmp_movement_type = 0;
+			// 		new_loop = 1;
+			// 		// int status = new_loop_plan();
+			// 		spool_next_step_swf_calculated = 0;
+			// 		sem_post(&spool_calc_next_step_swf);
+			// }
 			else {
 				tmp_movement_type = 1;
 			}
@@ -1723,7 +1729,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 4:
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
 				tmp_movement_type = 3;
 			}
 			else {
@@ -1733,7 +1739,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 5:
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
 				tmp_movement_type = 2;
 			}
 			else {
@@ -1770,12 +1776,12 @@ int update_swf_map(void) {
 	int this_pixel_x 	   = (int)round(10*(tmp_position_x));
 	int this_pixel_y 	   = (int)round(10*(tmp_position_y));
 
-	int left_sensor_pix_x  = (int)round(10*(tmp_position_x - 0.15 * (sin(ST_TO_RAD * tmp_orientation))));  
-	int left_sensor_pix_y  = (int)round(10*(tmp_position_y + 0.15 * (cos(ST_TO_RAD * tmp_orientation))));
-	int right_sensor_pix_x = (int)round(10*(tmp_position_x + 0.15 * (sin(ST_TO_RAD * tmp_orientation))));
-	int right_sensor_pix_y = (int)round(10*(tmp_position_y - 0.15 * (cos(ST_TO_RAD * tmp_orientation))));
-	int front_sensor_pix_x = (int)round(10*(tmp_position_x + 0.15 * (cos(ST_TO_RAD * tmp_orientation))));
-	int front_sensor_pix_y = (int)round(10*(tmp_position_y + 0.15 * (sin(ST_TO_RAD * tmp_orientation))));
+	int left_sensor_pix_x  = (int)round(10*(tmp_position_x - 0.175 * (sin(ST_TO_RAD * tmp_orientation))));  
+	int left_sensor_pix_y  = (int)round(10*(tmp_position_y + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_x = (int)round(10*(tmp_position_x + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_y = (int)round(10*(tmp_position_y - 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_x = (int)round(10*(tmp_position_x + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_y = (int)round(10*(tmp_position_y + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
 	
 	
 	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
@@ -1785,23 +1791,57 @@ int update_swf_map(void) {
 
 	if (((int) round(tmp_orientation) % 90) == 0) {
 
-		for (int i = -1; i < 2; i++){
-			for (int j = -1; j < 2; j++){
-				if (swf_disc_map[this_pixel_x + i][this_pixel_y + j] != 2) {
-					swf_disc_map[this_pixel_x + i][this_pixel_y + j] = 2; 
+		// for (int i = -1; i < 2; i++){
+		// 	for (int j = -1; j < 2; j++){
+		// 		if (abs(i) + abs(j) < 2) {
+		// 			if (swf_disc_map[this_pixel_x + i][this_pixel_y + j] < 2) {
+		// 				swf_disc_map[this_pixel_x + i][this_pixel_y + j] = 2; 
+		// 			}
+		// 		}
+		// 	}
+		// }
+		for (double i = -0.1; i <= 0.1; i += 0.025){
+			for (double j = -0.1; j <= 0.1; j += 0.025){
+				if (sqrt(pow(i,2) + pow(j,2)) <= 0.1) {
+						if (swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] < 2) {
+							swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] = 2; 
+					}	
 				}
 			}
 		}
-		if (swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
-			if (tmp_right_sensor <= 0.0075) {
-				swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
-			}
-		}
-		if (swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
-			if (tmp_front_sensor <= 0.005) {
-				swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
-			}
-		}
+
+		// if(movement_type == 1){
+		// 	int dir = (int)round(tmp_orientation/90);
+		// 	switch(dir){
+		// 		case 0:
+		// 			if (swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y + 0.125))+1] < 2) {
+		// 			swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y + 0.125))+1] = 1;
+		// 			break; }
+		// 		case 1:
+		// 			if (swf_disc_map[(int)round(10*(tmp_position_x - 0.125))-1][(int)round(10*(position_y))] < 2) {
+		// 			swf_disc_map[(int)round(10*(tmp_position_x - 0.125))-1][(int)round(10*(position_y))] = 1;
+		// 			break; }
+		// 		case 2:
+		// 			if (swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y - 0.125))-1] < 2){
+		// 			swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y - 0.125))-1] = 1;
+		// 			break; }
+		// 		case 3:
+		// 			if (swf_disc_map[(int)round(10*(tmp_position_x + 0.125))+1][(int)round(10*(position_y))] < 2){
+		// 			swf_disc_map[(int)round(10*(tmp_position_x + 0.125))+1][(int)round(10*(position_y))] = 1;
+		// 			break; }							
+		// 	}
+		// }
+
+		// if (swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] <= 2){
+		// 	if (tmp_right_sensor <= 0.005) {
+		// 		swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
+		// 	}
+		// }
+		// if (swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] <= 2){
+		// 	if (tmp_front_sensor <= 0.005) {
+		// 		swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+		// 	}
+		// }
 	}
 
 
@@ -1833,10 +1873,10 @@ int virtual_sensors(void) {
 	double right_orientation = (front_orientation + 270.0) * ST_TO_RAD;
 	front_orientation = front_orientation * ST_TO_RAD;
 
-	double front_x = x_coord + 0.175 * cos(front_orientation);
-	double front_y = y_coord + 0.175 * sin(front_orientation);
-	double right_x = x_coord + 0.175 * cos(right_orientation);
-	double right_y = y_coord + 0.175 * sin(right_orientation);
+	double front_x = x_coord + 0.125 * cos(front_orientation);
+	double front_y = y_coord + 0.125 * sin(front_orientation);
+	double right_x = x_coord + 0.125 * cos(right_orientation);
+	double right_y = y_coord + 0.125 * sin(right_orientation);
 	
 	int f_flag = 0;
 	int r_flag = 0;
@@ -1934,6 +1974,133 @@ int new_loop_plan(void) {
     }
     fclose(fptr);
 
+
+	return EXIT_SUCCESS;
+}
+
+int create_bt_list_swf(void) {
+
+	memset(bt_list_swf,0,sizeof(bt_list_swf));
+	bt_list_swf[0][0] = 0;
+	bt_list_swf[0][1] = 0;
+	int k = 0;
+
+	for (int i = 1; i < 200; i++){
+		for (int j = 1; j < 200; j++){
+			if (swf_disc_map[i][j] == 2) {
+
+				int s1 = swf_disc_map[i+1][j];
+				int s2 = swf_disc_map[i+1][j+1];
+				int s3 = swf_disc_map[i][j+1];
+				int s4 = swf_disc_map[i-1][j+1];
+				int s5 = swf_disc_map[i-1][j];
+				int s6 = swf_disc_map[i-1][j-1];
+				int s7 = swf_disc_map[i][j-1];
+				int s8 = swf_disc_map[i+1][j-1];
+
+				int goal = 0;
+				goal += (s1 == 1 && (s2 % 3 == 0)) ? 1 : 0;
+				goal += (s1 == 1 && (s8 % 3 == 0)) ? 1 : 0;
+				goal += (s5 == 1 && (s6 % 3 == 0)) ? 1 : 0;
+				goal += (s5 == 1 && (s4 % 3 == 0)) ? 1 : 0;
+				goal += (s7 == 1 && (s6 % 3 == 0)) ? 1 : 0;
+				goal += (s7 == 1 && (s8 % 3 == 0)) ? 1 : 0;
+
+				if (goal >= 1) {
+					bt_list_swf[k][0] = i;
+					bt_list_swf[k][1] = j;
+					k++;
+				}
+			}
+
+		}
+	}
+	for (int z = 0; bt_list_swf[z][0] != 0; z++){
+		printf("\n{%d,%d}\n",bt_list_swf[z][0],bt_list_swf[z][1]);
+	}
+
+	return EXIT_SUCCESS;
+}
+
+int update_bt_swf_map(void) {
+
+	int status;
+
+	sem_wait(&position_orientationSemaphore);
+	double tmp_orientation = orientation;
+	double tmp_position_x = position_x;
+
+	double tmp_position_y = position_y;
+	sem_post(&position_orientationSemaphore);
+
+	sem_wait(&dist_sensorsSemaphore);
+	double tmp_front_sensor = front_sensor;
+	double tmp_back_sensor  = back_sensor;
+	double tmp_left_sensor  = left_sensor;
+	double tmp_right_sensor = right_sensor;
+	sem_post(&dist_sensorsSemaphore);
+
+	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
+	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
+
+	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation))));  
+	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_y = (int)round(4*(tmp_position_y - 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_y = (int)round(4*(tmp_position_y + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
+	
+	
+	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
+	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
+	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
+
+
+	if (((int) round(tmp_orientation) % 90) == 0) {
+
+		if (swf_bt_map[this_pixel_x][this_pixel_y] != 2) {
+			swf_bt_map[this_pixel_x][this_pixel_y] = 2; }
+		
+		if (swf_bt_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
+			if (tmp_left_sensor < 0.025) {
+				swf_bt_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
+			}
+			else {
+				swf_bt_map[left_sensor_pix_x][left_sensor_pix_y] = 1;
+			}
+		}
+		if (swf_bt_map[right_sensor_pix_x][right_sensor_pix_y] < 2){
+			if (tmp_right_sensor < 0.025) {
+				swf_bt_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
+			}
+			else {
+
+				swf_bt_map[right_sensor_pix_x][right_sensor_pix_y] = 1;
+			}
+		}
+		if (swf_bt_map[front_sensor_pix_x][front_sensor_pix_y] < 2){
+			if (tmp_front_sensor < 0.025) {
+				swf_bt_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
+			}
+			else {
+				swf_bt_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
+			}
+		}
+	}
+
+
+	/* write a map for debugging */
+    FILE *fptr;
+    char c;
+    fptr = fopen("../../roomba/log/map_swf_bt.txt","w");
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++){
+            c = swf_bt_map[j][80-i] +'0';
+            fputc(c,fptr);
+        }
+        fprintf(fptr,"\r\n");
+    }
+    fclose(fptr);
 
 	return EXIT_SUCCESS;
 }

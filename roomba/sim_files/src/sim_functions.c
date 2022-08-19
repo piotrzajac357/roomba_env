@@ -20,7 +20,7 @@ double sim_step_position = 0.01;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.01;
-double max_speed = 4;
+double max_speed = 2;
 double max_rotating_speed = 0.1;
 
 double position_x;

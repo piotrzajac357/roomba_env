@@ -93,6 +93,7 @@ void* tSwfMapThreadFunction(void *cookie) {
  
     status = virtual_sensors();
     if (is_updatable){
+        status = update_bt_swf_map();
         if ((status = update_swf_map())) {
             fprintf(stderr, "Error updating swf map");
             return 0;
