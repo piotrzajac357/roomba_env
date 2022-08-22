@@ -219,6 +219,15 @@ int is_updatable;
 int new_loop;
 int bt_list_swf[100][2];
 int swf_bt_map[80][80];
+int movement_mode_swf;
+int path_index_swf;
+double bt_target_swf_x;
+double bt_target_swf_y;
+int is_path_calculated;
+
+path_t path_swf;
+
+
 
 int initialize_semaphores(void);
 
@@ -293,5 +302,11 @@ int new_loop_plan(void);
 int create_bt_list_swf(void);
 
 int update_bt_swf_map(void);
+
+int select_bt_point_swf(void);
+
+void init_a_grid_swf(grid_uint8_t* grid);
+
+path_t smooth_path_swf(path_t* path);
 
 #endif /* CONTROL_FUNCTIONS_H_*/

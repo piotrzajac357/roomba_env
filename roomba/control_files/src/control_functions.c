@@ -642,6 +642,8 @@ int init_swf(void) {
 	virt_sensor_right = 1.0;
 	new_loop = 0;
 	is_updatable = 0;
+	movement_mode_swf = 0;
+	is_path_calculated = 0;
 	init_plan();
 	return EXIT_SUCCESS;
 }
@@ -1423,6 +1425,18 @@ void init_a_grid(grid_uint8_t* grid){
 	//grid_uint8_for_each(grid,grid_uint8_print);
 }
 
+void init_a_grid_swf(grid_uint8_t* grid){
+
+	uint8_t values[80*80];
+	for (int i = 0; i < 80; i++){
+		for (int j = 0; j < 80; j++){
+			values[80*i+j] = swf_bt_map[i][j];
+		}
+	}
+	grid_uint8_init(grid,80,80,&values[0]);
+	//grid_uint8_for_each(grid,grid_uint8_print);
+}
+
 int is_point_traversable(const uint8_t* val) {
     return *val == 2 ? 1 : 0;
 }
@@ -1563,7 +1577,123 @@ int next_step_swf(void){
 
 	int tmp_current_swf_step = current_swf_step;
 
+	if (movement_mode_swf == 1){
+		if (is_path_calculated == 0){
+			printf("update map");
+			update_bt_swf_map();
+			printf(" ... map updated\n");
+			printf("create bt list ");
+			int status = create_bt_list_swf();
+			printf("... bt list created\n");
+			int bt_point;
+			printf("selecting bt point ");
+			bt_point = select_bt_point_swf();
+			printf("... bt point selected\n");
+			if (bt_point < 0) {
+				algorithm_finished = 1;
+				printf("\nalgorithm finished \n");
+				return EXIT_SUCCESS;
+			}
+
+			int begin_x = (int)round(4*(tmp_pos_x));
+			int begin_y = (int)round(4*(tmp_pos_y));
+
+			grid_uint8_t grid;
+			init_a_grid_swf(&grid);
+			coordinate_t begin = {begin_x,begin_y};
+			coordinate_t end = {bt_list_swf[bt_point][0],bt_list_swf[bt_point][1]};
+			print_begin_end(&begin, &end);
+			path_t path_raw_swf = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
+
+			path_index_swf = 0;
+			if(path_empty(&path_raw_swf)) {
+				printf("%d %d\n", swf_bt_map[begin_x][begin_y],swf_bt_map[bt_list_swf[bt_point][0]][bt_list_swf[bt_point][1]]);
+				algorithm_finished = 1;
+				printf("No path found!\nFinishing work...\n");
+			}
+			else {
+				printf("Path before smoothing:\n");
+				path_for_each_r(&path_raw_swf, coordinate_print);
+				printf("\n");
+			}
+			printf("Path after smoothing:\n");
+			//path_t path2 = path;
+
+			path_swf = smooth_path_swf(&path_raw_swf);
+
+			path_destroy(&path_raw_swf);
+			path_for_each_r(&path_swf, coordinate_print);
+			printf("\n");
+			printf("size: %zu capacity: %zu\n",path_swf.size,path_swf.capacity);
+			fflush(stdout);
+			grid_uint8_destroy(&grid);
+
+			double dest_x = ((double)(path_get(&path_swf,path_index_swf)).row)/4;
+			double dest_y = ((double)(path_get(&path_swf,path_index_swf)).col)/4;
+			target_orientation_swf = calculate_target_angle(tmp_pos_x,tmp_pos_y,dest_x,dest_y);
+
+			bt_target_swf_x = dest_x;
+			bt_target_swf_y = dest_y;
+
+			int a = rotation_direction(target_orientation_swf,tmp_orientation);
+			if (a == 1){
+				current_swf_step = 5;
+			}
+			else{
+				current_swf_step = 4;
+			}
+			is_path_calculated = 1;
+			spool_next_step_swf_calculated = 1;
+		}
+		else {
+			
+			switch (tmp_current_swf_step){
+				case 4 ... 5:
+					target_position_x_swf = bt_target_swf_x;
+					target_position_y_swf = bt_target_swf_y;
+					current_swf_step = 3;
+					spool_next_step_swf_calculated = 1;
+					break;
+				case 3:
+					path_index_swf++;
+					if (path_index_swf == path_size(&path_swf)){
+						// start new movement somehow
+						printf("begin new swf movement\n");
+						movement_mode_swf = 0;
+						is_path_calculated = 0;
+						int a = rotation_direction(target_orientation_swf,tmp_orientation);
+						if (a == 1){
+							current_swf_step = 5;
+						}
+						else{
+							current_swf_step = 4;
+						}
+						spool_next_step_swf_calculated = 1;
+						path_destroy(&path_swf);
+						break; 
+					}
+				else {
+					bt_target_swf_x = ((double)(path_get(&path_swf,path_index_swf).row))/4;
+					bt_target_swf_y = ((double)(path_get(&path_swf,path_index_swf).col))/4;
+					//printf("target_x_px: %d target_y_px: %d\n", (int)path_get(&path,path_index).row,(int)path_get(&path,path_index).col);
+					target_orientation_swf = calculate_target_angle(tmp_pos_x,tmp_pos_y,bt_target_swf_x,bt_target_swf_y);
+					int a = rotation_direction(target_orientation_swf,tmp_orientation);
+					if (a == 1){
+							current_swf_step = 5;
+						}
+						else{
+							current_swf_step = 4;
+						}
+					spool_next_step_swf_calculated = 1;
+					break;
+				}					
+			}
+
+		}
+		return EXIT_SUCCESS;		
+	}
 	
+
 	switch(tmp_current_swf_step){
 		case 0: 
 			current_swf_step = 0;
@@ -1584,8 +1714,8 @@ int next_step_swf(void){
 				current_swf_step = 4;
 			}
 			else if (new_wall_parameter == 0) {
-				target_position_x_swf = tmp_pos_x + 0.125 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.125 * sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + 0.15 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.15 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("x: %.4f y: %.4f target x: %.4f target y: %.4f", tmp_pos_x,tmp_pos_y,target_position_x_swf,target_position_y_swf);
 				current_swf_step = 3;
 				//current_swf_step = 5;
@@ -1640,8 +1770,8 @@ int next_step_swf(void){
 				printf("#4 target x: %.4f target y: %.4f\n", target_position_x_swf,target_position_y_swf);
 			}
 			else if (is_at_corner == 1){
-				target_position_x_swf = tmp_pos_x + 0.3 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.3 * sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + 0.5 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.5 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("%f %f \n", target_position_x_swf, target_position_y_swf);
 				current_swf_step = 3;
 				new_loop_plan();
@@ -1669,14 +1799,26 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 
 	tmp_front_sensor = fmin(tmp_front_sensor,virt_sensor_front);
 	tmp_right_sensor = fmin(tmp_right_sensor,virt_sensor_right);
+	tmp_left_sensor =  fmin(tmp_left_sensor,virt_sensor_left);
 
-	//printf("%f %f\n", tmp_right_sensor,tmp_front_sensor);
+	if (swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)] >= 2 && 
+		swf_bt_map[(int)round(tmp_pos_x)+1][(int)round(tmp_pos_y)] >= 2 &&
+		swf_bt_map[(int)round(tmp_pos_x)-1][(int)round(tmp_pos_y)] >= 2 &&
+		swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)+1] >= 2 &&
+		swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)+1] >= 2){
+			tmp_movement_type = 0;
+			spool_next_step_swf_calculated = 0;
+			movement_mode_swf = 1;
+			printf("lets calculate new path\n");
+			sem_post(&spool_calc_next_step_swf);
+			return tmp_movement_type;
+	}
 
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
 			break;
-		case 1:
+		case 1:	
 			dist_from_wall = (is_adjusted == 1) ? 0.005 : 0.005;
 			if (tmp_front_sensor < dist_from_wall){
 				tmp_movement_type = 0;
@@ -1688,14 +1830,25 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 2:
-			if (tmp_right_sensor > 0.015) {
+
+			// if (tmp_front_sensor < 0.001 && tmp_right_sensor < 0.001) {
+			// 	printf("front: %f left %f right %f",tmp_front_sensor,tmp_left_sensor,tmp_right_sensor);
+			// 	tmp_movement_type = 0;
+			// 	spool_next_step_swf_calculated = 0;
+			// 	movement_mode_swf = 1;
+			// 	printf("lets calculate new path\n");
+			// 	sem_post(&spool_calc_next_step_swf);
+			// 	return tmp_movement_type;
+			// }
+
+			if (tmp_right_sensor > 0.05) {
 				printf("end of wall %f\n", right_sensor);
 				tmp_movement_type = 0;
 				new_wall_parameter = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (tmp_front_sensor < 0.01) {
+			else if (tmp_front_sensor < 0.02) {
 				tmp_movement_type = 0;
 				new_wall_parameter = 1;
 				spool_next_step_swf_calculated = 0;
@@ -1800,9 +1953,9 @@ int update_swf_map(void) {
 		// 		}
 		// 	}
 		// }
-		for (double i = -0.1; i <= 0.1; i += 0.025){
-			for (double j = -0.1; j <= 0.1; j += 0.025){
-				if (sqrt(pow(i,2) + pow(j,2)) <= 0.1) {
+		for (double i = -0.1; i <= 0.1; i += 0.02){
+			for (double j = -0.1; j <= 0.1; j += 0.02){
+				if (sqrt(pow(i,2) + pow(j,2)) < 0.1) {
 						if (swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] < 2) {
 							swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] = 2; 
 					}	
@@ -1861,7 +2014,6 @@ int update_swf_map(void) {
 	return EXIT_SUCCESS;
 }
 
-
 int virtual_sensors(void) {
 
 	sem_wait(&position_orientationSemaphore);
@@ -1883,7 +2035,7 @@ int virtual_sensors(void) {
 
 	double temp_front_sensor = 1.0;
 	double temp_right_sensor = 1.0;
-
+	double temp_left_sensor = 1.0;
 	for (double i = 0.0; i < 2.0; i = i + 0.001) {
 		// front sensor
 		if (!f_flag) {
@@ -1910,13 +2062,13 @@ int virtual_sensors(void) {
 
 	virt_sensor_front = temp_front_sensor;
 	virt_sensor_right = temp_right_sensor;
+	virt_sensor_left = temp_left_sensor;
 
 	// printf("c_x: %f,      c_y: %f    %f\n",position_x,position_y,orientation);
 	// printf("v_front: %.4f v_right: %.4f\n\n", virt_sensor_front,virt_sensor_right);
 
 	return EXIT_SUCCESS;
 }
-
 
 void init_plan(){
 
@@ -1985,18 +2137,18 @@ int create_bt_list_swf(void) {
 	bt_list_swf[0][1] = 0;
 	int k = 0;
 
-	for (int i = 1; i < 200; i++){
-		for (int j = 1; j < 200; j++){
-			if (swf_disc_map[i][j] == 2) {
+	for (int i = 1; i < 80; i++){
+		for (int j = 1; j < 80; j++){
+			if (swf_bt_map[i][j] == 2) {
 
-				int s1 = swf_disc_map[i+1][j];
-				int s2 = swf_disc_map[i+1][j+1];
-				int s3 = swf_disc_map[i][j+1];
-				int s4 = swf_disc_map[i-1][j+1];
-				int s5 = swf_disc_map[i-1][j];
-				int s6 = swf_disc_map[i-1][j-1];
-				int s7 = swf_disc_map[i][j-1];
-				int s8 = swf_disc_map[i+1][j-1];
+				int s1 = swf_bt_map[i+1][j];
+				int s2 = swf_bt_map[i+1][j+1];
+				int s3 = swf_bt_map[i][j+1];
+				int s4 = swf_bt_map[i-1][j+1];
+				int s5 = swf_bt_map[i-1][j];
+				int s6 = swf_bt_map[i-1][j-1];
+				int s7 = swf_bt_map[i][j-1];
+				int s8 = swf_bt_map[i+1][j-1];
 
 				int goal = 0;
 				goal += (s1 == 1 && (s2 % 3 == 0)) ? 1 : 0;
@@ -2006,7 +2158,7 @@ int create_bt_list_swf(void) {
 				goal += (s7 == 1 && (s6 % 3 == 0)) ? 1 : 0;
 				goal += (s7 == 1 && (s8 % 3 == 0)) ? 1 : 0;
 
-				if (goal >= 1) {
+				if ((goal >= 1) && !(i == (int)round(4*position_x) && j == (int)round(4*position_y))) {
 					bt_list_swf[k][0] = i;
 					bt_list_swf[k][1] = j;
 					k++;
@@ -2043,6 +2195,15 @@ int update_bt_swf_map(void) {
 	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
 	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
 
+	int this_pixel_x_1 	   = (int)round(4*(tmp_position_x+0.1));
+	int this_pixel_y_1 	   = (int)round(4*(tmp_position_y+0.1));
+	int this_pixel_x_2 	   = (int)round(4*(tmp_position_x+0.1));
+	int this_pixel_y_2 	   = (int)round(4*(tmp_position_y-0.1));
+	int this_pixel_x_3 	   = (int)round(4*(tmp_position_x-0.1));
+	int this_pixel_y_3 	   = (int)round(4*(tmp_position_y+0.1));
+	int this_pixel_x_4 	   = (int)round(4*(tmp_position_x-0.1));
+	int this_pixel_y_4 	   = (int)round(4*(tmp_position_y-0.1));
+
 	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation))));  
 	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
 	int right_sensor_pix_x = (int)round(4*(tmp_position_x + 0.25 * (sin(ST_TO_RAD * tmp_orientation))));
@@ -2060,7 +2221,7 @@ int update_bt_swf_map(void) {
 
 		if (swf_bt_map[this_pixel_x][this_pixel_y] != 2) {
 			swf_bt_map[this_pixel_x][this_pixel_y] = 2; }
-		
+
 		if (swf_bt_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
 			if (tmp_left_sensor < 0.025) {
 				swf_bt_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
@@ -2086,6 +2247,17 @@ int update_bt_swf_map(void) {
 				swf_bt_map[front_sensor_pix_x][front_sensor_pix_y] = 1;
 			}
 		}
+
+
+
+		if (swf_bt_map[this_pixel_x_1][this_pixel_y_1] < 2) {
+			swf_bt_map[this_pixel_x_1][this_pixel_y_1] = 2; }
+
+		if (swf_bt_map[this_pixel_x_2][this_pixel_y_2] < 2) {
+			swf_bt_map[this_pixel_x_2][this_pixel_y_2] = 2; }
+
+		if (swf_bt_map[this_pixel_x_3][this_pixel_y_3] < 2) {
+			swf_bt_map[this_pixel_x_3][this_pixel_y_3] = 2; }	
 	}
 
 
@@ -2103,4 +2275,124 @@ int update_bt_swf_map(void) {
     fclose(fptr);
 
 	return EXIT_SUCCESS;
+}
+
+int select_bt_point_swf(void) {
+	// just distance for now
+
+	sem_wait(&position_orientationSemaphore);
+	double tmp_position_x = position_x;
+	double tmp_position_y = position_y;
+	double tmp_orientation = orientation;
+	sem_post(&position_orientationSemaphore);
+
+	int best_point = 0;
+	double best_value = 10000;
+	int bt_point_x;
+	int bt_point_y;
+	double i_value;
+
+	if (bt_list_swf[0][0] == 0 && bt_list_swf[0][1] == 0) { return -1; }
+
+	for (int i = 0; i < 100; i++) {
+		if (bt_list_swf[i][0] == 0 && bt_list_swf[i][1] == 0) {break;}
+		bt_point_x = bt_list_swf[i][0];
+		bt_point_y = bt_list_swf[i][1];	
+		i_value = sqrt(pow(((double)bt_point_x)/4 - tmp_position_x,2) +
+				 	   pow(((double)bt_point_y)/4 - tmp_position_y,2));
+		if (i_value < best_value) {
+			best_value = i_value;
+			best_point = i;
+		}
+	}
+	printf("selected point: x = %d, y = %d\n",bt_list_swf[best_point][0],bt_list_swf[best_point][1]);
+
+	return best_point;
+}
+
+path_t smooth_path_swf(path_t* path) {
+
+	path_t smoothed_path;
+	path_init(&smoothed_path, 10);
+
+	int is_path_traversable = 1;
+	int last_checked_point = 0;
+	int sequence_first_point = 0;
+	int checked_point = 0;
+
+	if (path_size(path) == 1) { 
+		path_push_back(&smoothed_path,path_get(path,0));
+		return smoothed_path;
+	}
+
+
+	printf("size of path: %zu", path_size(path));
+	while(last_checked_point != path_size(path)-1){
+		printf("last checked: %d   path size: %zu\n",last_checked_point,path_size(path));
+		printf("sequence_first_point: %d", sequence_first_point);
+		// for(int i = sequence_first_point + 1; i < path_size(path); i++) {
+		for(int i = path_size(path) - 1; i > sequence_first_point; i--) {
+			double first_x 		= ((double)(path_get(path,sequence_first_point)).row)/4;
+			double first_y 		= ((double)(path_get(path,sequence_first_point)).col)/4;
+			double checked_x 	= ((double)(path_get(path,i)).row)/4;
+			double checked_y 	= ((double)(path_get(path,i)).col)/4;
+
+			// get angle between these 2 points
+			double angle 	= calculate_target_angle(first_x,first_y,checked_x,checked_y);
+			double distance = sqrt((pow(first_x-checked_x,2)+pow(first_y-checked_y,2)));
+			is_path_traversable = 1;
+
+			for (double j = 0.0; j <= distance; j = j + 0.1){
+				// determining the closest pixel
+				int x_pix = (int)round(4 * (first_x + j * cos(angle * ST_TO_RAD)));
+				int y_pix = (int)round(4 * (first_y + j * sin(angle * ST_TO_RAD)));
+
+				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.1)));
+				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.1)));
+				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.1)));
+				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.1)));
+
+				int pix_value 		= swf_bt_map[x_pix][y_pix];
+				int pix_value_left  = swf_bt_map[x_pix_left][y_pix];
+				int pix_value_right = swf_bt_map[x_pix_right][y_pix];
+				int pix_value_up    = swf_bt_map[x_pix][y_pix_up];
+				int pix_value_down  = swf_bt_map[x_pix][y_pix_down];
+
+
+				if ((pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
+									  pix_value_up == 2	  && pix_value_down == 2) ||
+									  x_pix_left == path_begin(path)->col ||
+									  x_pix_right == path_begin(path)->col ||
+									  y_pix_up == path_begin(path)->row ||
+									  y_pix_down == path_begin(path)->row){
+					continue; }
+				else {
+					is_path_traversable = 0;
+					printf("due to px %d, %d\n", x_pix,y_pix);
+					break;
+				}
+			}
+			printf("\n");
+			printf("from point %d to point %d  ", sequence_first_point, i);
+			printf("is traversable path: %d\n", is_path_traversable);
+			
+			last_checked_point = i;
+
+			// end to start
+			if (is_path_traversable == 0) {
+				if (i == sequence_first_point+1){
+					path_push_back(&smoothed_path,path_get(path,i));
+					sequence_first_point = i;
+				}
+				else {
+					continue;
+				}
+			}
+			else {
+				path_push_back(&smoothed_path,path_get(path, i));
+				sequence_first_point = i;
+			}
+		}
+	}
+	return smoothed_path;
 }
