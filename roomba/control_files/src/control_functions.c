@@ -1659,8 +1659,29 @@ int next_step_swf(void){
 					if (path_index_swf == path_size(&path_swf)){
 						// start new movement somehow
 						printf("begin new swf movement\n");
+
+						if (swf_bt_map[(int)round(4*(tmp_pos_x))][(int)round(4*(tmp_pos_y))+1] == 1) {
+							target_orientation_swf = 90.0;
+							printf("90\n");
+						}
+						else if (swf_bt_map[(int)round(4*(tmp_pos_x))][(int)round(4*(tmp_pos_y))-1] == 1) {
+							target_orientation_swf = 270.0;
+							printf("270\n");
+						}
+						else if (swf_bt_map[(int)round(4*(tmp_pos_x))+1][(int)round(4*(tmp_pos_y))] == 1) {
+							target_orientation_swf = 0.0;
+							printf("0\n");
+						}
+						else if (swf_bt_map[(int)round(4*(tmp_pos_x))-1][(int)round(4*(tmp_pos_y))] == 1) {
+							target_orientation_swf = 180.0;
+							printf("180\n");
+						}
+
 						movement_mode_swf = 0;
 						is_path_calculated = 0;
+						new_loop = 1;
+						target_position_x_swf = tmp_pos_x + 0.2 * cos(target_orientation_swf * ST_TO_RAD);
+						target_position_y_swf = tmp_pos_y + 0.2 * sin(target_orientation_swf * ST_TO_RAD);
 						int a = rotation_direction(target_orientation_swf,tmp_orientation);
 						if (a == 1){
 							current_swf_step = 5;
@@ -1699,23 +1720,14 @@ int next_step_swf(void){
 			current_swf_step = 0;
 			break;
 		case 1:
-			loop_point_x = tmp_pos_x;
-			loop_point_y = tmp_pos_y;
 			is_updatable = 1;
 			target_orientation_swf = fmod(tmp_orientation + 90.0,360.0);
 			current_swf_step = 4;
 			break;
 		case 2:
-			// new_loop_plan();
-			if (new_loop == 1){
-				//int status = new_loop_plan();
-				target_orientation_swf = fmod(tmp_orientation + 90, 360.0);
-				printf("#1 target ori new loop: %.4f\n", target_orientation_swf);
-				current_swf_step = 4;
-			}
-			else if (new_wall_parameter == 0) {
-				target_position_x_swf = tmp_pos_x + 0.15 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.15 * sin(tmp_orientation * ST_TO_RAD);
+			if (new_wall_parameter == 0) {
+				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.1 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("x: %.4f y: %.4f target x: %.4f target y: %.4f", tmp_pos_x,tmp_pos_y,target_position_x_swf,target_position_y_swf);
 				current_swf_step = 3;
 				//current_swf_step = 5;
@@ -1723,63 +1735,52 @@ int next_step_swf(void){
 				is_at_corner = 1;
 				new_loop_plan();
 			}
-			else {
+			else if (new_wall_parameter == 1) {
 				current_swf_step = 4;
 				target_orientation_swf = 90.0 * round(fmod(tmp_orientation + 360.0 + 90.0,360.0)/90);
 			}
+			else {
+				current_swf_step = 5;
+				target_orientation_swf = 90.0 * round(fmod(tmp_orientation + 360.0 - 90.0,360.0)/90);
+			}
+			
 			break;
 		case 3:
-			if (new_loop == 1){
-				target_orientation_swf = 90.0 * round(fmod(tmp_orientation + 360.0 - 90.0,360.0)/90);
-				current_swf_step = 5;
-				printf("#3, target ori: %.4f\n", target_orientation_swf);
-			}
-			else if (is_at_corner == 1){
+ 			if (is_at_corner == 1){
 				current_swf_step = 5;
 			}
 			else {
 				current_swf_step = 2;
 			}
-			//current_swf_step = 2;
 			break;
 
 		case 4:
 			if (new_loop == 1){
-				target_position_x_swf = tmp_pos_x + 0.25 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.25 * sin(tmp_orientation * ST_TO_RAD);
+				new_loop = 0;
 				current_swf_step = 3;
-				is_at_corner = 0;
-				printf("#2 orientation: %.4f\n current x: %.4f curr_y: %.4f\n target_x: %.4f target_y: %.4f",
-				orientation,tmp_pos_x,tmp_pos_y,target_position_x_swf,target_position_y_swf);
 			}
 			else {
-				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.1 * sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + 0.2 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.2 * sin(tmp_orientation * ST_TO_RAD);
 				current_swf_step = 3;
 				new_loop_plan();
 			}
 			break;
 		case 5:
-			if (new_loop == 1) {
-				loop_point_x = tmp_pos_x;
-				loop_point_y = tmp_pos_y;
+			if (new_loop == 1){
 				new_loop = 0;
-				target_position_x_swf = tmp_pos_x + 0.1 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.1 * sin(tmp_orientation * ST_TO_RAD);
 				current_swf_step = 3;
-				printf("#4 target x: %.4f target y: %.4f\n", target_position_x_swf,target_position_y_swf);
 			}
 			else if (is_at_corner == 1){
-				target_position_x_swf = tmp_pos_x + 0.5 * cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + 0.5 * sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + 0.25 * cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + 0.25 * sin(tmp_orientation * ST_TO_RAD);
 				//printf("%f %f \n", target_position_x_swf, target_position_y_swf);
 				current_swf_step = 3;
 				new_loop_plan();
 				is_at_corner = 0;
-				// new_loop_plan();
 			}
 			else{
-				current_swf_step = 0;
+				current_swf_step = 2;
 			}
 			break;
 
@@ -1800,19 +1801,6 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 	tmp_front_sensor = fmin(tmp_front_sensor,virt_sensor_front);
 	tmp_right_sensor = fmin(tmp_right_sensor,virt_sensor_right);
 	tmp_left_sensor =  fmin(tmp_left_sensor,virt_sensor_left);
-
-	if (swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)] >= 2 && 
-		swf_bt_map[(int)round(tmp_pos_x)+1][(int)round(tmp_pos_y)] >= 2 &&
-		swf_bt_map[(int)round(tmp_pos_x)-1][(int)round(tmp_pos_y)] >= 2 &&
-		swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)+1] >= 2 &&
-		swf_bt_map[(int)round(tmp_pos_x)][(int)round(tmp_pos_y)+1] >= 2){
-			tmp_movement_type = 0;
-			spool_next_step_swf_calculated = 0;
-			movement_mode_swf = 1;
-			printf("lets calculate new path\n");
-			sem_post(&spool_calc_next_step_swf);
-			return tmp_movement_type;
-	}
 
 	switch(current_swf_step) {
 		case 0:
@@ -1842,26 +1830,49 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			// }
 
 			if (tmp_right_sensor > 0.05) {
-				printf("end of wall %f\n", right_sensor);
+
+				printf("end of wall, right sensor:  %.4f\n", tmp_right_sensor);
+				printf("real right: %.4f  virtual right: %.4f\n\n", right_sensor,virt_sensor_right);
 				tmp_movement_type = 0;
 				new_wall_parameter = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
-			else if (tmp_front_sensor < 0.02) {
-				tmp_movement_type = 0;
-				new_wall_parameter = 1;
-				spool_next_step_swf_calculated = 0;
-				sem_post(&spool_calc_next_step_swf);
+			else if (tmp_front_sensor < 0.0075) {
+				// if (swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)] >= 2 && 
+				// 	swf_bt_map[(int)round(4*tmp_pos_x)+1][(int)round(4*tmp_pos_y)] >= 2 &&
+				// 	swf_bt_map[(int)round(4*tmp_pos_x)-1][(int)round(4*tmp_pos_y)] >= 2 &&
+				// 	swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)+1] >= 2 &&
+				// 	swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)-1] >= 2){
+
+				if (tmp_front_sensor < 0.0075 &&
+					tmp_right_sensor < 0.0075 &&
+					tmp_left_sensor  < 0.01){
+						tmp_movement_type = 0;
+						spool_next_step_swf_calculated = 0;
+						movement_mode_swf = 1;
+						printf("lets calculate new path\n");
+						sem_post(&spool_calc_next_step_swf);
+						return tmp_movement_type;
+				}
+				else {		
+					if (tmp_left_sensor < 0.01)	{
+						printf("le special maneuver\n");
+						tmp_movement_type = 0;
+						new_wall_parameter = 2;
+						spool_next_step_swf_calculated = 0;
+						sem_post(&spool_calc_next_step_swf);
+					}
+					else {	
+						printf("new wall, front sensor:  %.4f\n", tmp_front_sensor);
+						printf("real front: %.4f  virtual front: %.4f\n\n", front_sensor,virt_sensor_front);
+						tmp_movement_type = 0;
+						new_wall_parameter = 1;
+						spool_next_step_swf_calculated = 0;
+						sem_post(&spool_calc_next_step_swf);
+					}
+				}
 			}
-			// else if (sqrt(pow(loop_point_x - tmp_pos_x,2) + 
-			// 			  pow(loop_point_y - tmp_pos_y,2)) < 0.15){
-			// 		tmp_movement_type = 0;
-			// 		new_loop = 1;
-			// 		// int status = new_loop_plan();
-			// 		spool_next_step_swf_calculated = 0;
-			// 		sem_post(&spool_calc_next_step_swf);
-			// }
 			else {
 				tmp_movement_type = 1;
 			}
@@ -1882,7 +1893,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 4:
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
 				tmp_movement_type = 3;
 			}
 			else {
@@ -1892,7 +1903,8 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 5:
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
+			//if(movement_mode_swf == 1){printf("%.4f\n",fabs(target_orientation_swf - fmod(tmp_orientation,360.0)));}
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.2) {
 				tmp_movement_type = 2;
 			}
 			else {
@@ -1926,15 +1938,15 @@ int update_swf_map(void) {
 	double tmp_right_sensor = right_sensor;
 	sem_post(&dist_sensorsSemaphore);
 
-	int this_pixel_x 	   = (int)round(10*(tmp_position_x));
-	int this_pixel_y 	   = (int)round(10*(tmp_position_y));
+	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
+	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
 
-	int left_sensor_pix_x  = (int)round(10*(tmp_position_x - 0.175 * (sin(ST_TO_RAD * tmp_orientation))));  
-	int left_sensor_pix_y  = (int)round(10*(tmp_position_y + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
-	int right_sensor_pix_x = (int)round(10*(tmp_position_x + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
-	int right_sensor_pix_y = (int)round(10*(tmp_position_y - 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
-	int front_sensor_pix_x = (int)round(10*(tmp_position_x + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
-	int front_sensor_pix_y = (int)round(10*(tmp_position_y + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
+	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.175 * (sin(ST_TO_RAD * tmp_orientation))));  
+	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_x = (int)round(4*(tmp_position_x + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
+	int right_sensor_pix_y = (int)round(4*(tmp_position_y - 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_x = (int)round(4*(tmp_position_x + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
+	int front_sensor_pix_y = (int)round(4*(tmp_position_y + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
 	
 	
 	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
@@ -1953,48 +1965,16 @@ int update_swf_map(void) {
 		// 		}
 		// 	}
 		// }
-		for (double i = -0.1; i <= 0.1; i += 0.02){
-			for (double j = -0.1; j <= 0.1; j += 0.02){
-				if (sqrt(pow(i,2) + pow(j,2)) < 0.1) {
-						if (swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] < 2) {
-							swf_disc_map[(int)round(10*(tmp_position_x + i))][(int)round(10*(position_y + j))] = 2; 
+		// TODO
+		for (double i = -0.12; i <= 0.12; i += 0.02){
+			for (double j = -0.12; j <= 0.12; j += 0.02){
+				if (sqrt(pow(i,2) + pow(j,2)) <= 0.12) {
+						if (swf_disc_map[(int)round(4*(tmp_position_x + i))][(int)round(4*(position_y + j))] < 2) {
+							swf_disc_map[(int)round(4*(tmp_position_x + i))][(int)round(4*(position_y + j))] = 2; 
 					}	
 				}
 			}
 		}
-
-		// if(movement_type == 1){
-		// 	int dir = (int)round(tmp_orientation/90);
-		// 	switch(dir){
-		// 		case 0:
-		// 			if (swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y + 0.125))+1] < 2) {
-		// 			swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y + 0.125))+1] = 1;
-		// 			break; }
-		// 		case 1:
-		// 			if (swf_disc_map[(int)round(10*(tmp_position_x - 0.125))-1][(int)round(10*(position_y))] < 2) {
-		// 			swf_disc_map[(int)round(10*(tmp_position_x - 0.125))-1][(int)round(10*(position_y))] = 1;
-		// 			break; }
-		// 		case 2:
-		// 			if (swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y - 0.125))-1] < 2){
-		// 			swf_disc_map[(int)round(10*(tmp_position_x))][(int)round(10*(position_y - 0.125))-1] = 1;
-		// 			break; }
-		// 		case 3:
-		// 			if (swf_disc_map[(int)round(10*(tmp_position_x + 0.125))+1][(int)round(10*(position_y))] < 2){
-		// 			swf_disc_map[(int)round(10*(tmp_position_x + 0.125))+1][(int)round(10*(position_y))] = 1;
-		// 			break; }							
-		// 	}
-		// }
-
-		// if (swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] <= 2){
-		// 	if (tmp_right_sensor <= 0.005) {
-		// 		swf_disc_map[right_sensor_pix_x][right_sensor_pix_y] = 3;
-		// 	}
-		// }
-		// if (swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] <= 2){
-		// 	if (tmp_front_sensor <= 0.005) {
-		// 		swf_disc_map[front_sensor_pix_x][front_sensor_pix_y] = 3;
-		// 	}
-		// }
 	}
 
 
@@ -2002,9 +1982,9 @@ int update_swf_map(void) {
     FILE *fptr;
     char c;
     fptr = fopen("../../roomba/log/map_swf.txt","w");
-    for(int i = 0; i < 200; i++) {
-        for(int j = 0; j < 200; j++){
-            c = swf_disc_map[j][200-i] +'0';
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++){
+            c = swf_disc_map[j][80-i] +'0';
             fputc(c,fptr);
         }
         fprintf(fptr,"\r\n");
@@ -2023,87 +2003,108 @@ int virtual_sensors(void) {
 	sem_post(&position_orientationSemaphore);
 
 	double right_orientation = (front_orientation + 270.0) * ST_TO_RAD;
+	double left_orientation  = (front_orientation +  90.0) * ST_TO_RAD;
 	front_orientation = front_orientation * ST_TO_RAD;
 
-	double front_x = x_coord + 0.125 * cos(front_orientation);
-	double front_y = y_coord + 0.125 * sin(front_orientation);
-	double right_x = x_coord + 0.125 * cos(right_orientation);
-	double right_y = y_coord + 0.125 * sin(right_orientation);
-	
+	double front_x = x_coord + 0.05 * cos(front_orientation);
+	double front_y = y_coord + 0.05 * sin(front_orientation);
+	double right_x = x_coord + 0.05 * cos(right_orientation);
+	double right_y = y_coord + 0.05 * sin(right_orientation);
+	double left_x  = x_coord + 0.05 * cos(left_orientation);
+	double left_y  = y_coord + 0.05 * sin(left_orientation);
+
+	int this_pix_x = round(4 * x_coord);
+	int this_pix_y = round(4 * y_coord);
+
 	int f_flag = 0;
 	int r_flag = 0;
+	int l_flag = 0;
 
 	double temp_front_sensor = 1.0;
 	double temp_right_sensor = 1.0;
 	double temp_left_sensor = 1.0;
-	for (double i = 0.0; i < 2.0; i = i + 0.001) {
+	for (double i = 0.0; i < 5.0; i = i + 0.05) {
 		// front sensor
 		if (!f_flag) {
 			// determine closest pixel on background matrix
-			int f_x_pix = round(10 * (front_x + i * cos(front_orientation)));
-			int f_y_pix = round(10 * (front_y + i * sin(front_orientation)));
-			if (swf_plan[f_x_pix][f_y_pix] == 0) {
+			int f_x_pix = round(4 * (front_x + i * cos(front_orientation)));
+			int f_y_pix = round(4 * (front_y + i * sin(front_orientation)));
+			if (swf_plan[f_x_pix][f_y_pix] == 0){// &&
+				//this_pix_x != f_x_pix && this_pix_y != f_y_pix) {
 				temp_front_sensor = i/10;
 				//printf("%f\n",i);
+				// printf("f_x=%.2f f_y=%.2f %d %d\n",front_x,front_y,f_x_pix,f_y_pix);
 				f_flag = 1;
 			}
 		}
 		if (!r_flag) {
 			// determine closest pixel on background matrix
-			int r_x_pix = round(10 * (right_x + i * cos(right_orientation)));
-			int r_y_pix = round(10 * (right_y + i * sin(right_orientation)));
-			if (swf_plan[r_x_pix][r_y_pix] == 0) {
+			int r_x_pix = round(4 * (right_x + i * cos(right_orientation)));
+			int r_y_pix = round(4 * (right_y + i * sin(right_orientation)));
+			if (swf_plan[r_x_pix][r_y_pix] == 0){// &&
+				//this_pix_x != r_x_pix && this_pix_y != r_y_pix) {
 				temp_right_sensor = i/10;
 				//printf("%f\n",i);
 				r_flag = 1;
 			}
 		}
+		if (!l_flag) {
+			// determine closest pixel on background matrix
+			int l_x_pix = round(4 * (left_x + i * cos(left_orientation)));
+			int l_y_pix = round(4 * (left_y + i * sin(left_orientation)));
+			if (swf_plan[l_x_pix][l_y_pix] == 0){// &&
+				//this_pix_x != l_x_pix && this_pix_y != l_y_pix) {
+				temp_left_sensor = i/10;
+				//printf("%f\n",i);
+				l_flag = 1;
+			}
+		}
 	}
-
 	virt_sensor_front = temp_front_sensor;
 	virt_sensor_right = temp_right_sensor;
 	virt_sensor_left = temp_left_sensor;
 
 	// printf("c_x: %f,      c_y: %f    %f\n",position_x,position_y,orientation);
 	// printf("v_front: %.4f v_right: %.4f\n\n", virt_sensor_front,virt_sensor_right);
-
+	//printf("l: %.4f r: %.4f f: %.4f\n", virt_sensor_left,virt_sensor_right,virt_sensor_front);
 	return EXIT_SUCCESS;
 }
 
 void init_plan(){
 
-    FILE *fptr;
-    char c;
-    int a;
-    fptr = fopen("../../roomba/plan/plan_binary2.txt","r");
-    if(fptr == NULL) {
-        perror("Error in opening file");
-        return;
-    }
-    for(int i = 0; i < 200; i++) {
-        for(int j = 0; j < 201; j++) {
-            c = fgetc(fptr);
-            a = c -'0';
-            if (!(j == 200)) {
-                // inverted y coord, higher index - smaller coord
-                swf_plan[j][199-i] = 1;
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++) {
+            if (!(j == 80)) {
+                swf_plan[j][80-i] = 1;
             }
         }
     }
-    fclose(fptr);
+	
+    // fclose(fptr);
 
     return;
 }
 
 int new_loop_plan(void) {
 
-	for (int i = 0; i < 200; i++){
-		for (int j = 0; j<  200; j++){
+	for (int i = 0; i < 80; i++){
+		for (int j = 0; j<  80; j++){
 			if (swf_disc_map[i][j] > 1){
 				swf_plan[i][j] = 0;
 			}
 		}
 	}
+
+
+for (double i = -0.12; i <= 0.12; i += 0.02){
+			for (double j = -0.12; j <= 0.12; j += 0.02){
+				if (sqrt(pow(i,2) + pow(j,2)) <= 0.12) {
+						if (swf_plan[(int)round(4*(position_x + i))][(int)round(4*(position_y + j))] == 0) {
+							swf_plan[(int)round(4*(position_x + i))][(int)round(4*(position_y + j))] = 1; 
+					}	
+				}
+			}
+		}
 
 	// for (int i=0; i<140;i++){
 	// 	for(int j = 0; j<140;j++){
@@ -2117,9 +2118,9 @@ int new_loop_plan(void) {
     FILE *fptr;
     char c;
     fptr = fopen("../../roomba/log/map_swf_new_loop.txt","w");
-    for(int i = 0; i < 200; i++) {
-        for(int j = 0; j < 200; j++){
-            c = swf_plan[j][200-i] +'0';
+    for(int i = 0; i < 80; i++) {
+        for(int j = 0; j < 80; j++){
+            c = swf_plan[j][80-i] +'0';
             fputc(c,fptr);
         }
         fprintf(fptr,"\r\n");
@@ -2195,14 +2196,14 @@ int update_bt_swf_map(void) {
 	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
 	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
 
-	int this_pixel_x_1 	   = (int)round(4*(tmp_position_x+0.1));
-	int this_pixel_y_1 	   = (int)round(4*(tmp_position_y+0.1));
-	int this_pixel_x_2 	   = (int)round(4*(tmp_position_x+0.1));
-	int this_pixel_y_2 	   = (int)round(4*(tmp_position_y-0.1));
-	int this_pixel_x_3 	   = (int)round(4*(tmp_position_x-0.1));
-	int this_pixel_y_3 	   = (int)round(4*(tmp_position_y+0.1));
-	int this_pixel_x_4 	   = (int)round(4*(tmp_position_x-0.1));
-	int this_pixel_y_4 	   = (int)round(4*(tmp_position_y-0.1));
+	int this_pixel_x_1 	   = (int)round(4*(tmp_position_x+0.08));
+	int this_pixel_y_1 	   = (int)round(4*(tmp_position_y+0.08));
+	int this_pixel_x_2 	   = (int)round(4*(tmp_position_x+0.08));
+	int this_pixel_y_2 	   = (int)round(4*(tmp_position_y-0.08));
+	int this_pixel_x_3 	   = (int)round(4*(tmp_position_x-0.08));
+	int this_pixel_y_3 	   = (int)round(4*(tmp_position_y+0.08));
+	int this_pixel_x_4 	   = (int)round(4*(tmp_position_x-0.08));
+	int this_pixel_y_4 	   = (int)round(4*(tmp_position_y-0.08));
 
 	int left_sensor_pix_x  = (int)round(4*(tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation))));  
 	int left_sensor_pix_y  = (int)round(4*(tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation))));
@@ -2368,13 +2369,13 @@ path_t smooth_path_swf(path_t* path) {
 					continue; }
 				else {
 					is_path_traversable = 0;
-					printf("due to px %d, %d\n", x_pix,y_pix);
+					// printf("due to px %d, %d\n", x_pix,y_pix);
 					break;
 				}
 			}
-			printf("\n");
-			printf("from point %d to point %d  ", sequence_first_point, i);
-			printf("is traversable path: %d\n", is_path_traversable);
+			// printf("\n");
+			// printf("from point %d to point %d  ", sequence_first_point, i);
+			// printf("is traversable path: %d\n", is_path_traversable);
 			
 			last_checked_point = i;
 

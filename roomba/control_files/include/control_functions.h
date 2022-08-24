@@ -207,9 +207,9 @@ double prev_right_sensor;
 double prev_front_sensor;
 double loop_point_x;
 double loop_point_y;
-int swf_disc_map[200][200];
+int swf_disc_map[80][80];
 
-int swf_plan[200][200];
+int swf_plan[80][80];
 
 double virt_sensor_front;
 double virt_sensor_back;
