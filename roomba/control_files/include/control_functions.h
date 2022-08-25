@@ -59,7 +59,7 @@ int rg_disc_map[80][80];
     2 - rotating clockwise
     3 - rotating counter clockwise
     4 - driving backward   */
-_Atomic int movement_type;
+int movement_type;
 sem_t movement_typeSemaphore;           // Semaphore
 
 double target_direction;                // target direction to rotate to
@@ -170,69 +170,102 @@ int movement_mode;
 1 - horizontal (left or right) */
 int vertical_horizontal;
 
-/* sfw algorithm variables */
+/* SFW algorithm variables */
+
+/* signal to calculate next task */
 sem_t spool_calc_next_step_swf;
 
-int spool_next_step_swf_calculated;
+/* signal that next task is calculated */
+_Atomic int spool_next_step_swf_calculated;
+
+sem_t superv_calc_swf_Semaphore;
 
 /* type of swf step that is being executed or is to be executed
 0 - do nothing
 1 - drive forward until reeaching wall
 2 - move forward by wall until end of wall/new wall
-3 - drive forward by 25cm
-4 - rotate ccw by 90deg
-5 - rotate cw by 90deg
-6 - rotate cw until right_sensor' > 0
-7 - rotate cw until right_sensor' < 0
-8 - rotate ccw until right_sensor' > 0
-9 - rotate ccw until right_sensor' < 0
-10 - rotate cw until front_sensor' > 0
+3 - drive forward until position reached 
+4 - rotate ccw until direction reached 
+5 - rotate cw until direction reached 
 */
 int current_swf_step;
 
-int is_adjusted;
-double dist_from_wall;
-
 /* 0 - end of wall, 1 - new wall */
-int new_wall_parameter;
-int is_at_corner;
+_Atomic int new_wall_parameter;
 
+/* 1 - first half of a right turn (drive and rotae)
+   0 - second half (drive and start movement)
+*/ 
+_Atomic int is_at_corner;
+
+/* distance to dest point */
 double dist_swf;
+
+/* previous distance to dest point */
 double prev_dist_swf;
+
+/* target position while moving forward */
 double target_position_x_swf;
 double target_position_y_swf;
+
+/* target orientation while rotating */
 double target_orientation_swf;
-int sensors_set;
-double prev_right_sensor;
-double prev_front_sensor;
-double loop_point_x;
-double loop_point_y;
+
+/* handling virtual sensors variables */
+
+/* discovery map, contains obstacles and visited points
+treat as not updated map */
 int swf_disc_map[400][400];
+sem_t swf_disc_mapSemaphore;
 
+/* plan for virtual sensors calculations 
+0 - obstacle, 1 - no obstacle 
+doesnt include points covered by robot atm */
 int swf_plan[400][400];
+sem_t swf_planSemaphore;
 
+/* virtual sensors indications */
 double virt_sensor_front;
 double virt_sensor_back;
 double virt_sensor_right;
 double virt_sensor_left;
-int is_updatable;
-int new_loop;
+sem_t virtual_sensorsSemaphore;
+
+/* is plan updatable (it is not before reaching first wall)
+ 0 - no, 1 - yes */
+_Atomic int is_updatable;
+
+/* handling navigation to next area 
+1 - navigating, 0 - reached */
+_Atomic int new_loop;
+
+/* backtracking list for backtracking algorithm */
 int bt_list_swf[100][2];
+
+/* map for searching backtracking points */
 int swf_bt_map[80][80];
-int movement_mode_swf;
+
+/* movement mode in swf algorithm
+0 - normal wall following, 1 - navigating to next area */
+_Atomic int movement_mode_swf;
+
+/* handling a* trace to new area */
 int path_index_swf;
+
+/* handling a* trace, target position */
 double bt_target_swf_x;
 double bt_target_swf_y;
-int is_path_calculated;
+
+/* flag, 1 - calculated, 0 - not calculated */
+_Atomic int is_path_calculated;
 
 /* which sensor smaller 1 - real, 0 - virtual */
 int smaller_front;
 int smaller_right;
 int smaller_left;
 
+/* a* navigation to new area in swf algorithm path */
 path_t path_swf;
-
-
 
 int initialize_semaphores(void);
 

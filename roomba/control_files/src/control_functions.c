@@ -31,7 +31,10 @@ int initialize_semaphores(void) {
 		sem_init(&spool_calc_next_step_stc, 0, 0)		||
 		sem_init(&spool_calc_next_step_ba, 0, 0)		||
 		sem_init(&spool_calc_next_step_rg, 0, 0)		||
-		sem_init(&spool_calc_next_step_swf, 0, 0))
+		sem_init(&spool_calc_next_step_swf, 0, 0)		||
+		sem_init(&virtual_sensorsSemaphore, 0, 1)		||
+		sem_init(&superv_calc_swf_Semaphore, 0, 1)		||
+		sem_init(&swf_planSemaphore, 0, 1))
 		{
 			return EXIT_FAILURE;
 		}
@@ -524,7 +527,6 @@ int calculate_movement_type(void) {
 					}
 					break;
 
-
 				default:
 				movement_type = 0;
 				break;
@@ -535,9 +537,10 @@ int calculate_movement_type(void) {
 	
 	else if (algorithm_select == 3){
 		if (spool_next_step_swf_calculated == 1){
+			sem_wait(&superv_calc_swf_Semaphore);
 			movement_type = swf_mov_superv(tmp_pos_x,tmp_pos_y,tmp_orientation, tmp_front_sensor,
 									   	   tmp_back_sensor,tmp_left_sensor,tmp_right_sensor);
-	
+			sem_post(&superv_calc_swf_Semaphore);
 		}
 	}
 	
@@ -629,17 +632,14 @@ int init_ba(void) {
 /* function initializing sfw algorithm variables */
 int init_swf(void) {
 	current_swf_step = 1;
-	is_adjusted = 1;
 	spool_next_step_swf_calculated = 1;
 	new_wall_parameter = 0;
 	dist_swf = 10000;
 	prev_dist_swf = 10000;
-	sensors_set = 0;
 	is_at_corner = 0;
-	prev_right_sensor = 0.0;
-	prev_front_sensor = 0.0;
 	virt_sensor_front = 1.0;
 	virt_sensor_right = 1.0;
+	virt_sensor_left = 1.0;
 	new_loop = 0;
 	is_updatable = 0;
 	movement_mode_swf = 0;
@@ -1484,10 +1484,10 @@ path_t smooth_path(path_t* path) {
 	}
 
 
-	printf("size of path: %zu", path_size(path));
+	//printf("size of path: %zu", path_size(path));
 	while(last_checked_point != path_size(path)-1){
-		printf("last checked: %d   path size: %zu\n",last_checked_point,path_size(path));
-		printf("sequence_first_point: %d", sequence_first_point);
+		//printf("last checked: %d   path size: %zu\n",last_checked_point,path_size(path));
+		//printf("sequence_first_point: %d", sequence_first_point);
 		// for(int i = sequence_first_point + 1; i < path_size(path); i++) {
 		for(int i = path_size(path) - 1; i > sequence_first_point; i--) {
 			double first_x 		= ((double)(path_get(path,sequence_first_point)).row)/4;
@@ -1526,13 +1526,13 @@ path_t smooth_path(path_t* path) {
 					continue; }
 				else {
 					is_path_traversable = 0;
-					printf("due to px %d, %d\n", x_pix,y_pix);
+					//printf("due to px %d, %d\n", x_pix,y_pix);
 					break;
 				}
 			}
-			printf("\n");
-			printf("from point %d to point %d  ", sequence_first_point, i);
-			printf("is traversable path: %d\n", is_path_traversable);
+			//printf("\n");
+			//printf("from point %d to point %d  ", sequence_first_point, i);
+			//printf("is traversable path: %d\n", is_path_traversable);
 			
 			last_checked_point = i;
 
@@ -1568,6 +1568,7 @@ path_t smooth_path(path_t* path) {
 	return smoothed_path;
 }
 
+/* function calculating next step based on current state for swf algorithm */
 int next_step_swf(void){
 	sem_wait(&position_orientationSemaphore);
 	double tmp_pos_x = position_x;
@@ -1580,12 +1581,12 @@ int next_step_swf(void){
 	if (movement_mode_swf == 1){
 		if (is_path_calculated == 0){
 			update_bt_swf_map();
-			printf(" ... map updated\n");
+			//printf(" ... map updated\n");
 			int status = create_bt_list_swf();
-			printf("... bt list created\n");
+			//printf("... bt list created\n");
 			int bt_point;
 			bt_point = select_bt_point_swf();
-			printf("... bt point selected\n");
+			//printf("... bt point selected\n");
 			if (bt_point < 0) {
 				algorithm_finished = 1;
 				printf("\nalgorithm finished \n");
@@ -1599,30 +1600,30 @@ int next_step_swf(void){
 			init_a_grid_swf(&grid);
 			coordinate_t begin = {begin_x,begin_y};
 			coordinate_t end = {bt_list_swf[bt_point][0],bt_list_swf[bt_point][1]};
-			print_begin_end(&begin, &end);
+			//print_begin_end(&begin, &end);
 			path_t path_raw_swf = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
 
 			path_index_swf = 0;
 			if(path_empty(&path_raw_swf)) {
-				printf("%d %d\n", swf_bt_map[begin_x][begin_y],swf_bt_map[bt_list_swf[bt_point][0]][bt_list_swf[bt_point][1]]);
+				//printf("%d %d\n", swf_bt_map[begin_x][begin_y],swf_bt_map[bt_list_swf[bt_point][0]][bt_list_swf[bt_point][1]]);
 				algorithm_finished = 1;
-				printf("No path found!\nFinishing work...\n");
+				//printf("No path found!\nFinishing work...\n");
 			}
-			else {
-				printf("Path before smoothing:\n");
-				path_for_each_r(&path_raw_swf, coordinate_print);
-				printf("\n");
-			}
-			printf("Path after smoothing:\n");
+			//else {
+				//printf("Path before smoothing:\n");
+				//path_for_each_r(&path_raw_swf, coordinate_print);
+				//printf("\n");
+			//}
+			//printf("Path after smoothing:\n");
 			//path_t path2 = path;
 
 			path_swf = smooth_path_swf(&path_raw_swf);
 
 			path_destroy(&path_raw_swf);
-			path_for_each_r(&path_swf, coordinate_print);
-			printf("\n");
-			printf("size: %zu capacity: %zu\n",path_swf.size,path_swf.capacity);
-			fflush(stdout);
+			// path_for_each_r(&path_swf, coordinate_print);
+			// printf("\n");
+			// printf("size: %zu capacity: %zu\n",path_swf.size,path_swf.capacity);
+			// fflush(stdout);
 			grid_uint8_destroy(&grid);
 
 			double dest_x = ((double)(path_get(&path_swf,path_index_swf)).row)/4;
@@ -1655,7 +1656,7 @@ int next_step_swf(void){
 					path_index_swf++;
 					if (path_index_swf == path_size(&path_swf)){
 						// start new movement somehow
-						printf("begin new swf movement\n");
+						//printf("begin new swf movement\n");
 
 						if (swf_bt_map[(int)round(4*(tmp_pos_x))][(int)round(4*(tmp_pos_y))+1] == 1) {
 							target_orientation_swf = 90.0;
@@ -1782,7 +1783,6 @@ int next_step_swf(void){
 			break;
 
 	}
-	//usleep(100000);
 	//printf("step: %d\n",current_swf_step);
 	spool_next_step_swf_calculated = 1;
 	return EXIT_SUCCESS;
@@ -1792,10 +1792,8 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_front_sensor, double tmp_back_sensor,
                    double tmp_left_sensor, double tmp_right_sensor) {
 	int tmp_movement_type = 0;
-	//printf("  front: %.4f   right: %.4f\n", tmp_front_sensor,tmp_right_sensor);
-	//printf("v_front: %.4f v_right: %.4f\n", virt_sensor_front,virt_sensor_right);
-	
 
+	sem_wait(&virtual_sensorsSemaphore);
 	smaller_front = (tmp_front_sensor <= virt_sensor_front) ? 1 : 0;
 	smaller_right = (tmp_right_sensor <= virt_sensor_right) ? 1 : 0;
 	smaller_left =  (tmp_left_sensor  <= virt_sensor_left)  ? 1 : 0;
@@ -1803,15 +1801,14 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 	tmp_front_sensor = fmin(tmp_front_sensor,virt_sensor_front);
 	tmp_right_sensor = fmin(tmp_right_sensor,virt_sensor_right);
 	tmp_left_sensor =  fmin(tmp_left_sensor,virt_sensor_left);
-	
+	sem_post(&virtual_sensorsSemaphore);	
 
 	switch(current_swf_step) {
 		case 0:
 			tmp_movement_type = 0;
 			break;
 		case 1:	
-			dist_from_wall = (is_adjusted == 1) ? 0.005 : 0.005;
-			if (tmp_front_sensor < dist_from_wall){
+			if (tmp_front_sensor < 0.005){
 				tmp_movement_type = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
@@ -1833,7 +1830,6 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			// }
 
 			if (tmp_right_sensor > 0.05) {
-
 				//printf("end of wall, right sensor:  %.4f\n", tmp_right_sensor);
 				//printf("real right: %.4f  virtual right: %.4f\n\n", right_sensor,virt_sensor_right);
 				tmp_movement_type = 0;
@@ -1842,19 +1838,13 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 				sem_post(&spool_calc_next_step_swf);
 			}
 			else if (tmp_front_sensor < 0.0075) {
-				// if (swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)] >= 2 && 
-				// 	swf_bt_map[(int)round(4*tmp_pos_x)+1][(int)round(4*tmp_pos_y)] >= 2 &&
-				// 	swf_bt_map[(int)round(4*tmp_pos_x)-1][(int)round(4*tmp_pos_y)] >= 2 &&
-				// 	swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)+1] >= 2 &&
-				// 	swf_bt_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)-1] >= 2){
-
 				if (tmp_front_sensor < 0.005 &&
 					tmp_right_sensor < 0.005 &&
 					tmp_left_sensor  < 0.005){
 						tmp_movement_type = 0;
 						spool_next_step_swf_calculated = 0;
 						movement_mode_swf = 1;
-						printf("lets calculate new path\n");
+						//printf("lets calculate new path\n");
 						sem_post(&spool_calc_next_step_swf);
 						return tmp_movement_type;
 				}
@@ -1864,7 +1854,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 						tmp_movement_type = 0;
 						spool_next_step_swf_calculated = 0;
 						movement_mode_swf = 1;
-						printf("lets calculate new path\n");
+						//printf("lets calculate new path\n");
 						sem_post(&spool_calc_next_step_swf);
 						return tmp_movement_type;
 
@@ -1901,7 +1891,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			else {
 				prev_dist_swf = 10000;
-				movement_type = 0;
+				tmp_movement_type = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
@@ -1911,7 +1901,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 				tmp_movement_type = 3;
 			}
 			else {
-				movement_type = 0;
+				tmp_movement_type = 0;
 				spool_next_step_swf_calculated = 0;
 				sem_post(&spool_calc_next_step_swf);
 			}
@@ -2027,6 +2017,8 @@ int virtual_sensors(void) {
 	double temp_front_sensor = 1.0;
 	double temp_right_sensor = 1.0;
 	double temp_left_sensor = 1.0;
+
+	sem_wait(&swf_planSemaphore);
 	for (double i = 0.0; i < 5.0; i = i + 0.05) {
 		// front sensor
 		if (!f_flag) {
@@ -2064,9 +2056,12 @@ int virtual_sensors(void) {
 			}
 		}
 	}
+	sem_post(&swf_planSemaphore);
+	sem_wait(&virtual_sensorsSemaphore);
 	virt_sensor_front = temp_front_sensor;
 	virt_sensor_right = temp_right_sensor;
 	virt_sensor_left = temp_left_sensor;
+	sem_post(&virtual_sensorsSemaphore);
 
 	// printf("c_x: %f,      c_y: %f    %f\n",position_x,position_y,orientation);
 	// printf("v_front: %.4f v_right: %.4f\n\n", virt_sensor_front,virt_sensor_right);
@@ -2090,7 +2085,7 @@ void init_plan(){
 }
 
 int new_loop_plan(void) {
-
+	sem_wait(&swf_planSemaphore);
 	for (int i = 0; i < 400; i++){
 		for (int j = 0; j<  400; j++){
 			if (swf_disc_map[i][j] > 1){
@@ -2109,15 +2104,6 @@ for (double i = -0.125; i <= 0.125; i += 0.025){
 				}
 			}
 		}
-
-	// for (int i=0; i<140;i++){
-	// 	for(int j = 0; j<140;j++){
-	// 		printf("%d",swf_plan[j][200-i]);
-	// 	}
-	// 	printf("\n");
-	// }
-
-
 	/* write a map for debugging */
     // FILE *fptr;
     // char c;
@@ -2131,7 +2117,7 @@ for (double i = -0.125; i <= 0.125; i += 0.025){
     // }
     // fclose(fptr);
 
-
+	sem_post(&swf_planSemaphore);
 	return EXIT_SUCCESS;
 }
 
@@ -2190,7 +2176,7 @@ int create_bt_list_swf(void) {
 		}
 	}
 	for (int z = 0; bt_list_swf[z][0] != 0; z++){
-		printf("\n{%d,%d}\n",bt_list_swf[z][0],bt_list_swf[z][1]);
+		//printf("\n{%d,%d}\n",bt_list_swf[z][0],bt_list_swf[z][1]);
 	}
 
 	return EXIT_SUCCESS;
@@ -2284,17 +2270,17 @@ int update_bt_swf_map(void) {
 
 
 	/* write a map for debugging */
-    FILE *fptr;
-    char c;
-    fptr = fopen("../../roomba/log/map_swf_bt.txt","w");
-    for(int i = 0; i < 80; i++) {
-        for(int j = 0; j < 80; j++){
-            c = swf_bt_map[j][80-i] +'0';
-            fputc(c,fptr);
-        }
-        fprintf(fptr,"\r\n");
-    }
-    fclose(fptr);
+    // FILE *fptr;
+    // char c;
+    // fptr = fopen("../../roomba/log/map_swf_bt.txt","w");
+    // for(int i = 0; i < 80; i++) {
+    //     for(int j = 0; j < 80; j++){
+    //         c = swf_bt_map[j][80-i] +'0';
+    //         fputc(c,fptr);
+    //     }
+    //     fprintf(fptr,"\r\n");
+    // }
+    // fclose(fptr);
 
 	return EXIT_SUCCESS;
 }
@@ -2327,7 +2313,7 @@ int select_bt_point_swf(void) {
 			best_point = i;
 		}
 	}
-	printf("selected point: x = %d, y = %d\n",bt_list_swf[best_point][0],bt_list_swf[best_point][1]);
+	//printf("selected point: x = %d, y = %d\n",bt_list_swf[best_point][0],bt_list_swf[best_point][1]);
 
 	return best_point;
 }

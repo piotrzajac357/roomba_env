@@ -73,7 +73,9 @@ void *tSwfThreadFunc(void *cookie) {
     for(;;) {
         sem_wait(&spool_calc_next_step_swf);
         if (algorithm_finished == 0){
+            sem_wait(&superv_calc_swf_Semaphore);
             status = next_step_swf();
+            sem_post(&superv_calc_swf_Semaphore);
         } else {
             movement_type = 0;
         }

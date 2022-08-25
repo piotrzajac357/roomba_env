@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2014 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Aug 25 13:44:07 2022
+# Make data base, printed on Thu Aug 25 20:02:14 2022
 
 # Variables
 
@@ -113,7 +115,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2561
+GIO_LAUNCHED_DESKTOP_FILE_PID = 20899
 # automatic
 %F = $(notdir $%)
 # environment
@@ -267,7 +269,7 @@ LC_ADDRESS = pl_PL.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2611
+VSCODE_PID = 20949
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/151=15%
 
@@ -279,8 +281,6 @@ VSCODE_PID = 2611
 
 # . (device 64768, inode 1458607): 8 files, no impossibilities.
  
-make: *** No rule to make target 'all'.  Stop.
-
 
 # 8 files, no impossibilities in 1 directories.
 
@@ -338,6 +338,6 @@ GNUmakefile:
 # strcache performance: lookups = 19 / hit rate = 15%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Thu Aug 25 13:44:07 2022
+# Finished Make data base on Thu Aug 25 20:02:14 2022
 
  
