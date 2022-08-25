@@ -40,7 +40,7 @@ int init_swf_algorithm(){
     timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 10000000;
+	timerSpecStruct.it_interval.tv_nsec = 1000000;
 
     // inititalize algorithm variables
     sleep(3);   

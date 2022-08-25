@@ -207,9 +207,9 @@ double prev_right_sensor;
 double prev_front_sensor;
 double loop_point_x;
 double loop_point_y;
-int swf_disc_map[80][80];
+int swf_disc_map[400][400];
 
-int swf_plan[80][80];
+int swf_plan[400][400];
 
 double virt_sensor_front;
 double virt_sensor_back;
@@ -224,6 +224,11 @@ int path_index_swf;
 double bt_target_swf_x;
 double bt_target_swf_y;
 int is_path_calculated;
+
+/* which sensor smaller 1 - real, 0 - virtual */
+int smaller_front;
+int smaller_right;
+int smaller_left;
 
 path_t path_swf;
 
