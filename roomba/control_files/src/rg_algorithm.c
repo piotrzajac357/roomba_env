@@ -45,8 +45,6 @@ int init_rg_algorithm() {
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
 	timerSpecStruct.it_interval.tv_nsec = 50000000;
-
-    // read plan from file, direction grades are based on plan
     
     sleep(3);
 
@@ -56,7 +54,7 @@ int init_rg_algorithm() {
     // int seed = time(&tt);    // random
 
     // initialize pseudorandom numbers generator
-    int seed = 1;
+    int seed = 2137;
     srand(seed);                // pseudorandom
 
     if ((status = pthread_create(&RgThread, &aRgThreadAttr, tRgThreadFunc, NULL))) {
@@ -83,6 +81,7 @@ void *tRgThreadFunc(void *cookie) {
         /* wait for spool ("new task must be set" signal) */
         sem_wait(&spool_calc_next_step_rg);
         
+        sem_wait(&superv_calc_rg_Semaphore);
         // stop the robot while new task is calculated
         current_task = 0;
 
@@ -105,6 +104,8 @@ void *tRgThreadFunc(void *cookie) {
             current_task = 3;
         }
         spool_next_step_rg_calculated = 1;
+
+        sem_post(&superv_calc_rg_Semaphore);
     }
     return 0;
 }

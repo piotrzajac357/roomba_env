@@ -53,7 +53,9 @@ void *tStcThreadFunc(void *cookie) {
         // calculate next step, movement controller will
         // know what to do with result
         if (algorithm_finished == 0) {
-            status = calc_next_step(); 
+            sem_wait(&superv_calc_stc_Semaphore);
+            status = calc_next_step();
+            sem_post(&superv_calc_stc_Semaphore);
         } else {
             next_step = 0;
             movement_type = 0;

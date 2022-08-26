@@ -20,8 +20,9 @@ double sim_step_position = 0.001;
 int sim_step_battery = 1;
 int sim_step_container = 1;
 double sim_step_dist_sensors = 0.001;
-double max_speed = 2;
-double max_rotating_speed = 0.08;
+double max_speed = 0.5;						// 0.5m/s
+double max_rotating_speed = 0.055556;			// 360deg * 1/18 this is 0.02 deg in iteration
+double simulation_speed = 4;
 
 double position_x;
 double position_y;
@@ -52,12 +53,17 @@ int initialize_semaphores(void) {
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
 	/* STC position */
-	// position_x = 12.875;
-	// position_y = 17.125;
-	position_x = 10.0;
-	position_y = 10.0;
+	position_x = 9.875;
+	position_y = 10.125;
+	previous_orientation = 270.0;
 
-	previous_orientation = 90.0;
+	/* BA* position */
+	// position_x = 10.25;
+	// position_y = 10.0;
+	// previous_orientation = 90.0;
+
+	// osition_x = 10.4;
+	// position_y = 10.0;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }
@@ -111,9 +117,9 @@ int initialize_quality_indexes(void) {
 	}
 	sem_post(&planSemaphore);
 
-	FILE *fptr2;
-    fptr2 = fopen("../../roomba/log/log_cov.txt","w");
-    fclose(fptr2);
+	// FILE *fptr2;
+    // fptr2 = fopen("../../roomba/log/log_cov.txt","w");
+    // fclose(fptr2);
 
 
 	// FILE* fptr9;
@@ -168,7 +174,7 @@ int calculate_position(void) {
 	// when left motor power is -1 and right motor power is 1, simulate rotating counter clockwise
 	else if (left_motor_power_tmp == -1 && right_motor_power_tmp == 1){
 		// angle change depends on sim_step and max rotating speed
-		tmp_orientation = tmp_orientation + (-left_motor_power_tmp + right_motor_power_tmp) * sim_step_position * 360 * max_rotating_speed/2;
+		tmp_orientation = tmp_orientation + (-left_motor_power_tmp + right_motor_power_tmp) * simulation_speed * sim_step_position * 360 * max_rotating_speed/2;
 		
 		// normalize result to 0-360 degree
 		if (tmp_orientation >= 360) { tmp_orientation -= 360; }
@@ -177,7 +183,7 @@ int calculate_position(void) {
 
 	// when left motor power is 1 and right motor power is -1, simulate rotating clockwise
 	else if ((left_motor_power_tmp == 1 && right_motor_power_tmp == -1)){
-		tmp_orientation = tmp_orientation - (left_motor_power_tmp - right_motor_power_tmp) * sim_step_position * 360 * max_rotating_speed/2;
+		tmp_orientation = tmp_orientation - (left_motor_power_tmp - right_motor_power_tmp) * simulation_speed * sim_step_position * 360 * max_rotating_speed/2;
 		
 		// normalize result to 0-360 degree
 		if (tmp_orientation >= 360) {tmp_orientation -= 360; }
@@ -186,8 +192,8 @@ int calculate_position(void) {
 
 	// when motors power values are equal, simulate displacement in given direction
  	else if (left_motor_power_tmp == right_motor_power_tmp){
-		tmp_x = tmp_x + max_speed * left_motor_power_tmp * sim_step_position * (cos(tmp_orientation * ST_TO_RAD));
-		tmp_y = tmp_y + max_speed * left_motor_power_tmp * sim_step_position * (sin(tmp_orientation * ST_TO_RAD));
+		tmp_x = tmp_x + simulation_speed * max_speed * left_motor_power_tmp * sim_step_position * (cos(tmp_orientation * ST_TO_RAD));
+		tmp_y = tmp_y + simulation_speed * max_speed * left_motor_power_tmp * sim_step_position * (sin(tmp_orientation * ST_TO_RAD));
 	}
 
 	// change here to adjust resolution
@@ -195,7 +201,7 @@ int calculate_position(void) {
 	// tmp_y = round(tmp_y * 80)/80;
 
 	//if ((fmod(tmp_orientation,1.0) < 0.01) || (fmod(tmp_orientation,1.0) > 0.99)){tmp_orientation = round(tmp_orientation);}
-	tmp_orientation = round(tmp_orientation * 100)/100;
+	tmp_orientation = round(tmp_orientation * 1000)/1000;
 	// write output values
 	sem_wait(&position_orientationSemaphore);
 	position_x = tmp_x;
@@ -210,7 +216,8 @@ int calculate_position(void) {
 int calculate_battery(void) {
 
 	/* battery changes by:
-    	~0.1% battery every second at max power 
+		battery time at max power: 60min 
+    	~0.027778% battery every second at max power 
 		that value consists of:
     	0.05 static battery usage
     	0.45 cleaning/suction power
@@ -226,7 +233,8 @@ int calculate_battery(void) {
 
 	// calculate and write to output
 	sem_wait(&batterySemaphore);
-	battery_level = battery_level - 0.1 * (0.05 	+ 0.25 * (fabs(left_motor_power_tmp)) 
+	battery_level = battery_level -
+			  0.0277778 * simulation_speed *  (0.05 + 0.25 * (fabs(left_motor_power_tmp)) 
                                                 	+ 0.25 * (fabs(right_motor_power_tmp)) 
                                                  	+ 0.45 * suction_power_tmp);
     if (battery_level < 0.0) { battery_level = 0.0; }
@@ -234,7 +242,6 @@ int calculate_battery(void) {
 
     return 0;
 }
-
 
 /* function calculating distance sensors indications */
 int calculate_sensors(void) {
@@ -347,7 +354,6 @@ int calculate_sensors(void) {
 /* function calculating time_QI */
 int calculate_qis(double time_step) {
 
-
 	double time_QI_tmp = time_QI;
 	double path_QI_tmp = path_QI;
 	double rotation_QI_tmp = rotation_QI;
@@ -366,7 +372,7 @@ int calculate_qis(double time_step) {
 	sem_post(&controlSemaphore);
 
 	// time quality index
-	time_QI_tmp += time_step;
+	time_QI_tmp += time_step * simulation_speed;
 
 	// travelled distance quality index
 	path_QI_tmp += sqrt(pow(path_qi_prev_x - curr_x_tmp, 2)
@@ -403,6 +409,7 @@ int calculate_qis(double time_step) {
 	rotation_QI = rotation_QI_tmp;
 	coverage_QI = coverage_QI_tmp;
 	idle_time_QI = idle_time_QI_tmp;
+	battery_QI = battery_level;
 	sem_post(&qiSemaphore);
 	
 	// printf("%d	",coverage_acc);

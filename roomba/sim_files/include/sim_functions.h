@@ -52,6 +52,7 @@ int coverage_plan[800][800];
 int coverage_qi_total;
 int coverage_acc;
 double idle_time_QI;
+double battery_QI;
 
 int algorithm_finished;
 

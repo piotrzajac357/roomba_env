@@ -82,8 +82,6 @@ unistd.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control.h
 
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
-
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_from_sim.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
@@ -173,40 +171,12 @@ sys/mman.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/rg_algorithm.h
 ../include/task_to_movement.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/task_to_movement.h
-../include/control_battery.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
 ../include/stc_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/stc_algorithm.h
 ../include/ba_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/ba_algorithm.h
 ../include/swf_algorithm.h
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/swf_algorithm.h
-
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c
-stdio.h
--
-stdlib.h
--
-pthread.h
--
-unistd.h
--
-signal.h
--
-errno.h
--
-time.h
--
-semaphore.h
--
-fcntl.h
--
-sys/types.h
--
-../include/control_battery.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_battery.h
-../include/control_functions.h
-/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include/control_functions.h
 
 /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c
 stdlib.h

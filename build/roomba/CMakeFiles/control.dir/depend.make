@@ -13,7 +13,6 @@ roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_f
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/astar/path.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/ba_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control.h
-roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control_battery.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control_from_sim.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control_functions.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/control_to_sim.h
@@ -23,13 +22,6 @@ roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_f
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/swf_algorithm.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/include/task_to_movement.h
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o: ../roomba/control_files/src/control.c
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/include/astar/coordinate.h
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/include/astar/grid.uint8_t.h
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/include/astar/path.h
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/include/control_battery.h
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/include/control_functions.h
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/src/control_battery.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/control_files/include/astar/coordinate.h
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/control_files/include/astar/grid.uint8_t.h

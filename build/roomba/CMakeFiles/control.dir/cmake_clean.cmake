@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/control.dir/control_files/src/control.c.o"
-  "CMakeFiles/control.dir/control_files/src/control_battery.c.o"
   "CMakeFiles/control.dir/control_files/src/control_from_sim.c.o"
   "CMakeFiles/control.dir/control_files/src/control_functions.c.o"
   "CMakeFiles/control.dir/control_files/src/control_to_sim.c.o"

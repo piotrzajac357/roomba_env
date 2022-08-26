@@ -21,7 +21,6 @@ target_link_libraries(sim pthread rt m)
 include_directories(control control_files/include)
 
 add_executable(control  control_files/src/control
-                        control_files/src/control_battery.c
                         control_files/src/control_from_sim.c
                         control_files/src/control_functions.c
                         control_files/src/control_to_sim.c

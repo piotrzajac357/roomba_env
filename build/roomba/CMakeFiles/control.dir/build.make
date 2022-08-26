@@ -81,33 +81,9 @@ roomba/CMakeFiles/control.dir/control_files/src/control.c.o.provides: roomba/CMa
 roomba/CMakeFiles/control.dir/control_files/src/control.c.o.provides.build: roomba/CMakeFiles/control.dir/control_files/src/control.c.o
 
 
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: roomba/CMakeFiles/control.dir/flags.make
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o: ../roomba/control_files/src/control_battery.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o"
-	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/control_battery.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/control.dir/control_files/src/control_battery.c.i"
-	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c > CMakeFiles/control.dir/control_files/src/control_battery.c.i
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/control.dir/control_files/src/control_battery.c.s"
-	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c -o CMakeFiles/control.dir/control_files/src/control_battery.c.s
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.requires:
-
-.PHONY : roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.requires
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.provides: roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.requires
-	$(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.provides.build
-.PHONY : roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.provides
-
-roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.provides.build: roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o
-
-
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o: ../roomba/control_files/src/control_from_sim.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/control_from_sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.i: cmake_force
@@ -131,7 +107,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o.provides.bu
 
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o: ../roomba/control_files/src/control_functions.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/control_functions.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_functions.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.i: cmake_force
@@ -155,7 +131,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o.provides.b
 
 roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o: ../roomba/control_files/src/control_to_sim.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/control_to_sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_to_sim.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.i: cmake_force
@@ -179,7 +155,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o.provides.buil
 
 roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o: ../roomba/control_files/src/control_update.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/control_update.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_update.c
 
 roomba/CMakeFiles/control.dir/control_files/src/control_update.c.i: cmake_force
@@ -203,7 +179,7 @@ roomba/CMakeFiles/control.dir/control_files/src/control_update.c.o.provides.buil
 
 roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o: ../roomba/control_files/src/rg_algorithm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/rg_algorithm.c
 
 roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.i: cmake_force
@@ -227,7 +203,7 @@ roomba/CMakeFiles/control.dir/control_files/src/rg_algorithm.c.o.provides.build:
 
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o: ../roomba/control_files/src/task_to_movement.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/task_to_movement.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/task_to_movement.c
 
 roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.i: cmake_force
@@ -251,7 +227,7 @@ roomba/CMakeFiles/control.dir/control_files/src/task_to_movement.c.o.provides.bu
 
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o: ../roomba/control_files/src/stc_algorithm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/stc_algorithm.c
 
 roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.i: cmake_force
@@ -275,7 +251,7 @@ roomba/CMakeFiles/control.dir/control_files/src/stc_algorithm.c.o.provides.build
 
 roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o: ../roomba/control_files/src/ba_algorithm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/ba_algorithm.c
 
 roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.i: cmake_force
@@ -299,7 +275,7 @@ roomba/CMakeFiles/control.dir/control_files/src/ba_algorithm.c.o.provides.build:
 
 roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: roomba/CMakeFiles/control.dir/flags.make
 roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o: ../roomba/control_files/src/swf_algorithm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && /usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/swf_algorithm.c
 
 roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.i: cmake_force
@@ -324,7 +300,6 @@ roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.o.provides.build
 # Object files for target control
 control_OBJECTS = \
 "CMakeFiles/control.dir/control_files/src/control.c.o" \
-"CMakeFiles/control.dir/control_files/src/control_battery.c.o" \
 "CMakeFiles/control.dir/control_files/src/control_from_sim.c.o" \
 "CMakeFiles/control.dir/control_files/src/control_functions.c.o" \
 "CMakeFiles/control.dir/control_files/src/control_to_sim.c.o" \
@@ -339,7 +314,6 @@ control_OBJECTS = \
 control_EXTERNAL_OBJECTS =
 
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/control.c.o
-roomba/control: roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o
 roomba/control: roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o
@@ -352,7 +326,7 @@ roomba/control: roomba/CMakeFiles/control.dir/control_files/src/swf_algorithm.c.
 roomba/control: roomba/CMakeFiles/control.dir/build.make
 roomba/control: /lib/x86_64-linux-gnu/libpath.so
 roomba/control: roomba/CMakeFiles/control.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable control"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable control"
 	cd /home/piotr/Desktop/pm_project/roomba_env/build/roomba && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/control.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -361,7 +335,6 @@ roomba/CMakeFiles/control.dir/build: roomba/control
 .PHONY : roomba/CMakeFiles/control.dir/build
 
 roomba/CMakeFiles/control.dir/requires: roomba/CMakeFiles/control.dir/control_files/src/control.c.o.requires
-roomba/CMakeFiles/control.dir/requires: roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o.requires
 roomba/CMakeFiles/control.dir/requires: roomba/CMakeFiles/control.dir/control_files/src/control_from_sim.c.o.requires
 roomba/CMakeFiles/control.dir/requires: roomba/CMakeFiles/control.dir/control_files/src/control_functions.c.o.requires
 roomba/CMakeFiles/control.dir/requires: roomba/CMakeFiles/control.dir/control_files/src/control_to_sim.c.o.requires

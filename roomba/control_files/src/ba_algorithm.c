@@ -42,7 +42,7 @@ int init_ba_algorithm() {
     timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 10000000;
+	timerSpecStruct.it_interval.tv_nsec = 5000000;
 
     // initilize algorithm variables
     sleep(3);
@@ -78,32 +78,18 @@ void *tBaThreadFunc(void *cookie) {
         sem_wait(&spool_calc_next_step_ba);
         // calculate next step, movement controller will
         // know what to do with result
-        // if (algorithm_finished == 0) {
-        //     status = calc_next_step(); 
-        // } else {
-        //     next_step = 0;
-        //     movement_type = 0;
-        // }
+
         if (algorithm_finished == 0) {
+            sem_wait(&superv_calc_ba_Semaphore);
             status = calc_next_task();
+            sem_post(&superv_calc_ba_Semaphore);
 
         } else {
+            printf("Algorithm has finished!\n");
             current_task_ba = 0;
             movement_type = 0;
         }
-
         spool_next_step_ba_calculated = 1;
-        // wait for semaphore: task (moving/rotating) finished
-        // moving is basically moving until obstacle
-        // TODO update some data
-        // data can be big matrix with some sort of mapping
-        // TODO check some nbh to determine task
-        // TODO first function calculates type of task: 
-        // 1: move boustrophodenically
-        // 2: critical point, find a new point (call a function) and move to that point
-        // 3: continue moving to next starting point
-        // TODO second function calculates 
-
     }
 
     return EXIT_SUCCESS;

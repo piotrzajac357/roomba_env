@@ -34,7 +34,10 @@ int initialize_semaphores(void) {
 		sem_init(&spool_calc_next_step_swf, 0, 0)		||
 		sem_init(&virtual_sensorsSemaphore, 0, 1)		||
 		sem_init(&superv_calc_swf_Semaphore, 0, 1)		||
-		sem_init(&swf_planSemaphore, 0, 1))
+		sem_init(&swf_planSemaphore, 0, 1)				||
+		sem_init(&superv_calc_rg_Semaphore, 0, 1)		||
+		sem_init(&superv_calc_stc_Semaphore, 0, 1)		||
+		sem_init(&superv_calc_ba_Semaphore, 0, 1))
 		{
 			return EXIT_FAILURE;
 		}
@@ -87,42 +90,73 @@ int calculate_control(void){
 		// just standing
 		left_motor_power = 0.0;
 		right_motor_power = 0.0;
-		suction_power = 0.0;
 		break;
 	case 1:
 		// driving forward
 		left_motor_power = 1.0;
 		right_motor_power = 1.0;
-		suction_power = 1.0; 
 		break;
 	case 2:
 		// rotating clockwise with suction 0.2
 		left_motor_power = 1.0;
 		right_motor_power = -1.0;
-		suction_power = 0.2;
 		break;
 	case 3:
 		// rotating counter clockwise with suction 0.2
 		left_motor_power = -1.0;
 		right_motor_power = 1.0;
-		suction_power = 0.2; 
 		break;
 	case 4:
 		// driving backward 
-			left_motor_power = -1.0;
-			right_motor_power = -1.0;
-			suction_power = 1.0;
+		left_motor_power = -1.0;
+		right_motor_power = -1.0;
 		break;
 	default:
 		// default controls 0.0 for safety
 		left_motor_power = 0.0;
 		right_motor_power = 0.0;
-		suction_power = 0.0;
 		break;
 	}
-
+	suction_power = calculate_suction(algorithm_select, movement_type);
 	sem_post(&controlSemaphore);
 	return EXIT_SUCCESS;
+}
+
+/* function calculating suction power based on algorithm variables */
+double calculate_suction(int alg_select, int tmp_movement_type){
+	double tmp_suction;
+	switch (alg_select){
+		case 0:
+			sem_wait(&position_orientationSemaphore);
+			double tmp_pos_x = position_x;
+			double tmp_pos_y = position_y;
+			sem_post(&position_orientationSemaphore);
+			if (rg_disc_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)] != 2){
+				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
+			} else {
+				tmp_suction = 0.0;
+			}
+			break;
+		case 1:
+				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
+			break;
+		case 2:
+			if (movement_mode == 0){
+				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
+			} else {
+				tmp_suction = 0.0;
+			}
+			break;
+		case 3:
+			if (movement_mode == 0){
+				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
+			}
+			else {
+				tmp_suction = 0.0;
+			}
+			break;
+	}
+	return tmp_suction;
 }
 
 /* function choosing the best new direction from random candidates  */
@@ -228,7 +262,7 @@ int select_new_direction(void) {
 	else if (target_direction < 0) { target_direction += 360; }
 	sem_post(&target_directionSemaphore);
 
-	printf("target_direction_selected: %.2f		grade: %f\n", target_direction, candidate_grades[best_candidate_index]);
+	//printf("target_direction_selected: %.2f		grade: %f\n", target_direction, candidate_grades[best_candidate_index]);
 
 	return EXIT_SUCCESS;
 }
@@ -297,17 +331,17 @@ int update_rg_map(void) {
 
 
 	/* write a map for debugging */
-    FILE *fptr;
-    char c;
-    fptr = fopen("../../roomba/log/map_rg.txt","w");
-    for(int i = 0; i < 80; i++) {
-        for(int j = 0; j < 80; j++){
-            c = rg_disc_map[j][80-i] +'0';
-            fputc(c,fptr);
-        }
-        fprintf(fptr,"\r\n");
-    }
-    fclose(fptr);
+    // FILE *fptr;
+    // char c;
+    // fptr = fopen("../../roomba/log/map_rg.txt","w");
+    // for(int i = 0; i < 80; i++) {
+    //     for(int j = 0; j < 80; j++){
+    //         c = rg_disc_map[j][80-i] +'0';
+    //         fputc(c,fptr);
+    //     }
+    //     fprintf(fptr,"\r\n");
+    // }
+    // fclose(fptr);
 
 	return EXIT_SUCCESS;
 }
@@ -336,9 +370,12 @@ int calculate_movement_type(void) {
 
 	if (algorithm_select == 0){
 		if (spool_next_step_rg_calculated == 1){
+			if (sem_trywait(&superv_calc_rg_Semaphore) != 0){
+				return EXIT_SUCCESS;
+			}
 			// algorith_select = 0 is random bouncing
 			switch (current_task)
-				{
+			{
 				case 0:
 					// just standing
 					movement_type = 0;
@@ -375,6 +412,7 @@ int calculate_movement_type(void) {
 				default: 
 					break;
 			}
+			sem_post(&superv_calc_rg_Semaphore);
 		}
 	}
 	
@@ -383,6 +421,9 @@ int calculate_movement_type(void) {
 
 		// check flag "is task calculated yet"
 		if (spool_next_step_calculated == 1) {
+			if (sem_trywait(&superv_calc_stc_Semaphore) != 0) {
+				return EXIT_SUCCESS;
+			}
 			switch(next_step)
 			{
 				case 0:
@@ -391,7 +432,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate counter clockwise until reaching target direction
-					if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.03) {
+					if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.1) {
 						movement_type = 3;
 					} else {
 						// target direction reached, set movement to 0
@@ -406,7 +447,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2:
 					// rotate clockwise until reaching target direction
-					if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.03) {
+					if (fabs(tmp_orientation_stc_step - fmod(tmp_orientation,360.0)) > 0.1) {
 						movement_type = 2;
 					} else {
 						// target direction reached, set movement to 0
@@ -443,11 +484,15 @@ int calculate_movement_type(void) {
 					movement_type = 0;
 					break;
 			}
+		sem_post(&superv_calc_stc_Semaphore);			
 		}
 	}
 
 	else if (algorithm_select == 2){
 		if (spool_next_step_ba_calculated == 1){
+			if(sem_trywait(&superv_calc_ba_Semaphore) != 0){
+				return EXIT_SUCCESS;
+			}
 			switch(current_task_ba){
 				case 0:
 					// just standing
@@ -455,7 +500,7 @@ int calculate_movement_type(void) {
 					break;
 				case 1:
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.2) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) {
 						movement_type = 2;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 						}
@@ -469,7 +514,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2: 
 					// rotate clockwise to orientation
-					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.2) {
+					if (fabs(target_orientation_ba - fmod(tmp_orientation,360.0)) > 0.05) {
 						movement_type = 3;
 						//printf("%f\n",fabs(target_orientation_ba - fmod(tmp_orientation,360.0)));
 					}
@@ -532,36 +577,21 @@ int calculate_movement_type(void) {
 				break;
 					
 			}
-		} 
+		sem_post(&superv_calc_ba_Semaphore); 			
+		}
 	}
 	
 	else if (algorithm_select == 3){
 		if (spool_next_step_swf_calculated == 1){
-			sem_wait(&superv_calc_swf_Semaphore);
+			if (sem_trywait(&superv_calc_swf_Semaphore) != 0){
+				return EXIT_SUCCESS;
+			};
 			movement_type = swf_mov_superv(tmp_pos_x,tmp_pos_y,tmp_orientation, tmp_front_sensor,
 									   	   tmp_back_sensor,tmp_left_sensor,tmp_right_sensor);
 			sem_post(&superv_calc_swf_Semaphore);
 		}
 	}
 	
-	return EXIT_SUCCESS;
-}
-
-/* check battery and container state */
-int inspect_battery(void) {
-
-	// read inputs
-	sem_wait(&batterySemaphore);
-	double tmp_battery = battery_level;
-	sem_post(&batterySemaphore);
-
-	// if battery is less than 1%, stop robot
-	if (tmp_battery < 1) {
-		sem_wait(&taskSemaphore);
-		current_task = 0;
-		sem_post(&taskSemaphore);
-	}
-
 	return EXIT_SUCCESS;
 }
 
@@ -646,11 +676,6 @@ int init_swf(void) {
 	is_path_calculated = 0;
 	init_plan();
 	return EXIT_SUCCESS;
-}
-
-/* does nothing atm */
-int update_position_orientation(void){
-    return EXIT_SUCCESS;
 }
 
 /* function checking distance sensors and updating disc_plan if obstacles detected */
@@ -1052,8 +1077,10 @@ int parent_to_target(int parent_cell) {
     else { return 0;}
 }
 
+/* function calculating what to do in BA* algorithm */
 int calc_next_task(void){
 	
+	// get most recent state of map
 	update_ba_map();
 
 	sem_wait(&position_orientationSemaphore);
@@ -1062,14 +1089,18 @@ int calc_next_task(void){
 	double tmp_orientation = orientation;
 	sem_post(&position_orientationSemaphore);
 	
+	// get current task and vertical/horizontal orientation
 	int tmp_current_task_ba = current_task_ba;
 	vertical_horizontal = ((int)round(tmp_orientation/90)+1) % 2;
 	//printf("%d", tmp_current_task_ba);
 	switch (tmp_current_task_ba){
 		case 0:
+			// just standing
 			break;
 		case 1 ... 2:
+			// finished rotating
 			if (movement_mode == 1){ 
+				// if navigating to BT point, set target point from path and drive
 				target_position_x_ba = bt_target_x;
 				target_position_y_ba = bt_target_y;
 				current_task_ba = 4;
@@ -1077,125 +1108,136 @@ int calc_next_task(void){
 				break;
 			}
 			else {
+				// if simple B. movement
 				if (vertical_horizontal == 1){
-					// calculate target position based on sensors and data
-					// target posistion, set driving forward, update flags, exit
+					// if horizontal then move by left/right by 25cm (cleaning size)
 					target_position_x_ba = tmp_position_x + 0.25*cos((round(tmp_orientation) * ST_TO_RAD));
 					target_position_y_ba = tmp_position_y + 0.25*sin((round(tmp_orientation) * ST_TO_RAD));
 					current_task_ba = 4;
 					spool_next_step_ba_calculated = 1;
 				}
 				else {
+					// if its B. movement, position vertical and finished rotating, then move forward 
 					current_task_ba = 3;
 					spool_next_step_ba_calculated = 1;
 				}
 				break;
 			}
 		case 3 ... 4:
-		if (movement_mode == 0) {
-			// check nbh 
-			if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
-				target_orientation_ba = 90.0;
-				//printf("90\n");
-				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
-				spool_next_step_ba_calculated = 1;		
-				break;		
-			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
-				target_orientation_ba = 270.0;
-				//printf("270\n");
-				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
-				spool_next_step_ba_calculated = 1;
-				break;
-			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
-				target_orientation_ba = 0.0;
-				//printf("0\n");
-				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
-				spool_next_step_ba_calculated = 1;
-				break;
-			}
-			else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
-				target_orientation_ba = 180.0;
-				//printf("180\n");
-				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
-				spool_next_step_ba_calculated = 1;
-				break;
-			}
-			else {
-
-				FILE *fptr14;
-				char c;
-				fptr14 = fopen("../../roomba/log/decisions_ba.txt","a");
-				fprintf(fptr14,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
-				fprintf(fptr14,"up: %d down: %d left: %d right: %d, target: %f\r\n moving to next area\r\n\r\n",
-							ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1],
-							ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1],
-							ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))],
-							ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))],
-							target_orientation_ba);
-				fprintf(fptr14,"\r\n");
-				fclose(fptr14);
-
-
-				movement_mode = 1;
-				update_ba_map();
-			 	int status = create_bt_list();
-				int bt_point;
-				bt_point = select_bt_point();
-
-				if (bt_point < 0) {
-					algorithm_finished = 1;
-					return EXIT_SUCCESS;
+			// if finished moving forward (reaching wall, point or visited point)
+			if (movement_mode == 0) {
+				// B. movement
+				// check nbh and choose apropriate new direction
+				if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
+					target_orientation_ba = 90.0;
+					//printf("90\n");
+					current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
+					spool_next_step_ba_calculated = 1;		
+					break;		
 				}
-
-				int begin_x = (int)round(4*(tmp_position_x));
-				int begin_y = (int)round(4*(tmp_position_y));
-
-				grid_uint8_t grid;
-				init_a_grid(&grid);
-				coordinate_t begin = {begin_x,begin_y};
-				coordinate_t end = {bt_list[bt_point][0],bt_list[bt_point][1]};
-				print_begin_end(&begin, &end);
-				path_t path_raw = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
-
-				path_index = 0;
-				if(path_empty(&path_raw)) {
-					algorithm_finished = 1;
-					printf("No path found!\nFinishing work...\n");
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1] == 1) {
+					target_orientation_ba = 270.0;
+					//printf("270\n");
+					current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
+					spool_next_step_ba_calculated = 1;
+					break;
+				}
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))] == 1) {
+					target_orientation_ba = 0.0;
+					//printf("0\n");
+					current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
+					spool_next_step_ba_calculated = 1;
+					break;
+				}
+				else if (ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))] == 1) {
+					target_orientation_ba = 180.0;
+					//printf("180\n");
+					current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
+					spool_next_step_ba_calculated = 1;
+					break;
 				}
 				else {
-					printf("Path before smoothing:\n");
-					path_for_each_r(&path_raw, coordinate_print);
-					printf("\n");
+					// no valid point, then find path to new bt point
+
+					// FILE *fptr14;
+					// char c;
+					// fptr14 = fopen("../../roomba/log/decisions_ba.txt","a");
+					// fprintf(fptr14,"pos_x: %f pos_y: %f orientation: %f\r\n", position_x, position_y, orientation);
+					// fprintf(fptr14,"up: %d down: %d left: %d right: %d, target: %f\r\n moving to next area\r\n\r\n",
+					// 			ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1],
+					// 			ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))-1],
+					// 			ba_disc_map[(int)round(4*(tmp_position_x))-1][(int)round(4*(tmp_position_y))],
+					// 			ba_disc_map[(int)round(4*(tmp_position_x))+1][(int)round(4*(tmp_position_y))],
+					// 			target_orientation_ba);
+					// fprintf(fptr14,"\r\n");
+					// fclose(fptr14);
+
+					// set movement mode to navigating to next area
+					movement_mode = 1;
+					// get most recent data
+					update_ba_map();
+					// create list of bt points
+					int status = create_bt_list();
+					int bt_point;
+					// select best bt point
+					bt_point = select_bt_point();
+
+					// if there were no bt points, algorithm has finished
+					if (bt_point < 0) {
+						algorithm_finished = 1;
+						return EXIT_SUCCESS;
+					}
+
+					// starting point for A*
+					int begin_x = (int)round(4*(tmp_position_x));
+					int begin_y = (int)round(4*(tmp_position_y));
+
+					// prepare structures for A* pathfinder
+					grid_uint8_t grid;
+					init_a_grid(&grid);
+					coordinate_t begin = {begin_x,begin_y};
+					coordinate_t end = {bt_list[bt_point][0],bt_list[bt_point][1]};
+					//print_begin_end(&begin, &end);
+
+					// find path 
+					path_t path_raw = astar_uint8_get_path(&grid,end,begin, is_point_traversable);
+
+					// index for path following
+					path_index = 0;
+					if(path_empty(&path_raw)) {
+						algorithm_finished = 1;
+						printf("No path found!\nFinishing work...\n");
+					}
+					// else {
+					// 	printf("Path before smoothing:\n");
+					// 	path_for_each_r(&path_raw, coordinate_print);
+					// 	printf("\n");
+					// }
+					//printf("Path after smoothing:\n");
+					//path_t path2 = path;
+
+					// smoth the path using smoothing funciton
+					path = smooth_path(&path_raw);
+
+					path_destroy(&path_raw);
+					//path_for_each_r(&path, coordinate_print);
+					//printf("\n");
+					//printf("size: %zu capacity: %zu\n",path.size,path.capacity);
+					//fflush(stdout);
+					grid_uint8_destroy(&grid);
+
+					// get first point' coordinates and orientation to rotate to
+					double dest_x = ((double)(path_get(&path,path_index)).row)/4;
+					double dest_y = ((double)(path_get(&path,path_index)).col)/4;
+					target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,dest_x,dest_y);
+
+					bt_target_x = dest_x;
+					bt_target_y = dest_y;
+
+					current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
+					spool_next_step_ba_calculated = 1;
+					break;
 				}
-				printf("Path after smoothing:\n");
-				//path_t path2 = path;
-
-				path = smooth_path(&path_raw);
-
-				path_destroy(&path_raw);
-				path_for_each_r(&path, coordinate_print);
-				printf("\n");
-				printf("size: %zu capacity: %zu\n",path.size,path.capacity);
-				fflush(stdout);
-				grid_uint8_destroy(&grid);
-				// uint8_t abc = path_get(&path,path_index).row;
-				// uint8_t abcd = path_get(&path,path_index).col;
-				// uint8_t dcba = path_get(&path,path_index+1).row;
-
-				// printf("%d %d %d\n",abc,abcd,dcba);
-				double dest_x = ((double)(path_get(&path,path_index)).row)/4;
-				double dest_y = ((double)(path_get(&path,path_index)).col)/4;
-				target_orientation_ba = calculate_target_angle(tmp_position_x,tmp_position_y,dest_x,dest_y);
-
-				bt_target_x = dest_x;
-				bt_target_y = dest_y;
-
-				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
-				spool_next_step_ba_calculated = 1;
-				break;
-			}
 
 
 			// FILE *fptr13;
@@ -1214,8 +1256,12 @@ int calc_next_task(void){
 		
 		}
 		else {
+			// if navigating to next area
+			// increment point index
 			path_index++;
 			if (path_index == path_size(&path)){
+				// if that was last point of path, select new apropriate direction and 
+				// start B. movement
 				if (ba_disc_map[(int)round(4*(tmp_position_x))][(int)round(4*(tmp_position_y))+1] == 1) {
 					target_orientation_ba = 90.0;
 					//printf("90\n");
@@ -1232,7 +1278,7 @@ int calc_next_task(void){
 					target_orientation_ba = 180.0;
 					//printf("180\n");
 				}
-				printf("begin B. movement\n");
+				//printf("begin B. movement\n");
 				movement_mode = 0;
 				current_task_ba = rotation_direction(target_orientation_ba,tmp_orientation);
 				spool_next_step_ba_calculated = 1;
@@ -1240,6 +1286,7 @@ int calc_next_task(void){
 				break; 
 			}
 			else {
+				// if points was not the last one, get coords of next one and orientation
 				bt_target_x = ((double)(path_get(&path,path_index).row))/4;
 				bt_target_y = ((double)(path_get(&path,path_index).col))/4;
 				//printf("target_x_px: %d target_y_px: %d\n", (int)path_get(&path,path_index).row,(int)path_get(&path,path_index).col);
@@ -1253,6 +1300,7 @@ int calc_next_task(void){
 	return EXIT_SUCCESS;
 }
 
+/* function updating BA* map */
 int update_ba_map(void) {
 
 	int status;
@@ -1260,7 +1308,6 @@ int update_ba_map(void) {
 	sem_wait(&position_orientationSemaphore);
 	double tmp_orientation = orientation;
 	double tmp_position_x = position_x;
-
 	double tmp_position_y = position_y;
 	sem_post(&position_orientationSemaphore);
 
@@ -1271,6 +1318,7 @@ int update_ba_map(void) {
 	double tmp_right_sensor = right_sensor;
 	sem_post(&dist_sensorsSemaphore);
 
+	// convert coordinates to grid indexes
 	int this_pixel_x 	   = (int)round(4*(tmp_position_x));
 	int this_pixel_y 	   = (int)round(4*(tmp_position_y));
 
@@ -1286,12 +1334,14 @@ int update_ba_map(void) {
 	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
 	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
 
-
+	// update only on modulo 90deg to avoid bugs
 	if (((int) round(tmp_orientation) % 90) == 0) {
 
+		// set visited 
 		if (ba_disc_map[this_pixel_x][this_pixel_y] != 2) {
 			ba_disc_map[this_pixel_x][this_pixel_y] = 2; }
 		
+		// if obstacle set obstacle, if not set visitable
 		if (ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
 			if (tmp_left_sensor < 0.025) {
 				ba_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
@@ -1321,21 +1371,22 @@ int update_ba_map(void) {
 
 
 	/* write a map for debugging */
-    FILE *fptr;
-    char c;
-    fptr = fopen("../../roomba/log/map_ba.txt","w");
-    for(int i = 0; i < 80; i++) {
-        for(int j = 0; j < 80; j++){
-            c = ba_disc_map[j][80-i] +'0';
-            fputc(c,fptr);
-        }
-        fprintf(fptr,"\r\n");
-    }
-    fclose(fptr);
+    // FILE *fptr;
+    // char c;
+    // fptr = fopen("../../roomba/log/map_ba.txt","w");
+    // for(int i = 0; i < 80; i++) {
+    //     for(int j = 0; j < 80; j++){
+    //         c = ba_disc_map[j][80-i] +'0';
+    //         fputc(c,fptr);
+    //     }
+    //     fprintf(fptr,"\r\n");
+    // }
+    // fclose(fptr);
 
 	return EXIT_SUCCESS;
 }
 
+/* function creating bt list for ba* */
 int create_bt_list(void) {
 
 	memset(bt_list,0,sizeof(bt_list));
@@ -1373,13 +1424,14 @@ int create_bt_list(void) {
 
 		}
 	}
-	for (int z = 0; bt_list[z][0] != 0; z++){
-		printf("\n{%d,%d}\n",bt_list[z][0],bt_list[z][1]);
-	}
+	// for (int z = 0; bt_list[z][0] != 0; z++){
+	// 	printf("\n{%d,%d}\n",bt_list[z][0],bt_list[z][1]);
+	// }
 
 	return EXIT_SUCCESS;
 }
 
+/* function selecting the best bt point for ba* */
 int select_bt_point(void) {
 	// just distance for now
 
@@ -1408,11 +1460,12 @@ int select_bt_point(void) {
 			best_point = i;
 		}
 	}
-	printf("selected point: x = %d, y = %d\n",bt_list[best_point][0],bt_list[best_point][1]);
+	//printf("selected point: x = %d, y = %d\n",bt_list[best_point][0],bt_list[best_point][1]);
 
 	return best_point;
 }
 
+/* input for path finding A* algorithm preparation (BA*) */
 void init_a_grid(grid_uint8_t* grid){
 
 	uint8_t values[80*80];
@@ -1425,6 +1478,7 @@ void init_a_grid(grid_uint8_t* grid){
 	//grid_uint8_for_each(grid,grid_uint8_print);
 }
 
+/* input for path finding A* algorithm preparation (SWF) */
 void init_a_grid_swf(grid_uint8_t* grid){
 
 	uint8_t values[80*80];
@@ -1437,27 +1491,22 @@ void init_a_grid_swf(grid_uint8_t* grid){
 	//grid_uint8_for_each(grid,grid_uint8_print);
 }
 
+/* is point traversable? for pathfinding */
 int is_point_traversable(const uint8_t* val) {
     return *val == 2 ? 1 : 0;
 }
 
+/* function calculating angle between two points in coordinates system */
 double calculate_target_angle(double start_x, double start_y, double end_x, double end_y) {
 	
 	double diff_x = end_x - start_x;
 	double diff_y = end_y - start_y;
-	//printf("%f\n",atan2(diff_y, diff_x) * 180.0 / M_PI);
 	double angle = fmod((atan2(diff_y, diff_x) * 180.0 / M_PI) + 360.0,360.0);
-
-	//printf("pos_x: %.2f pos_y: %.2f dest_x: %.2f dest_y: %.2f\n",start_x,start_y,end_x,end_y);
-	//printf("target_orienteation: %.2f\n",angle);
-	// if 		(diff_x <= 0 && diff_y >= 0) {angle = 180.0 - angle;}
-	// else if (diff_x <= 0 && diff_y <= 0) {angle = 180.0 + angle;}
-	// else if (diff_x >= 0 && diff_y <= 0) {angle = 360.0 - angle;}
-	
 
 	return round(100*angle)/100;
 }
 
+/* calculate cw or ccw direction of rotation so that robot will rotate <=180deg */
 int rotation_direction(double target_angle, double current_angle){
 
         if ((   (target_angle > current_angle) && (fabs(target_angle - current_angle) > 180.0)) ||
@@ -1468,6 +1517,7 @@ int rotation_direction(double target_angle, double current_angle){
         }
 }
 
+/* function smoothing path for BA* */
 path_t smooth_path(path_t* path) {
 
 	path_t smoothed_path;
@@ -1788,6 +1838,7 @@ int next_step_swf(void){
 	return EXIT_SUCCESS;
 }
 
+/* function supervising swf movement */
 int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
                    double tmp_front_sensor, double tmp_back_sensor,
                    double tmp_left_sensor, double tmp_right_sensor) {
@@ -1818,17 +1869,6 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 2:
-
-			// if (tmp_front_sensor < 0.001 && tmp_right_sensor < 0.001) {
-			// 	printf("front: %f left %f right %f",tmp_front_sensor,tmp_left_sensor,tmp_right_sensor);
-			// 	tmp_movement_type = 0;
-			// 	spool_next_step_swf_calculated = 0;
-			// 	movement_mode_swf = 1;
-			// 	printf("lets calculate new path\n");
-			// 	sem_post(&spool_calc_next_step_swf);
-			// 	return tmp_movement_type;
-			// }
-
 			if (tmp_right_sensor > 0.05) {
 				//printf("end of wall, right sensor:  %.4f\n", tmp_right_sensor);
 				//printf("real right: %.4f  virtual right: %.4f\n\n", right_sensor,virt_sensor_right);
@@ -1857,15 +1897,6 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 						//printf("lets calculate new path\n");
 						sem_post(&spool_calc_next_step_swf);
 						return tmp_movement_type;
-
-						// printf("le special maneuver\n");
-						// tmp_movement_type = 0;
-						// new_wall_parameter = 2;
-						// spool_next_step_swf_calculated = 0;
-						// sem_post(&spool_calc_next_step_swf);
-
-
-
 					}
 					else {	
 						//printf("new wall, front sensor:  %.4f\n", tmp_front_sensor);
@@ -1924,8 +1955,8 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 	return tmp_movement_type;
 }
 
+/* function updating swf discovery map */
 int update_swf_map(void) {
-
 
 	int status;
 
@@ -1952,11 +1983,9 @@ int update_swf_map(void) {
 	int front_sensor_pix_x = (int)round(8*(tmp_position_x + 0.175 * (cos(ST_TO_RAD * tmp_orientation))));
 	int front_sensor_pix_y = (int)round(8*(tmp_position_y + 0.175 * (sin(ST_TO_RAD * tmp_orientation))));
 	
-	
 	// printf("raw left: %f %f\n",tmp_position_x - 0.25 * (sin(ST_TO_RAD * tmp_orientation)),tmp_position_y + 0.25 * (cos(ST_TO_RAD * tmp_orientation)));
 	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
 	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
-
 
 	if (((int) round(tmp_orientation) % 90) == 0) {
 
@@ -1988,6 +2017,7 @@ int update_swf_map(void) {
 	return EXIT_SUCCESS;
 }
 
+/* function calcucating virtual sensors (distance from visited point) indications */
 int virtual_sensors(void) {
 
 	sem_wait(&position_orientationSemaphore);
@@ -2007,8 +2037,8 @@ int virtual_sensors(void) {
 	double left_x  = x_coord + 0.05 * cos(left_orientation);
 	double left_y  = y_coord + 0.05 * sin(left_orientation);
 
-	int this_pix_x = round(4 * x_coord);
-	int this_pix_y = round(4 * y_coord);
+	int this_pix_x = round(20 * x_coord);
+	int this_pix_y = round(20 * y_coord);
 
 	int f_flag = 0;
 	int r_flag = 0;
@@ -2069,8 +2099,8 @@ int virtual_sensors(void) {
 	return EXIT_SUCCESS;
 }
 
+/* initialize plan with ones for swf */
 void init_plan(){
-
     for(int i = 0; i < 400; i++) {
         for(int j = 0; j < 400; j++) {
             if (!(j == 400)) {
@@ -2078,12 +2108,10 @@ void init_plan(){
             }
         }
     }
-	
-    // fclose(fptr);
-
     return;
 }
 
+/* update obstables/visited points grid for virtual sensors */
 int new_loop_plan(void) {
 	sem_wait(&swf_planSemaphore);
 	for (int i = 0; i < 400; i++){
@@ -2093,34 +2121,33 @@ int new_loop_plan(void) {
 			}
 		}
 	}
-
-
-for (double i = -0.125; i <= 0.125; i += 0.025){
-			for (double j = -0.125; j <= 0.125; j += 0.025){
-				if (sqrt(pow(i,2) + pow(j,2)) <= 0.125) {
-						if (swf_plan[(int)round(20*(position_x + i))][(int)round(20*(position_y + j))] == 0) {
-							swf_plan[(int)round(20*(position_x + i))][(int)round(20*(position_y + j))] = 1; 
-					}	
+	for (double i = -0.125; i <= 0.125; i += 0.025){
+				for (double j = -0.125; j <= 0.125; j += 0.025){
+					if (sqrt(pow(i,2) + pow(j,2)) <= 0.125) {
+							if (swf_plan[(int)round(20*(position_x + i))][(int)round(20*(position_y + j))] == 0) {
+								swf_plan[(int)round(20*(position_x + i))][(int)round(20*(position_y + j))] = 1; 
+						}	
+					}
 				}
 			}
-		}
-	/* write a map for debugging */
-    // FILE *fptr;
-    // char c;
-    // fptr = fopen("../../roomba/log/map_swf_new_loop.txt","w");
-    // for(int i = 0; i < 160; i++) {
-    //     for(int j = 0; j < 160; j++){
-    //         c = swf_plan[j][160-i] +'0';
-    //         fputc(c,fptr);
-    //     }
-    //     fprintf(fptr,"\r\n");
-    // }
-    // fclose(fptr);
+		/* write a map for debugging */
+		// FILE *fptr;
+		// char c;
+		// fptr = fopen("../../roomba/log/map_swf_new_loop.txt","w");
+		// for(int i = 0; i < 160; i++) {
+		//     for(int j = 0; j < 160; j++){
+		//         c = swf_plan[j][160-i] +'0';
+		//         fputc(c,fptr);
+		//     }
+		//     fprintf(fptr,"\r\n");
+		// }
+		// fclose(fptr);
 
 	sem_post(&swf_planSemaphore);
 	return EXIT_SUCCESS;
 }
 
+/* function creating bt list for SWF */
 int create_bt_list_swf(void) {
 
 	memset(bt_list_swf,0,sizeof(bt_list_swf));
@@ -2182,6 +2209,7 @@ int create_bt_list_swf(void) {
 	return EXIT_SUCCESS;
 }
 
+/* function updating map for bt list creation of SWF */
 int update_bt_swf_map(void) {
 
 	int status;
@@ -2285,6 +2313,7 @@ int update_bt_swf_map(void) {
 	return EXIT_SUCCESS;
 }
 
+/* select the best bt point - swf */
 int select_bt_point_swf(void) {
 	// just distance for now
 
@@ -2318,6 +2347,7 @@ int select_bt_point_swf(void) {
 	return best_point;
 }
 
+/* smooth path found by pathfinder for swf */
 path_t smooth_path_swf(path_t* path) {
 
 	path_t smoothed_path;

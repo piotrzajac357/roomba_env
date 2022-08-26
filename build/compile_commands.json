@@ -16,11 +16,6 @@
 },
 {
   "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
-  "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_battery.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c",
-  "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_battery.c"
-},
-{
-  "directory": "/home/piotr/Desktop/pm_project/roomba_env/build/roomba",
   "command": "/usr/bin/clang  -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim -I/home/piotr/Desktop/pm_project/roomba_env/roomba/sim_files/include -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control -I/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/include  -g   -o CMakeFiles/control.dir/control_files/src/control_from_sim.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c",
   "file": "/home/piotr/Desktop/pm_project/roomba_env/roomba/control_files/src/control_from_sim.c"
 },

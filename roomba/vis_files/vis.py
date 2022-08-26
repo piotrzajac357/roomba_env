@@ -63,7 +63,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
                 + '%, timeQI: ' + str(round(float(timeQI),2))
                 + 'sec, pathQI: ' + str(round(pathQI,2))
                 + 'm,\n rotationQI: ' + str(round(rotation_qi,2)) 
-                + 'deg, coverageQI: ' + str(round(coverage_qi,2)) + '%')
+                + '(obroty), coverageQI: ' + str(round(coverage_qi,2)) + '%')
         # flush 
         fig1.canvas.flush_events()
         #fig1.canvas.draw()
@@ -155,7 +155,7 @@ while(True):
     # trashes_x = 400 - round(2*float(new_trashes_x))
     # trashes_y = round(2*float(new_trashes_y))
     pathQI = float(pathQI)
-    rotation_qi = float(rotation_qi)
+    rotation_qi = float(rotation_qi)/360
     coverage_qi = 100*float(coverage_qi)
     #coverage_qi = 100*float(coverage_qi)
     # Call function to update display

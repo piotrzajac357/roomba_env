@@ -41,6 +41,8 @@ sem_t dist_sensorsSemaphore;            // Semaphore
 
 /* RANDOM algorithm variables */
 
+sem_t superv_calc_rg_Semaphore;
+
 /*  current task to be done 
     0 - no driving, motors off
     1 - driving forward
@@ -70,6 +72,9 @@ int spool_next_step_rg_calculated;      // flag that next step has been calclate
 
 
 /* STC ALGORITHM VARIABLES */
+
+sem_t superv_calc_stc_Semaphore;
+
 sem_t spool_calc_next_step_stc;         // notification for STC algorithm - calculate next step
 
 int spool_next_step_calculated;         // flag that next step has been calculated
@@ -129,8 +134,13 @@ int next_step;
 int target_cell;
 
 /* BA* algorithm variables */
+
+sem_t superv_calc_ba_Semaphore;
+
+/* flag - lets calculate next step */
 sem_t spool_calc_next_step_ba;
 
+/* flag - next step has been calculated */ 
 int spool_next_step_ba_calculated;
 
 /* 0 - no data
@@ -149,15 +159,29 @@ int ba_disc_map[80][80];
     movement (to a certain point)
 */
 int current_task_ba;
+
+/* handling moving to point */
 double dist;
 double prev_dist;
+
+/* handling rotating to orientation - target orientation */
 double target_orientation_ba;
+
+/* target position to move */
 double target_position_x_ba;
 double target_position_y_ba;
+
+/* list containing backtracking points */
 int bt_list[100][2];
+
+/* handling following path from critical point to bt point */
 double bt_target_x;
 double bt_target_y;
+
+/* path from CP to BT point */
 path_t path;
+
+/* handling path following */
 int path_index;
 
 /* movement mode:
@@ -267,33 +291,39 @@ int smaller_left;
 /* a* navigation to new area in swf algorithm path */
 path_t path_swf;
 
-int initialize_semaphores(void);
+/* initialization functions */
 
-int init_battery(void);
+int initialize_semaphores(void);
 
 int init_control(void);
 
-int init_rg(void);
-
-int update_rg_map(void);
-
 int init_movement_type(void);
 
-int calculate_control(void);
-
-int select_new_direction(void);
-
-int calculate_movement_type(void);
-
-int inspect_battery(void);
-
-int check_nbh(void);
+int init_rg(void);
 
 int init_stc(void);
 
 int init_ba(void);
 
-int update_position_orientation(void);
+int init_swf(void);
+
+/* common functions */
+
+int calculate_control(void);
+
+double calculate_suction(int alg_select, int tmp_movement_type);
+
+int calculate_movement_type(void);
+
+/* RG functions */
+
+int update_rg_map(void);
+
+int select_new_direction(void);
+
+/* STC functions */
+
+int check_nbh(void);
 
 int calc_next_step(void);
 
@@ -303,13 +333,15 @@ int update_quarter_and_cell(void);
 
 int calc_next_task(void);
 
+int parent_to_target(int);
+
+/* BA* functions */
+
 int update_ba_map(void);
 
 int create_bt_list(void);
 
 int select_bt_point(void);
-
-int parent_to_target(int);
 
 void init_a_grid(grid_uint8_t* grid);
 
@@ -321,7 +353,7 @@ int rotation_direction(double target_angle, double current_angle);
 
 path_t smooth_path(path_t* path);
 
-int init_swf(void);
+/* SWF functions */
 
 int next_step_swf(void);
 

@@ -224,33 +224,6 @@ control_files/src/control.c.s:
 	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control.c.s
 .PHONY : control_files/src/control.c.s
 
-control_files/src/control_battery.o: control_files/src/control_battery.c.o
-
-.PHONY : control_files/src/control_battery.o
-
-# target to build an object file
-control_files/src/control_battery.c.o:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.o
-.PHONY : control_files/src/control_battery.c.o
-
-control_files/src/control_battery.i: control_files/src/control_battery.c.i
-
-.PHONY : control_files/src/control_battery.i
-
-# target to preprocess a source file
-control_files/src/control_battery.c.i:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.i
-.PHONY : control_files/src/control_battery.c.i
-
-control_files/src/control_battery.s: control_files/src/control_battery.c.s
-
-.PHONY : control_files/src/control_battery.s
-
-# target to generate assembly for a file
-control_files/src/control_battery.c.s:
-	cd /home/piotr/Desktop/pm_project/roomba_env/build && $(MAKE) -f roomba/CMakeFiles/control.dir/build.make roomba/CMakeFiles/control.dir/control_files/src/control_battery.c.s
-.PHONY : control_files/src/control_battery.c.s
-
 control_files/src/control_from_sim.o: control_files/src/control_from_sim.c.o
 
 .PHONY : control_files/src/control_from_sim.o
@@ -836,9 +809,6 @@ help:
 	@echo "... control_files/src/control.o"
 	@echo "... control_files/src/control.i"
 	@echo "... control_files/src/control.s"
-	@echo "... control_files/src/control_battery.o"
-	@echo "... control_files/src/control_battery.i"
-	@echo "... control_files/src/control_battery.s"
 	@echo "... control_files/src/control_from_sim.o"
 	@echo "... control_files/src/control_from_sim.i"
 	@echo "... control_files/src/control_from_sim.s"
