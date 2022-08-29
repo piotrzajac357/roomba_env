@@ -9,8 +9,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "control_update.h"
-#include "control_functions.h"
+#include "../include/control_update.h"
+#include "../include/control_functions.h"
 
 /* initialize control (motors power and suction power) update thread */
 int init_control_update() {
@@ -35,7 +35,7 @@ int init_control_update() {
     timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 1000000;
+	timerSpecStruct.it_interval.tv_nsec = 100000;
 
 	init_control();
 

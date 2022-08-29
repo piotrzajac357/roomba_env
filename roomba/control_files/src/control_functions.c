@@ -373,6 +373,12 @@ int calculate_movement_type(void) {
 			if (sem_trywait(&superv_calc_rg_Semaphore) != 0){
 				return EXIT_SUCCESS;
 			}
+			if (battery_level <= 0.0001) {
+				algorithm_finished = 1;
+				spool_next_step_rg_calculated = 0;
+				sem_post(&spool_calc_next_step_rg);
+				return EXIT_SUCCESS;
+			}
 			// algorith_select = 0 is random bouncing
 			switch (current_task)
 			{
@@ -2395,10 +2401,10 @@ path_t smooth_path_swf(path_t* path) {
 
 				if ((pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
 									  pix_value_up == 2	  && pix_value_down == 2) ||
-									  x_pix_left == path_begin(path)->col ||
-									  x_pix_right == path_begin(path)->col ||
-									  y_pix_up == path_begin(path)->row ||
-									  y_pix_down == path_begin(path)->row){
+									  (x_pix_left == path_begin(path)->col && y_pix == path_begin(path)->row)||
+									  (x_pix_right == path_begin(path)->col && y_pix == path_begin(path)->row)||
+									  (y_pix_up == path_begin(path)->row && x_pix == path_begin(path)->col)||
+									  (y_pix_down == path_begin(path)->row && x_pix == path_begin(path)->col)){
 					continue; }
 				else {
 					is_path_traversable = 0;

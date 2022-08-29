@@ -40,7 +40,7 @@ int init_task_to_movement() {
 	timerSpecStruct.it_interval.tv_sec = 0;
 	// gigaimportant - interval must be lower than 
 	// sim->control data transfer
-	timerSpecStruct.it_interval.tv_nsec = 1000000;
+	timerSpecStruct.it_interval.tv_nsec = 200000;
 
     init_movement_type();
 

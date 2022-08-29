@@ -39,7 +39,7 @@ int init_control_to_sim(){
     timerSpecStruct.it_value.tv_sec = 1;            // wait a sec before sending 
 	timerSpecStruct.it_value.tv_nsec = 0;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 1000000;
+	timerSpecStruct.it_interval.tv_nsec = 200000;
 
     timer_settime(timerVar, 0, &timerSpecStruct, NULL);
 

@@ -19,7 +19,7 @@
 double sim_step_position = 0.001;
 int sim_step_battery = 1;
 int sim_step_container = 1;
-double sim_step_dist_sensors = 0.001;
+double sim_step_dist_sensors = 0.0005;
 double max_speed = 0.5;						// 0.5m/s
 double max_rotating_speed = 0.055556;			// 360deg * 1/18 this is 0.02 deg in iteration
 double simulation_speed = 4;

@@ -62,28 +62,28 @@ void * tQualityThreadFunc(void *cookie) {
         status = calculate_qis(sim_step_position);
     }
     
-    if (thread_counter1 == 100){
-        thread_counter1 = 0;
+    // if (thread_counter1 == 100){
+    //     thread_counter1 = 0;
 
-        FILE *fptr_log_cov;
-        fptr_log_cov = fopen("../../roomba/log/log_cov.txt","a");
-        fprintf(fptr_log_cov, "%f\r\n",coverage_QI);
-        fclose(fptr_log_cov);
+        // FILE *fptr_log_cov;
+        // fptr_log_cov = fopen("../../roomba/log/log_cov.txt","a");
+        // fprintf(fptr_log_cov, "%f\r\n",coverage_QI);
+        // fclose(fptr_log_cov);
 
-        FILE *fptr_cov_map;
-        char c;
-        fptr_cov_map = fopen("../../roomba/log/map_cov.txt","w");
-        for (int i = 0; i < 800; i++) {
-            for (int j = 0; j < 800; j++) {
-                c = coverage_plan[i][j] + '0';
-                fputc(c, fptr_cov_map);
-            }
-            fprintf(fptr_cov_map, "\r\n");
-        }
-        fclose(fptr_cov_map);
+        // FILE *fptr_cov_map;
+        // char c;
+        // fptr_cov_map = fopen("../../roomba/log/map_cov.txt","w");
+        // for (int i = 0; i < 800; i++) {
+        //     for (int j = 0; j < 800; j++) {
+        //         c = coverage_plan[i][j] + '0';
+        //         fputc(c, fptr_cov_map);
+        //     }
+        //     fprintf(fptr_cov_map, "\r\n");
+        // }
+        // fclose(fptr_cov_map);
 
-    }
+    //}
     //printf("\nidle_time_qi: %f", idle_time_QI);
-    thread_counter1++;
+    //thread_counter1++;
     return EXIT_SUCCESS;
 }

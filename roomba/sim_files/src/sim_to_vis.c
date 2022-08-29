@@ -44,7 +44,7 @@ int init_sim_to_vis() {
       	timerSpecStruct.it_value.tv_sec = 0;
 	    timerSpecStruct.it_value.tv_nsec = 25000000;
 	    timerSpecStruct.it_interval.tv_sec = 0;
-    	timerSpecStruct.it_interval.tv_nsec = 10000000;
+    	timerSpecStruct.it_interval.tv_nsec = 25000000;
 
         // create and configure socket
         my_socket = socket(PF_INET, SOCK_DGRAM, 0);
@@ -109,7 +109,7 @@ void * tS2VThreadFunc(void *cookie) {
     
     // buffer with trash coords 
     // snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %d %d %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_container, trashes[0], trashes[1], tmp_suction_power);
-    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f  ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery_qi, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi);
+    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f %d  ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery_qi, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi, algorithm_finished);
 
     // send buffer 
     sendto(my_socket, buffer, 100, MSG_CONFIRM, (const struct sockaddr *) &socket_addr, sizeof(socket_addr));

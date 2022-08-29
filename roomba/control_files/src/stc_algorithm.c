@@ -25,6 +25,7 @@ int init_stc_algorithm(){
     // initialize algoithm variables
     status = init_stc();
 
+    sleep(3);
     // create new stc thread
     if ((status = pthread_create(&StcThread, &aStcThreadAttr, tStcThreadFunc, NULL))) {
         fprintf(stderr, "Cannot create stc thread.\n");

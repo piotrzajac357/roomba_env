@@ -40,7 +40,7 @@ int init_sim_to_control(){
 	timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 1000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 500000;
+	timerSpecStruct.it_interval.tv_nsec = 250000;
 
 	timer_settime(timerVar, 0, &timerSpecStruct, NULL);
 

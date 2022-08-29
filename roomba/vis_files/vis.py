@@ -1,3 +1,4 @@
+from sys import path_hooks
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -14,13 +15,7 @@ UDPServerSocket.bind((localIP, localPort))
 
 # Function adds received data from socket to visualisation
 def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
-    """# Apply trashes to plot if there are new trashes
-    if ((trashes_coords[1] > 0) and ((trashes_coords[0] != previous_trashes_x[0]) or (trashes_coords[1] != previous_trashes_y[0]))):
-        for k in range (-8,8,1):
-            for j in range (-8,8,1):
-                # Trashes - Blue 
-                background[trashes_coords[0] + k,trashes_coords[1] + j,:] = [0,0,1]"""
-
+   
     # Increase clean area and change robot position on plot if robot position has changed
     if (robot_pos_x != previous_robot_x[0]) or (robot_pos_y != previous_robot_y[0]):
         for k in [-2,-1,0,1,2,]:
@@ -38,8 +33,13 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
     # previous_trashes_y[0] = trashes_coords[1]
 
     i[0] = i[0] + 1
+
+    if (i[0] % 5 == 0):
+        file1 = open("../../roomba/tests_results/log_clover_center.txt","a")
+        file1.write(str(timeQI) + ',' + str(battery_lvl) + ',' + str(coverage_qi) + ',' + str(rotation_qi) + ',' + str(pathQI) + '\r\n')
+        file1.close()
     # Display changes every 8th received packet
-    if i[0] == 16:
+    if i[0] == 10:
 
         img[:,:,:] = background[:,:,:]
         i[0] = 0
@@ -70,11 +70,13 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
         a.remove()
     return
 
+with open("../../roomba/tests_results/log_clover_center.txt","w") as file1:
+    pass
 
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/plan/plan_clover.png')
+background = mpimg.imread('../../roomba/test_plans/plan_clover.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
@@ -82,7 +84,7 @@ fig1.set_size_inches(8,8)
 
 
 # Mutual objects help with handling first iteration and "did it change?" checking
-i = [3]
+i = [9]
 previous_robot_x = [0]
 previous_robot_y = [0]
 # previous_trashes_x = [0]
@@ -114,6 +116,7 @@ while(True):
     pathQI = ''
     rotation_qi = ''
     coverage_qi = ''
+    algorithm_finished = ''
 
     # Each variable is separated by ' ' sign
     licznik_spacji = 0
@@ -137,6 +140,8 @@ while(True):
                 rotation_qi = rotation_qi + char
             elif licznik_spacji == 7:
                 coverage_qi = coverage_qi + char
+            elif licznik_spacji == 8:
+                algorithm_finished = algorithm_finished + char
             else:
                 break
 
@@ -157,6 +162,11 @@ while(True):
     pathQI = float(pathQI)
     rotation_qi = float(rotation_qi)/360
     coverage_qi = 100*float(coverage_qi)
+    algorithm_finished = float(algorithm_finished)
     #coverage_qi = 100*float(coverage_qi)
     # Call function to update display
-    update_vis(robot_pos_x,robot_pos_y,orientation,battery,timeQI,pathQI)
+    if algorithm_finished == 0:
+        update_vis(robot_pos_x,robot_pos_y,orientation,battery,timeQI,pathQI)
+
+
+        # do some logging
