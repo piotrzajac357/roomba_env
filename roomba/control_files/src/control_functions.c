@@ -1826,8 +1826,8 @@ int next_step_swf(void){
 				current_swf_step = 3;
 			}
 			else if (is_at_corner == 1){
-				target_position_x_swf = tmp_pos_x + (0.25 + 0.1*smaller_right)* cos(tmp_orientation * ST_TO_RAD);
-				target_position_y_swf = tmp_pos_y + (0.25 + 0.1*smaller_right)* sin(tmp_orientation * ST_TO_RAD);
+				target_position_x_swf = tmp_pos_x + (0.255 + 0.1*smaller_right)* cos(tmp_orientation * ST_TO_RAD);
+				target_position_y_swf = tmp_pos_y + (0.255 + 0.1*smaller_right)* sin(tmp_orientation * ST_TO_RAD);
 				//printf("%f %f \n", target_position_x_swf, target_position_y_swf);
 				current_swf_step = 3;
 				new_loop_plan();

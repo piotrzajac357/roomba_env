@@ -34,7 +34,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
 
     i[0] = i[0] + 1
 
-    if (i[0] % 5 == 0):
+    if (i[0] % 10 == 0):
         file1 = open("../../roomba/tests_results/log_clover_center.txt","a")
         file1.write(str(timeQI) + ',' + str(battery_lvl) + ',' + str(coverage_qi) + ',' + str(rotation_qi) + ',' + str(pathQI) + '\r\n')
         file1.close()

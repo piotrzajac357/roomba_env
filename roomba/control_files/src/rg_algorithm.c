@@ -80,32 +80,37 @@ void *tRgThreadFunc(void *cookie) {
     for(;;) {
         /* wait for spool ("new task must be set" signal) */
         sem_wait(&spool_calc_next_step_rg);
-        
-        sem_wait(&superv_calc_rg_Semaphore);
-        // stop the robot while new task is calculated
-        current_task = 0;
+        if (algorithm_finished == 0){
+            sem_wait(&superv_calc_rg_Semaphore);
+            // stop the robot while new task is calculated
+            current_task = 0;
 
-        // call a function to select new direction
-        if((status = select_new_direction())){
-    	fprintf(stderr, "Error selecting new direction: %d\n", status);
-  		    return 0;
-  	    }
+            // call a function to select new direction
+            if((status = select_new_direction())){
+            fprintf(stderr, "Error selecting new direction: %d\n", status);
+                return 0;
+            }
 
-        // get current orientation
-        sem_wait(&position_orientationSemaphore);
-        double tmp_orientation = orientation;
-        sem_post(&position_orientationSemaphore);
+            // get current orientation
+            sem_wait(&position_orientationSemaphore);
+            double tmp_orientation = orientation;
+            sem_post(&position_orientationSemaphore);
 
-        // choose rotating direction based on current and target orientation
-        if ((   (target_direction > tmp_orientation) && (fabs(target_direction - tmp_orientation) > 180.0)) ||
-            (   (target_direction < tmp_orientation) && (fabs(target_direction - tmp_orientation) < 180.0))) {
-            current_task = 2;
-        } else {
-            current_task = 3;
+            // choose rotating direction based on current and target orientation
+            if ((   (target_direction > tmp_orientation) && (fabs(target_direction - tmp_orientation) > 180.0)) ||
+                (   (target_direction < tmp_orientation) && (fabs(target_direction - tmp_orientation) < 180.0))) {
+                current_task = 2;
+            } else {
+                current_task = 3;
+            }
+            spool_next_step_rg_calculated = 1;
+
+            sem_post(&superv_calc_rg_Semaphore);
         }
-        spool_next_step_rg_calculated = 1;
-
-        sem_post(&superv_calc_rg_Semaphore);
+        else {
+            current_task = 0;
+            movement_type = 0;
+        }
     }
     return 0;
 }
