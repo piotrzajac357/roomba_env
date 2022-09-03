@@ -2401,10 +2401,20 @@ path_t smooth_path_swf(path_t* path) {
 
 				if ((pix_value == 2 && pix_value_left == 2 && pix_value_right == 2 && 
 									  pix_value_up == 2	  && pix_value_down == 2) ||
-									  (x_pix_left == path_begin(path)->col && y_pix == path_begin(path)->row)||
-									  (x_pix_right == path_begin(path)->col && y_pix == path_begin(path)->row)||
-									  (y_pix_up == path_begin(path)->row && x_pix == path_begin(path)->col)||
-									  (y_pix_down == path_begin(path)->row && x_pix == path_begin(path)->col)){
+									  (x_pix_left == path_begin(path)->row && y_pix == path_begin(path)->col)||
+									  (x_pix_right == path_begin(path)->row && y_pix == path_begin(path)->col)||
+									  (y_pix_up == path_begin(path)->col && x_pix == path_begin(path)->row)||
+									  (y_pix_down == path_begin(path)->col && x_pix == path_begin(path)->row)){
+
+													// TODO TODO
+									//   (x_pix_left == path_begin(path)->col && y_pix == path_begin(path)->row)||
+									//   (x_pix_right == path_begin(path)->col && y_pix == path_begin(path)->row)||
+									//   (y_pix_up == path_begin(path)->row && x_pix == path_begin(path)->col)||
+									//   (y_pix_down == path_begin(path)->row && x_pix == path_begin(path)->col)){
+
+
+
+
 					continue; }
 				else {
 					is_path_traversable = 0;
