@@ -61,6 +61,7 @@ int init_rg(void) {
 	suction_on = 1;
 	last_pixel_x = -1;
 	last_pixel_y = -1;
+	timer_rg = 0.0;
 	return EXIT_SUCCESS;
 }
 
@@ -1953,7 +1954,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 4:
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.08) {
 				tmp_movement_type = 3;
 			}
 			else {
@@ -1964,7 +1965,7 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			break;
 		case 5:
 			//if(movement_mode_swf == 1){printf("%.4f\n",fabs(target_orientation_swf - fmod(tmp_orientation,360.0)));}
-			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.1) {
+			if (fabs(target_orientation_swf - fmod(tmp_orientation,360.0)) > 0.08) {
 				tmp_movement_type = 2;
 			}
 			else {

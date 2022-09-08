@@ -122,9 +122,13 @@ void* tRgMapThreadFunction(void* cookie) {
     struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_max(policy) -10;
+    param.sched_priority = sched_get_priority_max(policy) - 10;
 	pthread_setschedparam(pthread_self(), policy, &param);
  
+    timer_rg += 0.05;
+    if(timer_rg >= 3600){
+        algorithm_finished = 1;
+    }
     if ((status = update_rg_map())) {
         fprintf(stderr, "Error updating ba map");
         return 0;

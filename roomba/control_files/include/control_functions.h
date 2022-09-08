@@ -73,6 +73,7 @@ int spool_next_step_rg_calculated;      // flag that next step has been calclate
 int suction_on;
 int last_pixel_x;
 int last_pixel_y;
+double timer_rg;
 
 /* STC ALGORITHM VARIABLES */
 

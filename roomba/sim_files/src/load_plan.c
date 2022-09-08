@@ -8,7 +8,7 @@ void init_plan(){
 
     FILE *fptr;
     char c;
-    fptr = fopen("../../roomba/test_plans/plan_showcase_stc_ba.txt","r");
+    fptr = fopen("../../roomba/test_plans/plan_clover.txt","r");
     if(fptr == NULL) {
         perror("Error in opening file");
         return;

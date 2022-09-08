@@ -24,7 +24,7 @@
 int main(int argc, char *argv[]) {
 
     int status;
-    algorithm_select = 1;
+    algorithm_select = 3;
 
     //nice(-20);
 

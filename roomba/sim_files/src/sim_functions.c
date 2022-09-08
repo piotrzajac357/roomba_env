@@ -53,18 +53,20 @@ int initialize_semaphores(void) {
 /* set starting position and orientation */
 int initialize_position(void) {
 	sem_wait(&position_orientationSemaphore);
+	// for stc_ba_showcase around 13.0, 16.0 
 	/* STC position */
-	position_x = 12.875;
-	position_y = 16.125;
-	previous_orientation = 270.0;
-
+	// position_x = 12.875;
+	// position_y = 16.125;
+	// previous_orientation = 270.0;
 	/* BA* position */
-	// position_x = 10.25;
-	// position_y = 10.0;
+	// position_x = 12.75;
+	// position_y = 16.25;
 	// previous_orientation = 90.0;
 
-	// position_x = 10.4;
-	// position_y = 10.0;
+	// for clover around 10.0, 10.0
+	position_x = 10.0;
+	position_y = 10.4;
+	previous_orientation = 270;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }

@@ -35,7 +35,7 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
     i[0] = i[0] + 1
 
     if (i[0] % 20 == 0):
-        file1 = open("../../roomba/tests_results/log_stc_showcase.txt","a")
+        file1 = open("../../roomba/tests_results/log_dwa_clover.txt","a")
         file1.write(str(round(timeQI,3)) + ',' + str(round(100-battery_lvl,3)) + ',' + str(round(coverage_qi,3)) + ',' + str(round(rotation_qi,3)) + ',' + str(round(pathQI,3)) + ',' + str(round(suction_power,3)) + '\r\n')
         file1.close()
     # Display changes every 8th received packet
@@ -70,13 +70,13 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
         a.remove()
     return
 
-with open("../../roomba/tests_results/log_stc_showcase.txt","w") as file1:
+with open("../../roomba/tests_results/log_dwa_clover.txt","w") as file1:
     pass
 
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/test_plans/plan_showcase_stc_ba.png')
+background = mpimg.imread('../../roomba/test_plans/plan_clover.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
