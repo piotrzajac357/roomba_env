@@ -3,6 +3,8 @@ clear all; close all;
 img = imread('plan_showcase_stc_ba.png');
 imshow(img);
 img = mat2gray(img);
+imwrite(img, 'plan_showcase_stc_ba.png');
+
 img = imresize(img,[200 200], 'nearest');
 
 M = img(:,:,1);
@@ -18,3 +20,6 @@ for i=2:size(M, 1)
 
 end
 fclose(fid);
+
+
+
