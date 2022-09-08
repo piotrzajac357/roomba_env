@@ -54,7 +54,7 @@ void * tQualityThreadFunc(void *cookie) {
     struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_min(policy) - 3;
+    param.sched_priority = sched_get_priority_min(policy) + 2;
     pthread_setschedparam(pthread_self(), policy, &param);
 
     // in microseconds

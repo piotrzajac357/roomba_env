@@ -70,6 +70,9 @@ sem_t target_directionSemaphore;        // Semaphore
 sem_t spool_calc_next_step_rg;          // notification that new task has to be selected
 int spool_next_step_rg_calculated;      // flag that next step has been calclated
 
+int suction_on;
+int last_pixel_x;
+int last_pixel_y;
 
 /* STC ALGORITHM VARIABLES */
 

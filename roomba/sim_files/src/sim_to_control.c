@@ -40,7 +40,7 @@ int init_sim_to_control(){
 	timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 1000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 250000;
+	timerSpecStruct.it_interval.tv_nsec = 1000000;
 
 	timer_settime(timerVar, 0, &timerSpecStruct, NULL);
 
@@ -55,7 +55,7 @@ void * tS2CThreadFunc(void *cookie) {
 	struct sched_param param;
 
 	pthread_getschedparam(pthread_self(), &policy, &param);
-	param.sched_priority = sched_get_priority_max(policy) - 6;
+	param.sched_priority = sched_get_priority_max(policy) - 3;
 	pthread_setschedparam(pthread_self(), policy, &param);
 
 	// read all neccessary data from process and store in tmp variables

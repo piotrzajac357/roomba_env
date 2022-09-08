@@ -34,12 +34,12 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
 
     i[0] = i[0] + 1
 
-    if (i[0] % 10 == 0):
-        file1 = open("../../roomba/tests_results/log_clover_center.txt","a")
-        file1.write(str(timeQI) + ',' + str(battery_lvl) + ',' + str(coverage_qi) + ',' + str(rotation_qi) + ',' + str(pathQI) + '\r\n')
+    if (i[0] % 20 == 0):
+        file1 = open("../../roomba/tests_results/log_stc_showcase.txt","a")
+        file1.write(str(round(timeQI,3)) + ',' + str(round(100-battery_lvl,3)) + ',' + str(round(coverage_qi,3)) + ',' + str(round(rotation_qi,3)) + ',' + str(round(pathQI,3)) + ',' + str(round(suction_power,3)) + '\r\n')
         file1.close()
     # Display changes every 8th received packet
-    if i[0] == 10:
+    if i[0] == 40:
 
         img[:,:,:] = background[:,:,:]
         i[0] = 0
@@ -70,13 +70,13 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
         a.remove()
     return
 
-with open("../../roomba/tests_results/log_clover_center.txt","w") as file1:
+with open("../../roomba/tests_results/log_stc_showcase.txt","w") as file1:
     pass
 
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/test_plans/plan_clover.png')
+background = mpimg.imread('../../roomba/test_plans/plan_showcase_stc_ba.png')
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
@@ -84,7 +84,7 @@ fig1.set_size_inches(8,8)
 
 
 # Mutual objects help with handling first iteration and "did it change?" checking
-i = [9]
+i = [39]
 previous_robot_x = [0]
 previous_robot_y = [0]
 # previous_trashes_x = [0]
@@ -117,6 +117,7 @@ while(True):
     rotation_qi = ''
     coverage_qi = ''
     algorithm_finished = ''
+    suction_power = ''
 
     # Each variable is separated by ' ' sign
     licznik_spacji = 0
@@ -142,16 +143,11 @@ while(True):
                 coverage_qi = coverage_qi + char
             elif licznik_spacji == 8:
                 algorithm_finished = algorithm_finished + char
+            elif licznik_spacji == 9:
+                suction_power = suction_power + char
             else:
                 break
 
-            """
-            code for trashes coords
-            elif licznik_spacji == 5:
-                new_trashes_x = new_trashes_x + char
-            elif licznik_spacji == 6:
-                new_trashes_y = new_trashes_y + char
-            """
 
     # Convert variable strings to actual values
     robot_pos_x = 400 - round(20*float(pos_y))+1
@@ -159,10 +155,13 @@ while(True):
     orientation = float(orientation)
     # trashes_x = 400 - round(2*float(new_trashes_x))
     # trashes_y = round(2*float(new_trashes_y))
+    battery = float(battery)
+    timeQI = float(timeQI)
     pathQI = float(pathQI)
     rotation_qi = float(rotation_qi)/360
     coverage_qi = 100*float(coverage_qi)
     algorithm_finished = float(algorithm_finished)
+    suction_power = round(float(suction_power),2)
     #coverage_qi = 100*float(coverage_qi)
     # Call function to update display
     if algorithm_finished == 0:

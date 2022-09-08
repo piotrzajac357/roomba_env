@@ -66,7 +66,7 @@ void *tSwfThreadFunc(void *cookie) {
     struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_min(policy) + 5;
+    param.sched_priority = sched_get_priority_max(policy) - 9 ;
     pthread_setschedparam(pthread_self(), policy, &param);
 
     // infinite loop waiting for spool
@@ -90,7 +90,7 @@ void* tSwfMapThreadFunction(void *cookie) {
     struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_max(policy) - 6;
+    param.sched_priority = sched_get_priority_max(policy) - 10;
 	pthread_setschedparam(pthread_self(), policy, &param);
  
     status = virtual_sensors();

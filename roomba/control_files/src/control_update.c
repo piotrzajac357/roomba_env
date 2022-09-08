@@ -35,7 +35,7 @@ int init_control_update() {
     timerSpecStruct.it_value.tv_sec = 0;
 	timerSpecStruct.it_value.tv_nsec = 5000000;
 	timerSpecStruct.it_interval.tv_sec = 0;
-	timerSpecStruct.it_interval.tv_nsec = 100000;
+	timerSpecStruct.it_interval.tv_nsec = 200000;
 
 	init_control();
 
@@ -52,7 +52,7 @@ void * tControlUpdateThreadFunc(void *cookie) {
 	struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_max(policy) - 3;
+    param.sched_priority = sched_get_priority_max(policy) - 7;
 	pthread_setschedparam(pthread_self(), policy, &param);
 
 	if((status = calculate_control())){

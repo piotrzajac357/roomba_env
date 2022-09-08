@@ -41,7 +41,7 @@ void *tCFSThreadFunc(void *cookie) {
     struct sched_param param;
     
     pthread_getschedparam(pthread_self(), &policy, &param);
-	param.sched_priority = sched_get_priority_max(policy) - 2;
+	param.sched_priority = sched_get_priority_max(policy) - 6;
     pthread_setschedparam(pthread_self(), policy, &param);
 
     // infinite loop waiting for data

@@ -63,7 +63,7 @@ void * tBatteryThreadFunc(void *cookie) {
 
 	/* Read modify and set new thread priority */
 	pthread_getschedparam(pthread_self(), &policy, &param);
-	param.sched_priority = sched_get_priority_min(policy) + 3;
+	param.sched_priority = sched_get_priority_max(policy) - 2;
 	pthread_setschedparam( pthread_self(), policy, &param);
 
 	if((status = calculate_battery())){

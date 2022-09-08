@@ -57,7 +57,7 @@ void * tT2MThreadFunc(void *cookie) {
 	struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_max(policy) - 3;
+    param.sched_priority = sched_get_priority_max(policy) - 8;
 	pthread_setschedparam(pthread_self(), policy, &param);
     
     if((status = calculate_movement_type())){

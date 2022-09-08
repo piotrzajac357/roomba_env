@@ -39,7 +39,7 @@ void *tSFCThreadFunc(void *cookie) {
     struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-	param.sched_priority = sched_get_priority_max(policy) - 7;
+	param.sched_priority = sched_get_priority_max(policy) - 4;
 	pthread_setschedparam(pthread_self(), policy, &param);
 
     // Wait for "data is ready" signal and write to tmp variables

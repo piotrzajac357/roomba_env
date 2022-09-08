@@ -54,7 +54,7 @@ void * tPositionThreadFunc(void *cookie) {
 	struct sched_param param;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-	param.sched_priority = sched_get_priority_max(policy) - 4;
+	param.sched_priority = sched_get_priority_max(policy);
 	pthread_setschedparam( pthread_self(), policy, &param);
 
 	if((status = calculate_position())){

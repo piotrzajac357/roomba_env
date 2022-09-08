@@ -74,7 +74,7 @@ void * tS2VThreadFunc(void *cookie) {
     struct sockaddr_in socket_addr;
 
     pthread_getschedparam(pthread_self(), &policy, &param);
-    param.sched_priority = sched_get_priority_min(policy) + 2;
+    param.sched_priority = sched_get_priority_min(policy) + 1;
     pthread_setschedparam(pthread_self(), policy, &param);
 
     socket_addr.sin_family = AF_INET;
@@ -109,7 +109,7 @@ void * tS2VThreadFunc(void *cookie) {
     
     // buffer with trash coords 
     // snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %d %d %f ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery, tmp_container, trashes[0], trashes[1], tmp_suction_power);
-    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f %d  ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery_qi, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi, algorithm_finished);
+    snprintf(buffer, sizeof(buffer), "%f %f %f %f %f %f %f %f %d %f  ", tmp_position_x, tmp_position_y, tmp_orientation, tmp_battery_qi, tmp_time_qi, tmp_path_qi, tmp_rotation_qi, tmp_coverage_qi, algorithm_finished, tmp_suction_power);
 
     // send buffer 
     sendto(my_socket, buffer, 100, MSG_CONFIRM, (const struct sockaddr *) &socket_addr, sizeof(socket_addr));

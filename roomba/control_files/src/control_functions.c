@@ -58,6 +58,9 @@ int init_control(void) {
 int init_rg(void) {
 	current_task = 1;
 	spool_next_step_rg_calculated = 1;
+	suction_on = 1;
+	last_pixel_x = -1;
+	last_pixel_y = -1;
 	return EXIT_SUCCESS;
 }
 
@@ -131,12 +134,16 @@ double calculate_suction(int alg_select, int tmp_movement_type){
 			double tmp_pos_x = position_x;
 			double tmp_pos_y = position_y;
 			sem_post(&position_orientationSemaphore);
-			if (rg_disc_map[(int)round(4*tmp_pos_x)][(int)round(4*tmp_pos_y)] != 2){
+
+			if (suction_on == 1){
 				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
 			} else {
 				tmp_suction = 0.0;
 			}
 			break;
+
+
+
 		case 1:
 				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
 			break;
@@ -300,9 +307,21 @@ int update_rg_map(void) {
 	// printf("this: %d %d\n",this_pixel_x,this_pixel_y);
 	// printf("f:%d %d    l:%d %d     r:%d %d\n",front_sensor_pix_x,front_sensor_pix_y,left_sensor_pix_x,left_sensor_pix_y,right_sensor_pix_x,right_sensor_pix_y);
 
+		if (last_pixel_x != this_pixel_x || last_pixel_y != this_pixel_y){
+			if (rg_disc_map[this_pixel_x][this_pixel_y] != 2) {
+				suction_on = 1;
+				last_pixel_x = this_pixel_x;
+				last_pixel_y = this_pixel_y;
+			} else {
+				suction_on = 0;
+				last_pixel_x = this_pixel_x;
+				last_pixel_y = this_pixel_y;
+			}
+		}
+
 		if (rg_disc_map[this_pixel_x][this_pixel_y] != 2) {
 			rg_disc_map[this_pixel_x][this_pixel_y] = 2; }
-		
+
 		if (rg_disc_map[left_sensor_pix_x][left_sensor_pix_y] < 2){
 			if (tmp_left_sensor < 0.025) {
 				rg_disc_map[left_sensor_pix_x][left_sensor_pix_y] = 3;
