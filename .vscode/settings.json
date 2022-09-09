@@ -20,7 +20,8 @@
         "inttypes.h": "c",
         "path_main.h": "c",
         "control_functions.h": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "ba_algorithm.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

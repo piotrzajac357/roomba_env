@@ -1236,7 +1236,9 @@ int calc_next_task(void){
 					// index for path following
 					path_index = 0;
 					if(path_empty(&path_raw)) {
+
 						algorithm_finished = 1;
+						printf("%d %d %d %d\n",begin_x, begin_y, bt_list[bt_point][0],bt_list[bt_point][1]);
 						printf("No path found!\nFinishing work...\n");
 					}
 					// else {
@@ -1900,7 +1902,8 @@ int swf_mov_superv(double tmp_pos_x, double tmp_pos_y, double tmp_orientation,
 			}
 			break;
 		case 2:
-			if (tmp_right_sensor > 0.05) {
+			//if (tmp_right_sensor > 0.05) {
+			if (tmp_right_sensor > 0.04) {
 				//printf("end of wall, right sensor:  %.4f\n", tmp_right_sensor);
 				//printf("real right: %.4f  virtual right: %.4f\n\n", right_sensor,virt_sensor_right);
 				tmp_movement_type = 0;
