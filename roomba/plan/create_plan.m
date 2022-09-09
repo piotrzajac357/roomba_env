@@ -1,14 +1,14 @@
 clear all; close all;
 
-img = imread('plan_showcase_stc_ba.png');
+img = imread('plan_obstacles.png');
 imshow(img);
 img = mat2gray(img);
-imwrite(img, 'plan_showcase_stc_ba.png');
+imwrite(img, 'plan_obstacles.png');
 
 img = imresize(img,[200 200], 'nearest');
 
 M = img(:,:,1);
-fid = fopen('plan_showcase_stc_ba.txt', 'w+');
+fid = fopen('plan_obstacles.txt', 'w+');
 for i=2:size(M, 1)
     fprintf(fid, '%d', M(i,:));
     if i~=size(M,1) 
