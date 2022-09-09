@@ -59,14 +59,14 @@ int initialize_position(void) {
 	// position_y = 16.125;
 	// previous_orientation = 270.0;
 	/* BA* position */
-	// position_x = 12.75;
-	// position_y = 16.25;
-	// previous_orientation = 90.0;
+	position_x = 12.75;
+	position_y = 16.25;
+	previous_orientation = 90.0;
 
 	// for clover around 10.0, 10.0
-	position_x = 10.0;
-	position_y = 10.4;
-	previous_orientation = 270;
+	// position_x = 9.4;
+	// position_y = 10.0;
+	// previous_orientation = 90;
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
 }

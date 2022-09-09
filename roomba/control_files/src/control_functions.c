@@ -123,6 +123,11 @@ int calculate_control(void){
 	}
 	suction_power = calculate_suction(algorithm_select, movement_type);
 	sem_post(&controlSemaphore);
+
+	// timer_rg += 0.0002;
+	// if(timer_rg >= 905){
+	// 	algorithm_finished = 1;
+	// }
 	return EXIT_SUCCESS;
 }
 
@@ -156,7 +161,7 @@ double calculate_suction(int alg_select, int tmp_movement_type){
 			}
 			break;
 		case 3:
-			if (movement_mode == 0){
+			if (movement_mode_swf == 0){
 				tmp_suction = (tmp_movement_type == 1 || tmp_movement_type == 4) ? 1.0 : 0.5;
 			}
 			else {
@@ -419,7 +424,7 @@ int calculate_movement_type(void) {
 					break;
 				case 2:
 					// rotating clockwise until reaching target_direction, then driving forward
-					if (fabs(tmp_orientation - target_direction_tmp) < 0.5) { 
+					if (fabs(tmp_orientation - target_direction_tmp) < 3) { 
 						current_task = 1;
 						movement_type = 1; 
 					} else {
@@ -428,7 +433,7 @@ int calculate_movement_type(void) {
 					break;
 				case 3: 
 					// rotating counter clokcwise until reaching target direction, then driving forward
-					if (fabs(tmp_orientation - target_direction_tmp) < 0.5) {
+					if (fabs(tmp_orientation - target_direction_tmp) < 3) {
 						current_task = 1;
 						movement_type = 1;
 					} else {
@@ -638,12 +643,12 @@ int init_stc(void) {
 	algorithm_finished = 0;
 
 	/* clear log files for debugging */
-	FILE *fptr2;
-    fptr2 = fopen("../../roomba/log/decisions.txt","w");
-    fclose(fptr2);
-    FILE *fptr3;
-    fptr3 = fopen("../../roomba/log/quarters.txt","w");
-    fclose(fptr3);
+	// FILE *fptr2;
+    // fptr2 = fopen("../../roomba/log/decisions.txt","w");
+    // fclose(fptr2);
+    // FILE *fptr3;
+    // fptr3 = fopen("../../roomba/log/quarters.txt","w");
+    // fclose(fptr3);
 	
 	// sleep some time so simulator will set up
 	sleep(3);
@@ -674,9 +679,9 @@ int init_ba(void) {
 	dist = 10000;
 	prev_dist = 10000;
 
-	FILE *fptr12;
-    fptr12 = fopen("../../roomba/log/decisions_ba.txt","w");
-    fclose(fptr12);
+	// FILE *fptr12;
+    // fptr12 = fopen("../../roomba/log/decisions_ba.txt","w");
+    // fclose(fptr12);
 
 	//int status = run_test_1();
 
@@ -1581,10 +1586,10 @@ path_t smooth_path(path_t* path) {
 				int x_pix = (int)round(4 * (first_x + j * cos(angle * ST_TO_RAD)));
 				int y_pix = (int)round(4 * (first_y + j * sin(angle * ST_TO_RAD)));
 
-				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.1)));
-				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.1)));
-				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.1)));
-				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.1)));
+				int x_pix_left =	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) - 0.05)));
+				int x_pix_right = 	(int)round(4 * ((first_x + j * cos(angle * ST_TO_RAD) + 0.05)));
+				int y_pix_up = 		(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) + 0.05)));
+				int y_pix_down = 	(int)round(4 * ((first_y + j * sin(angle * ST_TO_RAD) - 0.05)));
 
 				int pix_value 		= ba_disc_map[x_pix][y_pix];
 				int pix_value_left  = ba_disc_map[x_pix_left][y_pix];

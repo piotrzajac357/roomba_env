@@ -6,6 +6,10 @@ import copy
 import math
 import socket 
 
+# plan name
+plan_file_name = '../../roomba/test_plans/plan_showcase_stc_ba.png'
+log_file_name  = '../../roomba/tests_results/log_dwa_showcase_center.txt'
+
 # create and bind socket
 localIP     = "127.0.0.1"
 localPort   = 1100
@@ -33,11 +37,11 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
     # previous_trashes_y[0] = trashes_coords[1]
 
     i[0] = i[0] + 1
-
-    if (i[0] % 20 == 0):
-        file1 = open("../../roomba/tests_results/log_dwa_clover.txt","a")
-        file1.write(str(round(timeQI,3)) + ',' + str(round(100-battery_lvl,3)) + ',' + str(round(coverage_qi,3)) + ',' + str(round(rotation_qi,3)) + ',' + str(round(pathQI,3)) + ',' + str(round(suction_power,3)) + '\r\n')
-        file1.close()
+    if algorithm_finished == 0:
+        if (i[0] % 20 == 0):
+            file1 = open(log_file_name,"a")
+            file1.write(str(round(timeQI,3)) + ',' + str(round(100-battery_lvl,3)) + ',' + str(round(coverage_qi,3)) + ',' + str(round(rotation_qi,3)) + ',' + str(round(pathQI,3)) + ',' + str(round(suction_power,3)) + '\r\n')
+            file1.close()
     # Display changes every 8th received packet
     if i[0] == 40:
 
@@ -70,13 +74,13 @@ def update_vis(robot_pos_x,robot_pos_y,direction,battery_lvl,timeQI, pathQI):
         a.remove()
     return
 
-with open("../../roomba/tests_results/log_dwa_clover.txt","w") as file1:
+with open(log_file_name,"w") as file1:
     pass
 
 # Initialize image for visualization and prepare data
 matplotlib.pyplot.ion()
 fig1, ax1 = plt.subplots()
-background = mpimg.imread('../../roomba/test_plans/plan_clover.png')
+background = mpimg.imread(plan_file_name)
 img = copy.deepcopy(background)
 axim1 = ax1.imshow(img)
 plt.axis("off")
@@ -164,8 +168,9 @@ while(True):
     suction_power = round(float(suction_power),2)
     #coverage_qi = 100*float(coverage_qi)
     # Call function to update display
-    if algorithm_finished == 0:
-        update_vis(robot_pos_x,robot_pos_y,orientation,battery,timeQI,pathQI)
+
+
+    update_vis(robot_pos_x,robot_pos_y,orientation,battery,timeQI,pathQI)
 
 
         # do some logging
