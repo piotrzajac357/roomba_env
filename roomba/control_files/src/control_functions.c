@@ -580,7 +580,7 @@ int calculate_movement_type(void) {
 					dist = sqrt(pow(target_position_x_ba - tmp_pos_x,2) + 
 								pow(target_position_y_ba - tmp_pos_y,2));
 					if (movement_mode == 0){
-						if (dist >= 0.005 && prev_dist >= dist) {
+						if (dist >= 0.005 && prev_dist >= dist && front_sensor > 0.0025) {
 							prev_dist = dist;
 							movement_type = 1;
 						}
@@ -591,7 +591,7 @@ int calculate_movement_type(void) {
 							sem_post(&spool_calc_next_step_ba);
 						}
 					} else {
-						if (dist >= 0.005 && prev_dist >= dist && front_sensor > 0.0025) {
+						if (dist >= 0.005 && prev_dist >= dist) {
 							prev_dist = dist;
 							movement_type = 1;
 						} else {

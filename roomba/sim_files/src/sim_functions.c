@@ -64,9 +64,9 @@ int initialize_position(void) {
 	// previous_orientation = 90.0;
 
 	// for clover around 10.0, 10.0
-	position_x = 10.0;
-	position_y = 10.125;
-	previous_orientation = 270;
+	// position_x = 10.0;
+	// position_y = 10.125;
+	// previous_orientation = 270;
 
 	// for narrow around 10.0, 10.0
 	// position_x = 9.875;
@@ -78,6 +78,25 @@ int initialize_position(void) {
 	// position_y = 12.125;
 	// previous_orientation = 90;
 
+	//corner positions showcase:
+	// position_x = 2.25;
+	// position_y = 2.75;
+	// previous_orientation = 270.0;
+
+	// corner position narrow:
+	// position_x = 2.25;
+	// position_y = 2.0;
+	// previous_orientation = 270.0;
+
+	// corner clover
+	// position_x = 2.25;
+	// position_y = 4.5;
+	// previous_orientation = 270.0;
+
+	// corner obstacles
+	position_x = 4.25;
+	position_y = 2.0;
+	previous_orientation = 90.0;
 
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;

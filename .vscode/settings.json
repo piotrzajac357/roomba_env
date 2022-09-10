@@ -21,7 +21,9 @@
         "path_main.h": "c",
         "control_functions.h": "c",
         "*.tcc": "c",
-        "ba_algorithm.h": "c"
+        "ba_algorithm.h": "c",
+        "task_to_movement.h": "c",
+        "swf_algorithm.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
