@@ -64,14 +64,20 @@ int initialize_position(void) {
 	// previous_orientation = 90.0;
 
 	// for clover around 10.0, 10.0
-	// position_x = 9.4;
-	// position_y = 10.0;
-	// previous_orientation = 90;
-
-	// for narrow around 10.0, 10.0
-	position_x = 9.875;
+	position_x = 10.0;
 	position_y = 10.125;
 	previous_orientation = 270;
+
+	// for narrow around 10.0, 10.0
+	// position_x = 9.875;
+	// position_y = 10.125;
+	// previous_orientation = 270;
+
+	// for obstacles around 10.0, 12.0
+	// position_x = 10.0;
+	// position_y = 12.125;
+	// previous_orientation = 90;
+
 
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;
