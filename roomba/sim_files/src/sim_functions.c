@@ -89,14 +89,14 @@ int initialize_position(void) {
 	// previous_orientation = 270.0;
 
 	// corner clover
-	// position_x = 2.25;
-	// position_y = 4.5;
-	// previous_orientation = 270.0;
+	position_x = 2.25;
+	position_y = 4.5;
+	previous_orientation = 270.0;
 
 	// corner obstacles
-	position_x = 4.25;
-	position_y = 2.0;
-	previous_orientation = 90.0;
+	// position_x = 4.25;
+	// position_y = 2.1;
+	// previous_orientation = 270.0;
 
 	sem_post(&position_orientationSemaphore);
 	return EXIT_SUCCESS;

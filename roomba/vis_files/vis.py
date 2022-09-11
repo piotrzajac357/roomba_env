@@ -7,8 +7,8 @@ import math
 import socket 
 
 # plan name
-plan_file_name = '../../roomba/test_plans/plan_obstacles.png'
-log_file_name  = '../../roomba/tests_results/log_ba_obstacles_corner.txt'
+plan_file_name = '../../roomba/test_plans/plan_clover.png'
+log_file_name  = '../../roomba/tests_results/log_rg_clover_corner.txt'
 
 # create and bind socket
 localIP     = "127.0.0.1"
