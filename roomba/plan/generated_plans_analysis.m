@@ -27,7 +27,8 @@ imshow(img,'InitialMagnification',1200);
 title('discovery map');
 
 %%
-filename = 'C:\Users\zajac\Desktop\pm\roomba_env\roomba\log\map_parent.txt';
+%filename = 'C:\Users\zajac\Desktop\pm\roomba_env\roomba\log\map_parent.txt';
+filename = 'C:\Users\zajac\Desktop\pm\some_backup\map_parent.txt';
 startRow = 2;
 formatSpec = '%s%[^\n\r]';
 fileID = fopen(filename,'r');
