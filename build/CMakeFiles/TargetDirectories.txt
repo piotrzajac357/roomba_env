@@ -1,8 +1,0 @@
-/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/rebuild_cache.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/edit_cache.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/rebuild_cache.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/vis.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/control.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/edit_cache.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/roomba.dir
-/home/piotr/Desktop/pm_project/roomba_env/build/roomba/CMakeFiles/sim.dir
