@@ -1,4 +1,4 @@
-The system is: Linux - 5.4.0-105-generic - x86_64
+The system is: Linux - 5.4.115-0504115-generic - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/clang 
 Build flags: 
@@ -28,28 +28,28 @@ The CXX compiler identification is Clang, found in "/home/piotr/Desktop/pm_proje
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_ec377/fast"
-/usr/bin/make -f CMakeFiles/cmTC_ec377.dir/build.make CMakeFiles/cmTC_ec377.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_cf7da/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cf7da.dir/build.make CMakeFiles/cmTC_cf7da.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_ec377.dir/testCCompiler.c.o
-/usr/bin/clang    -o CMakeFiles/cmTC_ec377.dir/testCCompiler.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_ec377
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec377.dir/link.txt --verbose=1
-/usr/bin/clang      CMakeFiles/cmTC_ec377.dir/testCCompiler.c.o  -o cmTC_ec377 
+Building C object CMakeFiles/cmTC_cf7da.dir/testCCompiler.c.o
+/usr/bin/clang    -o CMakeFiles/cmTC_cf7da.dir/testCCompiler.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_cf7da
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf7da.dir/link.txt --verbose=1
+/usr/bin/clang      CMakeFiles/cmTC_cf7da.dir/testCCompiler.c.o  -o cmTC_cf7da 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1bf41/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1bf41.dir/build.make CMakeFiles/cmTC_1bf41.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c84df/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c84df.dir/build.make CMakeFiles/cmTC_c84df.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o
-/usr/bin/clang    -o CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_1bf41
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bf41.dir/link.txt --verbose=1
-/usr/bin/clang     -v CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o  -o cmTC_1bf41 
+Building C object CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o
+/usr/bin/clang    -o CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_c84df
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c84df.dir/link.txt --verbose=1
+/usr/bin/clang     -v CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o  -o cmTC_c84df 
 clang version 6.0.0-1ubuntu2 (tags/RELEASE_600/final)
 Target: x86_64-pc-linux-gnu
 Thread model: posix
@@ -63,7 +63,7 @@ Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/8
 Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0
 Candidate multilib: .;@m64
 Selected multilib: .;@m64
- "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_1bf41 /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o
+ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c84df /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -71,14 +71,14 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_1bf41/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_1bf41.dir/build.make CMakeFiles/cmTC_1bf41.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_c84df/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_c84df.dir/build.make CMakeFiles/cmTC_c84df.dir/build]
   ignore line: [make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/clang    -o CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_1bf41]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bf41.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/clang     -v CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o  -o cmTC_1bf41 ]
+  ignore line: [Building C object CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/clang    -o CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_c84df]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c84df.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/clang     -v CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o  -o cmTC_c84df ]
   ignore line: [clang version 6.0.0-1ubuntu2 (tags/RELEASE_600/final)]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Thread model: posix]
@@ -94,7 +94,7 @@ Parsed C implicit link information from above output:
   ignore line: [@m64]
   ignore line: [Selected multilib: .]
   ignore line: [@m64]
-  link line: [ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_1bf41 /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o]
+  link line: [ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c84df /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/bin/ld] ==> ignore
     arg [-zrelro] ==> ignore
     arg [--hash-style=gnu] ==> ignore
@@ -104,7 +104,7 @@ Parsed C implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_1bf41] ==> ignore
+    arg [cmTC_c84df] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o] ==> ignore
@@ -117,7 +117,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/llvm-6.0/bin/../lib] ==> dir [/usr/lib/llvm-6.0/bin/../lib]
     arg [-L/lib] ==> dir [/lib]
     arg [-L/usr/lib] ==> dir [/usr/lib]
-    arg [CMakeFiles/cmTC_1bf41.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_c84df.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -148,14 +148,14 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_4e986/fast"
-/usr/bin/make -f CMakeFiles/cmTC_4e986.dir/build.make CMakeFiles/cmTC_4e986.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c2716/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c2716.dir/build.make CMakeFiles/cmTC_c2716.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_4e986.dir/feature_tests.c.o
-/usr/bin/clang   -std=c11 -o CMakeFiles/cmTC_4e986.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_4e986
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4e986.dir/link.txt --verbose=1
-/usr/bin/clang      CMakeFiles/cmTC_4e986.dir/feature_tests.c.o  -o cmTC_4e986 
+Building C object CMakeFiles/cmTC_c2716.dir/feature_tests.c.o
+/usr/bin/clang   -std=c11 -o CMakeFiles/cmTC_c2716.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_c2716
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2716.dir/link.txt --verbose=1
+/usr/bin/clang      CMakeFiles/cmTC_c2716.dir/feature_tests.c.o  -o cmTC_c2716 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -168,14 +168,14 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e2401/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e2401.dir/build.make CMakeFiles/cmTC_e2401.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_41913/fast"
+/usr/bin/make -f CMakeFiles/cmTC_41913.dir/build.make CMakeFiles/cmTC_41913.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e2401.dir/feature_tests.c.o
-/usr/bin/clang   -std=c99 -o CMakeFiles/cmTC_e2401.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_e2401
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e2401.dir/link.txt --verbose=1
-/usr/bin/clang      CMakeFiles/cmTC_e2401.dir/feature_tests.c.o  -o cmTC_e2401 
+Building C object CMakeFiles/cmTC_41913.dir/feature_tests.c.o
+/usr/bin/clang   -std=c99 -o CMakeFiles/cmTC_41913.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_41913
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_41913.dir/link.txt --verbose=1
+/usr/bin/clang      CMakeFiles/cmTC_41913.dir/feature_tests.c.o  -o cmTC_41913 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -188,14 +188,14 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_c34f0/fast"
-/usr/bin/make -f CMakeFiles/cmTC_c34f0.dir/build.make CMakeFiles/cmTC_c34f0.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_7c66b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7c66b.dir/build.make CMakeFiles/cmTC_7c66b.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c34f0.dir/feature_tests.c.o
-/usr/bin/clang   -std=c90 -o CMakeFiles/cmTC_c34f0.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_c34f0
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c34f0.dir/link.txt --verbose=1
-/usr/bin/clang      CMakeFiles/cmTC_c34f0.dir/feature_tests.c.o  -o cmTC_c34f0 
+Building C object CMakeFiles/cmTC_7c66b.dir/feature_tests.c.o
+/usr/bin/clang   -std=c90 -o CMakeFiles/cmTC_7c66b.dir/feature_tests.c.o   -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_7c66b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c66b.dir/link.txt --verbose=1
+/usr/bin/clang      CMakeFiles/cmTC_7c66b.dir/feature_tests.c.o  -o cmTC_7c66b 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -206,28 +206,28 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_9fa52/fast"
-/usr/bin/make -f CMakeFiles/cmTC_9fa52.dir/build.make CMakeFiles/cmTC_9fa52.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_d514f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d514f.dir/build.make CMakeFiles/cmTC_d514f.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_9fa52.dir/testCXXCompiler.cxx.o
-/usr/bin/clang++     -o CMakeFiles/cmTC_9fa52.dir/testCXXCompiler.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_9fa52
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9fa52.dir/link.txt --verbose=1
-/usr/bin/clang++       CMakeFiles/cmTC_9fa52.dir/testCXXCompiler.cxx.o  -o cmTC_9fa52 
+Building CXX object CMakeFiles/cmTC_d514f.dir/testCXXCompiler.cxx.o
+/usr/bin/clang++     -o CMakeFiles/cmTC_d514f.dir/testCXXCompiler.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_d514f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d514f.dir/link.txt --verbose=1
+/usr/bin/clang++       CMakeFiles/cmTC_d514f.dir/testCXXCompiler.cxx.o  -o cmTC_d514f 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_c82fe/fast"
-/usr/bin/make -f CMakeFiles/cmTC_c82fe.dir/build.make CMakeFiles/cmTC_c82fe.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_f5fec/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f5fec.dir/build.make CMakeFiles/cmTC_f5fec.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/clang++     -o CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_c82fe
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c82fe.dir/link.txt --verbose=1
-/usr/bin/clang++      -v CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_c82fe 
+Building CXX object CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/clang++     -o CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_f5fec
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5fec.dir/link.txt --verbose=1
+/usr/bin/clang++      -v CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_f5fec 
 clang version 6.0.0-1ubuntu2 (tags/RELEASE_600/final)
 Target: x86_64-pc-linux-gnu
 Thread model: posix
@@ -241,7 +241,7 @@ Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/8
 Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0
 Candidate multilib: .;@m64
 Selected multilib: .;@m64
- "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c82fe /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o
+ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_f5fec /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -249,14 +249,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_c82fe/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_c82fe.dir/build.make CMakeFiles/cmTC_c82fe.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_f5fec/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_f5fec.dir/build.make CMakeFiles/cmTC_f5fec.dir/build]
   ignore line: [make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/clang++     -o CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_c82fe]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c82fe.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/clang++      -v CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_c82fe ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/clang++     -o CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_f5fec]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5fec.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/clang++      -v CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_f5fec ]
   ignore line: [clang version 6.0.0-1ubuntu2 (tags/RELEASE_600/final)]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Thread model: posix]
@@ -272,7 +272,7 @@ Parsed CXX implicit link information from above output:
   ignore line: [@m64]
   ignore line: [Selected multilib: .]
   ignore line: [@m64]
-  link line: [ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c82fe /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o]
+  link line: [ "/usr/bin/ld" -z relro --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_f5fec /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../.. -L/usr/lib/llvm-6.0/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/bin/ld] ==> ignore
     arg [-zrelro] ==> ignore
     arg [--hash-style=gnu] ==> ignore
@@ -282,7 +282,7 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_c82fe] ==> ignore
+    arg [cmTC_f5fec] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/7.5.0/crtbegin.o] ==> ignore
@@ -295,7 +295,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/llvm-6.0/bin/../lib] ==> dir [/usr/lib/llvm-6.0/bin/../lib]
     arg [-L/lib] ==> dir [/lib]
     arg [-L/usr/lib] ==> dir [/usr/lib]
-    arg [CMakeFiles/cmTC_c82fe.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_f5fec.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -324,14 +324,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_da41f/fast"
-/usr/bin/make -f CMakeFiles/cmTC_da41f.dir/build.make CMakeFiles/cmTC_da41f.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_f9fdb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f9fdb.dir/build.make CMakeFiles/cmTC_f9fdb.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_da41f.dir/feature_tests.cxx.o
-/usr/bin/clang++    -std=c++1z -o CMakeFiles/cmTC_da41f.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_da41f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da41f.dir/link.txt --verbose=1
-/usr/bin/clang++       CMakeFiles/cmTC_da41f.dir/feature_tests.cxx.o  -o cmTC_da41f 
+Building CXX object CMakeFiles/cmTC_f9fdb.dir/feature_tests.cxx.o
+/usr/bin/clang++    -std=c++1z -o CMakeFiles/cmTC_f9fdb.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_f9fdb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9fdb.dir/link.txt --verbose=1
+/usr/bin/clang++       CMakeFiles/cmTC_f9fdb.dir/feature_tests.cxx.o  -o cmTC_f9fdb 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -397,14 +397,14 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a1e11/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a1e11.dir/build.make CMakeFiles/cmTC_a1e11.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_84c81/fast"
+/usr/bin/make -f CMakeFiles/cmTC_84c81.dir/build.make CMakeFiles/cmTC_84c81.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_a1e11.dir/feature_tests.cxx.o
-/usr/bin/clang++    -std=c++14 -o CMakeFiles/cmTC_a1e11.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_a1e11
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a1e11.dir/link.txt --verbose=1
-/usr/bin/clang++       CMakeFiles/cmTC_a1e11.dir/feature_tests.cxx.o  -o cmTC_a1e11 
+Building CXX object CMakeFiles/cmTC_84c81.dir/feature_tests.cxx.o
+/usr/bin/clang++    -std=c++14 -o CMakeFiles/cmTC_84c81.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_84c81
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_84c81.dir/link.txt --verbose=1
+/usr/bin/clang++       CMakeFiles/cmTC_84c81.dir/feature_tests.cxx.o  -o cmTC_84c81 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -470,14 +470,14 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_645a4/fast"
-/usr/bin/make -f CMakeFiles/cmTC_645a4.dir/build.make CMakeFiles/cmTC_645a4.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_e7280/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e7280.dir/build.make CMakeFiles/cmTC_e7280.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_645a4.dir/feature_tests.cxx.o
-/usr/bin/clang++    -std=c++11 -o CMakeFiles/cmTC_645a4.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_645a4
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_645a4.dir/link.txt --verbose=1
-/usr/bin/clang++       CMakeFiles/cmTC_645a4.dir/feature_tests.cxx.o  -o cmTC_645a4 
+Building CXX object CMakeFiles/cmTC_e7280.dir/feature_tests.cxx.o
+/usr/bin/clang++    -std=c++11 -o CMakeFiles/cmTC_e7280.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e7280
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7280.dir/link.txt --verbose=1
+/usr/bin/clang++       CMakeFiles/cmTC_e7280.dir/feature_tests.cxx.o  -o cmTC_e7280 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 
@@ -543,14 +543,14 @@ make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMak
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0866f/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0866f.dir/build.make CMakeFiles/cmTC_0866f.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9339e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9339e.dir/build.make CMakeFiles/cmTC_9339e.dir/build
 make[1]: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0866f.dir/feature_tests.cxx.o
-/usr/bin/clang++    -std=c++98 -o CMakeFiles/cmTC_0866f.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_0866f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0866f.dir/link.txt --verbose=1
-/usr/bin/clang++       CMakeFiles/cmTC_0866f.dir/feature_tests.cxx.o  -o cmTC_0866f 
+Building CXX object CMakeFiles/cmTC_9339e.dir/feature_tests.cxx.o
+/usr/bin/clang++    -std=c++98 -o CMakeFiles/cmTC_9339e.dir/feature_tests.cxx.o -c /home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_9339e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9339e.dir/link.txt --verbose=1
+/usr/bin/clang++       CMakeFiles/cmTC_9339e.dir/feature_tests.cxx.o  -o cmTC_9339e 
 make[1]: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/build/CMakeFiles/CMakeTmp'
 
 

@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/piotr/Desktop/pm_project/roomba_env/roomba'
-make: Leaving directory '/home/piotr/Desktop/pm_project/roomba_env/roomba'
- 
-make: *** No targets specified and no makefile found.  Stop.
-
